@@ -1,0 +1,3400 @@
+{
+  "schema_version": "v2_42_full_preflop_spot_matrix_e2e_report_v2",
+  "ok": true,
+  "runtime_chain_ok": true,
+  "semantic_exact_ok": true,
+  "cases_total": 53,
+  "cases_ok": 53,
+  "cases_failed": 0,
+  "runtime_failed_total": 0,
+  "runtime_failed_case_ids": [],
+  "reject_failed_total": 0,
+  "reject_failed_case_ids": [],
+  "semantic_failed_total": 0,
+  "known_semantic_gaps_total": 0,
+  "known_semantic_gap_case_ids": [],
+  "unexpected_semantic_failed_total": 0,
+  "unexpected_semantic_failed_case_ids": [],
+  "known_semantic_gap_registry": [],
+  "results": [
+    {
+      "case_id": "unopened_co_ako",
+      "label": "unopened",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "unopened"
+      ],
+      "actual_node_type": "unopened",
+      "expected_raw_any": [
+        "open_raise",
+        "fold"
+      ],
+      "actual_raw_action": "open_raise",
+      "engine_action": "raise",
+      "status": "ok",
+      "reason": "range:rfi.CO:open_raise",
+      "warnings": [],
+      "to_call_bb": 1.0,
+      "max_commitment_bb": 1.0,
+      "hero_commitment_bb": 0.0,
+      "raise_levels": [],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "bet_raise",
+      "runtime_raw_action": "open_raise",
+      "plan_status": "ok",
+      "planned_action": "bet_raise",
+      "target_sequence": [
+        "Raise"
+      ],
+      "raise_branch_enabled": true,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "bet_raise",
+        "target_sequence": [
+          "Raise"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "bb_unopened_option_no_raise",
+      "label": "bb_unopened_option_no_raise",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "bb_unopened_option_no_raise"
+      ],
+      "actual_node_type": "bb_unopened_option_no_raise",
+      "expected_raw_any": [
+        "check",
+        "fold",
+        "safe_fallback"
+      ],
+      "actual_raw_action": "check",
+      "engine_action": "check",
+      "status": "ok",
+      "reason": "range:bb_unopened_option_no_raise.default:default_or_override:check",
+      "warnings": [
+        "Hero BB has no raise/limp and no amount to call; classify as BB no-raise option.",
+        "BB no-raise option classified; default guarded check."
+      ],
+      "to_call_bb": 0.0,
+      "max_commitment_bb": 1.0,
+      "hero_commitment_bb": 1.0,
+      "raise_levels": [],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "check",
+      "runtime_raw_action": "check",
+      "plan_status": "ok",
+      "planned_action": "check",
+      "target_sequence": [
+        "Check"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "check",
+        "target_sequence": [
+          "Check"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "bb_option_vs_sb_limp",
+      "label": "bb_option_vs_sb_limp",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "bb_vs_sb_limp"
+      ],
+      "actual_node_type": "bb_vs_sb_limp",
+      "expected_raw_any": [
+        "check",
+        "fold",
+        "safe_fallback"
+      ],
+      "actual_raw_action": "check",
+      "engine_action": "check",
+      "status": "ok",
+      "reason": "range:bb_vs_sb_limp.BB:check",
+      "warnings": [
+        "Hero has logical preflop check option vs SB limp."
+      ],
+      "to_call_bb": 0.0,
+      "max_commitment_bb": 1.0,
+      "hero_commitment_bb": 1.0,
+      "raise_levels": [],
+      "limpers": [
+        "SB"
+      ],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "check",
+      "runtime_raw_action": "check",
+      "plan_status": "ok",
+      "planned_action": "check",
+      "target_sequence": [
+        "Check"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "check",
+        "target_sequence": [
+          "Check"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "bb_option_vs_1_limper",
+      "label": "bb_option_vs_1_limper",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "bb_option_vs_1_limper"
+      ],
+      "actual_node_type": "bb_option_vs_1_limper",
+      "expected_raw_any": [
+        "check",
+        "fold",
+        "safe_fallback"
+      ],
+      "actual_raw_action": "check",
+      "engine_action": "check",
+      "status": "ok",
+      "reason": "range:iso_raise.BB:default_or_override:check",
+      "warnings": [
+        "Hero has logical preflop check option.",
+        "Hand J7o not found in iso_raise.BB; default=check."
+      ],
+      "to_call_bb": 0.0,
+      "max_commitment_bb": 1.0,
+      "hero_commitment_bb": 1.0,
+      "raise_levels": [],
+      "limpers": [
+        "UTG"
+      ],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "check",
+      "runtime_raw_action": "check",
+      "plan_status": "ok",
+      "planned_action": "check",
+      "target_sequence": [
+        "Check"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "check",
+        "target_sequence": [
+          "Check"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "bb_option_vs_2plus_limpers",
+      "label": "bb_option_vs_2plus_limpers",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "bb_option_vs_2plus_limpers"
+      ],
+      "actual_node_type": "bb_option_vs_2plus_limpers",
+      "expected_raw_any": [
+        "check",
+        "fold",
+        "safe_fallback"
+      ],
+      "actual_raw_action": "check",
+      "engine_action": "check",
+      "status": "ok",
+      "reason": "range:iso_raise.BB:default_or_override:check",
+      "warnings": [
+        "Hero has logical preflop check option.",
+        "Hand J7o not found in iso_raise.BB; default=check."
+      ],
+      "to_call_bb": 0.0,
+      "max_commitment_bb": 1.0,
+      "hero_commitment_bb": 1.0,
+      "raise_levels": [],
+      "limpers": [
+        "UTG",
+        "MP"
+      ],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "check",
+      "runtime_raw_action": "check",
+      "plan_status": "ok",
+      "planned_action": "check",
+      "target_sequence": [
+        "Check"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "check",
+        "target_sequence": [
+          "Check"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "iso_vs_1_limper_btn_ako",
+      "label": "iso_vs_1_limper",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "iso_vs_1_limper"
+      ],
+      "actual_node_type": "iso_vs_1_limper",
+      "expected_raw_any": [
+        "iso_raise",
+        "call",
+        "fold"
+      ],
+      "actual_raw_action": "iso_raise",
+      "engine_action": "raise",
+      "status": "ok",
+      "reason": "range:iso_raise.BTN:iso_raise",
+      "warnings": [],
+      "to_call_bb": 1.0,
+      "max_commitment_bb": 1.0,
+      "hero_commitment_bb": 0.0,
+      "raise_levels": [],
+      "limpers": [
+        "UTG"
+      ],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "bet_raise",
+      "runtime_raw_action": "iso_raise",
+      "plan_status": "ok",
+      "planned_action": "bet_raise",
+      "target_sequence": [
+        "98%",
+        "Raise"
+      ],
+      "raise_branch_enabled": true,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "bet_raise",
+        "target_sequence": [
+          "98%",
+          "Raise"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "iso_vs_2plus_limpers_co_ako",
+      "label": "iso_vs_2plus_limpers",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "iso_vs_2plus_limpers"
+      ],
+      "actual_node_type": "iso_vs_2plus_limpers",
+      "expected_raw_any": [
+        "iso_raise",
+        "call",
+        "fold"
+      ],
+      "actual_raw_action": "iso_raise",
+      "engine_action": "raise",
+      "status": "ok",
+      "reason": "range:iso_raise.CO:iso_raise",
+      "warnings": [],
+      "to_call_bb": 1.0,
+      "max_commitment_bb": 1.0,
+      "hero_commitment_bb": 0.0,
+      "raise_levels": [],
+      "limpers": [
+        "UTG",
+        "MP"
+      ],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "bet_raise",
+      "runtime_raw_action": "iso_raise",
+      "plan_status": "ok",
+      "planned_action": "bet_raise",
+      "target_sequence": [
+        "98%",
+        "Raise"
+      ],
+      "raise_branch_enabled": true,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "bet_raise",
+        "target_sequence": [
+          "98%",
+          "Raise"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "overlimp_vs_1_limper_btn_t9s",
+      "label": "overlimp_vs_1_limper",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "iso_vs_1_limper"
+      ],
+      "actual_node_type": "iso_vs_1_limper",
+      "expected_raw_any": [
+        "call",
+        "fold",
+        "iso_raise"
+      ],
+      "actual_raw_action": "iso_raise",
+      "engine_action": "raise",
+      "status": "ok",
+      "reason": "range:iso_raise.BTN:iso_raise",
+      "warnings": [],
+      "to_call_bb": 1.0,
+      "max_commitment_bb": 1.0,
+      "hero_commitment_bb": 0.0,
+      "raise_levels": [],
+      "limpers": [
+        "UTG"
+      ],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "bet_raise",
+      "runtime_raw_action": "iso_raise",
+      "plan_status": "ok",
+      "planned_action": "bet_raise",
+      "target_sequence": [
+        "98%",
+        "Raise"
+      ],
+      "raise_branch_enabled": true,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "bet_raise",
+        "target_sequence": [
+          "98%",
+          "Raise"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": [
+        "Current frame-level classifier uses iso_vs_1_limper; action may be call/fold/iso_raise by range."
+      ]
+    },
+    {
+      "case_id": "overlimp_vs_2plus_limpers_btn_t9s",
+      "label": "overlimp_vs_2plus_limpers",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "iso_vs_2plus_limpers"
+      ],
+      "actual_node_type": "iso_vs_2plus_limpers",
+      "expected_raw_any": [
+        "call",
+        "fold",
+        "iso_raise"
+      ],
+      "actual_raw_action": "iso_raise",
+      "engine_action": "raise",
+      "status": "ok",
+      "reason": "range:iso_raise.BTN:iso_raise",
+      "warnings": [],
+      "to_call_bb": 1.0,
+      "max_commitment_bb": 1.0,
+      "hero_commitment_bb": 0.0,
+      "raise_levels": [],
+      "limpers": [
+        "UTG",
+        "MP"
+      ],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "bet_raise",
+      "runtime_raw_action": "iso_raise",
+      "plan_status": "ok",
+      "planned_action": "bet_raise",
+      "target_sequence": [
+        "98%",
+        "Raise"
+      ],
+      "raise_branch_enabled": true,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "bet_raise",
+        "target_sequence": [
+          "98%",
+          "Raise"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": [
+        "Current frame-level classifier uses iso_vs_2plus_limpers; action may be call/fold/iso_raise by range."
+      ]
+    },
+    {
+      "case_id": "limp_behind_blind_vs_limpers_sb",
+      "label": "limp_behind_blind_vs_limpers",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "iso_vs_2plus_limpers"
+      ],
+      "actual_node_type": "iso_vs_2plus_limpers",
+      "expected_raw_any": [
+        "call",
+        "fold",
+        "iso_raise",
+        "safe_fallback"
+      ],
+      "actual_raw_action": "fold",
+      "engine_action": "fold",
+      "status": "ok",
+      "reason": "range:iso_raise.SB:default_or_override:fold",
+      "warnings": [
+        "Hero SB has blind-only commitment and faces limper(s); classify as limp/isolation spot.",
+        "Hand 87s not found in iso_raise.SB; default=fold."
+      ],
+      "to_call_bb": 0.5,
+      "max_commitment_bb": 1.0,
+      "hero_commitment_bb": 0.5,
+      "raise_levels": [],
+      "limpers": [
+        "UTG",
+        "MP"
+      ],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "fold",
+      "runtime_raw_action": "fold",
+      "plan_status": "ok",
+      "planned_action": "fold",
+      "target_sequence": [
+        "FOLD"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "fold",
+        "target_sequence": [
+          "FOLD"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "facing_open_btn_ako",
+      "label": "facing_open",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "facing_open"
+      ],
+      "actual_node_type": "facing_open",
+      "expected_raw_any": [
+        "call",
+        "3bet",
+        "fold",
+        "jam"
+      ],
+      "actual_raw_action": "3bet",
+      "engine_action": "raise",
+      "status": "ok",
+      "reason": "range:vs_open.UTG|BTN:3bet",
+      "warnings": [],
+      "to_call_bb": 2.5,
+      "max_commitment_bb": 2.5,
+      "hero_commitment_bb": 0.0,
+      "raise_levels": [
+        2.5
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "bet_raise",
+      "runtime_raw_action": "3bet",
+      "plan_status": "ok",
+      "planned_action": "bet_raise",
+      "target_sequence": [
+        "98%",
+        "Raise"
+      ],
+      "raise_branch_enabled": true,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "bet_raise",
+        "target_sequence": [
+          "98%",
+          "Raise"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "blind_vs_open_bb_99",
+      "label": "blind_vs_open",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "blind_vs_open"
+      ],
+      "actual_node_type": "blind_vs_open",
+      "expected_raw_any": [
+        "call",
+        "3bet",
+        "fold",
+        "jam"
+      ],
+      "actual_raw_action": "3bet",
+      "engine_action": "raise",
+      "status": "ok",
+      "reason": "range:vs_open.BTN|BB:3bet",
+      "warnings": [],
+      "to_call_bb": 1.5,
+      "max_commitment_bb": 2.5,
+      "hero_commitment_bb": 1.0,
+      "raise_levels": [
+        2.5
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "bet_raise",
+      "runtime_raw_action": "3bet",
+      "plan_status": "ok",
+      "planned_action": "bet_raise",
+      "target_sequence": [
+        "98%",
+        "Raise"
+      ],
+      "raise_branch_enabled": true,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "bet_raise",
+        "target_sequence": [
+          "98%",
+          "Raise"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "facing_open_callers_bb_aqs",
+      "label": "facing_open_callers",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "blind_vs_open",
+        "facing_open"
+      ],
+      "actual_node_type": "blind_vs_open",
+      "expected_raw_any": [
+        "call",
+        "3bet",
+        "fold",
+        "jam"
+      ],
+      "actual_raw_action": "3bet",
+      "engine_action": "raise",
+      "status": "ok",
+      "reason": "range:vs_open.BTN|BB:3bet",
+      "warnings": [],
+      "to_call_bb": 1.5,
+      "max_commitment_bb": 2.5,
+      "hero_commitment_bb": 1.0,
+      "raise_levels": [
+        2.5
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "bet_raise",
+      "runtime_raw_action": "3bet",
+      "plan_status": "ok",
+      "planned_action": "bet_raise",
+      "target_sequence": [
+        "98%",
+        "Raise"
+      ],
+      "raise_branch_enabled": true,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "bet_raise",
+        "target_sequence": [
+          "98%",
+          "Raise"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": [
+        "Frame-level commitments do not encode caller order; node may remain blind_vs_open/facing_open."
+      ]
+    },
+    {
+      "case_id": "squeeze_sb_qq",
+      "label": "squeeze",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "blind_vs_open",
+        "facing_open"
+      ],
+      "actual_node_type": "blind_vs_open",
+      "expected_raw_any": [
+        "3bet",
+        "fold",
+        "call",
+        "jam"
+      ],
+      "actual_raw_action": "3bet",
+      "engine_action": "raise",
+      "status": "ok",
+      "reason": "range:vs_open.CO|SB:3bet",
+      "warnings": [],
+      "to_call_bb": 2.0,
+      "max_commitment_bb": 2.5,
+      "hero_commitment_bb": 0.5,
+      "raise_levels": [
+        2.5
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "bet_raise",
+      "runtime_raw_action": "3bet",
+      "plan_status": "ok",
+      "planned_action": "bet_raise",
+      "target_sequence": [
+        "98%",
+        "Raise"
+      ],
+      "raise_branch_enabled": true,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "bet_raise",
+        "target_sequence": [
+          "98%",
+          "Raise"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": [
+        "Frame-level classifier may not name squeeze separately; range action should still map to runtime."
+      ]
+    },
+    {
+      "case_id": "cold_call_vs_open_btn_88",
+      "label": "cold_call_vs_open",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "facing_open"
+      ],
+      "actual_node_type": "facing_open",
+      "expected_raw_any": [
+        "call",
+        "3bet",
+        "fold"
+      ],
+      "actual_raw_action": "call",
+      "engine_action": "call",
+      "status": "ok",
+      "reason": "range:vs_open.CO|BTN:call",
+      "warnings": [],
+      "to_call_bb": 2.5,
+      "max_commitment_bb": 2.5,
+      "hero_commitment_bb": 0.0,
+      "raise_levels": [
+        2.5
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "call",
+      "runtime_raw_action": "call",
+      "plan_status": "ok",
+      "planned_action": "call",
+      "target_sequence": [
+        "Call"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "call",
+        "target_sequence": [
+          "Call"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "threebet_vs_open_bb_ako",
+      "label": "threebet_vs_open",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "blind_vs_open"
+      ],
+      "actual_node_type": "blind_vs_open",
+      "expected_raw_any": [
+        "3bet",
+        "call",
+        "fold",
+        "jam"
+      ],
+      "actual_raw_action": "3bet",
+      "engine_action": "raise",
+      "status": "ok",
+      "reason": "range:vs_open.BTN|BB:3bet",
+      "warnings": [],
+      "to_call_bb": 1.5,
+      "max_commitment_bb": 2.5,
+      "hero_commitment_bb": 1.0,
+      "raise_levels": [
+        2.5
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "bet_raise",
+      "runtime_raw_action": "3bet",
+      "plan_status": "ok",
+      "planned_action": "bet_raise",
+      "target_sequence": [
+        "98%",
+        "Raise"
+      ],
+      "raise_branch_enabled": true,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "bet_raise",
+        "target_sequence": [
+          "98%",
+          "Raise"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "jam_vs_open_bb_77",
+      "label": "jam_vs_open",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "blind_vs_open"
+      ],
+      "actual_node_type": "blind_vs_open",
+      "expected_raw_any": [
+        "jam",
+        "3bet",
+        "call",
+        "fold"
+      ],
+      "actual_raw_action": "call",
+      "engine_action": "call",
+      "status": "ok",
+      "reason": "range:vs_open.BTN|BB:call",
+      "warnings": [],
+      "to_call_bb": 1.5,
+      "max_commitment_bb": 2.5,
+      "hero_commitment_bb": 1.0,
+      "raise_levels": [
+        2.5
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "call",
+      "runtime_raw_action": "call",
+      "plan_status": "ok",
+      "planned_action": "call",
+      "target_sequence": [
+        "Call"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "call",
+        "target_sequence": [
+          "Call"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "call_vs_open_callers_bb_aqs",
+      "label": "call_vs_open_callers",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "blind_vs_open",
+        "facing_open"
+      ],
+      "actual_node_type": "blind_vs_open",
+      "expected_raw_any": [
+        "call",
+        "3bet",
+        "fold",
+        "jam"
+      ],
+      "actual_raw_action": "3bet",
+      "engine_action": "raise",
+      "status": "ok",
+      "reason": "range:vs_open.UTG|BB:3bet",
+      "warnings": [],
+      "to_call_bb": 1.5,
+      "max_commitment_bb": 2.5,
+      "hero_commitment_bb": 1.0,
+      "raise_levels": [
+        2.5
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "bet_raise",
+      "runtime_raw_action": "3bet",
+      "plan_status": "ok",
+      "planned_action": "bet_raise",
+      "target_sequence": [
+        "98%",
+        "Raise"
+      ],
+      "raise_branch_enabled": true,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "bet_raise",
+        "target_sequence": [
+          "98%",
+          "Raise"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "jam_vs_open_callers_sb_99",
+      "label": "jam_vs_open_callers",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "blind_vs_open",
+        "facing_open"
+      ],
+      "actual_node_type": "blind_vs_open",
+      "expected_raw_any": [
+        "jam",
+        "3bet",
+        "call",
+        "fold"
+      ],
+      "actual_raw_action": "call",
+      "engine_action": "call",
+      "status": "ok",
+      "reason": "range:vs_open.UTG|SB:call",
+      "warnings": [],
+      "to_call_bb": 2.0,
+      "max_commitment_bb": 2.5,
+      "hero_commitment_bb": 0.5,
+      "raise_levels": [
+        2.5
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "call",
+      "runtime_raw_action": "call",
+      "plan_status": "ok",
+      "planned_action": "call",
+      "target_sequence": [
+        "Call"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "call",
+        "target_sequence": [
+          "Call"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "fold_vs_open_callers_sb_72o",
+      "label": "fold_vs_open_callers",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "blind_vs_open",
+        "facing_open"
+      ],
+      "actual_node_type": "blind_vs_open",
+      "expected_raw_any": [
+        "fold",
+        "safe_fallback"
+      ],
+      "actual_raw_action": "fold",
+      "engine_action": "fold",
+      "status": "ok",
+      "reason": "range:vs_open.UTG|SB:default_or_override:fold",
+      "warnings": [
+        "Hand 72o not found in vs_open.UTG|SB; default=fold."
+      ],
+      "to_call_bb": 2.0,
+      "max_commitment_bb": 2.5,
+      "hero_commitment_bb": 0.5,
+      "raise_levels": [
+        2.5
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "fold",
+      "runtime_raw_action": "fold",
+      "plan_status": "ok",
+      "planned_action": "fold",
+      "target_sequence": [
+        "FOLD"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "fold",
+        "target_sequence": [
+          "FOLD"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "opener_vs_3bet_co_ako",
+      "label": "opener_vs_3bet",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "opener_vs_normal_3bet",
+        "opener_vs_large_3bet",
+        "opener_vs_small_3bet"
+      ],
+      "actual_node_type": "opener_vs_large_3bet",
+      "expected_raw_any": [
+        "4bet",
+        "call",
+        "fold",
+        "jam"
+      ],
+      "actual_raw_action": "4bet",
+      "engine_action": "raise",
+      "status": "ok",
+      "reason": "range:opener_vs_3bet.CO|BTN:4bet",
+      "warnings": [],
+      "to_call_bb": 6.5,
+      "max_commitment_bb": 9.0,
+      "hero_commitment_bb": 2.5,
+      "raise_levels": [
+        2.5,
+        9.0
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "bet_raise",
+      "runtime_raw_action": "4bet",
+      "plan_status": "ok",
+      "planned_action": "bet_raise",
+      "target_sequence": [
+        "50%",
+        "Raise"
+      ],
+      "raise_branch_enabled": true,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "bet_raise",
+        "target_sequence": [
+          "50%",
+          "Raise"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "caller_vs_3bet_or_higher_btn_88",
+      "label": "caller_vs_3bet_or_higher",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "caller_vs_3bet_or_higher"
+      ],
+      "actual_node_type": "caller_vs_3bet_or_higher",
+      "expected_raw_any": [
+        "fold",
+        "call",
+        "4bet",
+        "safe_fallback"
+      ],
+      "actual_raw_action": "fold",
+      "engine_action": "fold",
+      "status": "ok",
+      "reason": "range:caller_vs_3bet_or_higher.BTN:default_or_override:fold",
+      "warnings": [
+        "V2.43 inferred caller-vs-3bet/squeeze from shared first raise level and higher raise behind.",
+        "V2.43 caller-vs-3bet/squeeze classified; guarded default until caller-vs-squeeze ranges exist."
+      ],
+      "to_call_bb": 6.5,
+      "max_commitment_bb": 9.0,
+      "hero_commitment_bb": 2.5,
+      "raise_levels": [
+        2.5,
+        9.0
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "fold",
+      "runtime_raw_action": "fold",
+      "plan_status": "ok",
+      "planned_action": "fold",
+      "target_sequence": [
+        "FOLD"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "fold",
+        "target_sequence": [
+          "FOLD"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": [
+        "Frame-only classifier may not distinguish caller-vs-squeeze precisely.",
+        "V2.43 exact semantic target: caller_vs_3bet_or_higher."
+      ]
+    },
+    {
+      "case_id": "cold_4bet_sb_ako",
+      "label": "cold_4bet",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "cold_vs_3bet_or_higher"
+      ],
+      "actual_node_type": "cold_vs_3bet_or_higher",
+      "expected_raw_any": [
+        "4bet",
+        "fold",
+        "call",
+        "safe_fallback"
+      ],
+      "actual_raw_action": "4bet",
+      "engine_action": "raise",
+      "status": "ok",
+      "reason": "range:cold_4bet.CO|BTN|SB:4bet",
+      "warnings": [
+        "Hero cold-faces multiple raise levels from no voluntary preflop action or blind-only commitment."
+      ],
+      "to_call_bb": 8.5,
+      "max_commitment_bb": 9.0,
+      "hero_commitment_bb": 0.5,
+      "raise_levels": [
+        2.5,
+        9.0
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "bet_raise",
+      "runtime_raw_action": "4bet",
+      "plan_status": "ok",
+      "planned_action": "bet_raise",
+      "target_sequence": [
+        "50%",
+        "Raise"
+      ],
+      "raise_branch_enabled": true,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "bet_raise",
+        "target_sequence": [
+          "50%",
+          "Raise"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "call_vs_3bet_co_qq",
+      "label": "call_vs_3bet",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "opener_vs_normal_3bet",
+        "opener_vs_large_3bet",
+        "opener_vs_small_3bet"
+      ],
+      "actual_node_type": "opener_vs_large_3bet",
+      "expected_raw_any": [
+        "call",
+        "4bet",
+        "fold"
+      ],
+      "actual_raw_action": "4bet",
+      "engine_action": "raise",
+      "status": "ok",
+      "reason": "range:opener_vs_3bet.CO|BTN:4bet",
+      "warnings": [],
+      "to_call_bb": 6.5,
+      "max_commitment_bb": 9.0,
+      "hero_commitment_bb": 2.5,
+      "raise_levels": [
+        2.5,
+        9.0
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "bet_raise",
+      "runtime_raw_action": "4bet",
+      "plan_status": "ok",
+      "planned_action": "bet_raise",
+      "target_sequence": [
+        "50%",
+        "Raise"
+      ],
+      "raise_branch_enabled": true,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "bet_raise",
+        "target_sequence": [
+          "50%",
+          "Raise"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "fourbet_vs_3bet_co_ako",
+      "label": "fourbet_vs_3bet",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "opener_vs_normal_3bet",
+        "opener_vs_large_3bet",
+        "opener_vs_small_3bet"
+      ],
+      "actual_node_type": "opener_vs_large_3bet",
+      "expected_raw_any": [
+        "4bet",
+        "call",
+        "fold"
+      ],
+      "actual_raw_action": "4bet",
+      "engine_action": "raise",
+      "status": "ok",
+      "reason": "range:opener_vs_3bet.CO|BTN:4bet",
+      "warnings": [],
+      "to_call_bb": 6.5,
+      "max_commitment_bb": 9.0,
+      "hero_commitment_bb": 2.5,
+      "raise_levels": [
+        2.5,
+        9.0
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "bet_raise",
+      "runtime_raw_action": "4bet",
+      "plan_status": "ok",
+      "planned_action": "bet_raise",
+      "target_sequence": [
+        "50%",
+        "Raise"
+      ],
+      "raise_branch_enabled": true,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "bet_raise",
+        "target_sequence": [
+          "50%",
+          "Raise"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "jam_vs_3bet_co_ako_short",
+      "label": "jam_vs_3bet",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "opener_vs_normal_3bet",
+        "opener_vs_large_3bet",
+        "opener_vs_small_3bet"
+      ],
+      "actual_node_type": "opener_vs_large_3bet",
+      "expected_raw_any": [
+        "4bet",
+        "jam",
+        "call",
+        "fold"
+      ],
+      "actual_raw_action": "4bet",
+      "engine_action": "raise",
+      "status": "ok",
+      "reason": "range:opener_vs_3bet.CO|BTN:4bet",
+      "warnings": [],
+      "to_call_bb": 6.5,
+      "max_commitment_bb": 9.0,
+      "hero_commitment_bb": 2.5,
+      "raise_levels": [
+        2.5,
+        9.0
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "bet_raise",
+      "runtime_raw_action": "4bet",
+      "plan_status": "ok",
+      "planned_action": "bet_raise",
+      "target_sequence": [
+        "50%",
+        "Raise"
+      ],
+      "raise_branch_enabled": true,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "bet_raise",
+        "target_sequence": [
+          "50%",
+          "Raise"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "fold_vs_3bet_co_72o",
+      "label": "fold_vs_3bet",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "opener_vs_normal_3bet",
+        "opener_vs_large_3bet",
+        "opener_vs_small_3bet"
+      ],
+      "actual_node_type": "opener_vs_large_3bet",
+      "expected_raw_any": [
+        "fold",
+        "safe_fallback"
+      ],
+      "actual_raw_action": "fold",
+      "engine_action": "fold",
+      "status": "ok",
+      "reason": "range:opener_vs_3bet.CO|BTN:default_or_override:fold",
+      "warnings": [
+        "Hand 72o not found in opener_vs_3bet.CO|BTN; default=fold."
+      ],
+      "to_call_bb": 6.5,
+      "max_commitment_bb": 9.0,
+      "hero_commitment_bb": 2.5,
+      "raise_levels": [
+        2.5,
+        9.0
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "fold",
+      "runtime_raw_action": "fold",
+      "plan_status": "ok",
+      "planned_action": "fold",
+      "target_sequence": [
+        "FOLD"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "fold",
+        "target_sequence": [
+          "FOLD"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "threebettor_vs_4bet_btn_ako",
+      "label": "threebettor_vs_4bet",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "threebettor_vs_normal_4bet",
+        "threebettor_vs_large_4bet",
+        "threebettor_vs_small_4bet"
+      ],
+      "actual_node_type": "threebettor_vs_normal_4bet",
+      "expected_raw_any": [
+        "5bet_jam",
+        "5bet",
+        "call",
+        "fold"
+      ],
+      "actual_raw_action": "5bet_jam",
+      "engine_action": "raise",
+      "status": "ok",
+      "reason": "range:threebettor_vs_4bet.BTN|CO:5bet_jam",
+      "warnings": [
+        "V239 inferred two-level positional 4bet: earlier max-commitment player re-raised after Hero 3bet."
+      ],
+      "to_call_bb": 13.0,
+      "max_commitment_bb": 22.0,
+      "hero_commitment_bb": 9.0,
+      "raise_levels": [
+        9.0,
+        22.0
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "bet_raise",
+      "runtime_raw_action": "5bet_jam",
+      "plan_status": "ok",
+      "planned_action": "bet_raise",
+      "target_sequence": [
+        "98%",
+        "Raise"
+      ],
+      "raise_branch_enabled": true,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "bet_raise",
+        "target_sequence": [
+          "98%",
+          "Raise"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "call_vs_4bet_btn_qq",
+      "label": "call_vs_4bet",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "threebettor_vs_normal_4bet",
+        "threebettor_vs_large_4bet",
+        "threebettor_vs_small_4bet"
+      ],
+      "actual_node_type": "threebettor_vs_normal_4bet",
+      "expected_raw_any": [
+        "call",
+        "5bet_jam",
+        "fold"
+      ],
+      "actual_raw_action": "5bet_jam",
+      "engine_action": "raise",
+      "status": "ok",
+      "reason": "range:threebettor_vs_4bet.BTN|CO:5bet_jam",
+      "warnings": [
+        "V239 inferred two-level positional 4bet: earlier max-commitment player re-raised after Hero 3bet."
+      ],
+      "to_call_bb": 13.0,
+      "max_commitment_bb": 22.0,
+      "hero_commitment_bb": 9.0,
+      "raise_levels": [
+        9.0,
+        22.0
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "bet_raise",
+      "runtime_raw_action": "5bet_jam",
+      "plan_status": "ok",
+      "planned_action": "bet_raise",
+      "target_sequence": [
+        "98%",
+        "Raise"
+      ],
+      "raise_branch_enabled": true,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "bet_raise",
+        "target_sequence": [
+          "98%",
+          "Raise"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "fivebet_non_allin_btn_aa",
+      "label": "fivebet",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "threebettor_vs_normal_4bet",
+        "threebettor_vs_large_4bet",
+        "threebettor_vs_small_4bet"
+      ],
+      "actual_node_type": "threebettor_vs_normal_4bet",
+      "expected_raw_any": [
+        "5bet",
+        "5bet_jam",
+        "call"
+      ],
+      "actual_raw_action": "5bet_jam",
+      "engine_action": "raise",
+      "status": "ok",
+      "reason": "range:threebettor_vs_4bet.BTN|CO:5bet_jam",
+      "warnings": [
+        "V239 inferred two-level positional 4bet: earlier max-commitment player re-raised after Hero 3bet."
+      ],
+      "to_call_bb": 13.0,
+      "max_commitment_bb": 22.0,
+      "hero_commitment_bb": 9.0,
+      "raise_levels": [
+        9.0,
+        22.0
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "bet_raise",
+      "runtime_raw_action": "5bet_jam",
+      "plan_status": "ok",
+      "planned_action": "bet_raise",
+      "target_sequence": [
+        "98%",
+        "Raise"
+      ],
+      "raise_branch_enabled": true,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "bet_raise",
+        "target_sequence": [
+          "98%",
+          "Raise"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "fivebet_jam_btn_ako",
+      "label": "fivebet_jam",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "threebettor_vs_normal_4bet",
+        "threebettor_vs_large_4bet",
+        "threebettor_vs_small_4bet"
+      ],
+      "actual_node_type": "threebettor_vs_normal_4bet",
+      "expected_raw_any": [
+        "5bet_jam",
+        "5bet",
+        "call",
+        "fold"
+      ],
+      "actual_raw_action": "5bet_jam",
+      "engine_action": "raise",
+      "status": "ok",
+      "reason": "range:threebettor_vs_4bet.BTN|CO:5bet_jam",
+      "warnings": [
+        "V239 inferred two-level positional 4bet: earlier max-commitment player re-raised after Hero 3bet."
+      ],
+      "to_call_bb": 13.0,
+      "max_commitment_bb": 22.0,
+      "hero_commitment_bb": 9.0,
+      "raise_levels": [
+        9.0,
+        22.0
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "bet_raise",
+      "runtime_raw_action": "5bet_jam",
+      "plan_status": "ok",
+      "planned_action": "bet_raise",
+      "target_sequence": [
+        "98%",
+        "Raise"
+      ],
+      "raise_branch_enabled": true,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "bet_raise",
+        "target_sequence": [
+          "98%",
+          "Raise"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "fold_vs_4bet_btn_72o",
+      "label": "fold_vs_4bet",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "threebettor_vs_normal_4bet",
+        "threebettor_vs_large_4bet",
+        "threebettor_vs_small_4bet"
+      ],
+      "actual_node_type": "threebettor_vs_normal_4bet",
+      "expected_raw_any": [
+        "fold",
+        "safe_fallback"
+      ],
+      "actual_raw_action": "fold",
+      "engine_action": "fold",
+      "status": "ok",
+      "reason": "range:threebettor_vs_4bet.BTN|CO:default_or_override:fold",
+      "warnings": [
+        "V239 inferred two-level positional 4bet: earlier max-commitment player re-raised after Hero 3bet.",
+        "Hand 72o not found in threebettor_vs_4bet.BTN|CO; default=fold."
+      ],
+      "to_call_bb": 13.0,
+      "max_commitment_bb": 22.0,
+      "hero_commitment_bb": 9.0,
+      "raise_levels": [
+        9.0,
+        22.0
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "fold",
+      "runtime_raw_action": "fold",
+      "plan_status": "ok",
+      "planned_action": "fold",
+      "target_sequence": [
+        "FOLD"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "fold",
+        "target_sequence": [
+          "FOLD"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "facing_5bet_jam_fourbettor_kk",
+      "label": "facing_5bet_jam",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "fourbettor_vs_normal_5bet",
+        "fourbettor_vs_large_5bet",
+        "fourbettor_vs_small_5bet",
+        "facing_allin_or_allin_present"
+      ],
+      "actual_node_type": "fourbettor_vs_small_5bet_jam",
+      "expected_raw_any": [
+        "call",
+        "fold",
+        "safe_fallback"
+      ],
+      "actual_raw_action": "safe_fallback",
+      "engine_action": "fold",
+      "status": "fallback",
+      "reason": "Range engine unsupported/unsafe node: fourbettor_vs_small_5bet_jam; V2.41 runtime fallback action=fold",
+      "warnings": [
+        "V2.43 inferred fourbettor-vs-5bet-jam from opener level, Hero middle 4bet level, and max all-in level.",
+        "V0.6 does not yet include 4bettor-vs-5bet non-jam ranges."
+      ],
+      "to_call_bb": 23.0,
+      "max_commitment_bb": 45.0,
+      "hero_commitment_bb": 22.0,
+      "raise_levels": [
+        2.5,
+        22.0,
+        45.0
+      ],
+      "limpers": [],
+      "all_in_players": [
+        "BTN"
+      ],
+      "all_in_amount_bb": 45.0,
+      "runtime_action": "fold",
+      "runtime_raw_action": "safe_fallback",
+      "plan_status": "ok",
+      "planned_action": "fold",
+      "target_sequence": [
+        "FOLD"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "fold",
+        "target_sequence": [
+          "FOLD"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "call_vs_5bet_jam_aa",
+      "label": "call_vs_5bet_jam",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "fourbettor_vs_normal_5bet",
+        "fourbettor_vs_large_5bet",
+        "fourbettor_vs_small_5bet",
+        "facing_allin_or_allin_present"
+      ],
+      "actual_node_type": "fourbettor_vs_small_5bet_jam",
+      "expected_raw_any": [
+        "call",
+        "fold",
+        "safe_fallback"
+      ],
+      "actual_raw_action": "safe_fallback",
+      "engine_action": "fold",
+      "status": "fallback",
+      "reason": "Range engine unsupported/unsafe node: fourbettor_vs_small_5bet_jam; V2.41 runtime fallback action=fold",
+      "warnings": [
+        "V2.43 inferred fourbettor-vs-5bet-jam from opener level, Hero middle 4bet level, and max all-in level.",
+        "V0.6 does not yet include 4bettor-vs-5bet non-jam ranges."
+      ],
+      "to_call_bb": 23.0,
+      "max_commitment_bb": 45.0,
+      "hero_commitment_bb": 22.0,
+      "raise_levels": [
+        2.5,
+        22.0,
+        45.0
+      ],
+      "limpers": [],
+      "all_in_players": [
+        "BTN"
+      ],
+      "all_in_amount_bb": 45.0,
+      "runtime_action": "fold",
+      "runtime_raw_action": "safe_fallback",
+      "plan_status": "ok",
+      "planned_action": "fold",
+      "target_sequence": [
+        "FOLD"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "fold",
+        "target_sequence": [
+          "FOLD"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "fold_vs_5bet_jam_72o",
+      "label": "fold_vs_5bet_jam",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "fourbettor_vs_normal_5bet",
+        "fourbettor_vs_large_5bet",
+        "fourbettor_vs_small_5bet",
+        "facing_allin_or_allin_present"
+      ],
+      "actual_node_type": "fourbettor_vs_small_5bet_jam",
+      "expected_raw_any": [
+        "fold",
+        "safe_fallback"
+      ],
+      "actual_raw_action": "safe_fallback",
+      "engine_action": "fold",
+      "status": "fallback",
+      "reason": "Range engine unsupported/unsafe node: fourbettor_vs_small_5bet_jam; V2.41 runtime fallback action=fold",
+      "warnings": [
+        "V2.43 inferred fourbettor-vs-5bet-jam from opener level, Hero middle 4bet level, and max all-in level.",
+        "V0.6 does not yet include 4bettor-vs-5bet non-jam ranges."
+      ],
+      "to_call_bb": 23.0,
+      "max_commitment_bb": 45.0,
+      "hero_commitment_bb": 22.0,
+      "raise_levels": [
+        2.5,
+        22.0,
+        45.0
+      ],
+      "limpers": [],
+      "all_in_players": [
+        "BTN"
+      ],
+      "all_in_amount_bb": 45.0,
+      "runtime_action": "fold",
+      "runtime_raw_action": "safe_fallback",
+      "plan_status": "ok",
+      "planned_action": "fold",
+      "target_sequence": [
+        "FOLD"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "fold",
+        "target_sequence": [
+          "FOLD"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "open_jam_btn_a8s",
+      "label": "open_jam",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "blind_vs_open_jam",
+        "facing_open_jam"
+      ],
+      "actual_node_type": "blind_vs_open_jam",
+      "expected_raw_any": [
+        "call",
+        "fold",
+        "safe_fallback"
+      ],
+      "actual_raw_action": "safe_fallback",
+      "engine_action": "fold",
+      "status": "fallback",
+      "reason": "Range engine unsupported/unsafe node: blind_vs_open_jam; V2.41 runtime fallback action=fold",
+      "warnings": [
+        "Open-jam all-in node is classified, but all-in ranges are not wired in V0.6.",
+        "blind_vs_open_jam classified, but all-in decision ranges are not wired in V0.6.",
+        "Safe fallback click sequence must be used."
+      ],
+      "to_call_bb": 11.0,
+      "max_commitment_bb": 12.0,
+      "hero_commitment_bb": 1.0,
+      "raise_levels": [
+        12.0
+      ],
+      "limpers": [],
+      "all_in_players": [
+        "BTN"
+      ],
+      "all_in_amount_bb": 12.0,
+      "runtime_action": "fold",
+      "runtime_raw_action": "safe_fallback",
+      "plan_status": "ok",
+      "planned_action": "fold",
+      "target_sequence": [
+        "FOLD"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "fold",
+        "target_sequence": [
+          "FOLD"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "iso_jam_vs_limper_bb",
+      "label": "iso_jam_vs_limper",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "blind_vs_open_jam",
+        "facing_open_jam",
+        "cold_vs_allin_3bet_or_higher"
+      ],
+      "actual_node_type": "blind_vs_open_jam",
+      "expected_raw_any": [
+        "call",
+        "fold",
+        "safe_fallback"
+      ],
+      "actual_raw_action": "safe_fallback",
+      "engine_action": "fold",
+      "status": "fallback",
+      "reason": "Range engine unsupported/unsafe node: blind_vs_open_jam; V2.41 runtime fallback action=fold",
+      "warnings": [
+        "Open-jam all-in node is classified, but all-in ranges are not wired in V0.6.",
+        "blind_vs_open_jam classified, but all-in decision ranges are not wired in V0.6.",
+        "Safe fallback click sequence must be used."
+      ],
+      "to_call_bb": 17.0,
+      "max_commitment_bb": 18.0,
+      "hero_commitment_bb": 1.0,
+      "raise_levels": [
+        18.0
+      ],
+      "limpers": [
+        "UTG"
+      ],
+      "all_in_players": [
+        "BTN"
+      ],
+      "all_in_amount_bb": 18.0,
+      "runtime_action": "fold",
+      "runtime_raw_action": "safe_fallback",
+      "plan_status": "ok",
+      "planned_action": "fold",
+      "target_sequence": [
+        "FOLD"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "fold",
+        "target_sequence": [
+          "FOLD"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "threebet_jam_opener_vs",
+      "label": "threebet_jam",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "opener_vs_3bet_jam",
+        "opener_vs_incomplete_3bet_allin"
+      ],
+      "actual_node_type": "opener_vs_3bet_jam",
+      "expected_raw_any": [
+        "call",
+        "fold",
+        "safe_fallback"
+      ],
+      "actual_raw_action": "safe_fallback",
+      "engine_action": "fold",
+      "status": "fallback",
+      "reason": "Range engine unsupported/unsafe node: opener_vs_3bet_jam; V2.41 runtime fallback action=fold",
+      "warnings": [
+        "Opener-vs-all-in 3bet node classified; guarded fallback until all-in ranges exist.",
+        "opener_vs_3bet_jam classified, but all-in decision ranges are not wired in V0.6.",
+        "Safe fallback click sequence must be used."
+      ],
+      "to_call_bb": 17.5,
+      "max_commitment_bb": 20.0,
+      "hero_commitment_bb": 2.5,
+      "raise_levels": [
+        2.5,
+        20.0
+      ],
+      "limpers": [],
+      "all_in_players": [
+        "BTN"
+      ],
+      "all_in_amount_bb": 20.0,
+      "runtime_action": "fold",
+      "runtime_raw_action": "safe_fallback",
+      "plan_status": "ok",
+      "planned_action": "fold",
+      "target_sequence": [
+        "FOLD"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "fold",
+        "target_sequence": [
+          "FOLD"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "fourbet_jam_threebettor_vs",
+      "label": "fourbet_jam",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "threebettor_vs_4bet_jam",
+        "threebettor_vs_incomplete_4bet_allin"
+      ],
+      "actual_node_type": "threebettor_vs_4bet_jam",
+      "expected_raw_any": [
+        "call",
+        "fold",
+        "safe_fallback"
+      ],
+      "actual_raw_action": "safe_fallback",
+      "engine_action": "fold",
+      "status": "fallback",
+      "reason": "Range engine unsupported/unsafe node: threebettor_vs_4bet_jam; V2.41 runtime fallback action=fold",
+      "warnings": [
+        "V2.43 inferred positional two-level all-in 4bet jam: earlier all-in actor re-raised after Hero 3bet.",
+        "threebettor_vs_4bet_jam classified, but all-in decision ranges are not wired in V0.6.",
+        "Safe fallback click sequence must be used."
+      ],
+      "to_call_bb": 26.0,
+      "max_commitment_bb": 35.0,
+      "hero_commitment_bb": 9.0,
+      "raise_levels": [
+        9.0,
+        35.0
+      ],
+      "limpers": [],
+      "all_in_players": [
+        "CO"
+      ],
+      "all_in_amount_bb": 35.0,
+      "runtime_action": "fold",
+      "runtime_raw_action": "safe_fallback",
+      "plan_status": "ok",
+      "planned_action": "fold",
+      "target_sequence": [
+        "FOLD"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "fold",
+        "target_sequence": [
+          "FOLD"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "fivebet_jam_fourbettor_vs",
+      "label": "fivebet_jam_allin",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "fourbettor_vs_normal_5bet",
+        "fourbettor_vs_large_5bet",
+        "fourbettor_vs_small_5bet",
+        "facing_allin_or_allin_present"
+      ],
+      "actual_node_type": "fourbettor_vs_small_5bet_jam",
+      "expected_raw_any": [
+        "call",
+        "fold",
+        "safe_fallback"
+      ],
+      "actual_raw_action": "safe_fallback",
+      "engine_action": "fold",
+      "status": "fallback",
+      "reason": "Range engine unsupported/unsafe node: fourbettor_vs_small_5bet_jam; V2.41 runtime fallback action=fold",
+      "warnings": [
+        "V2.43 inferred fourbettor-vs-5bet-jam from opener level, Hero middle 4bet level, and max all-in level.",
+        "V0.6 does not yet include 4bettor-vs-5bet non-jam ranges."
+      ],
+      "to_call_bb": 23.0,
+      "max_commitment_bb": 45.0,
+      "hero_commitment_bb": 22.0,
+      "raise_levels": [
+        2.5,
+        22.0,
+        45.0
+      ],
+      "limpers": [],
+      "all_in_players": [
+        "BTN"
+      ],
+      "all_in_amount_bb": 45.0,
+      "runtime_action": "fold",
+      "runtime_raw_action": "safe_fallback",
+      "plan_status": "ok",
+      "planned_action": "fold",
+      "target_sequence": [
+        "FOLD"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "fold",
+        "target_sequence": [
+          "FOLD"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "dirty_allin_unknown_amount",
+      "label": "dirty_allin_unknown_amount",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "blind_vs_open_jam",
+        "facing_allin_or_allin_present",
+        "hero_is_current_aggressor_no_decision",
+        "facing_short_allin"
+      ],
+      "actual_node_type": "blind_vs_open_jam",
+      "expected_raw_any": [
+        "safe_fallback",
+        "fold"
+      ],
+      "actual_raw_action": "safe_fallback",
+      "engine_action": "fold",
+      "status": "fallback",
+      "reason": "Range engine unsupported/unsafe node: blind_vs_open_jam; V2.41 runtime fallback action=fold",
+      "warnings": [
+        "Open-jam all-in node is classified, but all-in ranges are not wired in V0.6.",
+        "blind_vs_open_jam classified, but all-in decision ranges are not wired in V0.6.",
+        "Safe fallback click sequence must be used."
+      ],
+      "to_call_bb": 0.0,
+      "max_commitment_bb": 12.5,
+      "hero_commitment_bb": 12.5,
+      "raise_levels": [
+        12.5
+      ],
+      "limpers": [
+        "BTN"
+      ],
+      "all_in_players": [
+        "BTN"
+      ],
+      "all_in_amount_bb": 12.5,
+      "runtime_action": "fold",
+      "runtime_raw_action": "safe_fallback",
+      "plan_status": "ok",
+      "planned_action": "fold",
+      "target_sequence": [
+        "FOLD"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "fold",
+        "target_sequence": [
+          "FOLD"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": [
+        "Live-like dirty all-in flag with invalid amount must not error; V2.41 maps fallback to FOLD."
+      ]
+    },
+    {
+      "case_id": "sb_unopened_vs_bb_a8s",
+      "label": "sb_unopened_vs_bb",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "sb_first_in"
+      ],
+      "actual_node_type": "sb_first_in",
+      "expected_raw_any": [
+        "open_raise",
+        "fold",
+        "call",
+        "safe_fallback"
+      ],
+      "actual_raw_action": "open_raise",
+      "engine_action": "raise",
+      "status": "ok",
+      "reason": "range:sb_first_in.SB:open_raise",
+      "warnings": [
+        "Hero SB acts first-in against BB blind."
+      ],
+      "to_call_bb": 0.5,
+      "max_commitment_bb": 1.0,
+      "hero_commitment_bb": 0.5,
+      "raise_levels": [],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "bet_raise",
+      "runtime_raw_action": "open_raise",
+      "plan_status": "ok",
+      "planned_action": "bet_raise",
+      "target_sequence": [
+        "Raise"
+      ],
+      "raise_branch_enabled": true,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "bet_raise",
+        "target_sequence": [
+          "Raise"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "bb_vs_sb_open_kqs",
+      "label": "bb_vs_sb_open",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "blind_vs_open"
+      ],
+      "actual_node_type": "blind_vs_open",
+      "expected_raw_any": [
+        "call",
+        "3bet",
+        "fold",
+        "jam"
+      ],
+      "actual_raw_action": "3bet",
+      "engine_action": "raise",
+      "status": "ok",
+      "reason": "range:vs_open.SB|BB:3bet",
+      "warnings": [],
+      "to_call_bb": 2.0,
+      "max_commitment_bb": 3.0,
+      "hero_commitment_bb": 1.0,
+      "raise_levels": [
+        3.0
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "bet_raise",
+      "runtime_raw_action": "3bet",
+      "plan_status": "ok",
+      "planned_action": "bet_raise",
+      "target_sequence": [
+        "98%",
+        "Raise"
+      ],
+      "raise_branch_enabled": true,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "bet_raise",
+        "target_sequence": [
+          "98%",
+          "Raise"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "sb_vs_bb_3bet_aqo",
+      "label": "sb_vs_bb_3bet",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "opener_vs_normal_3bet",
+        "opener_vs_large_3bet"
+      ],
+      "actual_node_type": "opener_vs_large_3bet",
+      "expected_raw_any": [
+        "4bet",
+        "call",
+        "fold"
+      ],
+      "actual_raw_action": "call",
+      "engine_action": "call",
+      "status": "ok",
+      "reason": "range:opener_vs_3bet.SB|BB:call",
+      "warnings": [],
+      "to_call_bb": 7.0,
+      "max_commitment_bb": 10.0,
+      "hero_commitment_bb": 3.0,
+      "raise_levels": [
+        3.0,
+        10.0
+      ],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "call",
+      "runtime_raw_action": "call",
+      "plan_status": "ok",
+      "planned_action": "call",
+      "target_sequence": [
+        "Call"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "call",
+        "target_sequence": [
+          "Call"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "bb_vs_sb_limp_j7o",
+      "label": "bb_vs_sb_limp",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "bb_vs_sb_limp"
+      ],
+      "actual_node_type": "bb_vs_sb_limp",
+      "expected_raw_any": [
+        "check",
+        "fold",
+        "safe_fallback"
+      ],
+      "actual_raw_action": "check",
+      "engine_action": "check",
+      "status": "ok",
+      "reason": "range:bb_vs_sb_limp.BB:check",
+      "warnings": [
+        "Hero has logical preflop check option vs SB limp."
+      ],
+      "to_call_bb": 0.0,
+      "max_commitment_bb": 1.0,
+      "hero_commitment_bb": 1.0,
+      "raise_levels": [],
+      "limpers": [
+        "SB"
+      ],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "check",
+      "runtime_raw_action": "check",
+      "plan_status": "ok",
+      "planned_action": "check",
+      "target_sequence": [
+        "Check"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "check",
+        "target_sequence": [
+          "Check"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "sb_limp_jam_vs_bb_iso",
+      "label": "sb_limp_jam_vs_bb_iso",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "opener_vs_3bet_jam",
+        "threebettor_vs_4bet_jam",
+        "facing_allin_or_allin_present"
+      ],
+      "actual_node_type": "threebettor_vs_4bet_jam",
+      "expected_raw_any": [
+        "call",
+        "fold",
+        "safe_fallback"
+      ],
+      "actual_raw_action": "safe_fallback",
+      "engine_action": "fold",
+      "status": "fallback",
+      "reason": "Range engine unsupported/unsafe node: threebettor_vs_4bet_jam; V2.41 runtime fallback action=fold",
+      "warnings": [
+        "V2.43 inferred positional two-level all-in 4bet jam: earlier all-in actor re-raised after Hero 3bet.",
+        "threebettor_vs_4bet_jam classified, but all-in decision ranges are not wired in V0.6.",
+        "Safe fallback click sequence must be used."
+      ],
+      "to_call_bb": 14.0,
+      "max_commitment_bb": 18.0,
+      "hero_commitment_bb": 4.0,
+      "raise_levels": [
+        4.0,
+        18.0
+      ],
+      "limpers": [],
+      "all_in_players": [
+        "SB"
+      ],
+      "all_in_amount_bb": 18.0,
+      "runtime_action": "fold",
+      "runtime_raw_action": "safe_fallback",
+      "plan_status": "ok",
+      "planned_action": "fold",
+      "target_sequence": [
+        "FOLD"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "fold",
+        "target_sequence": [
+          "FOLD"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "bb_iso_vs_sb_limp_ako",
+      "label": "bb_iso_vs_sb_limp",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "bb_vs_sb_limp"
+      ],
+      "actual_node_type": "bb_vs_sb_limp",
+      "expected_raw_any": [
+        "check",
+        "iso_raise",
+        "fold",
+        "safe_fallback"
+      ],
+      "actual_raw_action": "iso_raise",
+      "engine_action": "raise",
+      "status": "ok",
+      "reason": "range:bb_vs_sb_limp.BB:iso_raise",
+      "warnings": [
+        "Hero has logical preflop check option vs SB limp."
+      ],
+      "to_call_bb": 0.0,
+      "max_commitment_bb": 1.0,
+      "hero_commitment_bb": 1.0,
+      "raise_levels": [],
+      "limpers": [
+        "SB"
+      ],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "bet_raise",
+      "runtime_raw_action": "iso_raise",
+      "plan_status": "ok",
+      "planned_action": "bet_raise",
+      "target_sequence": [
+        "98%",
+        "Raise"
+      ],
+      "raise_branch_enabled": true,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "bet_raise",
+        "target_sequence": [
+          "98%",
+          "Raise"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "safe_check_spot",
+      "label": "safe_check_spot",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "bb_vs_sb_limp"
+      ],
+      "actual_node_type": "bb_vs_sb_limp",
+      "expected_raw_any": [
+        "check",
+        "fold",
+        "safe_fallback"
+      ],
+      "actual_raw_action": "check",
+      "engine_action": "check",
+      "status": "ok",
+      "reason": "range:bb_vs_sb_limp.BB:check",
+      "warnings": [
+        "Hero has logical preflop check option vs SB limp."
+      ],
+      "to_call_bb": 0.0,
+      "max_commitment_bb": 1.0,
+      "hero_commitment_bb": 1.0,
+      "raise_levels": [],
+      "limpers": [
+        "SB"
+      ],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "check",
+      "runtime_raw_action": "check",
+      "plan_status": "ok",
+      "planned_action": "check",
+      "target_sequence": [
+        "Check"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "check",
+        "target_sequence": [
+          "Check"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "safe_fold_spot_bad_input",
+      "label": "safe_fold_spot",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "solver_input_error"
+      ],
+      "actual_node_type": "solver_input_error",
+      "expected_raw_any": [
+        "safe_fallback"
+      ],
+      "actual_raw_action": "safe_fallback",
+      "engine_action": "fold",
+      "status": "fallback",
+      "reason": "Solver input error: Clear_JSON must contain non-empty players dict; V2.41 runtime fallback action=fold",
+      "warnings": [
+        "Clear_JSON must contain non-empty players dict"
+      ],
+      "to_call_bb": null,
+      "max_commitment_bb": null,
+      "hero_commitment_bb": null,
+      "raise_levels": null,
+      "limpers": null,
+      "all_in_players": null,
+      "all_in_amount_bb": null,
+      "runtime_action": "fold",
+      "runtime_raw_action": "safe_fallback",
+      "plan_status": "ok",
+      "planned_action": "fold",
+      "target_sequence": [
+        "FOLD"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "fold",
+        "target_sequence": [
+          "FOLD"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": [
+        "Bad input must fall back to runtime fold after V2.41."
+      ]
+    },
+    {
+      "case_id": "unknown_no_raise_preflop_spot",
+      "label": "unknown_no_raise_preflop_spot",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "unknown_no_raise_preflop_spot",
+        "solver_input_error"
+      ],
+      "actual_node_type": "unknown_no_raise_preflop_spot",
+      "expected_raw_any": [
+        "safe_fallback",
+        "fold"
+      ],
+      "actual_raw_action": "safe_fallback",
+      "engine_action": "fold",
+      "status": "fallback",
+      "reason": "Range engine unsupported/unsafe node: unknown_no_raise_preflop_spot; V2.41 runtime fallback action=fold",
+      "warnings": [
+        "No raise exists, but V2.39 cannot classify this no-raise state.",
+        "V0.6 range engine does not support node_type=unknown_no_raise_preflop_spot."
+      ],
+      "to_call_bb": 0.5,
+      "max_commitment_bb": 1.0,
+      "hero_commitment_bb": 0.5,
+      "raise_levels": [],
+      "limpers": [],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "fold",
+      "runtime_raw_action": "safe_fallback",
+      "plan_status": "ok",
+      "planned_action": "fold",
+      "target_sequence": [
+        "FOLD"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "fold",
+        "target_sequence": [
+          "FOLD"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "structure_mismatch_blind_spot",
+      "label": "structure_mismatch_blind_spot",
+      "kind": "positive",
+      "ok": true,
+      "runtime_chain_ok": true,
+      "semantic_exact_ok": true,
+      "known_semantic_gap": false,
+      "checks": {
+        "node_ok": true,
+        "raw_action_ok": true,
+        "bridge_status_ok": true,
+        "runtime_decision_ok": true,
+        "runtime_plan_ok": true,
+        "fake_click_ok": true,
+        "synthetic_final_ok": true
+      },
+      "expected_node_any": [
+        "unknown_no_raise_preflop_spot",
+        "bb_option_vs_1_limper",
+        "facing_short_allin",
+        "solver_input_error"
+      ],
+      "actual_node_type": "unknown_no_raise_preflop_spot",
+      "expected_raw_any": [
+        "safe_fallback",
+        "fold",
+        "check"
+      ],
+      "actual_raw_action": "safe_fallback",
+      "engine_action": "fold",
+      "status": "fallback",
+      "reason": "Range engine unsupported/unsafe node: unknown_no_raise_preflop_spot; V2.41 runtime fallback action=fold",
+      "warnings": [
+        "No raise exists, but V2.39 cannot classify this no-raise state.",
+        "V0.6 range engine does not support node_type=unknown_no_raise_preflop_spot."
+      ],
+      "to_call_bb": 0.5,
+      "max_commitment_bb": 1.0,
+      "hero_commitment_bb": 0.5,
+      "raise_levels": [],
+      "limpers": [
+        "UTG"
+      ],
+      "all_in_players": [],
+      "all_in_amount_bb": null,
+      "runtime_action": "fold",
+      "runtime_raw_action": "safe_fallback",
+      "plan_status": "ok",
+      "planned_action": "fold",
+      "target_sequence": [
+        "FOLD"
+      ],
+      "raise_branch_enabled": false,
+      "click_result": {
+        "status": "clicked",
+        "branch": "action_button",
+        "action": "fold",
+        "target_sequence": [
+          "FOLD"
+        ],
+        "guard_passed": true,
+        "dry_run": true,
+        "physical_click_executed": false
+      },
+      "notes": []
+    },
+    {
+      "case_id": "already_has_click_result_reject",
+      "label": "already_has_click_result_reject",
+      "kind": "reject",
+      "ok": true,
+      "reject_reason": "already_has_click_result",
+      "actual_reject_reason": "already_has_click_result",
+      "checks": {
+        "reject_ok": true
+      }
+    },
+    {
+      "case_id": "postflop_reject",
+      "label": "postflop_reject",
+      "kind": "reject",
+      "ok": true,
+      "reject_reason": "not_preflop",
+      "actual_street": "flop",
+      "checks": {
+        "reject_ok": true
+      }
+    }
+  ]
+}
