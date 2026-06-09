@@ -1,22 +1,32 @@
 """Postflop module for PokerVision_Solver_AllPreflop_Flop.
 
-The package starts in V0.3.1 with contracts only. Runtime integration,
-source discovery, normalization, poker decisions, and click-chain logic are
-intentionally outside this module's current scope.
+V0.3.x exposes contract types only. Runtime/source-discovery/normalizer logic is added in later versions.
 """
 
 from .contracts import (
     ContractSeverity,
     ContractValidationError,
+    DiscoveryStatus,
     ModuleError,
     ModuleWarning,
+    PostflopConfidence,
+    PostflopRawSource,
+    PostflopSourceCandidate,
+    PostflopSourceDiscoveryResult,
     PostflopSourceType,
+    RawSourceLoadStatus,
 )
 
 __all__ = [
     "ContractSeverity",
     "ContractValidationError",
+    "DiscoveryStatus",
     "ModuleError",
     "ModuleWarning",
+    "PostflopConfidence",
+    "PostflopRawSource",
+    "PostflopSourceCandidate",
+    "PostflopSourceDiscoveryResult",
     "PostflopSourceType",
+    "RawSourceLoadStatus",
 ]
