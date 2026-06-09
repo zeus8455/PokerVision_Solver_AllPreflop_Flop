@@ -1,0 +1,38 @@
+{
+  "schema_version": "v020_expected_source_case_1",
+  "case_id": "flop_source_case_001",
+  "expected_source_type": "dark_json",
+  "expected_is_real_project_source": false,
+  "expected_is_manual_live_like_source": true,
+  "expected_has_board_cards": true,
+  "expected_board_card_count": 3,
+  "expected_has_hero_cards": true,
+  "expected_hero_card_count": 2,
+  "expected_has_players": true,
+  "expected_min_player_count": 2,
+  "expected_has_actions": true,
+  "expected_street_candidate": "flop",
+  "expected_pot_type_candidate": "single_raised_pot_candidate",
+  "expected_required_fields_present": [
+    "case_id",
+    "source_type",
+    "table_id",
+    "hand_id",
+    "street_candidate",
+    "hero.cards",
+    "board_cards",
+    "pot.total_pot",
+    "players",
+    "action_context"
+  ],
+  "expected_can_be_used_for_future_normalizer": true,
+  "expected_requires_click_cycle": false,
+  "expected_contains_poker_decision": false,
+  "expected_contains_click_result": false,
+  "expected_notes": [
+    "This expected JSON describes source features only.",
+    "It must not contain fold/call/bet/raise recommendations.",
+    "Final Clear_JSON is not required for this case.",
+    "Normalizer output is intentionally not required in V0.2.3."
+  ]
+}

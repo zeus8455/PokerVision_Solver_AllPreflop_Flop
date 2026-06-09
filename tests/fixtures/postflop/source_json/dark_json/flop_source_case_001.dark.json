@@ -1,0 +1,117 @@
+{
+  "schema_version": "v020_manual_live_like_dark_json_1",
+  "case_id": "flop_source_case_001",
+  "source_type": "dark_json",
+  "fixture_origin": {
+    "is_real_project_source": false,
+    "is_manual_live_like_source": true,
+    "source_of_truth_note": "Manual live-like source for fixture lab bootstrapping. Do not treat as real PokerVision export.",
+    "created_for_version": "V0.2.3"
+  },
+  "requires_click_cycle": false,
+  "table_id": "table_01",
+  "hand_id": "manual_flop_case_001",
+  "street_candidate": "flop",
+  "table_state": {
+    "active": true,
+    "service_state": "manual_fixture",
+    "trigger_state": "active_candidate",
+    "clear_state": "pre_normalizer_source"
+  },
+  "hero": {
+    "seat_id": "seat_6",
+    "position": "BTN",
+    "is_hero": true,
+    "cards": [
+      "Kh",
+      "Qh"
+    ],
+    "stack": 94.5,
+    "committed": 2.5,
+    "folded": false,
+    "sitout": false,
+    "all_in": false
+  },
+  "board_cards": [
+    "Ah",
+    "7d",
+    "2c"
+  ],
+  "pot": {
+    "total_pot": 7.5,
+    "main_pot": 7.5,
+    "to_call": 0.0,
+    "currency": "bb"
+  },
+  "players": [
+    {
+      "seat_id": "seat_1",
+      "position": "SB",
+      "name": "Villain_SB",
+      "is_hero": false,
+      "stack": 98.0,
+      "committed": 1.0,
+      "folded": false,
+      "sitout": false,
+      "all_in": false,
+      "action_state": "checked"
+    },
+    {
+      "seat_id": "seat_2",
+      "position": "BB",
+      "name": "Villain_BB",
+      "is_hero": false,
+      "stack": 97.5,
+      "committed": 1.0,
+      "folded": false,
+      "sitout": false,
+      "all_in": false,
+      "action_state": "checked"
+    },
+    {
+      "seat_id": "seat_6",
+      "position": "BTN",
+      "name": "Hero",
+      "is_hero": true,
+      "stack": 94.5,
+      "committed": 2.5,
+      "folded": false,
+      "sitout": false,
+      "all_in": false,
+      "action_state": "to_act"
+    }
+  ],
+  "action_context": {
+    "hero_to_act": true,
+    "active_player_seat": "seat_6",
+    "allowed_actions": [
+      "check",
+      "bet"
+    ],
+    "last_aggressor": "seat_6",
+    "raw_actions": [
+      {
+        "street": "flop",
+        "seat_id": "seat_1",
+        "action": "check",
+        "amount": 0.0
+      },
+      {
+        "street": "flop",
+        "seat_id": "seat_2",
+        "action": "check",
+        "amount": 0.0
+      }
+    ]
+  },
+  "diagnostics": {
+    "contains_poker_decision": false,
+    "contains_click_result": false,
+    "expected_future_use": "source_adapter_and_frame_normalizer_fixture",
+    "warnings": [
+      "manual_live_like_source",
+      "not_real_project_export",
+      "street_candidate_not_final_detector_result"
+    ]
+  }
+}

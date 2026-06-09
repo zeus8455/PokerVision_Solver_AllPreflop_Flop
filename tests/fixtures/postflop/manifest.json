@@ -39,5 +39,26 @@
     "expected_file_required_to_exist": true,
     "duplicate_case_id_allowed": false
   },
-  "cases": []
+  "cases": [
+    {
+      "case_id": "flop_source_case_001",
+      "description": "Minimal manual live-like flop dark_json source case for future postflop normalizer tests. No poker decision is included.",
+      "source_type": "dark_json",
+      "source_file": "source_json/dark_json/flop_source_case_001.dark.json",
+      "expected_file": "expected/flop_source_case_001.expected.json",
+      "normalized_file": "normalized/flop_source_case_001.normalized.json",
+      "street_candidate": "flop",
+      "pot_type_candidate": "single_raised_pot_candidate",
+      "is_real_project_source": false,
+      "is_manual_live_like_source": true,
+      "source_of_truth_note": "Manual live-like dark_json fixture created for V0.2.3. It is not claimed to be a real exported PokerVision live source.",
+      "requires_click_cycle": false,
+      "status": "active",
+      "notes": [
+        "First source-based postflop fixture case.",
+        "Final Clear_JSON is intentionally not required.",
+        "Used only to validate fixture lab storage rules before source discovery, contracts, or normalizer are implemented."
+      ]
+    }
+  ]
 }
