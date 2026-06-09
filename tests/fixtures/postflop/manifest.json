@@ -1,0 +1,43 @@
+{
+  "version": "0.2.0",
+  "schema_version": "v020_fixture_manifest_1",
+  "description": "Source-based postflop fixture lab manifest for PokerVision_Solver_AllPreflop_Flop.",
+  "purpose": "Track postflop source JSON cases before source discovery, contracts, normalizer, player resolver, ranges, equity, or poker decisions are implemented.",
+  "allowed_source_types": [
+    "dark_json",
+    "pending_json",
+    "service_json",
+    "current_cycle_json",
+    "runtime_json",
+    "solver_payload_json",
+    "final_clear_json",
+    "manual_live_like_json",
+    "unknown"
+  ],
+  "required_case_fields": [
+    "case_id",
+    "description",
+    "source_type",
+    "source_file",
+    "expected_file",
+    "normalized_file",
+    "street_candidate",
+    "pot_type_candidate",
+    "is_real_project_source",
+    "is_manual_live_like_source",
+    "source_of_truth_note",
+    "requires_click_cycle",
+    "status",
+    "notes"
+  ],
+  "rules": {
+    "final_clear_json_required": false,
+    "manual_live_like_json_must_be_marked": true,
+    "expected_json_contains_poker_decision": false,
+    "normalized_file_required_to_exist_before_normalizer": false,
+    "source_file_required_to_exist": true,
+    "expected_file_required_to_exist": true,
+    "duplicate_case_id_allowed": false
+  },
+  "cases": []
+}
