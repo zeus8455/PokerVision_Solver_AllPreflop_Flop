@@ -1,0 +1,260 @@
+{
+  "schema_version": "v010_project_baseline_audit_1",
+  "version_label": "V0.1.1",
+  "generated_at_utc": "2026-06-09T11:31:11+00:00",
+  "project_root": "C:\\PokerVision_Solver_AllPreflop_Flop",
+  "repo_identity": {
+    "expected_repo_name": "PokerVision_Solver_AllPreflop_Flop",
+    "project_root_name": "PokerVision_Solver_AllPreflop_Flop",
+    "matches_expected_name": true
+  },
+  "git_state": {
+    "git_available": true,
+    "current_branch": "main",
+    "head_commit_short": "db16abd",
+    "head_commit_full": "db16abd400d9a675d3183548365fdb587b273af8",
+    "origin_url": "https://github.com/zeus8455/PokerVision_Solver_AllPreflop_Flop.git",
+    "status_short": [
+      "?? tests/test_baseline_audit_tools_v010.py",
+      "?? tools/audit_current_project_baseline_v010.py"
+    ],
+    "working_tree_clean": false,
+    "recent_commits": [
+      "db16abd initial snapshot: Real_Version_SolverPreflop as AllPreflop_Flop baseline"
+    ],
+    "errors": {
+      "branch": null,
+      "head": null,
+      "remote": null,
+      "status": null
+    }
+  },
+  "root_file_presence": {
+    "expected": [
+      "README.md",
+      "VERSION.md",
+      "pyproject.toml",
+      ".gitignore"
+    ],
+    "present": [
+      "README.md",
+      "VERSION.md",
+      "pyproject.toml",
+      ".gitignore"
+    ],
+    "missing": [],
+    "presence_map": {
+      "README.md": true,
+      "VERSION.md": true,
+      "pyproject.toml": true,
+      ".gitignore": true
+    }
+  },
+  "directory_presence": {
+    "expected": [
+      "solver_preflop",
+      "external",
+      "tests",
+      "tools",
+      "outputs",
+      "ranges",
+      "examples/clear_json",
+      "docs",
+      "docs/checkpoints"
+    ],
+    "present": [
+      "solver_preflop",
+      "external",
+      "tests",
+      "tools",
+      "outputs",
+      "ranges",
+      "examples/clear_json",
+      "docs",
+      "docs/checkpoints"
+    ],
+    "missing": [],
+    "presence_map": {
+      "solver_preflop": true,
+      "external": true,
+      "tests": true,
+      "tools": true,
+      "outputs": true,
+      "ranges": true,
+      "examples/clear_json": true,
+      "docs": true,
+      "docs/checkpoints": true
+    }
+  },
+  "readme_identity_check": {
+    "readme_exists": true,
+    "contains_expected_repo_name": false,
+    "contains_legacy_preflop_name": true,
+    "contains_legacy_preflop_path": true,
+    "contains_postflop_terms": true,
+    "identity_mismatch_detected": true
+  },
+  "version_history_check": {
+    "version_file_exists": true,
+    "first_detected_headings": [
+      "## V2.34.0 - enable Solver_Preflop controlled raise branch",
+      "- Remove the old V1.1 simple-button blocker only for Solver_Preflop-adapted preflop raise-family actions.",
+      "- V2.34 audit status ok",
+      "- V2.34 allows Solver_Preflop-controlled raise-family plans while preserving all runtime click guards.",
+      "## V2.32.0 - inject Solver_Preflop bridge before live runtime",
+      "- V2.32 audit status ok",
+      "- After V2.31, v11_stage1_runtime could accept ok/fallback Solver_Preflop bridge.",
+      "- V2.32 injects the bridge before runtime, so the live click path can use Solver_Preflop instead of legacy stub.",
+      "## V2.31.0 - accept Solver_Preflop fallback bridge in live runtime",
+      "- V2.31 audit status ok",
+      "- V2.23 live runtime solver bridge audit updated for ok|fallback contract",
+      "- After V2.30, duplicate Active retry reached action runtime.",
+      "- V2.31 accepts fallback bridge when bridge_payload.action_decision exists, so live runtime uses Solver_Preflop instead of legacy stub.",
+      "## V2.30.0 - duplicate Active runtime retry when no runtime/final artifact exists",
+      "- V2.30 audit status ok",
+      "- After V2.29, stale lifecycle was released correctly.",
+      "- V2.30 converts unfinished duplicate Active frames into guarded runtime retry events without disabling click guards.",
+      "## V2.29.0 - release stale lifecycle inside early gate blocked path",
+      "- Fix the remaining real-live stale lifecycle lock case where heavy analysis is skipped before the V2.28 release block can run.",
+      "- V2.29 audit status ok",
+      "- V2.29 release is inside early gate blocked path",
+      "- V2.29 release occurs before V2.28 late release block",
+      "- table_lifecycle_already_open_before_analysis could block heavy analysis before the previous V2.28 release block was reached.",
+      "- V2.29 releases that stale lifecycle before continue, allowing the next scan to process normally.",
+      "## V2.28.0 - release early transaction lifecycle when action runtime cannot start"
+    ],
+    "mentions_v2_60": true,
+    "mentions_fixture_review": true
+  },
+  "preflop_baseline_presence": {
+    "expected_modules": [
+      "solver_preflop/__init__.py",
+      "solver_preflop/clear_json_adapter.py",
+      "solver_preflop/contracts.py",
+      "solver_preflop/decision_engine.py",
+      "solver_preflop/output_files.py",
+      "solver_preflop/pokervision_bridge.py",
+      "solver_preflop/range_engine.py",
+      "solver_preflop/range_loader.py",
+      "solver_preflop/range_parser.py",
+      "solver_preflop/sizing_policy.py",
+      "solver_preflop/spot_classifier.py"
+    ],
+    "present": [
+      "solver_preflop/__init__.py",
+      "solver_preflop/clear_json_adapter.py",
+      "solver_preflop/contracts.py",
+      "solver_preflop/decision_engine.py",
+      "solver_preflop/output_files.py",
+      "solver_preflop/pokervision_bridge.py",
+      "solver_preflop/range_engine.py",
+      "solver_preflop/range_loader.py",
+      "solver_preflop/range_parser.py",
+      "solver_preflop/sizing_policy.py",
+      "solver_preflop/spot_classifier.py"
+    ],
+    "missing": [],
+    "present_count": 11,
+    "missing_count": 0,
+    "presence_map": {
+      "solver_preflop/__init__.py": true,
+      "solver_preflop/clear_json_adapter.py": true,
+      "solver_preflop/contracts.py": true,
+      "solver_preflop/decision_engine.py": true,
+      "solver_preflop/output_files.py": true,
+      "solver_preflop/pokervision_bridge.py": true,
+      "solver_preflop/range_engine.py": true,
+      "solver_preflop/range_loader.py": true,
+      "solver_preflop/range_parser.py": true,
+      "solver_preflop/sizing_policy.py": true,
+      "solver_preflop/spot_classifier.py": true
+    }
+  },
+  "postflop_core_presence": {
+    "candidate_paths": [
+      "solver_postflop",
+      "postflop_solver",
+      "solver_flop",
+      "postflop",
+      "normalizer",
+      "player_resolver",
+      "source_discovery",
+      "equity"
+    ],
+    "present": [],
+    "missing": [
+      "solver_postflop",
+      "postflop_solver",
+      "solver_flop",
+      "postflop",
+      "normalizer",
+      "player_resolver",
+      "source_discovery",
+      "equity"
+    ],
+    "present_count": 0
+  },
+  "external_snapshot_presence": {
+    "candidate_paths": [
+      "external/PokerVisionFinalVersionNoSolver_snapshot",
+      "external/PokerVisionFinalVersionNoSolver_snapshot/PokerVision V1_2"
+    ],
+    "present": [
+      "external/PokerVisionFinalVersionNoSolver_snapshot",
+      "external/PokerVisionFinalVersionNoSolver_snapshot/PokerVision V1_2"
+    ],
+    "missing": [],
+    "present_count": 2,
+    "presence_map": {
+      "external/PokerVisionFinalVersionNoSolver_snapshot": true,
+      "external/PokerVisionFinalVersionNoSolver_snapshot/PokerVision V1_2": true
+    }
+  },
+  "observed_python_files": {
+    "solver_preflop": [
+      "solver_preflop/__init__.py",
+      "solver_preflop/cards.py",
+      "solver_preflop/clear_json_adapter.py",
+      "solver_preflop/contracts.py",
+      "solver_preflop/decision_engine.py",
+      "solver_preflop/output_files.py",
+      "solver_preflop/pokervision_bridge.py",
+      "solver_preflop/range_engine.py",
+      "solver_preflop/range_loader.py",
+      "solver_preflop/range_parser.py",
+      "solver_preflop/sizing_policy.py",
+      "solver_preflop/spot_classifier.py"
+    ],
+    "tools_count": 84,
+    "tests_count": 81
+  },
+  "recommended_next_action": "Run V0.1.2 Test Suite Health Audit after this baseline identity audit is committed.",
+  "risk_flags": [
+    {
+      "code": "README_IDENTITY_MISMATCH",
+      "severity": "medium",
+      "message": "Repository is AllPreflop_Flop, but README still identifies the project as PokerVision_Solver_Preflop."
+    },
+    {
+      "code": "PREFLOP_BASELINE_PRESENT",
+      "severity": "info",
+      "message": "Preflop solver baseline modules are present and should be treated as source baseline, not postflop implementation."
+    },
+    {
+      "code": "POSTFLOP_CORE_NOT_PRESENT",
+      "severity": "info",
+      "message": "No dedicated postflop solver/core directories were detected yet."
+    },
+    {
+      "code": "EXTERNAL_SNAPSHOT_PRESENT",
+      "severity": "info",
+      "message": "External PokerVision NoSolver snapshot is present; do not modify it casually during V0.1.x audit."
+    },
+    {
+      "code": "WORKING_TREE_NOT_CLEAN",
+      "severity": "medium",
+      "message": "Git working tree has uncommitted changes; commit/stash before development steps if needed."
+    }
+  ],
+  "status": "ok"
+}
