@@ -1,0 +1,1399 @@
+{
+  "schema_version": "v0.1.2-test-suite-health",
+  "generated_at_utc": "2026-06-09T11:51:05+00:00",
+  "project_root": "C:\\PokerVision_Solver_AllPreflop_Flop",
+  "run_mode": "safe",
+  "timeout_seconds_per_pytest_call": 35,
+  "purpose": "Classify current tests before postflop development; do not delete or rewrite tests in this audit.",
+  "summary": {
+    "total_test_files": 81,
+    "by_category": {
+      "live_dry_run": 55,
+      "core_baseline": 4,
+      "future_postflop": 11,
+      "legacy_old_audit": 10,
+      "static_dynamic_map": 1
+    },
+    "by_collect_status": {
+      "passed": 81
+    },
+    "by_run_status": {
+      "not_run_guarded": 78,
+      "passed": 2,
+      "timeout": 1
+    },
+    "by_recommended_action": {
+      "keep_but_not_blocking": 67,
+      "keep_as_required_baseline": 3,
+      "fix_before_postflop": 1,
+      "mark_legacy": 10
+    },
+    "requires_live_environment": 64,
+    "requires_external_snapshot": 27,
+    "requires_old_outputs": 60,
+    "blocking_for_postflop_dev": 4
+  },
+  "test_files": [
+    {
+      "test_file": "tests/test_allin_logic_v06.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": false,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_baseline_audit_tools_v010.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": false,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": false,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains external snapshot references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_cards.py",
+      "category": "core_baseline",
+      "collect_status": "passed",
+      "run_status": "passed",
+      "requires_live_environment": false,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": false,
+      "is_blocking_for_postflop_dev": true,
+      "failure_reason": "",
+      "recommended_action": "keep_as_required_baseline",
+      "notes": []
+    },
+    {
+      "test_file": "tests/test_clear_json_adapter.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": false,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_clear_json_adapter_v02.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": false,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_cold_4bet_range_support_v15.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_cold_blind_vs_3bet_v14.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_defensive_ranges_v05.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": false,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_display_cycle_bridge_embedding_v16.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": false,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_output_files_v08.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": false,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_pokervision_bridge_v09.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": false,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_preintegration_v10.py",
+      "category": "core_baseline",
+      "collect_status": "passed",
+      "run_status": "timeout",
+      "requires_live_environment": false,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": false,
+      "is_blocking_for_postflop_dev": true,
+      "failure_reason": "run_timeout: .",
+      "recommended_action": "fix_before_postflop",
+      "notes": []
+    },
+    {
+      "test_file": "tests/test_range_engine_v04.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": false,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_range_parser_v04.py",
+      "category": "core_baseline",
+      "collect_status": "passed",
+      "run_status": "passed",
+      "requires_live_environment": false,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": false,
+      "is_blocking_for_postflop_dev": true,
+      "failure_reason": "",
+      "recommended_action": "keep_as_required_baseline",
+      "notes": []
+    },
+    {
+      "test_file": "tests/test_response_contract_v07.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": false,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_snapshot_bridge_check_v13.py",
+      "category": "core_baseline",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": false,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": false,
+      "is_blocking_for_postflop_dev": true,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_as_required_baseline",
+      "notes": [
+        "contains external snapshot references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_snapshot_cycle_bridge_smoke_v19.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": false,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_snapshot_main_startup_smoke_v18.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": false,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_solver_decision.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": false,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_solver_preflop_bridge_publication_v17.py",
+      "category": "future_postflop",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": false,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_solver_preflop_dryrun_bridge_v12.py",
+      "category": "future_postflop",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": false,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_spot_classifier_v02.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": false,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_spot_classifier_v03.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": false,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_0_snapshot_runtime_source_switch.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_10_snapshot_transaction_source_audit.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_11_snapshot_transaction_lifecycle_audit.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_12_snapshot_display_transaction_integration_audit.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_13_snapshot_final_action_publication_regression.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_14_snapshot_final_solver_source_regression.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_15_snapshot_all_preflop_e2e.py",
+      "category": "future_postflop",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_16_snapshot_6slot_preflop_e2e.py",
+      "category": "future_postflop",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_17_pre_live_config_audit.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_18_startup_audit_only_readiness.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_19_live_no_click_capture_probe.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_1_snapshot_solver_source_dryrun.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_21_real_click_stub_blocker_audit.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_22_strict_real_click_source_guard_audit.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_23_live_runtime_solver_bridge_audit.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_24_snapshot_live_runtime_e2e.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_25_real_startup_readiness_after_v224.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_26_live_no_click_probe_after_v225.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_28_live_transaction_gate_unlock_audit.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_29_early_gate_stale_lifecycle_release_audit.py",
+      "category": "legacy_old_audit",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": false,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "mark_legacy",
+      "notes": [
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_2_snapshot_solver_source_multicase.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_30_duplicate_active_runtime_retry_audit.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_31_accept_solver_preflop_fallback_contract_audit.py",
+      "category": "future_postflop",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_32_pre_runtime_solver_bridge_injection_audit.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_34_enable_solver_preflop_raise_branch_audit.py",
+      "category": "future_postflop",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_35_synthetic_real_click_gate_e2e.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_36_synthetic_clear_json_runtime_chain.py",
+      "category": "future_postflop",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_37_lineage_cleanup_audit.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_38_synthetic_lifecycle_regression.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_39_spot_classifier_no_raise_audit.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_3_snapshot_runtime_publication.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_40_real_clear_json_adapter_audit.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_41_safe_fallback_runtime_fold_audit.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_42_full_preflop_spot_matrix_e2e.py",
+      "category": "future_postflop",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_43_allin_semantic_cleanup_audit.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_44_premium_fold_guard_e2e.py",
+      "category": "legacy_old_audit",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": false,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "mark_legacy",
+      "notes": [
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_45_allin_taxonomy_audit.py",
+      "category": "future_postflop",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_46_clear_json_allin_propagation_audit.py",
+      "category": "legacy_old_audit",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": false,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "mark_legacy",
+      "notes": [
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_47_allin_stack_policy_audit.py",
+      "category": "legacy_old_audit",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": false,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "mark_legacy",
+      "notes": [
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_48_unknown_amount_allin_audit.py",
+      "category": "legacy_old_audit",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": false,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "mark_legacy",
+      "notes": [
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_49_dark_clear_solver_runtime_chain.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_4_snapshot_click_guard_eligibility.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_50_remove_game_service_policy_audit.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_51_postflop_runtime_fallback_audit.py",
+      "category": "future_postflop",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_52_invalid_hero_runtime_fallback_audit.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_53_bridge_payload_fallback_audit.py",
+      "category": "future_postflop",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": false,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_54_project_static_logic_map.py",
+      "category": "static_dynamic_map",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": false,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_55_project_dynamic_execution_map.py",
+      "category": "legacy_old_audit",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": false,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "mark_legacy",
+      "notes": [
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_56_project_logic_coverage_report.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_57_cleanup_review_report.py",
+      "category": "legacy_old_audit",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": false,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "mark_legacy",
+      "notes": [
+        "contains external snapshot references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_58_delete_candidate_inspection.py",
+      "category": "legacy_old_audit",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": false,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "mark_legacy",
+      "notes": [
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_59_fixture_json_trust_review.py",
+      "category": "legacy_old_audit",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": false,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "mark_legacy",
+      "notes": [
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_5_snapshot_click_result_publication.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_60_fixture_review_inspection.py",
+      "category": "legacy_old_audit",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": false,
+      "requires_external_snapshot": false,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "mark_legacy",
+      "notes": [
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_6_snapshot_final_clear_embedding.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_7_snapshot_display_finalization_audit.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_8_snapshot_6slot_isolation_audit.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    },
+    {
+      "test_file": "tests/test_v2_9_snapshot_finalization_blocker_audit.py",
+      "category": "live_dry_run",
+      "collect_status": "passed",
+      "run_status": "not_run_guarded",
+      "requires_live_environment": true,
+      "requires_external_snapshot": true,
+      "requires_old_outputs": true,
+      "is_blocking_for_postflop_dev": false,
+      "failure_reason": "run skipped by safe audit guard",
+      "recommended_action": "keep_but_not_blocking",
+      "notes": [
+        "contains live/runtime/click/screen related references",
+        "contains external snapshot references",
+        "contains outputs/fixture/current_cycle related references",
+        "safe mode avoided executing this file"
+      ]
+    }
+  ],
+  "next_step": "V0.1.3 JSON Source Map Audit"
+}
