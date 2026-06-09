@@ -1,7 +1,4 @@
-"""Postflop module for PokerVision_Solver_AllPreflop_Flop.
-
-V0.3.x exposes contract types only. Runtime/source-discovery/normalizer logic is added in later versions.
-"""
+"""Postflop contracts for PokerVision_Solver_AllPreflop_Flop."""
 
 from .contracts import (
     ContractSeverity,
@@ -9,7 +6,12 @@ from .contracts import (
     DiscoveryStatus,
     ModuleError,
     ModuleWarning,
+    NormalizationStatus,
+    NormalizedPostflopFrame,
+    PostflopActionSnapshot,
+    PostflopBoardSnapshot,
     PostflopConfidence,
+    PostflopPlayerSnapshot,
     PostflopRawSource,
     PostflopSourceCandidate,
     PostflopSourceDiscoveryResult,
@@ -23,7 +25,12 @@ __all__ = [
     "DiscoveryStatus",
     "ModuleError",
     "ModuleWarning",
+    "NormalizationStatus",
+    "NormalizedPostflopFrame",
+    "PostflopActionSnapshot",
+    "PostflopBoardSnapshot",
     "PostflopConfidence",
+    "PostflopPlayerSnapshot",
     "PostflopRawSource",
     "PostflopSourceCandidate",
     "PostflopSourceDiscoveryResult",
