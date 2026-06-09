@@ -1,0 +1,262 @@
+{
+  "schema_version": "v010_final_report.1",
+  "version": "V0.1.5",
+  "title": "Final V0.1 Baseline Audit Report / Plan to V0.2",
+  "generated_at_utc": "2026-06-09T14:26:37+00:00",
+  "project_root": "C:\\PokerVision_Solver_AllPreflop_Flop",
+  "git": {
+    "branch": "main",
+    "head": "077eb88",
+    "status_short": "?? tests/test_v010_final_report_builder.py\n?? tools/build_v010_final_report.py",
+    "recent_commits": "077eb88 V0.1.4 add player state filtering audit\n00bfea3 V0.1.3 add json source map audit\nc062077 V0.1.2 add test suite health audit\n6bb90f8 V0.1.1 add project baseline audit\ndb16abd initial snapshot: Real_Version_SolverPreflop as AllPreflop_Flop baseline"
+  },
+  "source_report_status": {
+    "project_baseline": {
+      "path": "C:\\PokerVision_Solver_AllPreflop_Flop\\outputs\\baseline_audit_v010\\project_baseline_report.json",
+      "exists": true,
+      "loaded": true,
+      "error": null
+    },
+    "test_suite_health": {
+      "path": "C:\\PokerVision_Solver_AllPreflop_Flop\\outputs\\baseline_audit_v010\\test_suite_health_report.json",
+      "exists": true,
+      "loaded": true,
+      "error": null
+    },
+    "json_source_map": {
+      "path": "C:\\PokerVision_Solver_AllPreflop_Flop\\outputs\\baseline_audit_v010\\json_source_map_report.json",
+      "exists": true,
+      "loaded": true,
+      "error": null
+    },
+    "player_state_filtering": {
+      "path": "C:\\PokerVision_Solver_AllPreflop_Flop\\outputs\\baseline_audit_v010\\player_state_filtering_report.json",
+      "exists": true,
+      "loaded": true,
+      "error": null
+    }
+  },
+  "missing_or_failed_source_reports": [],
+  "v010_findings": {
+    "project_identity": {
+      "summary": "AllPreflop_Flop repository currently behaves as a preflop baseline plus external snapshot and audit/history tail.",
+      "repo_identity": {
+        "expected_repo_name": "PokerVision_Solver_AllPreflop_Flop",
+        "project_root_name": "PokerVision_Solver_AllPreflop_Flop",
+        "matches_expected_name": true
+      },
+      "directory_presence": {
+        "expected": [
+          "solver_preflop",
+          "external",
+          "tests",
+          "tools",
+          "outputs",
+          "ranges",
+          "examples/clear_json",
+          "docs",
+          "docs/checkpoints"
+        ],
+        "present": [
+          "solver_preflop",
+          "external",
+          "tests",
+          "tools",
+          "outputs",
+          "ranges",
+          "examples/clear_json",
+          "docs",
+          "docs/checkpoints"
+        ],
+        "missing": [],
+        "presence_map": {
+          "solver_preflop": true,
+          "external": true,
+          "tests": true,
+          "tools": true,
+          "outputs": true,
+          "ranges": true,
+          "examples/clear_json": true,
+          "docs": true,
+          "docs/checkpoints": true
+        }
+      },
+      "preflop_baseline_presence": {
+        "expected_modules": [
+          "solver_preflop/__init__.py",
+          "solver_preflop/clear_json_adapter.py",
+          "solver_preflop/contracts.py",
+          "solver_preflop/decision_engine.py",
+          "solver_preflop/output_files.py",
+          "solver_preflop/pokervision_bridge.py",
+          "solver_preflop/range_engine.py",
+          "solver_preflop/range_loader.py",
+          "solver_preflop/range_parser.py",
+          "solver_preflop/sizing_policy.py",
+          "solver_preflop/spot_classifier.py"
+        ],
+        "present": [
+          "solver_preflop/__init__.py",
+          "solver_preflop/clear_json_adapter.py",
+          "solver_preflop/contracts.py",
+          "solver_preflop/decision_engine.py",
+          "solver_preflop/output_files.py",
+          "solver_preflop/pokervision_bridge.py",
+          "solver_preflop/range_engine.py",
+          "solver_preflop/range_loader.py",
+          "solver_preflop/range_parser.py",
+          "solver_preflop/sizing_policy.py",
+          "solver_preflop/spot_classifier.py"
+        ],
+        "missing": [],
+        "present_count": 11,
+        "missing_count": 0,
+        "presence_map": {
+          "solver_preflop/__init__.py": true,
+          "solver_preflop/clear_json_adapter.py": true,
+          "solver_preflop/contracts.py": true,
+          "solver_preflop/decision_engine.py": true,
+          "solver_preflop/output_files.py": true,
+          "solver_preflop/pokervision_bridge.py": true,
+          "solver_preflop/range_engine.py": true,
+          "solver_preflop/range_loader.py": true,
+          "solver_preflop/range_parser.py": true,
+          "solver_preflop/sizing_policy.py": true,
+          "solver_preflop/spot_classifier.py": true
+        }
+      },
+      "external_snapshot_presence": {
+        "candidate_paths": [
+          "external/PokerVisionFinalVersionNoSolver_snapshot",
+          "external/PokerVisionFinalVersionNoSolver_snapshot/PokerVision V1_2"
+        ],
+        "present": [
+          "external/PokerVisionFinalVersionNoSolver_snapshot",
+          "external/PokerVisionFinalVersionNoSolver_snapshot/PokerVision V1_2"
+        ],
+        "missing": [],
+        "present_count": 2,
+        "presence_map": {
+          "external/PokerVisionFinalVersionNoSolver_snapshot": true,
+          "external/PokerVisionFinalVersionNoSolver_snapshot/PokerVision V1_2": true
+        }
+      },
+      "risk_flags_count": 5,
+      "risk_flags": [
+        {
+          "code": "README_IDENTITY_MISMATCH",
+          "severity": "medium",
+          "message": "Repository is AllPreflop_Flop, but README still identifies the project as PokerVision_Solver_Preflop."
+        },
+        {
+          "code": "PREFLOP_BASELINE_PRESENT",
+          "severity": "info",
+          "message": "Preflop solver baseline modules are present and should be treated as source baseline, not postflop implementation."
+        },
+        {
+          "code": "POSTFLOP_CORE_NOT_PRESENT",
+          "severity": "info",
+          "message": "No dedicated postflop solver/core directories were detected yet."
+        },
+        {
+          "code": "EXTERNAL_SNAPSHOT_PRESENT",
+          "severity": "info",
+          "message": "External PokerVision NoSolver snapshot is present; do not modify it casually during V0.1.x audit."
+        },
+        {
+          "code": "WORKING_TREE_NOT_CLEAN",
+          "severity": "medium",
+          "message": "Git working tree has uncommitted changes; commit/stash before development steps if needed."
+        }
+      ]
+    },
+    "test_suite": {
+      "summary": "Test suite is mixed; legacy/live-only tests must not automatically block postflop development.",
+      "total_test_files": null,
+      "by_category": {},
+      "by_recommended_action": {},
+      "postflop_gate_rule": "Use core/postflop-specific tests as blockers; keep legacy/live-only tests as non-blocking evidence unless explicitly promoted."
+    },
+    "json_source_map": {
+      "summary": "Project has pre-click and post-click JSON sources; Final Clear_JSON must remain optional for postflop source discovery.",
+      "total_json_files": null,
+      "by_source_type": {},
+      "available_before_click_count": null,
+      "available_after_click_count": null,
+      "final_clear_json_optional": true,
+      "recommended_v020_source_types": [
+        "dark_json",
+        "pending_json",
+        "service_json",
+        "current_cycle_json",
+        "runtime_json",
+        "solver_payload_json",
+        "final_clear_json",
+        "manual_live_like_json",
+        "unknown"
+      ]
+    },
+    "player_state_filtering": {
+      "summary": "Existing project contains substantial player-state/filtering logic; postflop resolver must adapt rather than duplicate it.",
+      "total_files_scanned": null,
+      "mechanisms_found": null,
+      "by_logic_type": {},
+      "should_not_duplicate_count": null,
+      "postflop_rule": "Do not re-implement HERO/sitout/all-in/active/clear-state filtering without explicit adapter contract."
+    }
+  },
+  "postflop_development_rules": [
+    "Do not build postflop only on Final Clear_JSON; support intermediate pre-click source JSON.",
+    "Do not duplicate existing player-state filtering; adapt/check already cleaned PokerVision data.",
+    "Do not make legacy/live-only tests automatic postflop blockers.",
+    "V0.2 must create fixture lab and manifest only, not solver logic.",
+    "manual_live_like_json must be explicitly separated from real project source JSON."
+  ],
+  "v020_plan": {
+    "version": "V0.2.0",
+    "title": "Source-Based Postflop Fixture Lab",
+    "must_create": [
+      "docs/POSTFLOP_FIXTURE_STRATEGY.md",
+      "docs/POSTFLOP_SOURCE_TYPES.md",
+      "docs/POSTFLOP_FIXTURE_MANIFEST_RULES.md",
+      "tests/fixtures/postflop/manifest.json",
+      "tests/fixtures/postflop/source_json/",
+      "tests/fixtures/postflop/live_like_tree/",
+      "tests/fixtures/postflop/normalized/",
+      "tests/fixtures/postflop/expected/",
+      "tests/test_postflop_fixture_manifest_v020.py",
+      "tests/test_postflop_fixture_structure_v020.py",
+      "tests/test_postflop_source_fixture_types_v020.py"
+    ],
+    "allowed_source_types": [
+      "dark_json",
+      "pending_json",
+      "service_json",
+      "current_cycle_json",
+      "runtime_json",
+      "solver_payload_json",
+      "final_clear_json",
+      "manual_live_like_json",
+      "unknown"
+    ],
+    "final_clear_json_required": false,
+    "manual_live_like_json_rule": "Must be marked as manual and never presented as real-source.",
+    "must_not_do": [
+      "postflop solver",
+      "normalizer",
+      "source discovery",
+      "player resolver",
+      "equity",
+      "ranges",
+      "poker decisions",
+      "runtime click plan",
+      "clicking",
+      "runtime changes"
+    ]
+  },
+  "readiness_decision": {
+    "v010_closed_when_reports_loaded": true,
+    "ready_for_v020_design": true,
+    "notes": "V0.1 closes baseline/test/source/player-state audit. V0.2 can start fixture lab if all four source reports are loaded."
+  }
+}
