@@ -562,3 +562,293 @@ class NormalizedPostflopFrame:
             "action_snapshot": self.action_snapshot.to_dict() if self.action_snapshot else None,
             "raw_frame": dict(self.raw_frame),
         }
+
+class StreetName(_StringEnum):
+    PREFLOP = "preflop"
+    FLOP = "flop"
+    TURN = "turn"
+    RIVER = "river"
+    UNKNOWN = "unknown"
+    INVALID = "invalid"
+
+
+class ModuleResultStatus(_StringEnum):
+    OK = "ok"
+    PARTIAL = "partial"
+    INVALID = "invalid"
+    UNKNOWN = "unknown"
+    PENDING = "pending"
+
+
+class PreflopHistoryStatus(_StringEnum):
+    AVAILABLE = "available"
+    PARTIAL = "partial"
+    MISSING = "missing"
+    UNKNOWN = "unknown"
+    PENDING = "pending"
+
+
+class PostflopDecisionAction(_StringEnum):
+    FOLD = "fold"
+    CHECK = "check"
+    CALL = "call"
+    BET = "bet"
+    RAISE = "raise"
+    NONE = "none"
+    UNKNOWN = "unknown"
+
+
+class RuntimeGuardStatus(_StringEnum):
+    SAFE = "safe"
+    BLOCKED = "blocked"
+    NOT_REQUIRED = "not_required"
+    UNKNOWN = "unknown"
+    PENDING = "pending"
+
+
+class ProbeReportStatus(_StringEnum):
+    OK = "ok"
+    PARTIAL = "partial"
+    FAILED = "failed"
+    EMPTY = "empty"
+    UNKNOWN = "unknown"
+
+
+def _ensure_non_negative_int(value: Any, field_name: str) -> int:
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise ContractValidationError(f"{field_name} must be a non-negative integer")
+    if value < 0:
+        raise ContractValidationError(f"{field_name} must be non-negative")
+    return value
+
+
+def _warning_list(values: List[ModuleWarning | Dict[str, Any]]) -> List[ModuleWarning]:
+    return [_warning_from_any(warning) for warning in _ensure_list(values, "warnings")]
+
+
+def _error_list(values: List[ModuleError | Dict[str, Any]]) -> List[ModuleError]:
+    return [_error_from_any(error) for error in _ensure_list(values, "errors")]
+
+
+@dataclass
+class StreetDetectionResult:
+    street: StreetName | str
+    board_card_count: int
+    is_valid: bool = True
+    error_code: Optional[str] = None
+    warnings: List[ModuleWarning | Dict[str, Any]] = field(default_factory=list)
+    source_file: Optional[str] = None
+    source_type: PostflopSourceType | str = PostflopSourceType.UNKNOWN
+    reason: str = ""
+
+    def __post_init__(self) -> None:
+        self.street = StreetName.from_value(self.street)
+        self.board_card_count = _ensure_non_negative_int(self.board_card_count, "board_card_count")
+        self.is_valid = _ensure_bool(self.is_valid, "is_valid")
+        self.source_type = PostflopSourceType.from_value(self.source_type)
+        self.warnings = _warning_list(self.warnings)
+        if self.error_code is not None:
+            self.error_code = _require_non_empty_string(self.error_code, "error_code")
+        if not isinstance(self.reason, str):
+            raise ContractValidationError("reason must be a string")
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "street": self.street.value,
+            "board_card_count": self.board_card_count,
+            "is_valid": self.is_valid,
+            "error_code": self.error_code,
+            "warnings": [warning.to_dict() for warning in self.warnings],
+            "source_file": self.source_file,
+            "source_type": self.source_type.value,
+            "reason": self.reason,
+        }
+
+
+@dataclass
+class PreflopHistoryResult:
+    status: PreflopHistoryStatus | str = PreflopHistoryStatus.UNKNOWN
+    line_type: str = "unknown"
+    aggressor_position: Optional[str] = None
+    caller_positions: List[str] = field(default_factory=list)
+    limper_positions: List[str] = field(default_factory=list)
+    three_bet_detected: bool = False
+    four_bet_detected: bool = False
+    warnings: List[ModuleWarning | Dict[str, Any]] = field(default_factory=list)
+    errors: List[ModuleError | Dict[str, Any]] = field(default_factory=list)
+    raw_history: Dict[str, Any] = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        self.status = PreflopHistoryStatus.from_value(self.status)
+        self.line_type = self.line_type if isinstance(self.line_type, str) and self.line_type.strip() else "unknown"
+        self.caller_positions = [str(position) for position in _ensure_list(self.caller_positions, "caller_positions")]
+        self.limper_positions = [str(position) for position in _ensure_list(self.limper_positions, "limper_positions")]
+        self.three_bet_detected = _ensure_bool(self.three_bet_detected, "three_bet_detected")
+        self.four_bet_detected = _ensure_bool(self.four_bet_detected, "four_bet_detected")
+        self.warnings = _warning_list(self.warnings)
+        self.errors = _error_list(self.errors)
+        self.raw_history = _ensure_dict(self.raw_history, "raw_history")
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "status": self.status.value,
+            "line_type": self.line_type,
+            "aggressor_position": self.aggressor_position,
+            "caller_positions": list(self.caller_positions),
+            "limper_positions": list(self.limper_positions),
+            "three_bet_detected": self.three_bet_detected,
+            "four_bet_detected": self.four_bet_detected,
+            "warnings": [warning.to_dict() for warning in self.warnings],
+            "errors": [error.to_dict() for error in self.errors],
+            "raw_history": dict(self.raw_history),
+        }
+
+
+@dataclass
+class PostflopDecision:
+    decision_id: str
+    action: PostflopDecisionAction | str = PostflopDecisionAction.UNKNOWN
+    size_policy: Optional[str] = None
+    amount: Optional[float] = None
+    confidence: PostflopConfidence | str = PostflopConfidence.UNKNOWN
+    reason: str = ""
+    warnings: List[ModuleWarning | Dict[str, Any]] = field(default_factory=list)
+    errors: List[ModuleError | Dict[str, Any]] = field(default_factory=list)
+
+    def __post_init__(self) -> None:
+        self.decision_id = _require_non_empty_string(self.decision_id, "decision_id")
+        self.action = PostflopDecisionAction.from_value(self.action)
+        self.amount = _ensure_non_negative_number(self.amount, "amount", allow_none=True)
+        self.confidence = PostflopConfidence.from_value(self.confidence)
+        if not isinstance(self.reason, str):
+            raise ContractValidationError("reason must be a string")
+        self.warnings = _warning_list(self.warnings)
+        self.errors = _error_list(self.errors)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "decision_id": self.decision_id,
+            "action": self.action.value,
+            "size_policy": self.size_policy,
+            "amount": self.amount,
+            "confidence": self.confidence.value,
+            "reason": self.reason,
+            "warnings": [warning.to_dict() for warning in self.warnings],
+            "errors": [error.to_dict() for error in self.errors],
+        }
+
+
+@dataclass
+class PostflopRuntimePlan:
+    decision_id: str
+    planned_action: PostflopDecisionAction | str = PostflopDecisionAction.UNKNOWN
+    button_sequence: List[str] = field(default_factory=list)
+    requires_click: bool = False
+    is_click_safe: bool = False
+    guard_status: RuntimeGuardStatus | str = RuntimeGuardStatus.UNKNOWN
+    warnings: List[ModuleWarning | Dict[str, Any]] = field(default_factory=list)
+    errors: List[ModuleError | Dict[str, Any]] = field(default_factory=list)
+
+    def __post_init__(self) -> None:
+        self.decision_id = _require_non_empty_string(self.decision_id, "decision_id")
+        self.planned_action = PostflopDecisionAction.from_value(self.planned_action)
+        self.button_sequence = [str(button) for button in _ensure_list(self.button_sequence, "button_sequence")]
+        self.requires_click = _ensure_bool(self.requires_click, "requires_click")
+        self.is_click_safe = _ensure_bool(self.is_click_safe, "is_click_safe")
+        self.guard_status = RuntimeGuardStatus.from_value(self.guard_status)
+        self.warnings = _warning_list(self.warnings)
+        self.errors = _error_list(self.errors)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "decision_id": self.decision_id,
+            "planned_action": self.planned_action.value,
+            "button_sequence": list(self.button_sequence),
+            "requires_click": self.requires_click,
+            "is_click_safe": self.is_click_safe,
+            "guard_status": self.guard_status.value,
+            "warnings": [warning.to_dict() for warning in self.warnings],
+            "errors": [error.to_dict() for error in self.errors],
+        }
+
+
+@dataclass
+class PostflopTrace:
+    source_candidate: Optional[PostflopSourceCandidate] = None
+    raw_source_status: RawSourceLoadStatus | str = RawSourceLoadStatus.EMPTY
+    normalized_frame_status: NormalizationStatus | str = NormalizationStatus.UNKNOWN
+    street_result: Optional[StreetDetectionResult] = None
+    preflop_history_result: Optional[PreflopHistoryResult] = None
+    decision: Optional[PostflopDecision] = None
+    runtime_plan: Optional[PostflopRuntimePlan] = None
+    warnings: List[ModuleWarning | Dict[str, Any]] = field(default_factory=list)
+    errors: List[ModuleError | Dict[str, Any]] = field(default_factory=list)
+
+    def __post_init__(self) -> None:
+        if self.source_candidate is not None and not isinstance(self.source_candidate, PostflopSourceCandidate):
+            raise ContractValidationError("source_candidate must be a PostflopSourceCandidate or None")
+        self.raw_source_status = RawSourceLoadStatus.from_value(self.raw_source_status)
+        self.normalized_frame_status = NormalizationStatus.from_value(self.normalized_frame_status)
+        if self.street_result is not None and not isinstance(self.street_result, StreetDetectionResult):
+            raise ContractValidationError("street_result must be a StreetDetectionResult or None")
+        if self.preflop_history_result is not None and not isinstance(self.preflop_history_result, PreflopHistoryResult):
+            raise ContractValidationError("preflop_history_result must be a PreflopHistoryResult or None")
+        if self.decision is not None and not isinstance(self.decision, PostflopDecision):
+            raise ContractValidationError("decision must be a PostflopDecision or None")
+        if self.runtime_plan is not None and not isinstance(self.runtime_plan, PostflopRuntimePlan):
+            raise ContractValidationError("runtime_plan must be a PostflopRuntimePlan or None")
+        self.warnings = _warning_list(self.warnings)
+        self.errors = _error_list(self.errors)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "source_candidate": self.source_candidate.to_dict() if self.source_candidate else None,
+            "raw_source_status": self.raw_source_status.value,
+            "normalized_frame_status": self.normalized_frame_status.value,
+            "street_result": self.street_result.to_dict() if self.street_result else None,
+            "preflop_history_result": self.preflop_history_result.to_dict() if self.preflop_history_result else None,
+            "decision": self.decision.to_dict() if self.decision else None,
+            "runtime_plan": self.runtime_plan.to_dict() if self.runtime_plan else None,
+            "warnings": [warning.to_dict() for warning in self.warnings],
+            "errors": [error.to_dict() for error in self.errors],
+        }
+
+
+@dataclass
+class PostflopProbeReport:
+    report_id: str
+    created_at: Optional[str] = None
+    status: ProbeReportStatus | str = ProbeReportStatus.UNKNOWN
+    input_root: str = "unknown"
+    source_count: int = 0
+    valid_frame_count: int = 0
+    trace_count: int = 0
+    warnings: List[ModuleWarning | Dict[str, Any]] = field(default_factory=list)
+    errors: List[ModuleError | Dict[str, Any]] = field(default_factory=list)
+    traces: List[PostflopTrace] = field(default_factory=list)
+
+    def __post_init__(self) -> None:
+        self.report_id = _require_non_empty_string(self.report_id, "report_id")
+        self.status = ProbeReportStatus.from_value(self.status)
+        self.input_root = self.input_root if isinstance(self.input_root, str) and self.input_root.strip() else "unknown"
+        self.source_count = _ensure_non_negative_int(self.source_count, "source_count")
+        self.valid_frame_count = _ensure_non_negative_int(self.valid_frame_count, "valid_frame_count")
+        self.trace_count = _ensure_non_negative_int(self.trace_count, "trace_count")
+        if not all(isinstance(trace, PostflopTrace) for trace in self.traces):
+            raise ContractValidationError("traces must contain only PostflopTrace items")
+        self.warnings = _warning_list(self.warnings)
+        self.errors = _error_list(self.errors)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "report_id": self.report_id,
+            "created_at": self.created_at,
+            "status": self.status.value,
+            "input_root": self.input_root,
+            "source_count": self.source_count,
+            "valid_frame_count": self.valid_frame_count,
+            "trace_count": self.trace_count,
+            "warnings": [warning.to_dict() for warning in self.warnings],
+            "errors": [error.to_dict() for error in self.errors],
+            "traces": [trace.to_dict() for trace in self.traces],
+        }
