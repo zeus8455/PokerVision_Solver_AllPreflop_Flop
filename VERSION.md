@@ -6,11 +6,168 @@ The repository was created from the earlier PokerVision_Solver_Preflop baseline.
 
 ---
 
+## V0.3.0 - Postflop Source Contracts
+
+**Status:** closed  
+**Final technical checkpoint:** `8f238b9 - V0.3.4 add postflop module result contracts`  
+**Close step:** `V0.3.5 - Contract Test Gate / Version Close`  
+**Validation:** `51 passed`  
+**Next block:** `V0.4.0 - Source Discovery + Postflop Normalizer`
+
+### Goal
+
+Create strict data contracts for the future postflop chain:
+
+```text
+source JSON -> source candidate -> raw source -> normalized frame -> module result -> warnings/errors -> future trace
+```
+
+This version does not search files, normalize real JSON, detect street, reconstruct preflop history, filter players, calculate equity, build ranges, make poker decisions, create runtime click plans, click, or modify the main PokerVision runtime.
+
+### V0.3.1 - Postflop Module Skeleton / Base Types
+
+**Commit:** `61b16e1 - V0.3.1 add postflop contract base types`
+
+Added:
+
+- `solver_postflop/__init__.py`
+- `solver_postflop/contracts.py`
+- `tests/test_postflop_contracts_v030.py`
+
+Contract types:
+
+- `PostflopSourceType`
+- `ContractSeverity`
+- `ContractValidationError`
+- `ModuleWarning`
+- `ModuleError`
+
+Validation:
+
+```text
+pytest tests/test_postflop_contracts_v030.py -q
+8 passed in 0.17s
+```
+
+### V0.3.2 - Source Candidate / Raw Source Contracts
+
+**Commit:** `b83874e - V0.3.2 add postflop source contracts`
+
+Added:
+
+- `PostflopConfidence`
+- `RawSourceLoadStatus`
+- `DiscoveryStatus`
+- `PostflopSourceCandidate`
+- `PostflopRawSource`
+- `PostflopSourceDiscoveryResult`
+- `tests/test_postflop_source_contracts_v030.py`
+
+Validation:
+
+```text
+pytest tests/test_postflop_contracts_v030.py tests/test_postflop_source_contracts_v030.py -q
+21 passed in 0.15s
+```
+
+Notes:
+
+- V0.3.2 preserves the V0.3.1 API surface.
+- `PostflopSourceType.values()` remains stable.
+- `ModuleWarning` / `ModuleError` keep structured `source_file`, `field_name`, and severity validation.
+
+### V0.3.3 - Normalized Frame Contracts
+
+**Commit:** `645c110 - V0.3.3 add postflop normalized frame contracts`
+
+Added:
+
+- `NormalizationStatus`
+- `PostflopPlayerSnapshot`
+- `PostflopBoardSnapshot`
+- `PostflopActionSnapshot`
+- `NormalizedPostflopFrame`
+- `tests/test_postflop_normalized_frame_contract_v030.py`
+
+Validation:
+
+```text
+pytest tests/test_postflop_contracts_v030.py tests/test_postflop_source_contracts_v030.py tests/test_postflop_normalized_frame_contract_v030.py -q
+37 passed in 0.24s
+```
+
+Notes:
+
+- `NormalizedPostflopFrame` is not a perfect poker-state requirement.
+- It is an honest data layer: extracted fields, raw fields, warnings, and status.
+- Player-state is captured, not re-filtered.
+
+### V0.3.4 - Module Result / Future Runtime Contracts
+
+**Commit:** `8f238b9 - V0.3.4 add postflop module result contracts`
+
+Added enum/status types:
+
+- `StreetName`
+- `ModuleResultStatus`
+- `PreflopHistoryStatus`
+- `PostflopDecisionAction`
+- `RuntimeGuardStatus`
+- `ProbeReportStatus`
+
+Added result contracts:
+
+- `StreetDetectionResult`
+- `PreflopHistoryResult`
+- `PostflopDecision`
+- `PostflopRuntimePlan`
+- `PostflopTrace`
+- `PostflopProbeReport`
+- `tests/test_postflop_module_result_contracts_v030.py`
+
+Validation:
+
+```text
+pytest tests/test_postflop_contracts_v030.py tests/test_postflop_source_contracts_v030.py tests/test_postflop_normalized_frame_contract_v030.py tests/test_postflop_module_result_contracts_v030.py -q
+51 passed in 0.38s
+```
+
+### V0.3.5 - Contract Test Gate / Version Close
+
+Adds:
+
+- `tools/run_v030_contract_gate.py`
+- `outputs/postflop_contracts_v030/contract_gate_report.json`
+- README / VERSION close state for V0.3.0
+
+Purpose:
+
+- run the full V0.3 contract test set;
+- write a contract gate report;
+- mark the project ready for V0.4.0 design;
+- close V0.3.0 without adding new contract models.
+
+Expected gate command:
+
+```text
+python tools/run_v030_contract_gate.py
+```
+
+Expected validation:
+
+```text
+51 passed
+ready_for_v040 = true
+```
+
+---
+
 ## V0.2.0 - Source-Based Postflop Fixture Lab
 
 **Status:** closed  
 **Final technical checkpoint:** `01528aa - V0.2.5 add postflop fixture structure tests`  
-**Validation:** `30 passed in 0.25s`
+**Documentation checkpoint:** `c4276ef - docs: close V0.2.0 fixture lab`  
+**Validation:** `30 passed`
 
 ### Goal
 
@@ -28,70 +185,22 @@ Added:
 - `docs/POSTFLOP_SOURCE_TYPES.md`
 - `docs/POSTFLOP_FIXTURE_MANIFEST_RULES.md`
 
-Purpose:
-
-- document fixture lab strategy;
-- document allowed source types;
-- document manifest rules;
-- document that Final Clear_JSON is optional;
-- document manual live-like vs real-source separation.
-
 ### V0.2.2 - Fixture Directory Skeleton
 
 **Commit:** `25981ad - V0.2.2 add postflop fixture skeleton`
 
-Added:
+Added fixture skeleton under:
 
-- `tests/fixtures/postflop/manifest.json`
-- `tests/fixtures/postflop/source_json/`
-- `tests/fixtures/postflop/live_like_tree/`
-- `tests/fixtures/postflop/normalized/`
-- `tests/fixtures/postflop/expected/`
-
-Added source_json subfolders:
-
-- `current_cycle_json`
-- `dark_json`
-- `final_clear_json`
-- `manual_live_like_json`
-- `pending_json`
-- `runtime_json`
-- `service_json`
-- `solver_payload_json`
-
-Purpose:
-
-- create the fixture lab directory skeleton;
-- initialize manifest with allowed source types;
-- keep fixture cases empty until V0.2.3.
+- `tests/fixtures/postflop/`
 
 ### V0.2.3 - First Source-Based Flop Fixture Case
 
 **Commit:** `db9c2c4 - V0.2.3 add first postflop source fixture`
 
-Added / updated:
+Added:
 
-- `tests/fixtures/postflop/manifest.json`
 - `tests/fixtures/postflop/source_json/dark_json/flop_source_case_001.dark.json`
 - `tests/fixtures/postflop/expected/flop_source_case_001.expected.json`
-
-Fixture case:
-
-```text
-case_id: flop_source_case_001
-source_type: dark_json
-street_candidate: flop
-is_real_project_source: false
-is_manual_live_like_source: true
-requires_click_cycle: false
-```
-
-Purpose:
-
-- add the first minimal postflop source-based fixture case;
-- prove fixture lab can link source JSON, expected JSON, and manifest entry;
-- keep poker decision absent;
-- keep Final Clear_JSON optional.
 
 ### V0.2.4 - Fixture Manifest Tests
 
@@ -100,23 +209,6 @@ Purpose:
 Added:
 
 - `tests/test_postflop_fixture_manifest_v020.py`
-
-Validation:
-
-```text
-11 passed in 0.15s
-```
-
-Purpose:
-
-- protect manifest structure;
-- require all mandatory case fields;
-- prevent duplicate case_id;
-- validate source_type;
-- require source_file and expected_file to exist;
-- allow normalized_file as a future path;
-- prevent manual/real source flag conflicts;
-- confirm expected JSON does not contain poker decisions.
 
 ### V0.2.5 - Fixture Structure / Source Type Tests
 
@@ -130,19 +222,8 @@ Added:
 Validation:
 
 ```text
-30 passed in 0.25s
+30 passed in 0.24s
 ```
-
-Purpose:
-
-- protect fixture root structure;
-- require all source_json subfolders;
-- validate allowed source types;
-- require source_file to live in the matching source_type folder;
-- require expected_file to live in expected/;
-- keep Final Clear_JSON optional;
-- allow unknown only with explicit notes;
-- prevent manual live-like source from being treated as real-source.
 
 ---
 
@@ -150,105 +231,24 @@ Purpose:
 
 **Status:** closed  
 **Final checkpoint:** `c2723c3 - V0.1.5 add final baseline report`  
-**README checkpoint:** `3d19268 - docs: update README for V0.1.0 baseline audit`  
-**Ready for V0.2 design:** `True`
+**README checkpoint:** `3d19268 - docs: update README for V0.1.0 baseline audit`
 
 ### Goal
 
 Create a factual audit layer for the current repository before starting postflop development.
 
-This version does not create postflop solver logic.
+### Subversions
 
-### V0.1.1 - Repo Identity / Baseline Audit
-
-**Commit:** `6bb90f8 - V0.1.1 add project baseline audit`
-
-Added:
-
-- `tools/audit_current_project_baseline_v010.py`
-- `tests/test_baseline_audit_tools_v010.py`
-- `docs/reports/current_project_baseline_audit_v010.md`
-- `outputs/baseline_audit_v010/project_baseline_report.json`
-
-Purpose:
-
-- identify repo baseline;
-- detect project identity mismatch;
-- confirm preflop baseline and external snapshot.
-
-### V0.1.2 - Test Suite Health Audit
-
-**Commit:** `c062077 - V0.1.2 add test suite health audit`
-
-Added:
-
-- `tools/audit_current_test_suite_health_v010.py`
-- `docs/reports/current_test_suite_health_audit_v010.md`
-- `outputs/baseline_audit_v010/test_suite_health_report.json`
-
-Purpose:
-
-- classify current tests;
-- separate core baseline, legacy, live/dry-run, static/dynamic map, and future postflop tests;
-- avoid treating legacy/live-only tests as automatic postflop blockers.
-
-### V0.1.3 - JSON Source Map Audit
-
-**Commit:** `00bfea3 - V0.1.3 add json source map audit`
-
-Added:
-
-- `tools/audit_current_json_source_map_v010.py`
-- `docs/reports/current_json_source_map_v010.md`
-- `outputs/baseline_audit_v010/json_source_map_report.json`
-
-Purpose:
-
-- map JSON files and JSON-producing code references;
-- classify before-click and after-click sources;
-- prove Final Clear_JSON must not be the only future source.
-
-### V0.1.4 - Player-State / Filtering Audit
-
-**Commit:** `077eb88 - V0.1.4 add player state filtering audit`
-
-Added:
-
-- `tools/audit_current_player_state_filtering_v010.py`
-- `docs/reports/current_player_state_filtering_audit_v010.md`
-- `outputs/baseline_audit_v010/player_state_filtering_report.json`
-
-Purpose:
-
-- find existing HERO, sitout, all-in, active state, trigger/service state, Clear_JSON filtering, and Final Clear_JSON filtering logic;
-- mark logic that must not be duplicated by future postflop modules.
-
-### V0.1.5 - Final V0.1 Report / Plan to V0.2
-
-**Commit:** `c2723c3 - V0.1.5 add final baseline report`
-
-Added:
-
-- `tools/build_v010_final_report.py`
-- `tests/test_v010_final_report_builder.py`
-- `docs/reports/v010_final_baseline_audit_report.md`
-- `docs/reports/v010_plan_to_v020.md`
-- `outputs/baseline_audit_v010/v010_final_report.json`
-
-Purpose:
-
-- close V0.1 audit block;
-- combine V0.1 reports;
-- approve V0.2 Source-Based Fixture Lab as the next development block.
+- `6bb90f8 - V0.1.1 add project baseline audit`
+- `c062077 - V0.1.2 add test suite health audit`
+- `00bfea3 - V0.1.3 add json source map audit`
+- `077eb88 - V0.1.4 add player state filtering audit`
+- `c2723c3 - V0.1.5 add final baseline report`
 
 ---
 
 ## Initial imported baseline
 
-### Initial snapshot
-
 **Commit:** `db16abd - initial snapshot: Real_Version_SolverPreflop as AllPreflop_Flop baseline`
 
-Purpose:
-
-- import the previous Real_Version_SolverPreflop baseline into the new AllPreflop_Flop development repository.
+This commit imported the previous preflop solver baseline into the new AllPreflop_Flop repository line.

@@ -1,0 +1,87 @@
+{
+  "version": "V0.3.0",
+  "subversion": "V0.3.5",
+  "name": "Postflop Source Contracts - Contract Test Gate",
+  "created_at_utc": "2026-06-09T22:14:51.471335+00:00",
+  "status": "passed",
+  "ready_for_v040": true,
+  "pytest_command": [
+    "C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "-m",
+    "pytest",
+    "tests/test_postflop_contracts_v030.py",
+    "tests/test_postflop_source_contracts_v030.py",
+    "tests/test_postflop_normalized_frame_contract_v030.py",
+    "tests/test_postflop_module_result_contracts_v030.py",
+    "-q"
+  ],
+  "test_files": [
+    "tests/test_postflop_contracts_v030.py",
+    "tests/test_postflop_source_contracts_v030.py",
+    "tests/test_postflop_normalized_frame_contract_v030.py",
+    "tests/test_postflop_module_result_contracts_v030.py"
+  ],
+  "test_file_statuses": [
+    {
+      "test_file": "tests/test_postflop_contracts_v030.py",
+      "exists": true,
+      "path": "C:\\PokerVision_Solver_AllPreflop_Flop\\tests\\test_postflop_contracts_v030.py"
+    },
+    {
+      "test_file": "tests/test_postflop_source_contracts_v030.py",
+      "exists": true,
+      "path": "C:\\PokerVision_Solver_AllPreflop_Flop\\tests\\test_postflop_source_contracts_v030.py"
+    },
+    {
+      "test_file": "tests/test_postflop_normalized_frame_contract_v030.py",
+      "exists": true,
+      "path": "C:\\PokerVision_Solver_AllPreflop_Flop\\tests\\test_postflop_normalized_frame_contract_v030.py"
+    },
+    {
+      "test_file": "tests/test_postflop_module_result_contracts_v030.py",
+      "exists": true,
+      "path": "C:\\PokerVision_Solver_AllPreflop_Flop\\tests\\test_postflop_module_result_contracts_v030.py"
+    }
+  ],
+  "missing_test_files": [],
+  "return_code": 0,
+  "passed_count": 51,
+  "failed_count": 0,
+  "error_count": 0,
+  "skipped_count": 0,
+  "contract_layers": [
+    {
+      "layer_id": "base_types",
+      "description": "PostflopSourceType, ContractSeverity, ContractValidationError, ModuleWarning, ModuleError."
+    },
+    {
+      "layer_id": "source_contracts",
+      "description": "PostflopSourceCandidate, PostflopRawSource, PostflopSourceDiscoveryResult."
+    },
+    {
+      "layer_id": "normalized_frame_contracts",
+      "description": "PostflopPlayerSnapshot, PostflopBoardSnapshot, PostflopActionSnapshot, NormalizedPostflopFrame."
+    },
+    {
+      "layer_id": "module_result_contracts",
+      "description": "StreetDetectionResult, PreflopHistoryResult, PostflopDecision, PostflopRuntimePlan, PostflopTrace, PostflopProbeReport."
+    }
+  ],
+  "v030_rules": {
+    "does_not_search_json_files": true,
+    "does_not_normalize_real_json": true,
+    "does_not_detect_street": true,
+    "does_not_reconstruct_preflop_history": true,
+    "does_not_make_poker_decisions": true,
+    "does_not_create_runtime_click_plan": true,
+    "does_not_click": true,
+    "does_not_modify_pokervision_runtime": true
+  },
+  "stdout_tail": "...................................................                      [100%]\n51 passed in 0.31s\n",
+  "stderr_tail": "",
+  "notes": [
+    "V0.3.5 closes the V0.3.0 contract layer only.",
+    "The next block is V0.4.0 Source Discovery + Postflop Normalizer.",
+    "contracts.py should not be changed in V0.3.5 unless the contract gate fails for a real compatibility reason."
+  ]
+}
