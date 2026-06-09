@@ -192,3 +192,99 @@ def test_v013_builds_report_and_writes_outputs(tmp_path: Path):
     payload = json.loads(json_path.read_text(encoding="utf-8"))
     assert payload["summary"]["final_clear_json_optional_confirmed"] is True
     assert "JSON Source Map Audit" in markdown_path.read_text(encoding="utf-8")
+
+PLAYER_STATE_TOOL = PROJECT_ROOT / "tools" / "audit_current_player_state_filtering_v010.py"
+
+
+def test_v014_player_state_audit_tool_file_exists():
+    assert PLAYER_STATE_TOOL.exists(), "V0.1.4 player-state/filtering audit tool is missing"
+
+
+def test_v014_classifies_player_state_logic_types():
+    module = load_module(PLAYER_STATE_TOOL, "audit_current_player_state_filtering_v010")
+
+    assert module.SCHEMA_VERSION == "v0.1.4-player-state-filtering"
+    assert module.primary_logic_type("runtime/player_filter.py", "def f(): return player.get('sitout')") == "sitout_filtering"
+    assert module.primary_logic_type("runtime/allin.py", "if player.get('all_in'): keep_player()") == "all_in_state"
+    assert module.primary_logic_type("runtime/hero.py", "hero_cards = ['As', 'Kd']; is_hero = True") == "hero_detection"
+    assert module.primary_logic_type("runtime/final.py", "payload['click_result'] = result; write JSON_Complete") == "final_clear_json_filtering"
+
+
+def test_v014_scans_python_function_mechanism(tmp_path: Path):
+    module = load_module(PLAYER_STATE_TOOL, "audit_current_player_state_filtering_v010")
+
+    runtime_dir = tmp_path / "external" / "PokerVisionFinalVersionNoSolver_snapshot" / "PokerVision V1_2"
+    runtime_dir.mkdir(parents=True)
+    source_file = runtime_dir / "display_analysis_cycle.py"
+    source_file.write_text(
+        """
+import json
+
+def filter_players_before_clear_json(players):
+    kept = []
+    for player in players:
+        if player.get('sitout') or player.get('sitting_out'):
+            continue
+        if player.get('all_in'):
+            kept.append(player)
+            continue
+        if player.get('folded'):
+            continue
+        kept.append(player)
+    return kept
+
+class HeroDetector:
+    def resolve_hero(self, state):
+        hero_cards = state.get('hero_cards')
+        return {'is_hero': bool(hero_cards), 'hero_cards': hero_cards}
+""".strip(),
+        encoding="utf-8",
+    )
+
+    mechanisms = module.scan_file(source_file, tmp_path)
+    logic_types = {item["logic_type"] for item in mechanisms}
+    assert "sitout_filtering" in logic_types
+    assert "hero_detection" in logic_types
+    assert any(item["should_not_be_duplicated"] for item in mechanisms)
+    assert any(item["can_be_reused_by_postflop"] for item in mechanisms)
+
+
+def test_v014_builds_report_and_writes_outputs(tmp_path: Path):
+    module = load_module(PLAYER_STATE_TOOL, "audit_current_player_state_filtering_v010")
+
+    tools_dir = tmp_path / "tools"
+    outputs_dir = tmp_path / "outputs" / "ui_display_cycle" / "current_cycle"
+    tools_dir.mkdir(parents=True)
+    outputs_dir.mkdir(parents=True)
+
+    (tools_dir / "runtime_player_state.py").write_text(
+        """
+def resolve_active_player(service_json):
+    table_status = service_json.get('table_status')
+    active_player = service_json.get('active_player')
+    return table_status, active_player
+
+def finalize_clear_json(payload, click_result):
+    payload['click_result'] = click_result
+    return payload
+""".strip(),
+        encoding="utf-8",
+    )
+    (outputs_dir / "table_01_service.json").write_text(
+        json.dumps({"table_status": "Active", "active_player": "HERO", "players": []}),
+        encoding="utf-8",
+    )
+
+    report = module.build_report(tmp_path)
+    assert report["schema_version"] == module.SCHEMA_VERSION
+    assert report["policy"]["audit_only"] is True
+    assert report["policy"]["postflop_solver_must_not_duplicate_existing_player_state_filtering"] is True
+    assert report["summary"]["total_mechanisms_found"] >= 2
+    assert report["summary"]["should_not_be_duplicated_candidates"] >= 1
+
+    json_path, markdown_path = module.write_reports(tmp_path, report)
+    assert json_path.exists()
+    assert markdown_path.exists()
+    payload = json.loads(json_path.read_text(encoding="utf-8"))
+    assert payload["summary"]["total_mechanisms_found"] >= 2
+    assert "Player-State / Filtering Audit" in markdown_path.read_text(encoding="utf-8")
