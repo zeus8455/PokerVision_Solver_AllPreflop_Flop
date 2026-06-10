@@ -1,28 +1,28 @@
-r"""
+﻿r"""
 display_analysis_cycle.py
 
-PokerVision Core V3.1 — live desktop analysis cycle + controlled live-click gate audit.
+PokerVision Core V3.1 вЂ” live desktop analysis cycle + controlled live-click gate audit.
 
-Что делает каждый display-pass:
-1. При первом pass удаляет старую outputs/ui_display_cycle.
-2. Делает screenshot основного монитора.
-3. V1.2 обрабатывает реальные table_N области рабочего стола; тестовые изображения не открываются.
-4. Запускает полный detector pipeline:
+Р§С‚Рѕ РґРµР»Р°РµС‚ РєР°Р¶РґС‹Р№ display-pass:
+1. РџСЂРё РїРµСЂРІРѕРј pass СѓРґР°Р»СЏРµС‚ СЃС‚Р°СЂСѓСЋ outputs/ui_display_cycle.
+2. Р”РµР»Р°РµС‚ screenshot РѕСЃРЅРѕРІРЅРѕРіРѕ РјРѕРЅРёС‚РѕСЂР°.
+3. V1.2 РѕР±СЂР°Р±Р°С‚С‹РІР°РµС‚ СЂРµР°Р»СЊРЅС‹Рµ table_N РѕР±Р»Р°СЃС‚Рё СЂР°Р±РѕС‡РµРіРѕ СЃС‚РѕР»Р°; С‚РµСЃС‚РѕРІС‹Рµ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ РЅРµ РѕС‚РєСЂС‹РІР°СЋС‚СЃСЏ.
+4. Р—Р°РїСѓСЃРєР°РµС‚ РїРѕР»РЅС‹Р№ detector pipeline:
    Trigger UI -> Table Structure -> Players -> Digit Amounts -> Card Detection.
-5. После детекций V1 HandIdentityTracker решает для каждой области table_N:
-   - новая это раздача или продолжение прошлой;
+5. РџРѕСЃР»Рµ РґРµС‚РµРєС†РёР№ V1 HandIdentityTracker СЂРµС€Р°РµС‚ РґР»СЏ РєР°Р¶РґРѕР№ РѕР±Р»Р°СЃС‚Рё table_N:
+   - РЅРѕРІР°СЏ СЌС‚Рѕ СЂР°Р·РґР°С‡Р° РёР»Рё РїСЂРѕРґРѕР»Р¶РµРЅРёРµ РїСЂРѕС€Р»РѕР№;
    - base hand_id: hand_01, hand_02, ...;
-   - frame_name для JSON: hand_01_preflop, hand_01_flop,
-     hand_08_preflop_02 и т.д.
-6. Сохраняет clean JSON с filename == frame_name.json.
-7. V1.1 Stage 2: после сохранения JSON запускает безопасную runtime-цепочку
+   - frame_name РґР»СЏ JSON: hand_01_preflop, hand_01_flop,
+     hand_08_preflop_02 Рё С‚.Рґ.
+6. РЎРѕС…СЂР°РЅСЏРµС‚ clean JSON СЃ filename == frame_name.json.
+7. V1.1 Stage 2: РїРѕСЃР»Рµ СЃРѕС…СЂР°РЅРµРЅРёСЏ JSON Р·Р°РїСѓСЃРєР°РµС‚ Р±РµР·РѕРїР°СЃРЅСѓСЋ runtime-С†РµРїРѕС‡РєСѓ
    solver_payload -> solver_stub -> Action_Button_Detector -> click dry-run report.
-8. Не выполняет сверку с эталонными JSON; сохраняет только собственные результаты анализа.
+8. РќРµ РІС‹РїРѕР»РЅСЏРµС‚ СЃРІРµСЂРєСѓ СЃ СЌС‚Р°Р»РѕРЅРЅС‹РјРё JSON; СЃРѕС…СЂР°РЅСЏРµС‚ С‚РѕР»СЊРєРѕ СЃРѕР±СЃС‚РІРµРЅРЅС‹Рµ СЂРµР·СѓР»СЊС‚Р°С‚С‹ Р°РЅР°Р»РёР·Р°.
 
-Ключевое правило V1:
-- отсутствие strong Active = отдельный hand_N без продолжения;
-- strong Active + те же HERO cards Player_seat1 в той же table-области = та же раздача;
-- strong Active + другие HERO cards = новая раздача.
+РљР»СЋС‡РµРІРѕРµ РїСЂР°РІРёР»Рѕ V1:
+- РѕС‚СЃСѓС‚СЃС‚РІРёРµ strong Active = РѕС‚РґРµР»СЊРЅС‹Р№ hand_N Р±РµР· РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ;
+- strong Active + С‚Рµ Р¶Рµ HERO cards Player_seat1 РІ С‚РѕР№ Р¶Рµ table-РѕР±Р»Р°СЃС‚Рё = С‚Р° Р¶Рµ СЂР°Р·РґР°С‡Р°;
+- strong Active + РґСЂСѓРіРёРµ HERO cards = РЅРѕРІР°СЏ СЂР°Р·РґР°С‡Р°.
 """
 
 from __future__ import annotations
@@ -517,7 +517,7 @@ class HandIdentityTracker:
         hero_cards_key = self._normalize_hero_cards(hero_cards)
         previous = self._active_hand_by_table_id.get(table_id)
 
-        # Без двух валидных HERO cards нельзя надёжно доказать новую руку.
+        # Р‘РµР· РґРІСѓС… РІР°Р»РёРґРЅС‹С… HERO cards РЅРµР»СЊР·СЏ РЅР°РґС‘Р¶РЅРѕ РґРѕРєР°Р·Р°С‚СЊ РЅРѕРІСѓСЋ СЂСѓРєСѓ.
         # V0.4.2: if a table already has a tracked Active hand, a single frame
         # with missing/invalid HERO cards must keep that previous hand_id as an
         # unproven continuation candidate. This does NOT invent HERO cards;
@@ -834,6 +834,162 @@ def save_completed_json_table_frame_json(
     _write_json_atomic(path, completed_state)
     return path
 
+
+
+# =============================================================================
+# POSTFLOP_CAPTURE_STUB_REMOVE_OR_REWORK_TODO: temporary no-click flop/turn/river Clear_JSON publication for source capture. Later versions must remove or rework this into proper postflop solver/runtime/click-chain.
+# POSTFLOP_CAPTURE_STUB_V0_TEST
+# Temporary local-only capture stub.
+# Purpose:
+#   Allow Final Clear_JSON publication for Active flop/turn/river frames without
+#   requiring a completed Action_Button click cycle while the postflop solver
+#   and postflop runtime are intentionally not implemented yet.
+# Safety:
+#   - preflop behavior is unchanged;
+#   - physical clicks are not enabled here;
+#   - the injected click_result is dry_run/no_click only;
+#   - duplicate Active hard-stop remains respected;
+#   - can be disabled with POKERVISION_POSTFLOP_CAPTURE_STUB=0.
+# =============================================================================
+def _postflop_capture_stub_env_enabled() -> bool:
+    value = __import__("os").environ.get("POKERVISION_POSTFLOP_CAPTURE_STUB", "1")
+    return str(value).strip().lower() not in {"0", "false", "no", "off", "disabled"}
+
+
+def _postflop_capture_stub_deep_get(data: object, *keys: str) -> object:
+    current = data
+    for key in keys:
+        if not isinstance(current, dict):
+            return None
+        current = current.get(key)
+    return current
+
+
+def _postflop_capture_stub_clean_cards(value: object) -> List[str]:
+    if not isinstance(value, list):
+        return []
+    return [str(card).strip() for card in value if str(card).strip()]
+
+
+def _postflop_capture_stub_infer_street_from_board_cards(cards: List[str]) -> Optional[str]:
+    if len(cards) == 0:
+        return "preflop"
+    if len(cards) == 3:
+        return "flop"
+    if len(cards) == 4:
+        return "turn"
+    if len(cards) == 5:
+        return "river"
+    return None
+
+
+def _postflop_capture_stub_extract_board(state: Dict[str, object]) -> Tuple[List[str], Optional[str]]:
+    board = state.get("board") if isinstance(state.get("board"), dict) else None
+    if not isinstance(board, dict):
+        board = _postflop_capture_stub_deep_get(state, "table_structure", "classes", "Board")
+    if not isinstance(board, dict):
+        return [], None
+
+    cards = _postflop_capture_stub_clean_cards(board.get("cards"))
+    street_raw = str(board.get("street") or "").strip().lower()
+    street = street_raw if street_raw in VALID_STREETS else None
+    if street is None:
+        street = _postflop_capture_stub_infer_street_from_board_cards(cards)
+    return cards, street
+
+
+def _postflop_capture_stub_frame_token(state: Dict[str, object]) -> str:
+    runtime_event = state.get("runtime_event") if isinstance(state.get("runtime_event"), dict) else {}
+    table = state.get("table") if isinstance(state.get("table"), dict) else {}
+    raw = (
+        runtime_event.get("action_event_id")
+        or table.get("action_event_id")
+        or table.get("frame_name")
+        or state.get("frame_name")
+        or "postflop_capture_stub"
+    )
+    token = str(raw or "postflop_capture_stub").strip()
+    safe = []
+    for char in token:
+        safe.append(char if (char.isalnum() or char in {"_", "-", "."}) else "_")
+    return "".join(safe).strip("._") or "postflop_capture_stub"
+
+
+def _maybe_build_postflop_capture_stub_click_result(
+    *,
+    state: Dict[str, object],
+    active_confirmed: bool,
+    duplicate_active_hard_stop: bool,
+    clear_json_save_allowed: bool,
+    click_result_for_clear: Optional[Dict[str, object]],
+) -> Tuple[bool, Optional[Dict[str, object]], Dict[str, object]]:
+    enabled = _postflop_capture_stub_env_enabled()
+    board_cards, street = _postflop_capture_stub_extract_board(state)
+    expected_counts = {"flop": 3, "turn": 4, "river": 5}
+    is_postflop_street = street in expected_counts
+    board_count_valid = is_postflop_street and len(board_cards) == expected_counts[str(street)]
+
+    report: Dict[str, object] = {
+        "schema_version": "postflop_capture_stub_v0_test",
+        "enabled": bool(enabled),
+        "status": "not_applied",
+        "active_confirmed": bool(active_confirmed),
+        "duplicate_active_hard_stop": bool(duplicate_active_hard_stop),
+        "street": street,
+        "board_cards": list(board_cards),
+        "board_card_count": len(board_cards),
+        "board_count_valid": bool(board_count_valid),
+        "previous_clear_json_save_allowed": bool(clear_json_save_allowed),
+        "previous_click_result_available": isinstance(click_result_for_clear, dict),
+        "reason": None,
+        "behavior": "allow_final_clear_json_for_postflop_without_click_only",
+    }
+
+    if not enabled:
+        report["reason"] = "disabled_by_env"
+        return False, None, report
+    if not active_confirmed:
+        report["reason"] = "blocked_no_active_confirmed"
+        return False, None, report
+    if duplicate_active_hard_stop:
+        report["reason"] = "blocked_duplicate_active_hard_stop"
+        return False, None, report
+    if not is_postflop_street:
+        report["reason"] = "blocked_not_flop_turn_or_river"
+        return False, None, report
+    if not board_count_valid:
+        report["reason"] = "blocked_invalid_postflop_board_card_count"
+        return False, None, report
+    if clear_json_save_allowed and isinstance(click_result_for_clear, dict):
+        report["reason"] = "not_needed_real_or_dry_run_click_result_already_available"
+        return False, None, report
+
+    decision_id = f"postflop_capture_stub::{_postflop_capture_stub_frame_token(state)}"
+    click_result = {
+        "status": "dry_run",
+        "branch": "postflop_capture_stub_no_action_runtime",
+        "action": "no_click",
+        "size_pct": None,
+        "dry_run": True,
+        "real_click_enabled": False,
+        "guard_passed": True,
+        "decision_id": decision_id,
+        "message": (
+            "Postflop capture stub: Final Clear_JSON publication allowed without "
+            "physical click because flop/turn/river solver runtime is not implemented yet."
+        ),
+    }
+    report.update(
+        {
+            "status": "applied",
+            "reason": "postflop_solver_runtime_not_implemented_capture_only",
+            "forced_clear_json_save_allowed": True,
+            "injected_click_result_status": "dry_run",
+            "injected_click_result_action": "no_click",
+            "decision_id": decision_id,
+        }
+    )
+    return True, click_result, report
 
 def _compact_gate_decision_for_diagnostics(decision: Optional[object]) -> Dict[str, object]:
     """Return a stable compact view of an event/transaction gate decision."""
@@ -2970,10 +3126,10 @@ def run_ui_display_analysis_cycle(
     cycle_id: str | None = None,
 ) -> List[Path]:
     """
-    Запустить V1 runtime-анализ текущего display-pass.
+    Р—Р°РїСѓСЃС‚РёС‚СЊ V1 runtime-Р°РЅР°Р»РёР· С‚РµРєСѓС‰РµРіРѕ display-pass.
 
-    В одном pass у разных table_N могут быть разные hand_id/frame_name.
-    display_pass_id используется только для debug-папок и не попадает в clean JSON.
+    Р’ РѕРґРЅРѕРј pass Сѓ СЂР°Р·РЅС‹С… table_N РјРѕРіСѓС‚ Р±С‹С‚СЊ СЂР°Р·РЅС‹Рµ hand_id/frame_name.
+    display_pass_id РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ С‚РѕР»СЊРєРѕ РґР»СЏ debug-РїР°РїРѕРє Рё РЅРµ РїРѕРїР°РґР°РµС‚ РІ clean JSON.
     """
     started_at = now_perf_counter()
 
@@ -3899,6 +4055,32 @@ def run_ui_display_analysis_cycle(
                     ),
                     "early_lifecycle_release": release_report,
                 }
+# POSTFLOP_CAPTURE_STUB_REMOVE_OR_REWORK_TODO: temporary no-click flop/turn/river Clear_JSON publication for source capture. Later versions must remove or rework this into proper postflop solver/runtime/click-chain.
+
+
+        postflop_capture_stub_applied, postflop_capture_stub_click_result, postflop_capture_stub_report = _maybe_build_postflop_capture_stub_click_result(
+            state=state,
+            active_confirmed=active_confirmed,
+            duplicate_active_hard_stop=duplicate_active_hard_stop_before_pending,
+            clear_json_save_allowed=clear_json_save_allowed,
+            click_result_for_clear=click_result_for_clear,
+        )
+        if isinstance(postflop_capture_stub_report, dict) and postflop_capture_stub_report.get("enabled"):
+            state["postflop_capture_stub"] = postflop_capture_stub_report
+        if postflop_capture_stub_applied:
+            clear_json_save_allowed = True
+            click_result_for_clear = postflop_capture_stub_click_result
+            if isinstance(state.get("action_transaction_runtime"), dict):
+                state["action_transaction_runtime"]["postflop_capture_stub_override"] = True
+                state["action_transaction_runtime"]["postflop_capture_stub_reason"] = "final_clear_json_capture_without_click_for_unimplemented_postflop"
+            add_warning(
+                state,
+                block="postflop_capture_stub",
+                message=(
+                    "POSTFLOP_CAPTURE_STUB_V0_TEST forced Final Clear_JSON publication "
+                    "for an Active flop/turn/river frame without executing a click."
+                ),
+            )
 
         _update_runtime_lifecycle_diagnostics(
             state,
@@ -4032,3 +4214,143 @@ def run_ui_display_analysis_cycle(
 
 
     return saved_json_paths
+# POSTFLOP_CAPTURE_STUB_REMOVE_OR_REWORK_TODO: temporary no-click flop/turn/river Clear_JSON publication for source capture. Later versions must remove or rework this into proper postflop solver/runtime/click-chain.
+
+# POSTFLOP_CAPTURE_STUB_V2_NO_GIT
+# Temporary local test override. Do not commit.
+# Purpose: allow flop/turn/river Final Clear_JSON capture without postflop solver/click runtime.
+def _pv_postflop_stub_v2_clean_cards(value):
+    if not isinstance(value, list):
+        return []
+    out = []
+    for item in value:
+        text = str(item or "").strip()
+        if text and text not in out:
+            out.append(text)
+    return out
+
+
+def _pv_postflop_stub_v2_extract_clear_state_and_board(state):
+    clear_state = {}
+    try:
+        clear_state = build_clear_json_from_dark_state(state if isinstance(state, dict) else {})
+    except Exception as exc:
+        return {}, [], "unknown", f"clear_json_candidate_error:{exc}"
+    if not isinstance(clear_state, dict):
+        return {}, [], "unknown", "clear_json_candidate_not_dict"
+    board = clear_state.get("board") if isinstance(clear_state.get("board"), dict) else {}
+    cards = _pv_postflop_stub_v2_clean_cards(board.get("cards"))
+    street = str(board.get("street") or "").strip().lower()
+    if street not in {"flop", "turn", "river"}:
+        street = {3: "flop", 4: "turn", 5: "river"}.get(len(cards), street or "preflop")
+    return clear_state, cards, street, None
+
+
+def _maybe_build_postflop_capture_stub_click_result(*args, **kwargs):
+    """V2 override for the V0 no-git postflop capture stub.
+
+    This intentionally does not require active_confirmed. The first V0 stub was too late/narrow:
+    non-active postflop frames reached Dark_JSON as minimal preflop diagnostics and never got Final Clear_JSON.
+    V2 pairs with TABLE_STRUCTURE_REQUIRE_ACTIVE=False so board/card detection can run on observer frames;
+    if the normalized Clear_JSON candidate has 3/4/5 board cards, it publishes a schema-safe dry_run
+    click_result placeholder and lets the existing Clear_JSON state-machine save the final file.
+    """
+    state = kwargs.get("state")
+    if state is None and args:
+        state = args[0]
+    if not isinstance(state, dict):
+        state = {}
+
+    table_id = str(kwargs.get("table_id") or state.get("table_id") or (state.get("table") or {}).get("table_id") or "unknown_table")
+    hand_id = str(kwargs.get("hand_id") or state.get("hand_id") or (state.get("table") or {}).get("hand_id") or "unknown_hand")
+    frame_name = str(kwargs.get("frame_name") or state.get("frame_name") or (state.get("table") or {}).get("frame_name") or hand_id)
+    active_confirmed = bool(kwargs.get("active_confirmed", False))
+
+    clear_state, board_cards, street, error = _pv_postflop_stub_v2_extract_clear_state_and_board(state)
+    expected_by_street = {"flop": 3, "turn": 4, "river": 5}
+    expected = expected_by_street.get(street)
+    valid_postflop = expected is not None and len(board_cards) == expected
+
+    report = {
+        "schema_version": "postflop_capture_stub_v2_no_git",
+        "enabled": True,
+        "status": "applied" if valid_postflop else "blocked",
+        "reason": "valid_postflop_board_capture_without_action_runtime" if valid_postflop else "not_valid_flop_turn_river_board",
+        "table_id": table_id,
+        "hand_id": hand_id,
+        "frame_name": frame_name,
+        "active_confirmed": active_confirmed,
+        "active_required": False,
+        "street": street,
+        "board_cards": list(board_cards),
+        "board_card_count": len(board_cards),
+        "expected_board_card_count": expected,
+        "board_count_valid": bool(valid_postflop),
+        "forced_clear_json_save_allowed": bool(valid_postflop),
+        "no_physical_click": True,
+        "safety": "postflop solver/click runtime remains disabled; only Clear_JSON capture is forced",
+    }
+    if error:
+        report["error"] = error
+
+    if not valid_postflop:
+        return False, None, report
+
+    decision_id = "postflop_capture_stub_v2_{}_{}_{}_{}".format(
+        table_id,
+        frame_name,
+        street,
+        "_".join(board_cards),
+    )
+    decision_id = "".join(ch if ch.isalnum() or ch in {"_", "-"} else "_" for ch in decision_id)[:180]
+
+    click_result = {
+        "status": "dry_run",
+        "branch": "postflop_capture_stub_no_action_runtime_v2",
+        "action": "no_click",
+        "size_pct": None,
+        "dry_run": True,
+        "real_click_enabled": False,
+        "guard_passed": True,
+        "decision_id": decision_id,
+        "message": "POSTFLOP_CAPTURE_STUB_V2_NO_GIT: saved postflop Clear_JSON without solver/click runtime.",
+    }
+    report["click_result"] = dict(click_result)
+    return True, click_result, report
+
+
+try:
+    _PV_ORIGINAL_BUILD_CLICK_EXECUTION_GUARD_REPORT_V2 = _build_click_execution_guard_report
+except NameError:  # pragma: no cover - defensive for partial imports
+    _PV_ORIGINAL_BUILD_CLICK_EXECUTION_GUARD_REPORT_V2 = None
+
+
+def _build_click_execution_guard_report(*args, **kwargs):
+    click_result = kwargs.get("click_result")
+    if click_result is None and len(args) >= 5:
+        click_result = args[4]
+    if isinstance(click_result, dict) and click_result.get("branch") == "postflop_capture_stub_no_action_runtime_v2":
+        return {
+            "schema_version": "click_result_v09_postflop_capture_stub_v2_no_git",
+            "status": "allowed",
+            "reason": "postflop_capture_stub_no_action_runtime",
+            "message": "POSTFLOP_CAPTURE_STUB_V2_NO_GIT: ClickExecutionGuard bypassed only for no-click postflop Clear_JSON capture.",
+            "guard_passed": True,
+            "guards": {
+                "postflop_capture_stub": True,
+                "no_physical_click": True,
+            },
+            "source": "POSTFLOP_CAPTURE_STUB_V2_NO_GIT",
+        }
+    if _PV_ORIGINAL_BUILD_CLICK_EXECUTION_GUARD_REPORT_V2 is None:
+        return {
+            "schema_version": "click_result_v09_postflop_capture_stub_v2_no_git",
+            "status": "blocked",
+            "reason": "original_click_guard_missing",
+            "message": "Original ClickExecutionGuard function is not available.",
+            "guard_passed": False,
+            "guards": {},
+        }
+    return _PV_ORIGINAL_BUILD_CLICK_EXECUTION_GUARD_REPORT_V2(*args, **kwargs)
+
+
