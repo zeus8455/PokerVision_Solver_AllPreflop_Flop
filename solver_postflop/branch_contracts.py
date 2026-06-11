@@ -52,7 +52,7 @@ class SolverBranchResult:
 
 
 DEFAULT_NEXT_MODULE_BY_BRANCH: Mapping[SolverBranch, str] = {
-    SolverBranch.PREFLOP_NOT_HANDLED: "preflop_solver_external_to_postflop",
+    SolverBranch.PREFLOP_NOT_HANDLED: "preflop_solver_external_or_skip",
     SolverBranch.FLOP: "flop_context_builder",
     SolverBranch.TURN_NOT_IMPLEMENTED_YET: "turn_branch_not_implemented_yet",
     SolverBranch.RIVER_NOT_IMPLEMENTED_YET: "river_branch_not_implemented_yet",

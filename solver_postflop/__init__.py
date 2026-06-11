@@ -32,6 +32,7 @@ from .branch_contracts import (
     branch_family_for,
     next_module_for,
 )
+from .branch_resolver import resolve_solver_branch
 from .solver_input import MAPPING_VERSION, build_solver_input
 
 __all__ = (
@@ -64,4 +65,5 @@ __all__ = (
     "SolverBranchResult",
     "branch_family_for",
     "next_module_for",
+    "resolve_solver_branch",
 )
