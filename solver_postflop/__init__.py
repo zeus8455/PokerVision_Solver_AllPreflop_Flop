@@ -35,6 +35,17 @@ from .branch_contracts import (
 from .branch_resolver import resolve_solver_branch
 from .solver_input import MAPPING_VERSION, build_solver_input
 
+from .flop_context_contracts import (
+    DEFAULT_FLOP_NEXT_MODULE,
+    FLOP_SPOT_FAMILIES,
+    FlopActionContext,
+    FlopContext,
+    FlopPlayerContext,
+    FlopPositionContext,
+    FlopPotContext,
+    FlopSpotFamily,
+)
+
 __all__ = (
     "ClearJsonInput",
     "SolverInput",
@@ -66,4 +77,12 @@ __all__ = (
     "branch_family_for",
     "next_module_for",
     "resolve_solver_branch",
+    "DEFAULT_FLOP_NEXT_MODULE",
+    "FLOP_SPOT_FAMILIES",
+    "FlopActionContext",
+    "FlopContext",
+    "FlopPlayerContext",
+    "FlopPositionContext",
+    "FlopPotContext",
+    "FlopSpotFamily",
 )
