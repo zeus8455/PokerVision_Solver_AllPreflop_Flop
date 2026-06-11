@@ -57,16 +57,17 @@ def test_one_pair_is_classified() -> None:
     features, _context, _texture = _made_hand(("Ah", "Kd"), ("As", "7d", "2c"))
 
     assert features.made_hand_class is MadeHandClass.ONE_PAIR
-    assert features.showdown_value_class is ShowdownValueClass.MEDIUM_SHOWDOWN
-    assert features.strength_tier is MadeHandStrengthTier.MEDIUM_SHOWDOWN
-    assert features.kicker_relevance == "not_evaluated"
+    assert features.showdown_value_class is ShowdownValueClass.STRONG_SHOWDOWN
+    assert features.strength_tier is MadeHandStrengthTier.STRONG_SHOWDOWN
+    assert features.pair_class is PairClass.TOP_PAIR
+    assert features.kicker_relevance == "high"
 
 
 def test_two_pair_is_classified() -> None:
     features, _context, _texture = _made_hand(("Ah", "Kd"), ("As", "Kc", "2d"))
 
     assert features.made_hand_class is MadeHandClass.TWO_PAIR
-    assert features.strength_tier is MadeHandStrengthTier.STRONG_SHOWDOWN
+    assert features.strength_tier is MadeHandStrengthTier.VALUE_HAND
 
 
 def test_three_of_a_kind_is_classified() -> None:
