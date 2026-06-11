@@ -35,6 +35,8 @@ from .branch_contracts import (
 from .branch_resolver import resolve_solver_branch
 from .solver_input import MAPPING_VERSION, build_solver_input
 
+from .flop_context import build_flop_context
+
 from .flop_context_contracts import (
     DEFAULT_FLOP_NEXT_MODULE,
     FLOP_SPOT_FAMILIES,
@@ -85,4 +87,5 @@ __all__ = (
     "FlopPositionContext",
     "FlopPotContext",
     "FlopSpotFamily",
+    "build_flop_context",
 )
