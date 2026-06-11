@@ -12,11 +12,12 @@ Old pre-reset V0.x history is preserved in:
 
 ---
 
-## Current version
+## Current closed version
 
 # V0.1.0 — Solver Engine Blueprint / Clear_JSON Input Contract
 
-Status: **closed by V0.1.5**
+Status: **closed by V0.1.5**  
+Close commit: `00b6b7d`
 
 Purpose:
 
@@ -119,8 +120,8 @@ Result:
 
 ## V0.1.5 — Version Close / Docs / README / VERSION
 
-Commit: pending  
-Status: closes V0.1.0
+Commit: `00b6b7d`  
+Status: closed V0.1.0
 
 Implemented:
 
@@ -185,9 +186,15 @@ Not implemented by design:
 
 ---
 
-## Next version
+## Active planned version
 
 # V0.2.0 — Clear_JSON Fixture Library / Real + Synthetic Solver Cases
+
+Status: **in progress**
+
+Purpose:
+
+Create the permanent Clear_JSON fixture library for future postflop solver tests.
 
 Planned scope:
 
@@ -197,3 +204,46 @@ Planned scope:
 - add minimum real/synthetic flop/turn/river cases
 - add expected solver interpretation files
 - keep decision logic out of V0.2.0
+
+---
+
+## V0.2.1 — Fixture Library Docs / Manifest Schema
+
+Status: prepared for integration
+
+Scope:
+
+- create `docs/POSTFLOP_CLEAR_JSON_FIXTURE_LIBRARY.md`
+- create `docs/POSTFLOP_CLEAR_JSON_FIXTURE_MANIFEST.md`
+- document fixture root structure
+- document real versus synthetic Clear_JSON policy
+- document manifest fields
+- document expected interpretation file policy
+- keep JSON fixtures and pytest tests out of V0.2.1
+
+Required gate:
+
+```powershell
+C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe -m pytest `
+  tests/test_postflop_engine_contracts_v010.py `
+  tests/test_postflop_clear_json_input_loader_v010.py `
+  tests/test_postflop_solver_input_mapping_v010.py `
+  tests/test_postflop_no_source_fallback_v010.py `
+  -q
+```
+
+Expected:
+
+```text
+25 passed
+```
+
+---
+
+## Planned next V0.2 subversions
+
+- V0.2.2 — Fixture Directory Skeleton
+- V0.2.3 — Minimum Clear_JSON Cases
+- V0.2.4 — Expected Solver Interpretation Files
+- V0.2.5 — Fixture Manifest / Library Tests
+- V0.2.6 — Version Close / README / VERSION / Miro Docs

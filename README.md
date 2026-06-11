@@ -15,8 +15,9 @@ The solver must not duplicate PokerVision upstream responsibilities. It starts f
 ## Current status
 
 **Current closed version:** V0.1.0 — Solver Engine Blueprint / Clear_JSON Input Contract  
-**Latest subversion:** V0.1.5 — Version Close / Docs / README / VERSION  
-**Latest completed code checkpoint before close:** `73163d9` — V0.1.4 add postflop no-fallback architecture gate
+**Latest closed subversion:** V0.1.5 — Version Close / Docs / README / VERSION  
+**Latest closed commit:** `00b6b7d` — V0.1.5 close solver engine blueprint  
+**Active next block:** V0.2.0 — Clear_JSON Fixture Library / Real + Synthetic Solver Cases
 
 ---
 
@@ -61,9 +62,9 @@ The original Clear_JSON content is preserved and referenced. It must not be muta
 
 The solver does not search temporary PokerVision artifacts or upstream project files.
 
-### No validation in V0.1.x
+### No validation in V0.1.x / V0.2.x fixture setup
 
-V0.1.x does not validate poker state, repair cards, reconstruct players, or infer missing HERO/active player data.
+The early engine and fixture layers do not validate poker state, repair cards, reconstruct players, or infer missing HERO/active player data.
 
 ---
 
@@ -76,7 +77,7 @@ V0.1.x does not validate poker state, repair cards, reconstruct players, or infe
 | V0.1.2 | `1a4a2eb` | add Clear_JSON trusted input loader |
 | V0.1.3 | `e80a582` | add SolverInput mapping baseline |
 | V0.1.4 | `73163d9` | add postflop no-fallback architecture gate |
-| V0.1.5 | pending | close solver engine blueprint documentation |
+| V0.1.5 | `00b6b7d` | close solver engine blueprint documentation |
 
 The previous old V0.x line is preserved in:
 
@@ -105,6 +106,27 @@ Expected at V0.1.5 close:
 
 ---
 
+## V0.2.0 planned block
+
+**V0.2.0 — Clear_JSON Fixture Library / Real + Synthetic Solver Cases**
+
+Planned purpose:
+
+- create permanent Clear_JSON fixture structure
+- add real/synthetic fixture separation
+- add manifest and expected interpretation files
+- keep solver decision logic out of V0.2.0
+
+Planned fixture root:
+
+```text
+tests/fixtures/postflop_clear_json/
+```
+
+V0.2.1 starts this block by documenting the fixture library policy and manifest schema.
+
+---
+
 ## Development method
 
 For every version/subversion:
@@ -117,16 +139,3 @@ For every version/subversion:
 6. Commit and push a short Git checkpoint.
 7. Update README / VERSION when a full version block is closed.
 8. Document the version for Miro.
-
----
-
-## Next version
-
-**V0.2.0 — Clear_JSON Fixture Library / Real + Synthetic Solver Cases**
-
-Planned purpose:
-
-- create permanent Clear_JSON fixture structure
-- add real/synthetic fixture separation
-- add manifest and expected interpretation files
-- keep solver decision logic out of V0.2.0
