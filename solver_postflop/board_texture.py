@@ -249,6 +249,20 @@ def _build_texture_tags(
         tags.append("monotone_broadway")
     if rank_texture is BoardRankTexture.LOW_CONNECTED:
         tags.append("low_connected_dynamic")
+    if (
+        paired_texture is BoardPairedTexture.PAIRED
+        and volatility_class is BoardVolatilityClass.STATIC_BOARD
+        and connection_texture is BoardConnectionTexture.DISCONNECTED
+    ):
+        tags.append("paired_dry")
+    if (
+        volatility_class is BoardVolatilityClass.DYNAMIC_BOARD
+        and connection_texture in {
+            BoardConnectionTexture.CONNECTED,
+            BoardConnectionTexture.HIGHLY_CONNECTED,
+        }
+    ):
+        tags.append("very_wet_connected")
 
     return _dedupe(tags)
 
