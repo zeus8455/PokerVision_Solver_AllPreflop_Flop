@@ -16,6 +16,12 @@ from .field_mapping_contract import (
     get_mappings_for_clear_json_field,
     solver_input_fields_in_contract,
 )
+from .field_usage_trace import (
+    FieldUsageRecord,
+    FieldUsageStatus,
+    FieldUsageTrace,
+    build_field_usage_trace,
+)
 from .solver_input import MAPPING_VERSION, build_solver_input
 
 __all__ = (
@@ -37,4 +43,8 @@ __all__ = (
     "get_mapping_for_solver_input_field",
     "get_mappings_for_clear_json_field",
     "solver_input_fields_in_contract",
+    "FieldUsageRecord",
+    "FieldUsageStatus",
+    "FieldUsageTrace",
+    "build_field_usage_trace",
 )
