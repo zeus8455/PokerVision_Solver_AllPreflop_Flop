@@ -1,0 +1,106 @@
+{
+  "case_id": "synthetic_flop_srp_oop_facing_cbet",
+  "case_name": "Synthetic flop SRP OOP facing cbet",
+  "source_kind": "synthetic",
+  "fixture_version": "v0.2.3",
+  "fixture_provenance": {
+    "library_role": "synthetic solver scenario based on real fixture structure",
+    "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+    "synthetic_changes": [
+      "facing_bet",
+      "to_call",
+      "pot",
+      "allowed_actions",
+      "action_context"
+    ]
+  },
+  "hand_id": "hand_synth_flop_001",
+  "street_group": "flop",
+  "spot_family": "srp_heads_up",
+  "hero_cards": [
+    "As",
+    "Kh"
+  ],
+  "board_cards": [
+    "Qd",
+    "8s",
+    "3c"
+  ],
+  "total_pot": 8.0,
+  "pot": 8.0,
+  "to_call": 3.5,
+  "allowed_actions": [
+    "fold",
+    "call",
+    "raise"
+  ],
+  "action_context": {
+    "street": "flop",
+    "current_actor": "hero",
+    "facing_bet": true,
+    "facing_raise": false,
+    "last_aggressor": "villain_btn",
+    "bet_size": 3.5,
+    "facing_action": "cbet"
+  },
+  "table_id": "table_01",
+  "hero_id": "hero",
+  "hero_position": "BB",
+  "button": "BTN",
+  "blinds": {
+    "small_blind": 0.5,
+    "big_blind": 1.0
+  },
+  "positions": {
+    "hero": "BB",
+    "villain_btn": "BTN"
+  },
+  "stacks": {
+    "hero": 96.5,
+    "villain_btn": 97.5
+  },
+  "committed_amounts": {
+    "hero": 1.0,
+    "villain_btn": 2.5
+  },
+  "players": [
+    {
+      "player_id": "hero",
+      "seat": "BB",
+      "position": "BB",
+      "is_hero": true,
+      "folded": false,
+      "all_in": false,
+      "stack": 96.5,
+      "committed": 1.0,
+      "cards": [
+        "As",
+        "Kh"
+      ]
+    },
+    {
+      "player_id": "villain_btn",
+      "seat": "BTN",
+      "position": "BTN",
+      "is_hero": false,
+      "folded": false,
+      "all_in": false,
+      "stack": 97.5,
+      "committed": 2.5,
+      "cards": []
+    }
+  ],
+  "preflop_context": {
+    "pot_type": "srp",
+    "preflop_aggressor": "villain_btn",
+    "hero_preflop_role": "bb_defender",
+    "open_raiser": "villain_btn",
+    "callers": [
+      "hero"
+    ]
+  },
+  "pot_type": "srp",
+  "preflop_aggressor": "villain_btn",
+  "hero_preflop_role": "bb_defender",
+  "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option"
+}

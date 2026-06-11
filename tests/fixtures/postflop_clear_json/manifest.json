@@ -1,9 +1,9 @@
 {
-  "schema_version": "0.2.2",
+  "schema_version": "0.2.3",
   "library_kind": "clear_json_fixture_library",
   "architecture": "clear_json_only",
   "fixture_root": "tests/fixtures/postflop_clear_json",
-  "description": "Skeleton manifest for trusted Clear_JSON postflop fixtures. Cases are added in V0.2.3.",
+  "description": "Trusted Clear_JSON postflop fixture library with the first minimum case set.",
   "source_policy": {
     "accepted_input_kind": "clear_json",
     "real_clear_json_policy": "real files must remain close to PokerVision output and must not be hand-improved",
@@ -12,7 +12,93 @@
   },
   "expected_policy": {
     "contains_final_poker_decision": false,
-    "purpose": "expected files describe solver interpretation only, not fold/call/bet decisions"
+    "purpose": "expected files describe solver interpretation only, not fold/call/bet decisions",
+    "v0_2_3_expected_files": "not_added_until_v0_2_4"
   },
-  "cases": []
+  "cases": [
+    {
+      "case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "case_name": "Real-format flop SRP BTN vs BB check option",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "real",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/real/flop/real_flop_srp_btn_vs_bb_check_option.clear.json",
+      "expected_file": null,
+      "base_real_case_id": null,
+      "purpose": "minimum_clear_json_case_for_fixture_library",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "future_branch_resolver"
+      ],
+      "status": "active",
+      "notes": [
+        "V0.2.3 adds Clear_JSON cases only; expected interpretation files are added in V0.2.4.",
+        "No final poker decision is attached to this fixture entry."
+      ]
+    },
+    {
+      "case_id": "synthetic_flop_srp_oop_facing_cbet",
+      "case_name": "Synthetic flop SRP OOP facing cbet",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/synthetic_flop_srp_oop_facing_cbet.clear.json",
+      "expected_file": null,
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "minimum_clear_json_case_for_fixture_library",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "future_branch_resolver"
+      ],
+      "status": "active",
+      "notes": [
+        "V0.2.3 adds Clear_JSON cases only; expected interpretation files are added in V0.2.4.",
+        "No final poker decision is attached to this fixture entry."
+      ]
+    },
+    {
+      "case_id": "synthetic_turn_after_flop_bet_call",
+      "case_name": "Synthetic turn after flop bet call",
+      "street_group": "turn",
+      "spot_family": "srp_heads_up_turn_after_bet_call",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/turn/synthetic_turn_after_flop_bet_call.clear.json",
+      "expected_file": null,
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "minimum_clear_json_case_for_fixture_library",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "future_branch_resolver"
+      ],
+      "status": "active",
+      "notes": [
+        "V0.2.3 adds Clear_JSON cases only; expected interpretation files are added in V0.2.4.",
+        "No final poker decision is attached to this fixture entry."
+      ]
+    },
+    {
+      "case_id": "synthetic_river_facing_large_bet",
+      "case_name": "Synthetic river facing large bet",
+      "street_group": "river",
+      "spot_family": "srp_heads_up_river_facing_large_bet",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/river/synthetic_river_facing_large_bet.clear.json",
+      "expected_file": null,
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "minimum_clear_json_case_for_fixture_library",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "future_branch_resolver"
+      ],
+      "status": "active",
+      "notes": [
+        "V0.2.3 adds Clear_JSON cases only; expected interpretation files are added in V0.2.4.",
+        "No final poker decision is attached to this fixture entry."
+      ]
+    }
+  ]
 }
