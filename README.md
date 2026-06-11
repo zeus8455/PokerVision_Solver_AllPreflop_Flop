@@ -1,66 +1,81 @@
-# PokerVision Solver AllPreflop Flop
+# PokerVision_Solver_AllPreflop_Flop
 
-Current line: **Clear_JSON-only postflop solver engine**
-
-This repository was reset to the initial baseline and restarted with a clean postflop solver architecture.
-
-The active development rule is:
-
-```text
-Clear_JSON -> ClearJsonInput -> SolverInput -> SolverTrace -> future solver modules
-```
-
-The postflop solver must not duplicate upstream PokerVision responsibilities. It starts from a ready Clear_JSON file.
-
----
+Postflop solver development line for PokerVision on top of the existing AllPreflop / Preflop Solver baseline.
 
 ## Current status
 
-**Current closed version:** V0.2.0 — Clear_JSON Fixture Library / Real + Synthetic Solver Cases  
-**Latest closed subversion:** V0.2.6 — Version Close / README / VERSION / Miro Docs  
-**Latest completed gate before close:** `62 passed` at V0.2.5/V0.2.6 gate  
-**Next block:** V0.3.0 — SolverInput Mapping / Field Usage Contract
-
----
+**Current closed block:** V0.3.0 — SolverInput Mapping / Field Usage Contract  
+**Current close checkpoint:** V0.3.6 — Version Close / README / VERSION / Miro  
+**Expected close commit message:** `V0.3.6 close SolverInput mapping contract`  
+**Latest verified gate:** `94 passed`  
+**Next planned block:** V0.4.0 — Solver Branch Resolver / Street Module Routing
 
 ## Active architecture
 
-V0.1.0 fixed the first engine layer:
+The active postflop solver direction is Clear_JSON-only:
 
 ```text
-Clear_JSON -> ClearJsonInput -> SolverInput -> SolverTrace -> future branch resolver / solver modules
+Clear_JSON -> ClearJsonInput -> SolverInput -> FieldUsageTrace -> future solver modules
 ```
 
-V0.2.0 added the permanent fixture layer:
+The solver does not search temporary PokerVision JSON sources. It accepts only explicitly provided Clear_JSON files that are already prepared by the PokerVision pipeline.
 
-```text
-tests/fixtures/postflop_clear_json/
-  manifest.json
-  real/
-    flop/
-    turn/
-    river/
-  synthetic/
-    flop/
-    turn/
-    river/
-  templates/
-  expected/
-```
+## Development rule
 
-The fixture library stores ready Clear_JSON cases and expected interpretation metadata. It does not store upstream temporary source artifacts as solver inputs.
+For every version/subversion:
+
+1. discuss the scope first;
+2. implement only after explicit approval;
+3. deliver a ZIP with ready project structure;
+4. integrate through one PowerShell command;
+5. run the required checks;
+6. commit and push a short Git checkpoint;
+7. update README / VERSION when a full version block is closed;
+8. document the version in Miro.
+
+No runtime, click-chain, source-of-truth, player-state, validation, or solver decision logic is changed without a separate approved version.
 
 ---
 
-## Current modules
+# Closed version: V0.1.0 — Solver Engine Blueprint / Clear_JSON Input Contract
 
-- `solver_postflop/engine_contracts.py`
-- `solver_postflop/clear_json_input.py`
-- `solver_postflop/solver_input.py`
+**Status:** closed  
+**Close checkpoint:** `00b6b7d - V0.1.5 close solver engine blueprint`  
+**Validation:** `25 passed`
+
+## Goal
+
+Create the postflop solver foundation:
+
+```text
+Clear_JSON -> ClearJsonInput -> SolverInput -> SolverTrace
+```
+
+V0.1.0 created the trusted input loader, baseline SolverInput mapping, and no-fallback architecture gate. It did not create poker decisions, source discovery, validation, runtime plans, or click-chain logic.
+
+## Subversions
+
+- `7fe5b4d - V0.1.1 add postflop engine contracts baseline`
+- `1a4a2eb - V0.1.2 add Clear_JSON trusted input loader`
+- `e80a582 - V0.1.3 add SolverInput mapping baseline`
+- `73163d9 - V0.1.4 add postflop no-fallback architecture gate`
+- `00b6b7d - V0.1.5 close solver engine blueprint`
 
 ---
 
-## Current fixture library
+# Closed version: V0.2.0 — Clear_JSON Fixture Library / Real + Synthetic Solver Cases
+
+**Status:** closed  
+**Close checkpoint:** `ee56990 - V0.2.6 close Clear_JSON fixture library`  
+**Validation:** `62 passed`
+
+## Goal
+
+Create a permanent Clear_JSON fixture library for future solver tests:
+
+```text
+real Clear_JSON -> templates -> synthetic Clear_JSON -> expected solver interpretation
+```
 
 Fixture root:
 
@@ -68,117 +83,111 @@ Fixture root:
 tests/fixtures/postflop_clear_json/
 ```
 
-Current minimum cases:
+V0.2.0 did not create solver decision logic, branch routing, source discovery, validation, runtime plans, or click-chain logic.
 
-| Case | Source kind | Street | Purpose |
-|---|---|---|---|
-| `real_flop_srp_btn_vs_bb_check_option` | real | flop | baseline real/project-format Clear_JSON case |
-| `synthetic_flop_srp_oop_facing_cbet` | synthetic | flop | synthetic flop scenario derived from real structure |
-| `synthetic_turn_after_flop_bet_call` | synthetic | turn | synthetic turn routing/context fixture |
-| `synthetic_river_facing_large_bet` | synthetic | river | synthetic river routing/context fixture |
+## Subversions
 
-Each case has:
+- `c2fa1a8 - V0.2.1 add Clear_JSON fixture library docs`
+- `d648478 - V0.2.2 add Clear_JSON fixture skeleton`
+- `fa9c509 - V0.2.3 add minimum Clear_JSON fixture cases`
+- `0050a9f - V0.2.4 add expected Clear_JSON interpretations`
+- `901aee5 - V0.2.5 add Clear_JSON fixture manifest gate`
+- `ee56990 - V0.2.6 close Clear_JSON fixture library`
 
-- a Clear_JSON fixture file
-- a manifest entry
-- an expected interpretation file
+## Fixture library contents
 
-Expected interpretation files describe solver understanding only. They do **not** contain final poker decisions.
-
----
-
-## Core policies
-
-### Clear_JSON-only input
-
-The postflop solver accepts only an explicitly passed Clear_JSON file or `ClearJsonInput` object.
-
-### Read-only source handling
-
-The original Clear_JSON content is preserved and referenced. It must not be mutated by the solver input layer.
-
-### No fallback
-
-The solver and fixture layer do not search temporary PokerVision artifacts or upstream project files.
-
-### No validation in V0.1.x / V0.2.x
-
-The early engine and fixture layers do not validate poker state, repair cards, reconstruct players, or infer missing HERO/active player data.
+- 1 real flop Clear_JSON case
+- 1 synthetic flop Clear_JSON case
+- 1 synthetic turn Clear_JSON case
+- 1 synthetic river Clear_JSON case
+- 4 expected interpretation files
+- strict manifest/library tests
 
 ---
 
-## Checkpoint history
+# Closed version: V0.3.0 — SolverInput Mapping / Field Usage Contract
 
-| Version | Commit | Description |
-|---|---:|---|
-| Initial reset baseline | `db16abd` | initial snapshot after clean reset |
-| V0.1.1 | `7fe5b4d` | add postflop engine contracts baseline |
-| V0.1.2 | `1a4a2eb` | add Clear_JSON trusted input loader |
-| V0.1.3 | `e80a582` | add SolverInput mapping baseline |
-| V0.1.4 | `73163d9` | add postflop no-fallback architecture gate |
-| V0.1.5 | `00b6b7d` | close solver engine blueprint documentation |
-| V0.2.1 | `c2fa1a8` | add Clear_JSON fixture library docs |
-| V0.2.2 | `d648478` | add Clear_JSON fixture skeleton |
-| V0.2.3 | `fa9c509` | add minimum Clear_JSON fixture cases |
-| V0.2.4 | `0050a9f` | add expected Clear_JSON interpretations |
-| V0.2.5 | `901aee5` | add Clear_JSON fixture manifest gate |
-| V0.2.6 | see latest commit | close Clear_JSON fixture library |
+**Status:** closed by V0.3.6  
+**Close checkpoint:** V0.3.6 — Version Close / README / VERSION / Miro  
+**Validation:** `94 passed`
 
-The previous old V0.x line is preserved in:
+## Goal
+
+Create the official field mapping contract for the postflop solver:
 
 ```text
-backup/old-v0-line-before-clear-json-reset
+Clear_JSON field -> SolverInput field -> future solver module
 ```
 
----
+V0.3.0 converts the earlier baseline mapping into a versioned contract-backed layer. It does not validate poker state, reconstruct missing data, detect street, build a branch resolver, produce poker decisions, create runtime plans, or click.
 
-## Full V0.1 + V0.2 gate
+## Subversions
 
-Run:
+- `66bd6a1 - V0.3.1 add postflop field mapping contract`
+- `00de073 - V0.3.2 add postflop field usage trace`
+- `99674e1 - V0.3.3 bind SolverInput mapping to field contract`
+- `cba0daa - V0.3.4 add postflop no-validation mapping gate`
+- `7a3dfce - V0.3.5 document Clear_JSON field mapping`
+- `V0.3.6 - close SolverInput mapping contract`
 
-```powershell
-C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe -m pytest `
-  tests/test_postflop_engine_contracts_v010.py `
-  tests/test_postflop_clear_json_input_loader_v010.py `
-  tests/test_postflop_solver_input_mapping_v010.py `
-  tests/test_postflop_no_source_fallback_v010.py `
-  tests/test_postflop_clear_json_fixture_skeleton_v020.py `
-  tests/test_postflop_clear_json_minimum_cases_v020.py `
-  tests/test_postflop_expected_interpretation_v020.py `
-  tests/test_postflop_clear_json_fixture_manifest_v020.py `
+## Final V0.3.0 chain
+
+```text
+Clear_JSON
+  -> ClearJsonInput
+  -> contract-backed SolverInput
+  -> FieldUsageTrace
+```
+
+## Created / updated modules
+
+- `solver_postflop/field_mapping_contract.py`
+- `solver_postflop/field_usage_trace.py`
+- `solver_postflop/solver_input.py`
+- `docs/POSTFLOP_CLEAR_JSON_FIELD_MAPPING.md`
+- `tests/test_postflop_field_mapping_contract_v030.py`
+- `tests/test_postflop_solver_input_field_usage_v030.py`
+- `tests/test_postflop_contract_backed_solver_input_mapping_v030.py`
+- `tests/test_postflop_no_validation_policy_v030.py`
+
+## Final gate
+
+```text
+pytest \
+  tests/test_postflop_engine_contracts_v010.py \
+  tests/test_postflop_clear_json_input_loader_v010.py \
+  tests/test_postflop_solver_input_mapping_v010.py \
+  tests/test_postflop_no_source_fallback_v010.py \
+  tests/test_postflop_clear_json_fixture_skeleton_v020.py \
+  tests/test_postflop_clear_json_minimum_cases_v020.py \
+  tests/test_postflop_expected_interpretation_v020.py \
+  tests/test_postflop_clear_json_fixture_manifest_v020.py \
+  tests/test_postflop_field_mapping_contract_v030.py \
+  tests/test_postflop_solver_input_field_usage_v030.py \
+  tests/test_postflop_contract_backed_solver_input_mapping_v030.py \
+  tests/test_postflop_no_validation_policy_v030.py \
   -q
+
+94 passed
 ```
 
-Expected at V0.2.6 close:
+---
+
+# Next planned block: V0.4.0 — Solver Branch Resolver / Street Module Routing
+
+V0.4.0 will create the first routing layer:
 
 ```text
-62 passed
+SolverInput -> SolverBranchResult
 ```
 
----
+Planned files:
 
-## Next planned block
+- `solver_postflop/branch_contracts.py`
+- `solver_postflop/branch_resolver.py`
+- `docs/POSTFLOP_BRANCH_RESOLVER.md`
+- `tests/test_postflop_branch_contracts_v040.py`
+- `tests/test_postflop_branch_resolver_v040.py`
+- `tests/test_postflop_branch_resolver_no_extra_checks_v040.py`
 
-**V0.3.0 — SolverInput Mapping / Field Usage Contract**
-
-Planned purpose:
-
-- turn the baseline V0.1.3 mapping into an official versioned contract
-- define Clear_JSON field → SolverInput field → future module usage
-- add FieldUsageTrace semantics for used / not_provided / ignored fields
-- keep validation, decision logic, source discovery, runtime plans, and clicks out of V0.3.0
-
----
-
-## Development method
-
-For every version/subversion:
-
-1. Discuss scope first.
-2. Implement only after explicit approval.
-3. Deliver a ZIP with ready project structure.
-4. Integrate through one PowerShell command.
-5. Run the required checks.
-6. Commit and push a short Git checkpoint.
-7. Update README / VERSION when a full version block is closed.
-8. Document the version for Miro.
+V0.4.0 must not validate cards, filter players, reconstruct HERO, search temporary JSON, create poker decisions, create runtime plans, or click.
