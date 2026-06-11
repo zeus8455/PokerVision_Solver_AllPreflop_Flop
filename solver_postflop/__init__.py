@@ -22,6 +22,16 @@ from .field_usage_trace import (
     FieldUsageTrace,
     build_field_usage_trace,
 )
+
+from .branch_contracts import (
+    DEFAULT_FAMILY_BY_BRANCH,
+    DEFAULT_NEXT_MODULE_BY_BRANCH,
+    SolverBranch,
+    SolverBranchFamily,
+    SolverBranchResult,
+    branch_family_for,
+    next_module_for,
+)
 from .solver_input import MAPPING_VERSION, build_solver_input
 
 __all__ = (
@@ -47,4 +57,11 @@ __all__ = (
     "FieldUsageStatus",
     "FieldUsageTrace",
     "build_field_usage_trace",
+    "DEFAULT_FAMILY_BY_BRANCH",
+    "DEFAULT_NEXT_MODULE_BY_BRANCH",
+    "SolverBranch",
+    "SolverBranchFamily",
+    "SolverBranchResult",
+    "branch_family_for",
+    "next_module_for",
 )
