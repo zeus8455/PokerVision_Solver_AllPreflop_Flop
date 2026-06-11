@@ -47,6 +47,21 @@ from .flop_context_contracts import (
     FlopPotContext,
     FlopSpotFamily,
 )
+from .board_texture_contracts import (
+    BOARD_CONNECTION_TEXTURES,
+    BOARD_PAIRED_TEXTURES,
+    BOARD_RANK_TEXTURES,
+    BOARD_SUIT_TEXTURES,
+    BOARD_TEXTURE_CONTRACT_VERSION,
+    BOARD_TEXTURE_FUTURE_MODULES,
+    BOARD_VOLATILITY_CLASSES,
+    BoardConnectionTexture,
+    BoardPairedTexture,
+    BoardRankTexture,
+    BoardSuitTexture,
+    BoardTextureFeatures,
+    BoardVolatilityClass,
+)
 
 __all__ = (
     "ClearJsonInput",
@@ -89,4 +104,17 @@ __all__ = (
     "FlopSpotFamily",
     "build_flop_context",
     "classify_flop_spot_family",
+    "BOARD_CONNECTION_TEXTURES",
+    "BOARD_PAIRED_TEXTURES",
+    "BOARD_RANK_TEXTURES",
+    "BOARD_SUIT_TEXTURES",
+    "BOARD_TEXTURE_CONTRACT_VERSION",
+    "BOARD_TEXTURE_FUTURE_MODULES",
+    "BOARD_VOLATILITY_CLASSES",
+    "BoardConnectionTexture",
+    "BoardPairedTexture",
+    "BoardRankTexture",
+    "BoardSuitTexture",
+    "BoardTextureFeatures",
+    "BoardVolatilityClass",
 )
