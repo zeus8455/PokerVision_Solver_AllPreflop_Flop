@@ -41,7 +41,7 @@ def test_build_flop_context_from_solver_input_and_flop_branch() -> None:
     assert context.table_id == solver_input.table_id
     assert context.hand_id == solver_input.hand_id
     assert context.branch == SolverBranch.FLOP.value
-    assert context.spot_family == FlopSpotFamily.UNKNOWN_FLOP_SPOT
+    assert context.spot_family == FlopSpotFamily.SRP_HEADS_UP
     assert context.next_module == DEFAULT_FLOP_NEXT_MODULE
     assert context.raw_clear_json_ref is solver_input.raw_clear_json_ref
 
@@ -149,7 +149,7 @@ def test_flop_context_serializes_to_json_safe_payload() -> None:
     context = build_flop_context(solver_input, branch_result)
     payload = context.to_json_dict()
 
-    assert payload["spot_family"] == "unknown_flop_spot"
+    assert payload["spot_family"] == "srp_heads_up"
     assert payload["next_module"] == "flop_board_texture_builder"
     assert payload["pot_context"]["pot_type"] == "srp"
     json.dumps(payload, sort_keys=True)

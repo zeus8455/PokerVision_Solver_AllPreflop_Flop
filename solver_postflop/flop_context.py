@@ -19,13 +19,13 @@ from solver_postflop.flop_context_contracts import (
 
 
 def build_flop_context(solver_input: SolverInput, branch_result: SolverBranchResult) -> FlopContext:
-    """Build baseline flop context from an already-routed flop SolverInput.
+    """Build flop context from an already-routed flop SolverInput.
 
     This builder is a read-only grouping layer. It copies information already
     present in SolverInput/raw Clear JSON into FlopContext blocks without
     repairing cards, selecting seats, computing poker actions, or deriving a
-    strategy. Spot-family classification is intentionally left as unknown in
-    V0.5.2 and will be handled by the next subversion.
+    strategy. Spot-family classification is intentionally limited to explicit
+    SolverInput/Clear JSON context; it does not reconstruct preflop history.
     """
 
     if _branch_value(branch_result.branch) != SolverBranch.FLOP.value:
@@ -92,6 +92,12 @@ def build_flop_context(solver_input: SolverInput, branch_result: SolverBranchRes
         hero_position=hero_position,
     )
 
+    spot_family = classify_flop_spot_family(solver_input)
+    if spot_family is FlopSpotFamily.UNKNOWN_FLOP_SPOT:
+        context_fields_not_provided.append("spot_family_context")
+    else:
+        context_fields_used.append("spot_family_context")
+
     context_fields_used.append("raw_clear_json_ref")
     context_fields_used = _dedupe(context_fields_used)
     context_fields_not_provided = _dedupe(context_fields_not_provided)
@@ -102,7 +108,7 @@ def build_flop_context(solver_input: SolverInput, branch_result: SolverBranchRes
         table_id=solver_input.table_id,
         hand_id=solver_input.hand_id,
         branch=SolverBranch.FLOP.value,
-        spot_family=FlopSpotFamily.UNKNOWN_FLOP_SPOT,
+        spot_family=spot_family,
         hero_cards=hero_cards,
         board_cards=board_cards,
         pot_context=pot_context,
@@ -114,11 +120,80 @@ def build_flop_context(solver_input: SolverInput, branch_result: SolverBranchRes
         context_fields_not_provided=tuple(context_fields_not_provided),
         raw_clear_json_ref=raw_payload,
         notes=(
-            "flop_context_builder_baseline_v0.5.2",
-            "spot_family_classification_deferred_to_v0.5.3",
+            "flop_context_builder_v0.5.3",
+            "spot_family_classified_from_solver_input_only",
             "metadata_only_no_poker_decision",
         ),
     )
+
+
+def classify_flop_spot_family(solver_input: SolverInput) -> FlopSpotFamily:
+    """Classify flop spot family from explicit SolverInput/Clear JSON context only.
+
+    This function does not rebuild preflop history, filter players, infer HERO,
+    validate board cards, or read any side-channel source. It only searches the
+    already trusted SolverInput and raw Clear JSON payload for explicit labels.
+    """
+
+    raw_payload = solver_input.raw_clear_json_ref
+    raw_mapping = raw_payload if isinstance(raw_payload, MappingABC) else {}
+    players = tuple(solver_input.players)
+
+    context_values = _collect_context_tokens(
+        raw_mapping,
+        solver_input.action_context if isinstance(solver_input.action_context, MappingABC) else {},
+    )
+    context_text = " ".join(context_values)
+
+    explicit_multiway = _contains_any(context_text, ("multiway", "multi-way", "3way", "three_way"))
+    if len(players) > 2 or explicit_multiway:
+        return FlopSpotFamily.MULTIWAY_POT
+
+    if _contains_any(context_text, ("4bet", "4-bet", "fourbet", "four_bet", "low_spr", "low spr")):
+        return FlopSpotFamily.FOURBET_LOW_SPR
+
+    if _contains_any(context_text, ("3bet", "3-bet", "threebet", "three_bet")):
+        return FlopSpotFamily.THREEBET_POT_HEADS_UP
+
+    if _contains_any(context_text, ("limp", "limped", "passive", "passive_pot")):
+        return FlopSpotFamily.LIMP_OR_PASSIVE_POT
+
+    has_srp_context = _contains_any(context_text, ("srp", "single_raised", "single raised"))
+    has_heads_up_shape = len(players) == 2 or _contains_any(context_text, ("heads_up", "heads-up", "hu"))
+    if has_srp_context and has_heads_up_shape:
+        return FlopSpotFamily.SRP_HEADS_UP
+
+    return FlopSpotFamily.UNKNOWN_FLOP_SPOT
+
+
+def _collect_context_tokens(*values: Any) -> tuple[str, ...]:
+    tokens: list[str] = []
+
+    def visit(value: Any) -> None:
+        if value is None:
+            return
+        if isinstance(value, MappingABC):
+            for key, item in value.items():
+                tokens.append(str(key).lower())
+                visit(item)
+            return
+        if isinstance(value, (list, tuple, set, frozenset)):
+            for item in value:
+                visit(item)
+            return
+        tokens.append(str(value).lower())
+
+    for value in values:
+        visit(value)
+    return tuple(tokens)
+
+
+def _contains_any(text: str, markers: tuple[str, ...]) -> bool:
+    normalized = text.lower().replace("-", "_")
+    for marker in markers:
+        if marker.lower().replace("-", "_") in normalized:
+            return True
+    return False
 
 
 def _build_pot_context(pot: Any, to_call: Any, pot_type: Any) -> FlopPotContext:
