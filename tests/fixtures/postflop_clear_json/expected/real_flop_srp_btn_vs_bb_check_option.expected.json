@@ -13,7 +13,8 @@
     "Real-format seed Clear_JSON for the fixture library.",
     "Expected interpretation only; no final poker action is attached.",
     "Hero position follows the Clear_JSON payload: BB defender versus BTN opener.",
-    "V0.4.3 adds fixture-backed Branch Resolver expectations; no poker decision is attached."
+    "V0.4.3 adds fixture-backed Branch Resolver expectations; no poker decision is attached.",
+    "V0.5.4 adds fixture-backed FlopContext expectations; no board texture, hand strength, decision, or runtime plan is attached."
   ],
   "contains_final_poker_decision": false,
   "expected_interpretation_version": "v0.2.4",
@@ -21,5 +22,30 @@
   "expected_branch_family": "postflop_flop",
   "expected_branch_reason": "board_card_count_3_routes_to_flop",
   "expected_branch_next_module": "flop_context_builder",
-  "expected_branch_contract_version": "v0.4.3"
+  "expected_branch_contract_version": "v0.4.3",
+  "expected_flop_spot_family": "srp_heads_up",
+  "expected_flop_action_context": "check_option",
+  "expected_flop_position_context": {
+    "hero_id": "hero",
+    "hero_position": "BB",
+    "is_in_position": null,
+    "position_label": null
+  },
+  "expected_flop_next_module": "flop_board_texture_builder",
+  "expected_flop_fields_used": [
+    "hero_cards",
+    "board_cards",
+    "players",
+    "pot",
+    "to_call",
+    "allowed_actions",
+    "action_context",
+    "hero_id",
+    "hero_position",
+    "pot_type",
+    "spot_family_context",
+    "raw_clear_json_ref"
+  ],
+  "expected_flop_fields_not_provided": [],
+  "expected_flop_context_version": "v0.5.4"
 }
