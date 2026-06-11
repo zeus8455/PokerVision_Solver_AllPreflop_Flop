@@ -11,8 +11,14 @@
   "expected_next_module": "branch_resolver",
   "expected_notes": [
     "Synthetic turn case for future routing tests.",
-    "Turn is recognized as a fixture street, but no turn decision engine exists in V0.2.4."
+    "Turn is recognized as a fixture street, but no turn decision engine exists in V0.2.4.",
+    "V0.4.3 adds fixture-backed Branch Resolver expectations; no poker decision is attached."
   ],
   "contains_final_poker_decision": false,
-  "expected_interpretation_version": "v0.2.4"
+  "expected_interpretation_version": "v0.2.4",
+  "expected_branch": "turn_not_implemented_yet",
+  "expected_branch_family": "postflop_turn",
+  "expected_branch_reason": "board_card_count_4_routes_to_turn_placeholder",
+  "expected_branch_next_module": "turn_branch_not_implemented_yet",
+  "expected_branch_contract_version": "v0.4.3"
 }

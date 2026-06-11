@@ -12,8 +12,14 @@
   "expected_notes": [
     "Real-format seed Clear_JSON for the fixture library.",
     "Expected interpretation only; no final poker action is attached.",
-    "Hero position follows the Clear_JSON payload: BB defender versus BTN opener."
+    "Hero position follows the Clear_JSON payload: BB defender versus BTN opener.",
+    "V0.4.3 adds fixture-backed Branch Resolver expectations; no poker decision is attached."
   ],
   "contains_final_poker_decision": false,
-  "expected_interpretation_version": "v0.2.4"
+  "expected_interpretation_version": "v0.2.4",
+  "expected_branch": "flop",
+  "expected_branch_family": "postflop_flop",
+  "expected_branch_reason": "board_card_count_3_routes_to_flop",
+  "expected_branch_next_module": "flop_context_builder",
+  "expected_branch_contract_version": "v0.4.3"
 }

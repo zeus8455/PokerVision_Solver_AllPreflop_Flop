@@ -11,8 +11,14 @@
   "expected_next_module": "branch_resolver",
   "expected_notes": [
     "Synthetic river case for future routing tests.",
-    "River is recognized as a fixture street, but no river decision engine exists in V0.2.4."
+    "River is recognized as a fixture street, but no river decision engine exists in V0.2.4.",
+    "V0.4.3 adds fixture-backed Branch Resolver expectations; no poker decision is attached."
   ],
   "contains_final_poker_decision": false,
-  "expected_interpretation_version": "v0.2.4"
+  "expected_interpretation_version": "v0.2.4",
+  "expected_branch": "river_not_implemented_yet",
+  "expected_branch_family": "postflop_river",
+  "expected_branch_reason": "board_card_count_5_routes_to_river_placeholder",
+  "expected_branch_next_module": "river_branch_not_implemented_yet",
+  "expected_branch_contract_version": "v0.4.3"
 }
