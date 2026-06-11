@@ -1,107 +1,132 @@
-# PokerVision_Solver_Preflop
+# PokerVision Solver AllPreflop Flop
 
-Standalone preflop Solver for PokerVision.
+Current line: **new Clear_JSON-only postflop solver engine**
 
-Current baseline: **V1.0.0 pre-integration stabilization**.
+This repository was reset to the initial baseline and restarted with a clean postflop solver architecture.
 
-## Purpose
+The active development rule is:
 
-Input:
+**Clear_JSON → ClearJsonInput → SolverInput → SolverTrace → future solver modules**
 
-```text
-PokerVision Clear_JSON from an Active preflop spot, before click_result
-```
+The solver must not duplicate PokerVision upstream responsibilities. It starts from a ready Clear_JSON file.
 
-Output:
+---
 
-```text
-SolverDecision JSON
-SolverActionDecision JSON
-SolverRuntimeHint JSON
-PokerVisionBridge JSON
-```
+## Current status
 
-Future full chain:
+**Current closed version:** V0.1.0 — Solver Engine Blueprint / Clear_JSON Input Contract  
+**Latest subversion:** V0.1.5 — Version Close / Docs / README / VERSION  
+**Latest completed code checkpoint before close:** `73163d9` — V0.1.4 add postflop no-fallback architecture gate
 
-```text
-PokerVision Active preflop
--> Clear_JSON without click_result
--> PokerVision_Solver_Preflop
--> PokerVision bridge/action decision/runtime hint
--> PokerVision guarded click runtime
--> Final Clear_JSON with click_result
-```
+---
 
-## Core PokerVision rules
+## Active architecture
 
-- `chips: false` means **0bb committed**, not missing detection.
-- `fold: false` means the player is still in the hand, even with `chips: false`.
-- `all_in` is absent unless true.
-- `all_in: true` plus numeric `chips` means the player is all-in for that committed amount.
-- Preflop check is inferred logically. Example: BB vs limp with `to_call_bb = 0` can check.
-- Safe fallback click sequence is always:
+V0.1.0 fixes the first engine layer:
 
 ```text
-Check -> Check/fold -> FOLD
+Clear_JSON
+  -> ClearJsonInput
+  -> SolverInput
+  -> SolverTrace
+  -> future branch resolver / solver modules
 ```
 
-## Click mapping
+### Current modules
 
-```text
-open_raise  -> Raise
-iso_raise   -> 98% -> Raise
-3bet        -> 98% -> Raise
-4bet        -> 50% -> Raise
-5bet        -> 50% -> Raise
-jam/all_in  -> 98% -> Raise
-check       -> Check
-call        -> CALL
-fold        -> FOLD
-```
+- `solver_postflop/engine_contracts.py`
+- `solver_postflop/clear_json_input.py`
+- `solver_postflop/solver_input.py`
 
-## Run tests
+### Current tests
+
+- `tests/test_postflop_engine_contracts_v010.py`
+- `tests/test_postflop_clear_json_input_loader_v010.py`
+- `tests/test_postflop_solver_input_mapping_v010.py`
+- `tests/test_postflop_no_source_fallback_v010.py`
+
+---
+
+## Core policies
+
+### Clear_JSON-only input
+
+The postflop solver accepts only an explicitly passed Clear_JSON file or `ClearJsonInput` object.
+
+### Read-only source handling
+
+The original Clear_JSON content is preserved and referenced. It must not be mutated by the solver input layer.
+
+### No fallback
+
+The solver does not search temporary PokerVision artifacts or upstream project files.
+
+### No validation in V0.1.x
+
+V0.1.x does not validate poker state, repair cards, reconstruct players, or infer missing HERO/active player data.
+
+---
+
+## V0.1.0 checkpoint history
+
+| Version | Commit | Description |
+|---|---:|---|
+| Initial reset baseline | `db16abd` | initial snapshot after clean reset |
+| V0.1.1 | `7fe5b4d` | add postflop engine contracts baseline |
+| V0.1.2 | `1a4a2eb` | add Clear_JSON trusted input loader |
+| V0.1.3 | `e80a582` | add SolverInput mapping baseline |
+| V0.1.4 | `73163d9` | add postflop no-fallback architecture gate |
+| V0.1.5 | pending | close solver engine blueprint documentation |
+
+The previous old V0.x line is preserved in:
+
+`backup/old-v0-line-before-clear-json-reset`
+
+---
+
+## V0.1 test gate
+
+Run:
 
 ```powershell
-cd "C:\PokerVision_Solver_Preflop"
-
-C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe -m pytest
+C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe -m pytest `
+  tests/test_postflop_engine_contracts_v010.py `
+  tests/test_postflop_clear_json_input_loader_v010.py `
+  tests/test_postflop_solver_input_mapping_v010.py `
+  tests/test_postflop_no_source_fallback_v010.py `
+  -q
 ```
 
-## Solve one Clear_JSON
-
-```powershell
-cd "C:\PokerVision_Solver_Preflop"
-
-C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe tools\solve_clear_json.py `
-  examples\clear_json\table_02_hand_29_preflop_01_preclick.json
-```
-
-## Write solver output files
-
-```powershell
-cd "C:\PokerVision_Solver_Preflop"
-
-C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe tools\solve_clear_json.py `
-  examples\clear_json\table_02_hand_29_preflop_01_preclick.json `
-  --write-files `
-  --out-dir ".\tmp_solver_outputs"
-```
-
-Expected files:
+Expected at V0.1.5 close:
 
 ```text
-*_SolverDecision_JSON.json
-*_SolverActionDecision_JSON.json
-*_SolverRuntimeHint_JSON.json
-*_PokerVisionBridge_JSON.json
+25 passed
 ```
 
-## Pre-integration check
+---
 
-```powershell
-cd "C:\PokerVision_Solver_Preflop"
+## Development method
 
-C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe tools\run_preintegration_check.py
-```
+For every version/subversion:
 
-This runs the test suite and verifies the CLI/bridge output path.
+1. Discuss scope first.
+2. Implement only after explicit approval.
+3. Deliver a ZIP with ready project structure.
+4. Integrate through one PowerShell command.
+5. Run the required checks.
+6. Commit and push a short Git checkpoint.
+7. Update README / VERSION when a full version block is closed.
+8. Document the version for Miro.
+
+---
+
+## Next version
+
+**V0.2.0 — Clear_JSON Fixture Library / Real + Synthetic Solver Cases**
+
+Planned purpose:
+
+- create permanent Clear_JSON fixture structure
+- add real/synthetic fixture separation
+- add manifest and expected interpretation files
+- keep solver decision logic out of V0.2.0
