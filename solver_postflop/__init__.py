@@ -63,6 +63,19 @@ from .board_texture_contracts import (
     BoardTextureFeatures,
     BoardVolatilityClass,
 )
+from .hero_made_hand_contracts import (
+    MADE_HAND_CLASSES,
+    MADE_HAND_CONTRACT_VERSION,
+    MADE_HAND_FUTURE_MODULES,
+    MADE_HAND_STRENGTH_TIERS,
+    PAIR_CLASSES,
+    SHOWDOWN_VALUE_CLASSES,
+    MadeHandClass,
+    MadeHandFeatures,
+    MadeHandStrengthTier,
+    PairClass,
+    ShowdownValueClass,
+)
 
 __all__ = (
     "ClearJsonInput",
@@ -118,5 +131,16 @@ __all__ = (
     "BoardSuitTexture",
     "BoardTextureFeatures",
     "BoardVolatilityClass",
+    "MADE_HAND_CLASSES",
+    "MADE_HAND_CONTRACT_VERSION",
+    "MADE_HAND_FUTURE_MODULES",
+    "MADE_HAND_STRENGTH_TIERS",
+    "PAIR_CLASSES",
+    "SHOWDOWN_VALUE_CLASSES",
+    "MadeHandClass",
+    "MadeHandFeatures",
+    "MadeHandStrengthTier",
+    "PairClass",
+    "ShowdownValueClass",
     "build_board_texture_features",
 )
