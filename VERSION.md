@@ -7,10 +7,10 @@ Development line: **Clear_JSON-only postflop solver engine**
 
 ## Current status
 
-**Current closed version:** `V0.4.0 — Solver Branch Resolver / Street Module Routing`  
-**Closing subversion:** `V0.4.6 — Version Close / README / VERSION / Miro`  
-**Final gate:** `125 passed`  
-**Next planned version:** `V0.5.0 — Flop Context Builder / Spot Family Layer`
+**Current closed version:** `V0.5.0 — Flop Context Builder / Spot Family Layer`  
+**Closing subversion:** `V0.5.7 — Version Close / README / VERSION / Miro`  
+**Final gate:** `163 passed`  
+**Next planned version:** `V0.6.0 — Board Texture Feature Builder`
 
 ---
 
@@ -91,8 +91,8 @@ Clear_JSON -> ClearJsonInput -> SolverInput -> SolverTrace
 
 ## V0.4.0 — Solver Branch Resolver / Street Module Routing
 
-**Status:** closed by V0.4.6  
-**Closing checkpoint:** created by commit `V0.4.6 close branch resolver routing`
+**Status:** closed  
+**Closing checkpoint:** `6da8320 — V0.4.6 close branch resolver routing`
 
 ### Subversions
 
@@ -101,7 +101,7 @@ Clear_JSON -> ClearJsonInput -> SolverInput -> SolverTrace
 - `21b087f` — `V0.4.3 add fixture-backed branch routing`
 - `ab77eb1` — `V0.4.4 add branch resolver no-extra-checks gate`
 - `209beb3` — `V0.4.5 document postflop branch resolver`
-- `V0.4.6` — `close branch resolver routing`
+- `6da8320` — `V0.4.6 close branch resolver routing`
 
 ### Final gate
 
@@ -131,14 +131,67 @@ This is a **routing layer**, not a validator or decision engine.
 
 ---
 
-## Next planned version
+## V0.5.0 — Flop Context Builder / Spot Family Layer
 
-### V0.5.0 — Flop Context Builder / Spot Family Layer
+**Status:** closed by V0.5.7  
+**Closing checkpoint:** created by commit `V0.5.7 close flop context builder`
 
-Target:
+### Subversions
+
+- `a4a3567` — `V0.5.1 add flop context contracts`
+- `5d10849` — `V0.5.2 add flop context builder baseline`
+- `377832c` — `V0.5.3 add flop spot family classifier`
+- `ed3504f` — `V0.5.4 add fixture-backed flop context`
+- `0fed29c` — `V0.5.5 add flop context no-extra-logic gate`
+- `aa33c9b` — `V0.5.6 document flop context builder`
+- `V0.5.7` — `close flop context builder`
+
+### Final gate
+
+```text
+163 passed
+```
+
+### Final result
+
+Created the flop-context chain:
 
 ```text
 SolverInput + SolverBranchResult -> FlopContext
 ```
 
-V0.5.0 will group already-mapped data into flop context structures for later modules.
+V0.5.0 added:
+
+- Flop context contracts
+- Flop context builder baseline
+- Spot family classifier
+- Fixture-backed FlopContext test coverage
+- No-extra-logic architecture gate
+- FlopContext documentation
+
+Flop spot families:
+
+```text
+srp_heads_up
+threebet_pot_heads_up
+fourbet_low_spr
+limp_or_passive_pot
+multiway_pot
+unknown_flop_spot
+```
+
+This layer groups ready solver input into a flop context. It does not validate cards, filter players, reconstruct preflop history, classify board texture, classify HERO made hand, compute equity, create decisions, create runtime plans, or click.
+
+---
+
+## Next planned version
+
+### V0.6.0 — Board Texture Feature Builder
+
+Target:
+
+```text
+FlopContext -> BoardTextureFeatures
+```
+
+V0.6.0 will classify board texture features for future solver modules while keeping validation, equity, ranges, decision logic, runtime plans, and click-chain out of scope.

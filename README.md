@@ -2,16 +2,16 @@
 
 Current development line: **Clear_JSON-only postflop solver engine**.
 
-This repository is now maintained as a staged solver-development project. Each version/subversion is discussed first, implemented only after explicit approval, delivered as a ZIP overlay, checked with targeted pytest gates, committed, pushed, and documented for Miro.
+This repository is maintained as a staged solver-development project. Each version/subversion is discussed first, implemented only after explicit approval, delivered as a ZIP overlay, checked with targeted pytest gates, committed, pushed, and documented for Miro.
 
 ---
 
 ## Current status
 
-**Current closed version:** `V0.4.0 — Solver Branch Resolver / Street Module Routing`  
-**Closing subversion:** `V0.4.6 — Version Close / README / VERSION / Miro`  
-**Final V0.4 gate:** `125 passed`  
-**Next planned version:** `V0.5.0 — Flop Context Builder / Spot Family Layer`
+**Current closed version:** `V0.5.0 — Flop Context Builder / Spot Family Layer`  
+**Closing subversion:** `V0.5.7 — Version Close / README / VERSION / Miro`  
+**Final V0.5 gate:** `163 passed`  
+**Next planned version:** `V0.6.0 — Board Texture Feature Builder`
 
 ---
 
@@ -104,12 +104,13 @@ Final V0.3 gate:
 
 ### V0.4.0 — Solver Branch Resolver / Street Module Routing
 
-Closed by: `V0.4.6`
+Closed by: `V0.4.6`  
+Checkpoint commit: `6da8320`
 
 Created the first routing layer:
 
 ```text
-SolverInput -> SolverBranchResult
+SolverInput -> Branch Resolver -> SolverBranchResult
 ```
 
 Key files:
@@ -145,6 +146,49 @@ Final V0.4 gate:
 
 ---
 
+### V0.5.0 — Flop Context Builder / Spot Family Layer
+
+Closed by: `V0.5.7`
+
+Created the first specialized flop context layer:
+
+```text
+SolverInput + SolverBranchResult -> FlopContext
+```
+
+Key files:
+
+- `solver_postflop/flop_context_contracts.py`
+- `solver_postflop/flop_context.py`
+- `docs/POSTFLOP_FLOP_CONTEXT.md`
+- `docs/checkpoints/V0_5_0_FLOP_CONTEXT_CLOSE.md`
+
+FlopContext now captures:
+
+- metadata context: case/source/table/hand/branch
+- cards context: `hero_cards`, `board_cards`
+- pot context: `pot`, `to_call`, optional effective-stack / SPR data if provided
+- player context: players, heads-up / multiway metadata without refiltering
+- action context: allowed actions and ready action context without repair
+- spot family: SRP, 3bet, 4bet/low-SPR, limp/passive, multiway, unknown
+
+Spot families:
+
+- `srp_heads_up`
+- `threebet_pot_heads_up`
+- `fourbet_low_spr`
+- `limp_or_passive_pot`
+- `multiway_pot`
+- `unknown_flop_spot`
+
+Final V0.5 gate:
+
+```text
+163 passed
+```
+
+---
+
 ## Current active architecture
 
 ```text
@@ -154,15 +198,16 @@ Clear_JSON
   -> FieldMappingContract / FieldUsageTrace
   -> Branch Resolver
   -> SolverBranchResult
+  -> FlopContext
 ```
 
-The project currently routes postflop input into future solver modules, but it does **not** make poker decisions.
+The project now routes ready Clear_JSON into a flop context layer, but it still does **not** make poker decisions.
 
 ---
 
 ## Current test gate
 
-Run the current full V0.1 + V0.2 + V0.3 + V0.4 gate:
+Run the current full V0.1 + V0.2 + V0.3 + V0.4 + V0.5 gate:
 
 ```powershell
 C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe -m pytest `
@@ -182,25 +227,30 @@ C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe -m pytest `
   tests/test_postflop_branch_resolver_v040.py `
   tests/test_postflop_branch_resolver_fixture_routing_v040.py `
   tests/test_postflop_branch_resolver_no_extra_checks_v040.py `
+  tests/test_postflop_flop_context_contracts_v050.py `
+  tests/test_postflop_flop_context_builder_v050.py `
+  tests/test_postflop_flop_spot_family_v050.py `
+  tests/test_postflop_flop_context_fixture_routing_v050.py `
+  tests/test_postflop_flop_context_no_extra_logic_v050.py `
   -q
 ```
 
 Expected result:
 
 ```text
-125 passed
+163 passed
 ```
 
 ---
 
 ## Next planned block
 
-### V0.5.0 — Flop Context Builder / Spot Family Layer
+### V0.6.0 — Board Texture Feature Builder
 
 Target chain:
 
 ```text
-Clear_JSON -> SolverInput -> Branch Resolver -> FlopContext
+Clear_JSON -> SolverInput -> Branch Resolver -> FlopContext -> BoardTextureFeatures
 ```
 
-V0.5.0 will create the first specialized flop context layer, but it will still not make poker decisions, compute equity, classify board texture, or interact with runtime/click-chain.
+V0.6.0 will create the first analytical board-texture feature layer. It will still not make poker decisions, compute equity, build ranges, classify HERO made hand, create runtime plans, or interact with click-chain.
