@@ -1,0 +1,18 @@
+{
+  "case_id": "synthetic_river_facing_large_bet",
+  "expected_street_group": "river",
+  "expected_spot_family": "srp_heads_up_river_facing_large_bet",
+  "expected_hero_position": "BB",
+  "expected_is_heads_up": true,
+  "expected_is_multiway": false,
+  "expected_pot_type": "srp",
+  "expected_action_context": "facing_large_bet",
+  "expected_available_solver_branch": "river_branch_not_implemented_yet",
+  "expected_next_module": "branch_resolver",
+  "expected_notes": [
+    "Synthetic river case for future routing tests.",
+    "River is recognized as a fixture street, but no river decision engine exists in V0.2.4."
+  ],
+  "contains_final_poker_decision": false,
+  "expected_interpretation_version": "v0.2.4"
+}

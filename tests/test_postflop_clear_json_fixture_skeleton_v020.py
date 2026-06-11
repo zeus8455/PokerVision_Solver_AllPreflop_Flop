@@ -65,7 +65,7 @@ def test_manifest_exists_and_uses_clear_json_library_schema() -> None:
 
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
 
-    assert manifest["schema_version"] in {"0.2.2", "0.2.3"}
+    assert manifest["schema_version"] in {"0.2.2", "0.2.3", "0.2.4"}
     assert manifest["library_kind"] == "clear_json_fixture_library"
     assert manifest["architecture"] == "clear_json_only"
     assert manifest["fixture_root"] == "tests/fixtures/postflop_clear_json"

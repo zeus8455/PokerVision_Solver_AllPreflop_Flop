@@ -80,9 +80,12 @@ def test_each_manifest_clear_json_file_exists_and_uses_clear_json_extension() ->
         assert FIXTURE_ROOT in clear_json_path.parents
 
 
-def test_expected_files_are_not_required_until_v0_2_4() -> None:
+def test_expected_files_are_attached_from_v0_2_4() -> None:
     for case in _cases():
-        assert case["expected_file"] is None
+        expected_file = case["expected_file"]
+        assert isinstance(expected_file, str)
+        assert expected_file.endswith(".expected.json")
+        assert Path(expected_file).exists()
 
 
 def test_each_clear_json_fixture_loads_through_trusted_loader() -> None:

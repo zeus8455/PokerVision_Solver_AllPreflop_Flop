@@ -1,0 +1,19 @@
+{
+  "case_id": "real_flop_srp_btn_vs_bb_check_option",
+  "expected_street_group": "flop",
+  "expected_spot_family": "srp_heads_up",
+  "expected_hero_position": "BB",
+  "expected_is_heads_up": true,
+  "expected_is_multiway": false,
+  "expected_pot_type": "srp",
+  "expected_action_context": "check_option",
+  "expected_available_solver_branch": "flop_srp_branch",
+  "expected_next_module": "flop_context_builder",
+  "expected_notes": [
+    "Real-format seed Clear_JSON for the fixture library.",
+    "Expected interpretation only; no final poker action is attached.",
+    "Hero position follows the Clear_JSON payload: BB defender versus BTN opener."
+  ],
+  "contains_final_poker_decision": false,
+  "expected_interpretation_version": "v0.2.4"
+}
