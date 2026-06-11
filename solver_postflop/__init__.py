@@ -63,6 +63,7 @@ from .board_texture_contracts import (
     BoardTextureFeatures,
     BoardVolatilityClass,
 )
+from .hero_made_hand import build_made_hand_features
 from .hero_made_hand_contracts import (
     MADE_HAND_CLASSES,
     MADE_HAND_CONTRACT_VERSION,
@@ -143,4 +144,5 @@ __all__ = (
     "PairClass",
     "ShowdownValueClass",
     "build_board_texture_features",
+    "build_made_hand_features",
 )
