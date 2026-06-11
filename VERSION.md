@@ -14,14 +14,28 @@ Old pre-reset V0.x history is preserved in:
 
 ## Current closed version
 
+# V0.2.0 — Clear_JSON Fixture Library / Real + Synthetic Solver Cases
+
+Status: **closed by V0.2.6**
+
+Purpose: Create the permanent Clear_JSON fixture library for future postflop solver tests.
+
+Fixed fixture pipeline:
+
+```text
+ready Clear_JSON -> fixture case -> manifest entry -> expected interpretation -> future solver module tests
+```
+
+Main rule: The fixture library stores ready Clear_JSON cases only. It does not use upstream temporary source artifacts as solver inputs.
+
+---
+
 # V0.1.0 — Solver Engine Blueprint / Clear_JSON Input Contract
 
 Status: **closed by V0.1.5**  
 Close commit: `00b6b7d`
 
-Purpose:
-
-Create the first clean postflop solver engine layer based only on ready Clear_JSON input.
+Purpose: Create the first clean postflop solver engine layer based only on ready Clear_JSON input.
 
 Fixed pipeline:
 
@@ -29,13 +43,9 @@ Fixed pipeline:
 Clear_JSON -> ClearJsonInput -> SolverInput -> SolverTrace
 ```
 
-Main rule:
+## V0.1 subversions
 
-The solver reads trusted Clear_JSON and does not duplicate upstream PokerVision responsibilities.
-
----
-
-## V0.1.1 — Postflop Package Baseline
+### V0.1.1 — Postflop Package Baseline
 
 Commit: `7fe5b4d`  
 Status: closed
@@ -49,15 +59,7 @@ Implemented:
 - `SolverTrace`
 - `tests/test_postflop_engine_contracts_v010.py`
 
-Result:
-
-- postflop package exists as an isolated engine layer
-- base contracts are importable and constructible
-- no preflop/runtime/click dependency in the package contract baseline
-
----
-
-## V0.1.2 — Clear_JSON Trusted Input Loader
+### V0.1.2 — Clear_JSON Trusted Input Loader
 
 Commit: `1a4a2eb`  
 Status: closed
@@ -68,17 +70,7 @@ Implemented:
 - `load_clear_json_input(path)`
 - `tests/test_postflop_clear_json_input_loader_v010.py`
 
-Result:
-
-- explicit Clear_JSON path is read
-- `raw_data`, `source_file`, `loaded_at` are stored
-- `case_id`, `hand_id`, `table_id` are extracted when present
-- missing metadata does not fail the loader
-- no automatic fallback source is used
-
----
-
-## V0.1.3 — SolverInput Mapping Baseline
+### V0.1.3 — SolverInput Mapping Baseline
 
 Commit: `e80a582`  
 Status: closed
@@ -89,17 +81,7 @@ Implemented:
 - `build_solver_input(clear_input)`
 - `tests/test_postflop_solver_input_mapping_v010.py`
 
-Result:
-
-- `SolverInput` is built from `ClearJsonInput`
-- `SolverTrace` records used and missing fields
-- `raw_clear_json_ref` is preserved
-- missing optional fields are traced, not treated as errors
-- no poker validation or source fallback is introduced
-
----
-
-## V0.1.4 — No Fallback / No Validation Architecture Gate
+### V0.1.4 — No Fallback / No Validation Architecture Gate
 
 Commit: `73163d9`  
 Status: closed
@@ -108,17 +90,7 @@ Implemented:
 
 - `tests/test_postflop_no_source_fallback_v010.py`
 
-Result:
-
-- no temporary-source fallback is allowed
-- loader opens only the explicitly passed Clear_JSON file
-- `build_solver_input` does not read project files
-- public API stays focused on V0.1 engine input contracts
-- Clear_JSON remains read-only at the mapping layer
-
----
-
-## V0.1.5 — Version Close / Docs / README / VERSION
+### V0.1.5 — Version Close / Docs / README / VERSION
 
 Commit: `00b6b7d`  
 Status: closed V0.1.0
@@ -129,25 +101,7 @@ Implemented:
 - updated `README.md`
 - updated `VERSION.md`
 
-Result:
-
-- V0.1.0 architecture documented
-- README points to the new clean solver line
-- VERSION tracks the new V0.1.0 subversion history
-- Miro documentation block prepared
-
-Required gate:
-
-```powershell
-C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe -m pytest `
-  tests/test_postflop_engine_contracts_v010.py `
-  tests/test_postflop_clear_json_input_loader_v010.py `
-  tests/test_postflop_solver_input_mapping_v010.py `
-  tests/test_postflop_no_source_fallback_v010.py `
-  -q
-```
-
-Expected:
+Required gate at close:
 
 ```text
 25 passed
@@ -155,95 +109,163 @@ Expected:
 
 ---
 
-## V0.1.0 closed scope
+# V0.2.0 — Clear_JSON Fixture Library / Real + Synthetic Solver Cases
 
-Implemented:
+Status: **closed by V0.2.6**
 
-- postflop package baseline
-- engine contracts
-- trusted Clear_JSON loader
-- SolverInput mapper
-- SolverTrace usage tracking
-- no-fallback architecture gate
-- documentation checkpoint
+Implemented scope:
+
+- permanent fixture root: `tests/fixtures/postflop_clear_json/`
+- `real/`, `synthetic/`, `templates/`, `expected/` structure
+- `manifest.json`
+- minimum real/synthetic flop/turn/river cases
+- expected solver interpretation files
+- strict manifest/library gate
+- full V0.1 + V0.2 test gate
 
 Not implemented by design:
 
-- flop decision logic
-- turn/river logic
+- solver decision engine
+- branch resolver
 - equity calculation
-- ranges
+- range construction
 - board texture classification
 - hand strength evaluation
-- source discovery
-- normalizer
-- runtime plan
-- click-chain
 - Clear_JSON safety validation
 - duplicate card checks
 - player filtering
 - HERO reconstruction
+- source discovery
+- runtime plan
+- click-chain
 
----
+## V0.2 subversions
 
-## Active planned version
+### V0.2.1 — Fixture Library Docs / Manifest Schema
 
-# V0.2.0 — Clear_JSON Fixture Library / Real + Synthetic Solver Cases
+Commit: `c2fa1a8`  
+Status: closed
 
-Status: **in progress**
+Implemented:
 
-Purpose:
-
-Create the permanent Clear_JSON fixture library for future postflop solver tests.
-
-Planned scope:
-
-- create fixture root: `tests/fixtures/postflop_clear_json/`
-- add `real/`, `synthetic/`, `templates/`, `expected/`
-- add `manifest.json`
-- add minimum real/synthetic flop/turn/river cases
-- add expected solver interpretation files
-- keep decision logic out of V0.2.0
-
----
-
-## V0.2.1 — Fixture Library Docs / Manifest Schema
-
-Status: prepared for integration
-
-Scope:
-
-- create `docs/POSTFLOP_CLEAR_JSON_FIXTURE_LIBRARY.md`
-- create `docs/POSTFLOP_CLEAR_JSON_FIXTURE_MANIFEST.md`
-- document fixture root structure
-- document real versus synthetic Clear_JSON policy
-- document manifest fields
-- document expected interpretation file policy
-- keep JSON fixtures and pytest tests out of V0.2.1
+- `docs/POSTFLOP_CLEAR_JSON_FIXTURE_LIBRARY.md`
+- `docs/POSTFLOP_CLEAR_JSON_FIXTURE_MANIFEST.md`
+- fixture root policy
+- manifest field contract
+- expected interpretation policy
 
 Required gate:
-
-```powershell
-C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe -m pytest `
-  tests/test_postflop_engine_contracts_v010.py `
-  tests/test_postflop_clear_json_input_loader_v010.py `
-  tests/test_postflop_solver_input_mapping_v010.py `
-  tests/test_postflop_no_source_fallback_v010.py `
-  -q
-```
-
-Expected:
 
 ```text
 25 passed
 ```
 
+### V0.2.2 — Fixture Directory Skeleton
+
+Commit: `d648478`  
+Status: closed
+
+Implemented:
+
+- `tests/fixtures/postflop_clear_json/manifest.json`
+- `real/flop`, `real/turn`, `real/river`
+- `synthetic/flop`, `synthetic/turn`, `synthetic/river`
+- `templates`
+- `expected`
+- `tests/test_postflop_clear_json_fixture_skeleton_v020.py`
+
+Required gate:
+
+```text
+33 passed
+```
+
+### V0.2.3 — Minimum Clear_JSON Cases
+
+Commit: `fa9c509`  
+Status: closed
+
+Implemented:
+
+- `real_flop_srp_btn_vs_bb_check_option.clear.json`
+- `synthetic_flop_srp_oop_facing_cbet.clear.json`
+- `synthetic_turn_after_flop_bet_call.clear.json`
+- `synthetic_river_facing_large_bet.clear.json`
+- updated `manifest.json`
+- `tests/test_postflop_clear_json_minimum_cases_v020.py`
+
+Required gate:
+
+```text
+45 passed
+```
+
+### V0.2.4 — Expected Solver Interpretation Files
+
+Commit: `0050a9f`  
+Status: closed
+
+Implemented:
+
+- one expected interpretation file per Clear_JSON fixture
+- manifest expected_file links
+- `tests/test_postflop_expected_interpretation_v020.py`
+
+Required gate:
+
+```text
+53 passed
+```
+
+### V0.2.5 — Fixture Manifest / Library Tests
+
+Commit: `901aee5`  
+Status: closed
+
+Implemented:
+
+- `tests/test_postflop_clear_json_fixture_manifest_v020.py`
+- strict manifest integrity checks
+- real/synthetic policy checks
+- no source/temp-path policy checks
+- no final-decision expected-file checks
+
+Required gate:
+
+```text
+62 passed
+```
+
+### V0.2.6 — Version Close / README / VERSION / Miro Docs
+
+Commit: see latest repository commit after integration  
+Status: closed V0.2.0
+
+Implemented:
+
+- updated `README.md`
+- updated `VERSION.md`
+- updated fixture docs to closed status
+- added `docs/checkpoints/V0_2_0_CLEAR_JSON_FIXTURE_LIBRARY_CLOSE.md`
+
+Required gate:
+
+```text
+62 passed
+```
+
 ---
 
-## Planned next V0.2 subversions
+## Next planned version
 
-- V0.2.2 — Fixture Directory Skeleton
-- V0.2.3 — Minimum Clear_JSON Cases
-- V0.2.4 — Expected Solver Interpretation Files
-- V0.2.5 — Fixture Manifest / Library Tests
-- V0.2.6 — Version Close / README / VERSION / Miro Docs
+# V0.3.0 — SolverInput Mapping / Field Usage Contract
+
+Status: planned
+
+Purpose:
+
+- create official field mapping contract
+- document Clear_JSON field → SolverInput field → future module usage
+- add field usage trace discipline
+- use V0.2 fixture library as the test source
+- keep validation, solver decision, source discovery, runtime plan, and clicks out of V0.3.0

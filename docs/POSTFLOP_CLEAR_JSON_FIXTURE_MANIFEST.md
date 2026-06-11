@@ -1,6 +1,7 @@
 # V0.2.0 — Clear_JSON Fixture Manifest Contract
 
-Status: **planned block, V0.2.1 docs/schema step**
+Status: **closed by V0.2.6**
+
 Manifest path:
 
 ```text
@@ -27,11 +28,13 @@ The manifest is not a poker decision file and not a validation report.
 
 ## 2. Top-level manifest shape
 
-The recommended manifest shape is:
+The active manifest shape is:
 
 ```json
 {
-  "schema_version": "v0.2.0",
+  "schema_version": "v0.2.4",
+  "library_kind": "clear_json_fixture_library",
+  "architecture": "clear_json_only",
   "fixture_root": "tests/fixtures/postflop_clear_json",
   "cases": []
 }
@@ -52,8 +55,8 @@ Each case entry must contain:
   "street_group": "flop",
   "spot_family": "srp_heads_up",
   "source_kind": "real",
-  "clear_json_file": "real/flop/flop_real_case_001.clear.json",
-  "expected_file": "expected/flop_real_case_001.expected.json",
+  "clear_json_file": "tests/fixtures/postflop_clear_json/real/flop/flop_real_case_001.clear.json",
+  "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_real_case_001.expected.json",
   "base_real_case_id": null,
   "purpose": "test_solver_input_mapping",
   "solver_modules_targeted": ["solver_input_mapping", "future_branch_resolver"],
@@ -75,13 +78,6 @@ Rules:
 - must be unique across the manifest
 - should be lowercase snake_case
 - should include street and source kind when useful
-
-Example:
-
-```text
-flop_real_case_001
-flop_synthetic_srp_btn_vs_bb_check_option_001
-```
 
 ### `case_name`
 
@@ -133,23 +129,11 @@ Rules:
 
 ### `clear_json_file`
 
-Relative path from fixture root to the Clear_JSON file.
-
-Example:
-
-```text
-real/flop/flop_real_case_001.clear.json
-```
+Path to the Clear_JSON file. V0.2.0 tests allow repository-relative paths and normalize path separators for Windows compatibility.
 
 ### `expected_file`
 
-Relative path from fixture root to the expected interpretation file.
-
-Example:
-
-```text
-expected/flop_real_case_001.expected.json
-```
+Path to the expected interpretation file.
 
 ### `base_real_case_id`
 
@@ -159,33 +143,14 @@ Rules:
 
 - must be `null` for real cases
 - should reference an existing real `case_id` when a synthetic case is derived from a real case
-- may be `null` for template-derived synthetic cases if no real base exists yet, but notes must explain that choice
 
 ### `purpose`
 
 Short reason the fixture exists.
 
-Examples:
-
-- `test_solver_input_mapping`
-- `test_flop_branch_resolution`
-- `test_srp_context`
-- `test_multiway_context`
-- `test_facing_bet_action_context`
-- `test_future_decision_matrix`
-
 ### `solver_modules_targeted`
 
 List of current or future modules this fixture is intended to support.
-
-Examples:
-
-- `clear_json_input_loader`
-- `solver_input_mapping`
-- `field_mapping_contract`
-- `branch_resolver`
-- `flop_context_builder`
-- `future_decision_engine`
 
 ### `status`
 
@@ -201,13 +166,11 @@ Allowed values in V0.2.0:
 
 List of short notes about the case.
 
-Use notes to explain synthetic derivation, incomplete real coverage, or future module relevance.
-
 ---
 
 ## 5. Expected interpretation file contract
 
-Each expected file should use this minimum shape:
+Each expected file uses this minimum shape:
 
 ```json
 {
@@ -257,21 +220,24 @@ Not allowed in V0.2.0:
 
 ## 7. Manifest integrity rules
 
-V0.2.0 tests should enforce:
+V0.2.0 tests enforce:
 
 - manifest exists
 - `schema_version` exists
+- `library_kind = clear_json_fixture_library`
+- `architecture = clear_json_only`
 - `cases` is a list
 - every `case_id` is unique
 - every required field is present
 - every `clear_json_file` exists
 - every `expected_file` exists
 - every `source_kind` is either `real` or `synthetic`
-- every synthetic case has either a valid `base_real_case_id` or an explanatory note
+- every synthetic case references an existing real case
 - every case has a non-empty `purpose`
 - every case has at least one `solver_modules_targeted` value
 - expected file `case_id` matches manifest `case_id`
 - expected files do not contain final decision fields
+- fixture paths do not contain old source/temp-source markers
 
 ---
 
