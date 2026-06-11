@@ -41,10 +41,14 @@ def _build_context_for(case: dict):
 def test_fixture_library_contains_flop_context_expected_fields() -> None:
     flop_cases = _flop_cases()
 
-    assert {case["case_id"] for case in flop_cases} == {
+    # V0.5.4 introduced fixture-backed FlopContext coverage for the two seed
+    # flop cases. Later versions may extend the same flop fixture library for
+    # downstream modules such as BoardTexture, so this gate protects the seed
+    # cases without freezing the flop fixture set size.
+    assert {
         "real_flop_srp_btn_vs_bb_check_option",
         "synthetic_flop_srp_oop_facing_cbet",
-    }
+    }.issubset({case["case_id"] for case in flop_cases})
 
     required_fields = {
         "expected_flop_spot_family",

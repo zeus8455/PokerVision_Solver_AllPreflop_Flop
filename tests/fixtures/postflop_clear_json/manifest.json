@@ -3,7 +3,7 @@
   "library_kind": "clear_json_fixture_library",
   "architecture": "clear_json_only",
   "fixture_root": "tests/fixtures/postflop_clear_json",
-  "description": "Trusted Clear_JSON postflop fixture library with minimum cases and expected interpretation files.",
+  "description": "Trusted Clear_JSON postflop fixture library with minimum cases, expected interpretation files, and V0.6.4 board texture fixture cases.",
   "source_policy": {
     "accepted_input_kind": "clear_json",
     "real_clear_json_policy": "real files must remain close to PokerVision output and must not be hand-improved",
@@ -13,7 +13,8 @@
   "expected_policy": {
     "contains_final_poker_decision": false,
     "purpose": "expected files describe solver interpretation only, not fold/call/bet/raise decisions",
-    "v0_2_4_expected_files": "added_for_all_active_minimum_cases"
+    "v0_2_4_expected_files": "added_for_all_active_minimum_cases",
+    "v0_6_4_expected_texture_files": "added_for_synthetic_flop_board_texture_cases"
   },
   "cases": [
     {
@@ -102,6 +103,198 @@
         "Clear_JSON case added in V0.2.3.",
         "Expected interpretation file attached in V0.2.4.",
         "No final poker decision is attached to this fixture entry."
+      ]
+    },
+    {
+      "case_id": "flop_texture_ace_high_dry_rainbow",
+      "case_name": "Synthetic flop texture: ace-high dry rainbow",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_texture_ace_high_dry_rainbow.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_texture_ace_high_dry_rainbow.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_board_texture_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic flop Clear_JSON case added in V0.6.4 for Board Texture fixture-backed coverage.",
+        "Expected interpretation includes board texture features only; no final poker decision is attached.",
+        "Board cards are trusted Clear_JSON input for feature grouping, not validation input."
+      ]
+    },
+    {
+      "case_id": "flop_texture_king_high_two_tone",
+      "case_name": "Synthetic flop texture: king-high two-tone",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_texture_king_high_two_tone.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_texture_king_high_two_tone.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_board_texture_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic flop Clear_JSON case added in V0.6.4 for Board Texture fixture-backed coverage.",
+        "Expected interpretation includes board texture features only; no final poker decision is attached.",
+        "Board cards are trusted Clear_JSON input for feature grouping, not validation input."
+      ]
+    },
+    {
+      "case_id": "flop_texture_monotone_broadway",
+      "case_name": "Synthetic flop texture: monotone broadway",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_texture_monotone_broadway.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_texture_monotone_broadway.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_board_texture_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic flop Clear_JSON case added in V0.6.4 for Board Texture fixture-backed coverage.",
+        "Expected interpretation includes board texture features only; no final poker decision is attached.",
+        "Board cards are trusted Clear_JSON input for feature grouping, not validation input."
+      ]
+    },
+    {
+      "case_id": "flop_texture_low_connected",
+      "case_name": "Synthetic flop texture: low connected",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_texture_low_connected.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_texture_low_connected.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_board_texture_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic flop Clear_JSON case added in V0.6.4 for Board Texture fixture-backed coverage.",
+        "Expected interpretation includes board texture features only; no final poker decision is attached.",
+        "Board cards are trusted Clear_JSON input for feature grouping, not validation input."
+      ]
+    },
+    {
+      "case_id": "flop_texture_middle_connected_two_tone",
+      "case_name": "Synthetic flop texture: middle connected two-tone",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_texture_middle_connected_two_tone.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_texture_middle_connected_two_tone.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_board_texture_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic flop Clear_JSON case added in V0.6.4 for Board Texture fixture-backed coverage.",
+        "Expected interpretation includes board texture features only; no final poker decision is attached.",
+        "Board cards are trusted Clear_JSON input for feature grouping, not validation input."
+      ]
+    },
+    {
+      "case_id": "flop_texture_paired_dry",
+      "case_name": "Synthetic flop texture: paired dry",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_texture_paired_dry.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_texture_paired_dry.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_board_texture_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic flop Clear_JSON case added in V0.6.4 for Board Texture fixture-backed coverage.",
+        "Expected interpretation includes board texture features only; no final poker decision is attached.",
+        "Board cards are trusted Clear_JSON input for feature grouping, not validation input."
+      ]
+    },
+    {
+      "case_id": "flop_texture_paired_dynamic",
+      "case_name": "Synthetic flop texture: paired semi-dynamic",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_texture_paired_dynamic.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_texture_paired_dynamic.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_board_texture_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic flop Clear_JSON case added in V0.6.4 for Board Texture fixture-backed coverage.",
+        "Expected interpretation includes board texture features only; no final poker decision is attached.",
+        "Board cards are trusted Clear_JSON input for feature grouping, not validation input."
+      ]
+    },
+    {
+      "case_id": "flop_texture_very_wet_connected",
+      "case_name": "Synthetic flop texture: very wet connected",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_texture_very_wet_connected.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_texture_very_wet_connected.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_board_texture_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic flop Clear_JSON case added in V0.6.4 for Board Texture fixture-backed coverage.",
+        "Expected interpretation includes board texture features only; no final poker decision is attached.",
+        "Board cards are trusted Clear_JSON input for feature grouping, not validation input."
       ]
     }
   ]

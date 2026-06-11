@@ -1,0 +1,108 @@
+{
+  "case_id": "flop_texture_paired_dynamic",
+  "case_name": "Synthetic flop texture: paired semi-dynamic",
+  "source_kind": "synthetic",
+  "fixture_version": "v0.6.4",
+  "fixture_provenance": {
+    "library_role": "synthetic board texture fixture based on real Clear_JSON structure",
+    "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+    "synthetic_changes": [
+      "case_id",
+      "case_name",
+      "fixture_version",
+      "hand_id",
+      "hero_cards",
+      "board_cards",
+      "action_context.texture_fixture"
+    ],
+    "policy": "preserve Clear_JSON shape while changing only board texture scenario fields"
+  },
+  "hand_id": "hand_texture_flop_007",
+  "street_group": "flop",
+  "spot_family": "srp_heads_up",
+  "hero_cards": [
+    "Ac",
+    "Kd"
+  ],
+  "board_cards": [
+    "9h",
+    "9d",
+    "8h"
+  ],
+  "total_pot": 5.5,
+  "pot": 5.5,
+  "to_call": 0.0,
+  "allowed_actions": [
+    "check",
+    "bet"
+  ],
+  "action_context": {
+    "street": "flop",
+    "current_actor": "hero",
+    "facing_bet": false,
+    "facing_raise": false,
+    "last_aggressor": "villain_btn",
+    "available_option": "check_option",
+    "texture_fixture": "flop_texture_paired_dynamic"
+  },
+  "table_id": "table_01",
+  "hero_id": "hero",
+  "hero_position": "BB",
+  "button": "BTN",
+  "blinds": {
+    "small_blind": 0.5,
+    "big_blind": 1.0
+  },
+  "positions": {
+    "hero": "BB",
+    "villain_btn": "BTN"
+  },
+  "stacks": {
+    "hero": 96.5,
+    "villain_btn": 97.5
+  },
+  "committed_amounts": {
+    "hero": 1.0,
+    "villain_btn": 2.5
+  },
+  "players": [
+    {
+      "player_id": "hero",
+      "seat": "BB",
+      "position": "BB",
+      "is_hero": true,
+      "folded": false,
+      "all_in": false,
+      "stack": 96.5,
+      "committed": 1.0,
+      "cards": [
+        "Ac",
+        "Kd"
+      ]
+    },
+    {
+      "player_id": "villain_btn",
+      "seat": "BTN",
+      "position": "BTN",
+      "is_hero": false,
+      "folded": false,
+      "all_in": false,
+      "stack": 97.5,
+      "committed": 2.5,
+      "cards": []
+    }
+  ],
+  "preflop_context": {
+    "pot_type": "srp",
+    "preflop_aggressor": "villain_btn",
+    "hero_preflop_role": "bb_defender",
+    "open_raiser": "villain_btn",
+    "callers": [
+      "hero"
+    ]
+  },
+  "pot_type": "srp",
+  "preflop_aggressor": "villain_btn",
+  "hero_preflop_role": "bb_defender",
+  "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option"
+}
