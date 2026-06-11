@@ -47,6 +47,7 @@ from .flop_context_contracts import (
     FlopPotContext,
     FlopSpotFamily,
 )
+from .board_texture import build_board_texture_features
 from .board_texture_contracts import (
     BOARD_CONNECTION_TEXTURES,
     BOARD_PAIRED_TEXTURES,
@@ -117,4 +118,5 @@ __all__ = (
     "BoardSuitTexture",
     "BoardTextureFeatures",
     "BoardVolatilityClass",
+    "build_board_texture_features",
 )
