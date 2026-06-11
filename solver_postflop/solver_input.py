@@ -1,4 +1,4 @@
-"""Solver input builder for explicitly loaded Clear JSON payloads."""
+"""Solver input builder backed by the versioned Clear JSON field contract."""
 
 from __future__ import annotations
 
@@ -6,32 +6,41 @@ from collections.abc import Mapping as MappingABC
 from typing import Any, Mapping, Optional, Sequence
 
 from solver_postflop.engine_contracts import ClearJsonInput, SolverInput, SolverTrace
+from solver_postflop.field_mapping_contract import (
+    CLEAR_JSON_FIELD_MAPPINGS,
+    FIELD_MAPPING_VERSION,
+    FieldMappingEntry,
+    assert_solver_input_fields_are_described,
+)
 
-MAPPING_VERSION = "v0.1.3"
+MAPPING_VERSION = FIELD_MAPPING_VERSION
 _NEXT_STEP = "solver_input_ready_for_future_branch_resolver"
 
-_FIELD_ALIASES: Mapping[str, tuple[str, ...]] = {
-    "table_id": ("table_id", "tableId", "table"),
-    "hand_id": ("hand_id", "handId", "hand"),
-    "hero_cards": ("hero_cards", "heroCards", "hero"),
-    "board_cards": ("board_cards", "boardCards", "board"),
-    "players": ("players", "active_players"),
-    "pot": ("total_pot", "pot"),
-    "to_call": ("to_call", "toCall"),
-    "stacks": ("stacks", "chips"),
-    "committed_amounts": ("committed_amounts", "committed"),
-    "positions": ("positions", "player_positions"),
-    "button": ("button", "dealer_button", "button_position"),
-    "blinds": ("blinds",),
-    "allowed_actions": ("allowed_actions", "available_actions"),
-    "action_context": ("action_context",),
-}
+_CURRENT_SOLVER_INPUT_FIELDS = (
+    "table_id",
+    "hand_id",
+    "hero_cards",
+    "board_cards",
+    "players",
+    "pot",
+    "to_call",
+    "stacks",
+    "committed_amounts",
+    "positions",
+    "button",
+    "blinds",
+    "allowed_actions",
+    "action_context",
+)
 
-_REQUIRED_TRACE_FIELDS = tuple(_FIELD_ALIASES)
+_SEQUENCE_FIELDS = frozenset({"hero_cards", "board_cards", "players", "allowed_actions"})
+_MAPPING_FIELDS = frozenset({"stacks", "committed_amounts", "positions", "blinds", "action_context"})
+
+assert_solver_input_fields_are_described(_CURRENT_SOLVER_INPUT_FIELDS)
 
 
 def build_solver_input(clear_input: ClearJsonInput) -> tuple[SolverInput, SolverTrace]:
-    """Build the first internal solver input from a trusted Clear JSON payload."""
+    """Build SolverInput from a trusted Clear JSON payload using the mapping contract."""
 
     raw_data = clear_input.raw_data
     if not isinstance(raw_data, MappingABC):
@@ -42,19 +51,26 @@ def build_solver_input(clear_input: ClearJsonInput) -> tuple[SolverInput, Solver
     fields_not_provided: list[str] = []
     notes: list[str] = []
 
-    for target_field in _REQUIRED_TRACE_FIELDS:
-        value, source_key = _extract_value(raw_data, target_field)
+    for mapping_entry in CLEAR_JSON_FIELD_MAPPINGS:
+        target_field = mapping_entry.solver_input_field
+        value, source_key = get_mapped_value(raw_data, mapping_entry)
+
         if value is _MISSING:
             fallback_value = _metadata_fallback(clear_input, target_field)
             if fallback_value is _MISSING:
-                values[target_field] = _default_value(target_field)
                 fields_not_provided.append(target_field)
+                if target_field in _CURRENT_SOLVER_INPUT_FIELDS:
+                    values[target_field] = _default_value(target_field)
                 continue
             value = fallback_value
             source_key = f"ClearJsonInput.{target_field}"
 
-        values[target_field] = _normalize_value(target_field, value)
+        if target_field in _CURRENT_SOLVER_INPUT_FIELDS:
+            values[target_field] = _normalize_value(target_field, value)
         fields_used.append(f"{source_key}->{target_field}")
+
+    for target_field in _CURRENT_SOLVER_INPUT_FIELDS:
+        values.setdefault(target_field, _default_value(target_field))
 
     solver_input = SolverInput(
         table_id=_optional_str(values["table_id"]),
@@ -76,20 +92,30 @@ def build_solver_input(clear_input: ClearJsonInput) -> tuple[SolverInput, Solver
 
     fields_used.append("raw_data->raw_clear_json_ref")
     if fields_not_provided:
-        notes.append("missing optional Clear JSON fields were recorded without blocking input build")
+        notes.append("missing Clear JSON fields were recorded without blocking input build")
     else:
-        notes.append("all baseline Clear JSON fields were provided")
+        notes.append("all contract Clear JSON fields were provided")
+    notes.append("SolverInput mapping is backed by FIELD_MAPPING_VERSION")
 
     trace = SolverTrace(
         input_file=clear_input.source_file,
         mapping_version=MAPPING_VERSION,
-        fields_used=tuple(fields_used),
-        fields_not_provided=tuple(fields_not_provided),
+        fields_used=tuple(_dedupe_preserve_order(fields_used)),
+        fields_not_provided=tuple(_dedupe_preserve_order(fields_not_provided)),
         module_chain_next_step=_NEXT_STEP,
         notes=tuple(notes),
     )
 
     return solver_input, trace
+
+
+def get_mapped_value(raw_data: Mapping[str, Any], mapping_entry: FieldMappingEntry) -> tuple[Any, Optional[str]]:
+    """Return the first available Clear JSON value described by one mapping entry."""
+
+    for source_key in mapping_entry.clear_json_fields:
+        if source_key in raw_data:
+            return raw_data[source_key], source_key
+    return _MISSING, None
 
 
 class _Missing:
@@ -99,14 +125,9 @@ class _Missing:
 _MISSING = _Missing()
 
 
-def _extract_value(raw_data: Mapping[str, Any], target_field: str) -> tuple[Any, Optional[str]]:
-    for source_key in _FIELD_ALIASES[target_field]:
-        if source_key in raw_data:
-            return raw_data[source_key], source_key
-    return _MISSING, None
-
-
 def _metadata_fallback(clear_input: ClearJsonInput, target_field: str) -> Any:
+    if target_field == "case_id" and clear_input.case_id is not None:
+        return clear_input.case_id
     if target_field == "table_id" and clear_input.table_id is not None:
         return clear_input.table_id
     if target_field == "hand_id" and clear_input.hand_id is not None:
@@ -115,9 +136,9 @@ def _metadata_fallback(clear_input: ClearJsonInput, target_field: str) -> Any:
 
 
 def _default_value(target_field: str) -> Any:
-    if target_field in {"hero_cards", "board_cards", "players", "allowed_actions"}:
+    if target_field in _SEQUENCE_FIELDS:
         return ()
-    if target_field in {"stacks", "committed_amounts", "positions", "blinds", "action_context"}:
+    if target_field in _MAPPING_FIELDS:
         return {}
     return None
 
@@ -125,9 +146,9 @@ def _default_value(target_field: str) -> Any:
 def _normalize_value(target_field: str, value: Any) -> Any:
     if value is None:
         return _default_value(target_field)
-    if target_field in {"hero_cards", "board_cards", "players", "allowed_actions"}:
+    if target_field in _SEQUENCE_FIELDS:
         return _as_tuple(value)
-    if target_field in {"stacks", "committed_amounts", "positions", "blinds", "action_context"}:
+    if target_field in _MAPPING_FIELDS:
         return _as_mapping(value)
     return value
 
@@ -156,3 +177,14 @@ def _optional_str(value: Any) -> Optional[str]:
     if value in (None, ""):
         return None
     return str(value)
+
+
+def _dedupe_preserve_order(values: list[str]) -> list[str]:
+    seen: set[str] = set()
+    result: list[str] = []
+    for value in values:
+        if value in seen:
+            continue
+        seen.add(value)
+        result.append(value)
+    return result

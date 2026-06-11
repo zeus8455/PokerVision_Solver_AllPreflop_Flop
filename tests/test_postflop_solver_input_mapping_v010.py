@@ -72,7 +72,7 @@ def test_build_solver_input_records_trace_used_fields() -> None:
 
     assert trace.input_kind == "clear_json"
     assert trace.input_file.endswith("case.clear.json")
-    assert trace.mapping_version == "v0.1.3"
+    assert trace.mapping_version == "v0.3.0"
     assert trace.module_chain_next_step == "solver_input_ready_for_future_branch_resolver"
     assert "table_id->table_id" in trace.fields_used
     assert "hand_id->hand_id" in trace.fields_used
