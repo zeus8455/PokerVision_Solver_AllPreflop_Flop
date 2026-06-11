@@ -1,0 +1,18 @@
+{
+  "schema_version": "0.2.2",
+  "library_kind": "clear_json_fixture_library",
+  "architecture": "clear_json_only",
+  "fixture_root": "tests/fixtures/postflop_clear_json",
+  "description": "Skeleton manifest for trusted Clear_JSON postflop fixtures. Cases are added in V0.2.3.",
+  "source_policy": {
+    "accepted_input_kind": "clear_json",
+    "real_clear_json_policy": "real files must remain close to PokerVision output and must not be hand-improved",
+    "synthetic_clear_json_policy": "synthetic files preserve real Clear_JSON structure while changing poker scenario fields",
+    "temporary_json_policy": "dark/pending/service/runtime source artifacts are not accepted as solver fixtures"
+  },
+  "expected_policy": {
+    "contains_final_poker_decision": false,
+    "purpose": "expected files describe solver interpretation only, not fold/call/bet decisions"
+  },
+  "cases": []
+}
