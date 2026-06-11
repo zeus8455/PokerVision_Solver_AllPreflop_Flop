@@ -8,10 +8,10 @@ This repository is maintained as a staged solver-development project. Each versi
 
 ## Current status
 
-**Current closed version:** `V0.5.0 — Flop Context Builder / Spot Family Layer`  
-**Closing subversion:** `V0.5.7 — Version Close / README / VERSION / Miro`  
-**Final V0.5 gate:** `163 passed`  
-**Next planned version:** `V0.6.0 — Board Texture Feature Builder`
+**Current closed version:** `V0.6.0 — Board Texture Feature Builder`  
+**Closing subversion:** `V0.6.7 — Version Close / README / VERSION / Miro`  
+**Final V0.6 gate:** `205 passed`  
+**Next planned version:** `V0.7.0 — Hero Hand Classifier / Made Hand Features`
 
 ---
 
@@ -148,7 +148,8 @@ Final V0.4 gate:
 
 ### V0.5.0 — Flop Context Builder / Spot Family Layer
 
-Closed by: `V0.5.7`
+Closed by: `V0.5.7`  
+Checkpoint commit: `1d7154e`
 
 Created the first specialized flop context layer:
 
@@ -163,7 +164,7 @@ Key files:
 - `docs/POSTFLOP_FLOP_CONTEXT.md`
 - `docs/checkpoints/V0_5_0_FLOP_CONTEXT_CLOSE.md`
 
-FlopContext now captures:
+FlopContext captures:
 
 - metadata context: case/source/table/hand/branch
 - cards context: `hero_cards`, `board_cards`
@@ -189,6 +190,52 @@ Final V0.5 gate:
 
 ---
 
+### V0.6.0 — Board Texture Feature Builder
+
+Closed by: `V0.6.7`  
+Checkpoint commit: created by commit `V0.6.7 close board texture builder`
+
+Created the first analytical board-texture feature layer:
+
+```text
+FlopContext -> BoardTextureFeatures
+```
+
+Key files:
+
+- `solver_postflop/board_texture_contracts.py`
+- `solver_postflop/board_texture.py`
+- `docs/POSTFLOP_BOARD_TEXTURE.md`
+- `docs/checkpoints/V0_6_0_BOARD_TEXTURE_CLOSE.md`
+
+BoardTextureFeatures captures:
+
+- suit texture: `rainbow`, `two_tone`, `monotone`
+- paired texture: `unpaired`, `paired`, `trips_board`
+- rank texture: `ace_high`, `king_high`, `broadway_heavy`, `middle_connected`, `low_connected`, `low_static`
+- connection texture: `disconnected`, `semi_connected`, `connected`, `highly_connected`
+- volatility class: `static_board`, `semi_dynamic_board`, `dynamic_board`
+- texture tags: stable labels such as `ace_high_dry_rainbow`, `king_high_two_tone`, `monotone_broadway`, `low_connected_dynamic`, `paired_dry`, `very_wet_connected`
+
+V0.6.0 added eight synthetic board-texture Clear_JSON fixtures and fixture-backed texture tests:
+
+- `flop_texture_ace_high_dry_rainbow`
+- `flop_texture_king_high_two_tone`
+- `flop_texture_monotone_broadway`
+- `flop_texture_low_connected`
+- `flop_texture_middle_connected_two_tone`
+- `flop_texture_paired_dry`
+- `flop_texture_paired_dynamic`
+- `flop_texture_very_wet_connected`
+
+Final V0.6 gate:
+
+```text
+205 passed
+```
+
+---
+
 ## Current active architecture
 
 ```text
@@ -199,15 +246,16 @@ Clear_JSON
   -> Branch Resolver
   -> SolverBranchResult
   -> FlopContext
+  -> BoardTextureFeatures
 ```
 
-The project now routes ready Clear_JSON into a flop context layer, but it still does **not** make poker decisions.
+The project now routes ready Clear_JSON into a flop context layer and extracts board texture features. It still does **not** make poker decisions.
 
 ---
 
 ## Current test gate
 
-Run the current full V0.1 + V0.2 + V0.3 + V0.4 + V0.5 gate:
+Run the current full V0.1 + V0.2 + V0.3 + V0.4 + V0.5 + V0.6 gate:
 
 ```powershell
 C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe -m pytest `
@@ -232,25 +280,31 @@ C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe -m pytest `
   tests/test_postflop_flop_spot_family_v050.py `
   tests/test_postflop_flop_context_fixture_routing_v050.py `
   tests/test_postflop_flop_context_no_extra_logic_v050.py `
+  tests/test_postflop_board_texture_contracts_v060.py `
+  tests/test_postflop_board_texture_builder_v060.py `
+  tests/test_postflop_board_texture_from_flop_context_v060.py `
+  tests/test_postflop_board_texture_classification_matrix_v060.py `
+  tests/test_postflop_board_texture_fixture_cases_v060.py `
+  tests/test_postflop_board_texture_no_extra_logic_v060.py `
   -q
 ```
 
 Expected result:
 
 ```text
-163 passed
+205 passed
 ```
 
 ---
 
 ## Next planned block
 
-### V0.6.0 — Board Texture Feature Builder
+### V0.7.0 — Hero Hand Classifier / Made Hand Features
 
 Target chain:
 
 ```text
-Clear_JSON -> SolverInput -> Branch Resolver -> FlopContext -> BoardTextureFeatures
+Clear_JSON -> SolverInput -> Branch Resolver -> FlopContext -> BoardTextureFeatures -> MadeHandFeatures
 ```
 
-V0.6.0 will create the first analytical board-texture feature layer. It will still not make poker decisions, compute equity, build ranges, classify HERO made hand, create runtime plans, or interact with click-chain.
+V0.7.0 will classify HERO made-hand features for future solver modules. It will still not make poker decisions, compute equity, build ranges, create runtime plans, or interact with click-chain.

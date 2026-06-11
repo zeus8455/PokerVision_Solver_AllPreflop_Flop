@@ -7,10 +7,10 @@ Development line: **Clear_JSON-only postflop solver engine**
 
 ## Current status
 
-**Current closed version:** `V0.5.0 — Flop Context Builder / Spot Family Layer`  
-**Closing subversion:** `V0.5.7 — Version Close / README / VERSION / Miro`  
-**Final gate:** `163 passed`  
-**Next planned version:** `V0.6.0 — Board Texture Feature Builder`
+**Current closed version:** `V0.6.0 — Board Texture Feature Builder`  
+**Closing subversion:** `V0.6.7 — Version Close / README / VERSION / Miro`  
+**Final gate:** `205 passed`  
+**Next planned version:** `V0.7.0 — Hero Hand Classifier / Made Hand Features`
 
 ---
 
@@ -133,8 +133,8 @@ This is a **routing layer**, not a validator or decision engine.
 
 ## V0.5.0 — Flop Context Builder / Spot Family Layer
 
-**Status:** closed by V0.5.7  
-**Closing checkpoint:** created by commit `V0.5.7 close flop context builder`
+**Status:** closed  
+**Closing checkpoint:** `1d7154e — V0.5.7 close flop context builder`
 
 ### Subversions
 
@@ -144,7 +144,7 @@ This is a **routing layer**, not a validator or decision engine.
 - `ed3504f` — `V0.5.4 add fixture-backed flop context`
 - `0fed29c` — `V0.5.5 add flop context no-extra-logic gate`
 - `aa33c9b` — `V0.5.6 document flop context builder`
-- `V0.5.7` — `close flop context builder`
+- `1d7154e` — `V0.5.7 close flop context builder`
 
 ### Final gate
 
@@ -184,14 +184,77 @@ This layer groups ready solver input into a flop context. It does not validate c
 
 ---
 
-## Next planned version
+## V0.6.0 — Board Texture Feature Builder
 
-### V0.6.0 — Board Texture Feature Builder
+**Status:** closed by V0.6.7  
+**Closing checkpoint:** created by commit `V0.6.7 close board texture builder`
 
-Target:
+### Subversions
+
+- `d648100` — `V0.6.1 add board texture contracts`
+- `19013a6` — `V0.6.2 add board texture builder baseline`
+- `247738e` — `V0.6.3 add board texture classification matrix`
+- `9b2729a` — `V0.6.4 add fixture-backed board texture cases`
+- `89a3985` — `V0.6.5 add board texture no-extra-logic gate`
+- `ed3ce55` — `V0.6.6 document board texture builder`
+- `V0.6.7` — `close board texture builder`
+
+### Final gate
+
+```text
+205 passed
+```
+
+### Final result
+
+Created the board-texture feature chain:
 
 ```text
 FlopContext -> BoardTextureFeatures
 ```
 
-V0.6.0 will classify board texture features for future solver modules while keeping validation, equity, ranges, decision logic, runtime plans, and click-chain out of scope.
+V0.6.0 added:
+
+- Board texture contracts
+- Board texture builder baseline
+- Board texture classification matrix
+- Eight fixture-backed board texture synthetic Clear_JSON cases
+- Board texture no-extra-logic architecture gate
+- Board texture documentation
+
+Board texture dimensions:
+
+```text
+suit_texture:       rainbow / two_tone / monotone
+paired_texture:     unpaired / paired / trips_board
+rank_texture:       ace_high / king_high / broadway_heavy / middle_connected / low_connected / low_static
+connection_texture: disconnected / semi_connected / connected / highly_connected
+volatility_class:   static_board / semi_dynamic_board / dynamic_board
+```
+
+Stable texture tags include:
+
+```text
+ace_high_dry_rainbow
+king_high_two_tone
+monotone_broadway
+low_connected_dynamic
+paired_dry
+very_wet_connected
+```
+
+This layer describes board structure for future solver modules. It does not validate cards, filter players, classify HERO made hand, classify HERO draws, compute equity, build ranges, create decisions, create runtime plans, or click.
+
+---
+
+## Next planned version
+
+### V0.7.0 — Hero Hand Classifier / Made Hand Features
+
+Target:
+
+```text
+FlopContext + BoardTextureFeatures -> MadeHandFeatures
+```
+
+V0.7.0 will classify HERO made-hand features for future solver modules while keeping validation, equity, ranges, decision logic, runtime plans, and click-chain out of scope.
