@@ -78,6 +78,24 @@ from .hero_made_hand_contracts import (
     ShowdownValueClass,
 )
 
+from .hero_draw_contracts import (
+    COMBO_DRAW_CLASSES,
+    DRAW_CLASSES,
+    DRAW_CONTRACT_VERSION,
+    DRAW_FUTURE_MODULES,
+    DRAW_STRENGTH_TIERS,
+    FLUSH_DRAW_CLASSES,
+    OVERCARD_CLASSES,
+    STRAIGHT_DRAW_CLASSES,
+    ComboDrawClass,
+    DrawClass,
+    DrawFeatures,
+    DrawStrengthTier,
+    FlushDrawClass,
+    OvercardClass,
+    StraightDrawClass,
+)
+
 __all__ = (
     "ClearJsonInput",
     "SolverInput",
@@ -145,4 +163,19 @@ __all__ = (
     "ShowdownValueClass",
     "build_board_texture_features",
     "build_made_hand_features",
+    "COMBO_DRAW_CLASSES",
+    "DRAW_CLASSES",
+    "DRAW_CONTRACT_VERSION",
+    "DRAW_FUTURE_MODULES",
+    "DRAW_STRENGTH_TIERS",
+    "FLUSH_DRAW_CLASSES",
+    "OVERCARD_CLASSES",
+    "STRAIGHT_DRAW_CLASSES",
+    "ComboDrawClass",
+    "DrawClass",
+    "DrawFeatures",
+    "DrawStrengthTier",
+    "FlushDrawClass",
+    "OvercardClass",
+    "StraightDrawClass",
 )
