@@ -8,10 +8,23 @@ This repository is maintained as a staged solver-development project. Each versi
 
 ## Current status
 
-**Current closed version:** `V0.6.0 — Board Texture Feature Builder`  
-**Closing subversion:** `V0.6.7 — Version Close / README / VERSION / Miro`  
-**Final V0.6 gate:** `205 passed`  
-**Next planned version:** `V0.7.0 — Hero Hand Classifier / Made Hand Features`
+**Current closed version:** `V0.7.0 — Hero Hand Classifier / Made Hand Features`  
+**Closing subversion:** `V0.7.7 — Version Close / README / VERSION / Miro`  
+**Final V0.7 gate:** `254 passed`  
+**Next planned version:** `V0.8.0 — Hero Draw Classifier / Draw Features`
+
+The current closed postflop analysis chain is:
+
+```text
+Clear_JSON
+  -> ClearJsonInput
+  -> SolverInput
+  -> Branch Resolver
+  -> SolverBranchResult
+  -> FlopContext
+  -> BoardTextureFeatures
+  -> MadeHandFeatures
+```
 
 ---
 
@@ -41,6 +54,12 @@ Core policy:
 - Solver does not search Dark/Pending/Service/Runtime JSON.
 - Solver does not validate cards or player state.
 - Solver does not mutate Clear_JSON.
+
+Final V0.1 gate:
+
+```text
+25 passed
+```
 
 ---
 
@@ -193,7 +212,7 @@ Final V0.5 gate:
 ### V0.6.0 — Board Texture Feature Builder
 
 Closed by: `V0.6.7`  
-Checkpoint commit: created by commit `V0.6.7 close board texture builder`
+Checkpoint commit: `341657d`
 
 Created the first analytical board-texture feature layer:
 
@@ -217,16 +236,7 @@ BoardTextureFeatures captures:
 - volatility class: `static_board`, `semi_dynamic_board`, `dynamic_board`
 - texture tags: stable labels such as `ace_high_dry_rainbow`, `king_high_two_tone`, `monotone_broadway`, `low_connected_dynamic`, `paired_dry`, `very_wet_connected`
 
-V0.6.0 added eight synthetic board-texture Clear_JSON fixtures and fixture-backed texture tests:
-
-- `flop_texture_ace_high_dry_rainbow`
-- `flop_texture_king_high_two_tone`
-- `flop_texture_monotone_broadway`
-- `flop_texture_low_connected`
-- `flop_texture_middle_connected_two_tone`
-- `flop_texture_paired_dry`
-- `flop_texture_paired_dynamic`
-- `flop_texture_very_wet_connected`
+V0.6.0 added eight synthetic board-texture Clear_JSON fixtures and fixture-backed texture tests.
 
 Final V0.6 gate:
 
@@ -236,75 +246,125 @@ Final V0.6 gate:
 
 ---
 
-## Current active architecture
+### V0.7.0 — Hero Hand Classifier / Made Hand Features
+
+Closed by: `V0.7.7`  
+Checkpoint commit: created by commit `V0.7.7 close hero made hand classifier`
+
+Created the HERO made-hand feature layer:
+
+```text
+FlopContext + BoardTextureFeatures -> MadeHandFeatures
+```
+
+Key files:
+
+- `solver_postflop/hero_made_hand_contracts.py`
+- `solver_postflop/hero_made_hand.py`
+- `docs/POSTFLOP_HERO_MADE_HAND.md`
+- `docs/checkpoints/V0_7_0_HERO_MADE_HAND_CLOSE.md`
+
+MadeHandFeatures captures:
+
+- HERO cards and board cards copied from `FlopContext`
+- made-hand class: `high_card`, `one_pair`, `two_pair`, `three_of_a_kind`, `straight`, `flush`, `full_house`, `quads`
+- pair class: `top_pair`, `middle_pair`, `bottom_pair`, `overpair`, `underpair`, `pocket_pair_below_board`, `no_pair_class`
+- showdown value class
+- strength tier: `air`, `weak_showdown`, `medium_showdown`, `strong_showdown`, `value_hand`, `very_strong_value`, `nut_or_near_nut`
+- kicker relevance
+- board interaction tags
+- future-module usage metadata
+- notes
+
+V0.7.0 added thirteen synthetic made-hand Clear_JSON fixtures:
+
+- `flop_made_hand_high_card`
+- `flop_made_hand_top_pair_good_kicker`
+- `flop_made_hand_middle_pair`
+- `flop_made_hand_bottom_pair`
+- `flop_made_hand_overpair`
+- `flop_made_hand_underpair`
+- `flop_made_hand_two_pair`
+- `flop_made_hand_set`
+- `flop_made_hand_trips`
+- `flop_made_hand_straight`
+- `flop_made_hand_flush`
+- `flop_made_hand_full_house`
+- `flop_made_hand_quads`
+
+The fixture-backed pipeline is:
+
+```text
+Clear_JSON fixture
+  -> ClearJsonInput
+  -> SolverInput
+  -> Branch Resolver
+  -> FlopContext
+  -> BoardTextureFeatures
+  -> MadeHandFeatures
+```
+
+Final V0.7 gate:
+
+```text
+254 passed
+```
+
+---
+
+## Active architecture policy
+
+The current solver line remains strictly Clear_JSON-only.
+
+The postflop solver modules do **not**:
+
+- search or read Dark/Pending/Service/Runtime JSON as solver input
+- validate cards
+- detect duplicate cards
+- check hero-board collisions
+- repair board cards
+- filter players again
+- create HERO
+- create active player
+- reconstruct preflop history from temporary runtime sources
+- compute equity
+- build ranges
+- create poker decisions
+- create runtime plans
+- call Action_Button detector
+- click
+
+Each layer must preserve upstream objects as read-only input and produce narrow feature contracts for later modules.
+
+---
+
+## Next planned version
+
+### V0.8.0 — Hero Draw Classifier / Draw Features
+
+Planned chain:
 
 ```text
 Clear_JSON
   -> ClearJsonInput
   -> SolverInput
-  -> FieldMappingContract / FieldUsageTrace
   -> Branch Resolver
-  -> SolverBranchResult
   -> FlopContext
   -> BoardTextureFeatures
+  -> MadeHandFeatures
+  -> DrawFeatures
 ```
 
-The project now routes ready Clear_JSON into a flop context layer and extracts board texture features. It still does **not** make poker decisions.
+V0.8.0 will classify HERO draw potential only:
 
----
+- flush draw
+- backdoor flush draw
+- straight draw
+- gutshot
+- open-ended straight draw
+- double gutshot
+- overcards
+- combo draw
+- draw strength tier
 
-## Current test gate
-
-Run the current full V0.1 + V0.2 + V0.3 + V0.4 + V0.5 + V0.6 gate:
-
-```powershell
-C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe -m pytest `
-  tests/test_postflop_engine_contracts_v010.py `
-  tests/test_postflop_clear_json_input_loader_v010.py `
-  tests/test_postflop_solver_input_mapping_v010.py `
-  tests/test_postflop_no_source_fallback_v010.py `
-  tests/test_postflop_clear_json_fixture_skeleton_v020.py `
-  tests/test_postflop_clear_json_minimum_cases_v020.py `
-  tests/test_postflop_expected_interpretation_v020.py `
-  tests/test_postflop_clear_json_fixture_manifest_v020.py `
-  tests/test_postflop_field_mapping_contract_v030.py `
-  tests/test_postflop_solver_input_field_usage_v030.py `
-  tests/test_postflop_contract_backed_solver_input_mapping_v030.py `
-  tests/test_postflop_no_validation_policy_v030.py `
-  tests/test_postflop_branch_contracts_v040.py `
-  tests/test_postflop_branch_resolver_v040.py `
-  tests/test_postflop_branch_resolver_fixture_routing_v040.py `
-  tests/test_postflop_branch_resolver_no_extra_checks_v040.py `
-  tests/test_postflop_flop_context_contracts_v050.py `
-  tests/test_postflop_flop_context_builder_v050.py `
-  tests/test_postflop_flop_spot_family_v050.py `
-  tests/test_postflop_flop_context_fixture_routing_v050.py `
-  tests/test_postflop_flop_context_no_extra_logic_v050.py `
-  tests/test_postflop_board_texture_contracts_v060.py `
-  tests/test_postflop_board_texture_builder_v060.py `
-  tests/test_postflop_board_texture_from_flop_context_v060.py `
-  tests/test_postflop_board_texture_classification_matrix_v060.py `
-  tests/test_postflop_board_texture_fixture_cases_v060.py `
-  tests/test_postflop_board_texture_no_extra_logic_v060.py `
-  -q
-```
-
-Expected result:
-
-```text
-205 passed
-```
-
----
-
-## Next planned block
-
-### V0.7.0 — Hero Hand Classifier / Made Hand Features
-
-Target chain:
-
-```text
-Clear_JSON -> SolverInput -> Branch Resolver -> FlopContext -> BoardTextureFeatures -> MadeHandFeatures
-```
-
-V0.7.0 will classify HERO made-hand features for future solver modules. It will still not make poker decisions, compute equity, build ranges, create runtime plans, or interact with click-chain.
+V0.8.0 will not compute equity, build ranges, make decisions, create runtime plans, or click.

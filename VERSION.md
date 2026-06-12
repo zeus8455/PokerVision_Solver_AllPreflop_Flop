@@ -7,10 +7,22 @@ Development line: **Clear_JSON-only postflop solver engine**
 
 ## Current status
 
-**Current closed version:** `V0.6.0 — Board Texture Feature Builder`  
-**Closing subversion:** `V0.6.7 — Version Close / README / VERSION / Miro`  
-**Final gate:** `205 passed`  
-**Next planned version:** `V0.7.0 — Hero Hand Classifier / Made Hand Features`
+**Current closed version:** `V0.7.0 — Hero Hand Classifier / Made Hand Features`  
+**Closing subversion:** `V0.7.7 — Version Close / README / VERSION / Miro`  
+**Final gate:** `254 passed`  
+**Next planned version:** `V0.8.0 — Hero Draw Classifier / Draw Features`
+
+Current closed chain:
+
+```text
+Clear_JSON
+  -> ClearJsonInput
+  -> SolverInput
+  -> Branch Resolver
+  -> FlopContext
+  -> BoardTextureFeatures
+  -> MadeHandFeatures
+```
 
 ---
 
@@ -34,6 +46,12 @@ Development line: **Clear_JSON-only postflop solver engine**
 - `e80a582` — `V0.1.3 add SolverInput mapping baseline`
 - `73163d9` — `V0.1.4 add postflop no-fallback architecture gate`
 - `00b6b7d` — `V0.1.5 close solver engine blueprint`
+
+### Final gate
+
+```text
+25 passed
+```
 
 ### Final result
 
@@ -127,7 +145,7 @@ V0.4.0 maps board-card count to branch result:
 missing / 1 / 2 / 6+ -> unsupported
 ```
 
-This is a **routing layer**, not a validator or decision engine.
+This is a routing layer, not a validator or decision engine.
 
 ---
 
@@ -169,25 +187,12 @@ V0.5.0 added:
 - No-extra-logic architecture gate
 - FlopContext documentation
 
-Flop spot families:
-
-```text
-srp_heads_up
-threebet_pot_heads_up
-fourbet_low_spr
-limp_or_passive_pot
-multiway_pot
-unknown_flop_spot
-```
-
-This layer groups ready solver input into a flop context. It does not validate cards, filter players, reconstruct preflop history, classify board texture, classify HERO made hand, compute equity, create decisions, create runtime plans, or click.
-
 ---
 
 ## V0.6.0 — Board Texture Feature Builder
 
-**Status:** closed by V0.6.7  
-**Closing checkpoint:** created by commit `V0.6.7 close board texture builder`
+**Status:** closed  
+**Closing checkpoint:** `341657d — V0.6.7 close board texture builder`
 
 ### Subversions
 
@@ -197,7 +202,7 @@ This layer groups ready solver input into a flop context. It does not validate c
 - `9b2729a` — `V0.6.4 add fixture-backed board texture cases`
 - `89a3985` — `V0.6.5 add board texture no-extra-logic gate`
 - `ed3ce55` — `V0.6.6 document board texture builder`
-- `V0.6.7` — `close board texture builder`
+- `341657d` — `V0.6.7 close board texture builder`
 
 ### Final gate
 
@@ -218,43 +223,134 @@ V0.6.0 added:
 - Board texture contracts
 - Board texture builder baseline
 - Board texture classification matrix
-- Eight fixture-backed board texture synthetic Clear_JSON cases
-- Board texture no-extra-logic architecture gate
+- Fixture-backed board texture cases
+- No-extra-logic architecture gate
 - Board texture documentation
-
-Board texture dimensions:
-
-```text
-suit_texture:       rainbow / two_tone / monotone
-paired_texture:     unpaired / paired / trips_board
-rank_texture:       ace_high / king_high / broadway_heavy / middle_connected / low_connected / low_static
-connection_texture: disconnected / semi_connected / connected / highly_connected
-volatility_class:   static_board / semi_dynamic_board / dynamic_board
-```
-
-Stable texture tags include:
-
-```text
-ace_high_dry_rainbow
-king_high_two_tone
-monotone_broadway
-low_connected_dynamic
-paired_dry
-very_wet_connected
-```
-
-This layer describes board structure for future solver modules. It does not validate cards, filter players, classify HERO made hand, classify HERO draws, compute equity, build ranges, create decisions, create runtime plans, or click.
+- V0.6 close checkpoint
 
 ---
 
-## Next planned version
+## V0.7.0 — Hero Hand Classifier / Made Hand Features
 
-### V0.7.0 — Hero Hand Classifier / Made Hand Features
+**Status:** closed by V0.7.7  
+**Closing checkpoint:** created by commit `V0.7.7 close hero made hand classifier`
 
-Target:
+### Subversions
+
+- `2001c6e` — `V0.7.1 add hero made hand contracts`
+- `2f7ecdc` — `V0.7.2 add hero made hand classifier baseline`
+- `2142871` — `V0.7.3 add hero made hand pair strength matrix`
+- `a650eb8` — `V0.7.4 add fixture-backed hero made hand cases`
+- `daa1923` — `V0.7.5 add hero made hand no-extra-logic gate`
+- `adb6b14` — `V0.7.6 document hero made hand classifier`
+- `V0.7.7` — `close hero made hand classifier`
+
+### Final gate
+
+```text
+254 passed
+```
+
+### Final result
+
+Created the HERO made-hand feature chain:
 
 ```text
 FlopContext + BoardTextureFeatures -> MadeHandFeatures
 ```
 
-V0.7.0 will classify HERO made-hand features for future solver modules while keeping validation, equity, ranges, decision logic, runtime plans, and click-chain out of scope.
+V0.7.0 added:
+
+- Hero made-hand contracts
+- Hero made-hand classifier baseline
+- Pair class / strength tier matrix
+- Fixture-backed made-hand coverage
+- No-extra-logic architecture gate
+- Hero made-hand documentation
+- V0.7 close checkpoint
+
+### Main output contract
+
+`MadeHandFeatures` contains:
+
+- `case_id`
+- `source_file`
+- `hero_cards`
+- `board_cards`
+- `made_hand_class`
+- `pair_class`
+- `showdown_value_class`
+- `strength_tier`
+- `kicker_relevance`
+- `board_interaction_tags`
+- `features_used_by_future_modules`
+- `notes`
+
+### Made hand classes
+
+```text
+high_card
+one_pair
+two_pair
+three_of_a_kind
+straight
+flush
+full_house
+quads
+```
+
+### Pair classes
+
+```text
+top_pair
+middle_pair
+bottom_pair
+overpair
+underpair
+pocket_pair_below_board
+no_pair_class
+```
+
+### Strength tiers
+
+```text
+air
+weak_showdown
+medium_showdown
+strong_showdown
+value_hand
+very_strong_value
+nut_or_near_nut
+```
+
+### Architecture boundaries
+
+V0.7.0 does not validate cards, find duplicate cards, check hero-board collisions, filter players, create HERO, calculate draws, calculate equity, build ranges, make decisions, create runtime plans, or click.
+
+---
+
+## Next version
+
+## V0.8.0 — Hero Draw Classifier / Draw Features
+
+**Status:** planned
+
+Planned chain:
+
+```text
+FlopContext + BoardTextureFeatures + MadeHandFeatures -> DrawFeatures
+```
+
+V0.8.0 will classify HERO draw potential only:
+
+- flush draw
+- backdoor flush draw
+- straight draw
+- gutshot
+- open-ended straight draw
+- double gutshot
+- overcards
+- combo draw
+- draw strength tier
+
+V0.8.0 will not calculate equity, build ranges, make decisions, create runtime plans, call Action_Button, or click.
