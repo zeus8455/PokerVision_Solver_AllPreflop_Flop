@@ -8,10 +8,10 @@ This repository is maintained as a staged solver-development project. Each versi
 
 ## Current status
 
-**Current closed version:** `V0.7.0 — Hero Hand Classifier / Made Hand Features`  
-**Closing subversion:** `V0.7.7 — Version Close / README / VERSION / Miro`  
-**Final V0.7 gate:** `254 passed`  
-**Next planned version:** `V0.8.0 — Hero Draw Classifier / Draw Features`
+**Current closed version:** `V0.8.0 — Hero Draw Classifier / Draw Features`  
+**Closing subversion:** `V0.8.7 — Version Close / README / VERSION / Miro`  
+**Final V0.8 gate:** `297 passed`  
+**Next planned version:** `V0.9.0 — Main Live Integration / Clear_JSON Capture / Full Module Audit`
 
 The current closed postflop analysis chain is:
 
@@ -24,6 +24,7 @@ Clear_JSON
   -> FlopContext
   -> BoardTextureFeatures
   -> MadeHandFeatures
+  -> DrawFeatures
 ```
 
 ---
@@ -249,7 +250,7 @@ Final V0.6 gate:
 ### V0.7.0 — Hero Hand Classifier / Made Hand Features
 
 Closed by: `V0.7.7`  
-Checkpoint commit: created by commit `V0.7.7 close hero made hand classifier`
+Checkpoint commit: `67e0183`
 
 Created the HERO made-hand feature layer:
 
@@ -312,6 +313,74 @@ Final V0.7 gate:
 
 ---
 
+
+### V0.8.0 — Hero Draw Classifier / Draw Features
+
+Closed by: `V0.8.7`  
+Checkpoint commit: created by commit `V0.8.7 close hero draw classifier`
+
+Created the HERO draw feature layer:
+
+```text
+FlopContext + BoardTextureFeatures + MadeHandFeatures -> DrawFeatures
+```
+
+Key files:
+
+- `solver_postflop/hero_draw_contracts.py`
+- `solver_postflop/hero_draw.py`
+- `docs/POSTFLOP_HERO_DRAW.md`
+- `docs/checkpoints/V0_8_0_HERO_DRAW_CLOSE.md`
+
+DrawFeatures captures:
+
+- HERO cards and board cards copied from `FlopContext`
+- flush draw class: `no_flush_draw`, `backdoor_flush_draw`, `weak_flush_draw`, `standard_flush_draw`, `nut_flush_draw_candidate`
+- straight draw class: `no_straight_draw`, `gutshot`, `open_ended_straight_draw`, `double_gutshot`, `combo_straight_draw`
+- overcard class: `no_overcards`, `one_overcard`, `two_overcards`
+- combo draw class: `no_combo_draw`, `flush_plus_gutshot`, `flush_plus_oesd`, `pair_plus_flush_draw`, `pair_plus_straight_draw`, `pair_plus_combo_draw`, `overcards_plus_draw`
+- draw strength tier: `no_draw`, `backdoor_only`, `weak_draw`, `medium_draw`, `strong_draw`, `premium_combo_draw`
+- draw tags
+- future-module usage metadata
+- notes
+
+V0.8.0 added thirteen synthetic draw Clear_JSON fixtures:
+
+- `flop_draw_no_draw`
+- `flop_draw_backdoor_flush`
+- `flop_draw_standard_flush_draw`
+- `flop_draw_nut_flush_draw`
+- `flop_draw_gutshot`
+- `flop_draw_oesd`
+- `flop_draw_double_gutshot`
+- `flop_draw_two_overcards`
+- `flop_draw_fd_plus_gutshot`
+- `flop_draw_fd_plus_oesd`
+- `flop_draw_pair_plus_fd`
+- `flop_draw_pair_plus_straight_draw`
+- `flop_draw_premium_combo_draw`
+
+The fixture-backed pipeline is:
+
+```text
+Clear_JSON fixture
+  -> ClearJsonInput
+  -> SolverInput
+  -> Branch Resolver
+  -> FlopContext
+  -> BoardTextureFeatures
+  -> MadeHandFeatures
+  -> DrawFeatures
+```
+
+Final V0.8 gate:
+
+```text
+297 passed
+```
+
+---
+
 ## Active architecture policy
 
 The current solver line remains strictly Clear_JSON-only.
@@ -340,12 +409,13 @@ Each layer must preserve upstream objects as read-only input and produce narrow 
 
 ## Next planned version
 
-### V0.8.0 — Hero Draw Classifier / Draw Features
+### V0.9.0 — Main Live Integration / Clear_JSON Capture / Full Module Audit
 
-Planned chain:
+Planned audit chain:
 
 ```text
-Clear_JSON
+live/main cycle
+  -> Clear_JSON capture
   -> ClearJsonInput
   -> SolverInput
   -> Branch Resolver
@@ -353,18 +423,18 @@ Clear_JSON
   -> BoardTextureFeatures
   -> MadeHandFeatures
   -> DrawFeatures
+  -> module audit report
 ```
 
-V0.8.0 will classify HERO draw potential only:
+V0.9.0 will verify that the fixture-proven modules also work on real live Clear_JSON created by the project.
 
-- flush draw
-- backdoor flush draw
-- straight draw
-- gutshot
-- open-ended straight draw
-- double gutshot
-- overcards
-- combo draw
-- draw strength tier
+Important boundaries:
 
-V0.8.0 will not compute equity, build ranges, make decisions, create runtime plans, or click.
+- existing project live click-chain may run as part of the real capture cycle
+- postflop solver does not create poker decisions
+- postflop solver does not create runtime plans
+- postflop solver does not call Action_Button
+- postflop solver does not click
+- solver input remains Clear_JSON only
+
+V0.9.0 is an integration/audit block, not an equity/range/decision block.

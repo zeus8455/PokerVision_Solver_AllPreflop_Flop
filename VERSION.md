@@ -7,10 +7,10 @@ Development line: **Clear_JSON-only postflop solver engine**
 
 ## Current status
 
-**Current closed version:** `V0.7.0 — Hero Hand Classifier / Made Hand Features`  
-**Closing subversion:** `V0.7.7 — Version Close / README / VERSION / Miro`  
-**Final gate:** `254 passed`  
-**Next planned version:** `V0.8.0 — Hero Draw Classifier / Draw Features`
+**Current closed version:** `V0.8.0 — Hero Draw Classifier / Draw Features`  
+**Closing subversion:** `V0.8.7 — Version Close / README / VERSION / Miro`  
+**Final gate:** `297 passed`  
+**Next planned version:** `V0.9.0 — Main Live Integration / Clear_JSON Capture / Full Module Audit`
 
 Current closed chain:
 
@@ -22,6 +22,7 @@ Clear_JSON
   -> FlopContext
   -> BoardTextureFeatures
   -> MadeHandFeatures
+  -> DrawFeatures
 ```
 
 ---
@@ -233,7 +234,7 @@ V0.6.0 added:
 ## V0.7.0 — Hero Hand Classifier / Made Hand Features
 
 **Status:** closed by V0.7.7  
-**Closing checkpoint:** created by commit `V0.7.7 close hero made hand classifier`
+**Closing checkpoint:** `67e0183 — V0.7.7 close hero made hand classifier`
 
 ### Subversions
 
@@ -329,28 +330,161 @@ V0.7.0 does not validate cards, find duplicate cards, check hero-board collision
 
 ---
 
-## Next version
 
 ## V0.8.0 — Hero Draw Classifier / Draw Features
+
+**Status:** closed by V0.8.7  
+**Closing checkpoint:** created by commit `V0.8.7 close hero draw classifier`
+
+### Subversions
+
+- `87ab817` — `V0.8.1 add hero draw contracts`
+- `05b4f4d` — `V0.8.2 add hero draw classifier baseline`
+- `2051e9a` — `V0.8.3 add hero draw combo strength matrix`
+- `8dac329` — `V0.8.4 add fixture-backed hero draw cases`
+- `762e729` — `V0.8.5 add hero draw no-extra-logic gate`
+- `41c3261` — `V0.8.6 document hero draw classifier`
+- `V0.8.7` — `close hero draw classifier`
+
+### Final gate
+
+```text
+297 passed
+```
+
+### Final result
+
+Created the HERO draw feature chain:
+
+```text
+FlopContext + BoardTextureFeatures + MadeHandFeatures -> DrawFeatures
+```
+
+V0.8.0 added:
+
+- Hero draw contracts
+- Hero draw classifier baseline
+- Combo draw / draw strength matrix
+- Fixture-backed draw coverage
+- No-extra-logic architecture gate
+- Hero draw documentation
+- V0.8 close checkpoint
+
+### Main output contract
+
+`DrawFeatures` contains:
+
+- `case_id`
+- `source_file`
+- `hero_cards`
+- `board_cards`
+- `flush_draw_class`
+- `straight_draw_class`
+- `overcard_class`
+- `combo_draw_class`
+- `draw_strength_tier`
+- `draw_tags`
+- `features_used_by_future_modules`
+- `notes`
+
+### Flush draw classes
+
+```text
+no_flush_draw
+backdoor_flush_draw
+weak_flush_draw
+standard_flush_draw
+nut_flush_draw_candidate
+```
+
+### Straight draw classes
+
+```text
+no_straight_draw
+gutshot
+open_ended_straight_draw
+double_gutshot
+combo_straight_draw
+```
+
+### Overcard classes
+
+```text
+no_overcards
+one_overcard
+two_overcards
+```
+
+### Combo draw classes
+
+```text
+no_combo_draw
+flush_plus_gutshot
+flush_plus_oesd
+pair_plus_flush_draw
+pair_plus_straight_draw
+pair_plus_combo_draw
+overcards_plus_draw
+```
+
+### Draw strength tiers
+
+```text
+no_draw
+backdoor_only
+weak_draw
+medium_draw
+strong_draw
+premium_combo_draw
+```
+
+### Fixture coverage
+
+V0.8.4 added thirteen synthetic draw Clear_JSON fixtures:
+
+```text
+flop_draw_no_draw
+flop_draw_backdoor_flush
+flop_draw_standard_flush_draw
+flop_draw_nut_flush_draw
+flop_draw_gutshot
+flop_draw_oesd
+flop_draw_double_gutshot
+flop_draw_two_overcards
+flop_draw_fd_plus_gutshot
+flop_draw_fd_plus_oesd
+flop_draw_pair_plus_fd
+flop_draw_pair_plus_straight_draw
+flop_draw_premium_combo_draw
+```
+
+### Architecture boundaries
+
+V0.8.0 does not validate cards, find duplicate cards, check hero-board collisions, filter players, create HERO, calculate equity, build ranges, make decisions, create runtime plans, call Action_Button, or click.
+
+---
+
+## Next version
+
+## V0.9.0 — Main Live Integration / Clear_JSON Capture / Full Module Audit
 
 **Status:** planned
 
 Planned chain:
 
 ```text
-FlopContext + BoardTextureFeatures + MadeHandFeatures -> DrawFeatures
+live/main cycle
+  -> Clear_JSON capture
+  -> ClearJsonInput
+  -> SolverInput
+  -> Branch Resolver
+  -> FlopContext
+  -> BoardTextureFeatures
+  -> MadeHandFeatures
+  -> DrawFeatures
+  -> module audit report
 ```
 
-V0.8.0 will classify HERO draw potential only:
+V0.9.0 will verify that live Clear_JSON exists, is readable, and can pass through the complete V0.1–V0.8 module chain.
 
-- flush draw
-- backdoor flush draw
-- straight draw
-- gutshot
-- open-ended straight draw
-- double gutshot
-- overcards
-- combo draw
-- draw strength tier
-
-V0.8.0 will not calculate equity, build ranges, make decisions, create runtime plans, call Action_Button, or click.
+V0.9.0 will not calculate equity, build ranges, make decisions, create postflop runtime plans, call Action_Button from the postflop solver, or click from the postflop solver.
