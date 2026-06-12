@@ -115,6 +115,22 @@ from .live_module_audit_report import (
     build_not_run_module_result,
 )
 
+from .live_clear_json_integration import (
+    LIVE_CLEAR_JSON_ALLOWED_SOURCE_TYPES,
+    LIVE_CLEAR_JSON_SCAN_FUTURE_MODULES,
+    LIVE_CLEAR_JSON_SCAN_VERSION,
+    LIVE_CLEAR_JSON_FORBIDDEN_SOURCE_TYPES,
+    LiveClearJsonCandidate,
+    LiveClearJsonScanResult,
+    LiveClearJsonScanStatus,
+    LiveClearJsonSkipReason,
+    LiveClearJsonSkippedFile,
+    LiveClearJsonSourceType,
+    classify_live_clear_json_source,
+    clear_json_candidate_paths,
+    discover_live_clear_json_files,
+)
+
 __all__ = (
     "ClearJsonInput",
     "SolverInput",
@@ -213,4 +229,17 @@ __all__ = (
     "ModuleChainStatus",
     "RuntimeClickChainStatus",
     "build_not_run_module_result",
+    "LIVE_CLEAR_JSON_ALLOWED_SOURCE_TYPES",
+    "LIVE_CLEAR_JSON_SCAN_FUTURE_MODULES",
+    "LIVE_CLEAR_JSON_SCAN_VERSION",
+    "LIVE_CLEAR_JSON_FORBIDDEN_SOURCE_TYPES",
+    "LiveClearJsonCandidate",
+    "LiveClearJsonScanResult",
+    "LiveClearJsonScanStatus",
+    "LiveClearJsonSkipReason",
+    "LiveClearJsonSkippedFile",
+    "LiveClearJsonSourceType",
+    "classify_live_clear_json_source",
+    "clear_json_candidate_paths",
+    "discover_live_clear_json_files",
 )
