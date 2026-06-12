@@ -622,6 +622,344 @@
         "Expected file contains feature metadata only.",
         "No poker decision or runtime plan is attached."
       ]
+    },
+    {
+      "case_id": "flop_draw_no_draw",
+      "case_name": "Synthetic draw: no draw",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_draw_no_draw.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_draw_no_draw.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_draw_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier",
+        "hero_draw_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic flop Clear_JSON case added in V0.8.4 for Hero Draw fixture-backed coverage.",
+        "Expected JSON covers DrawFeatures only as feature metadata, not a poker decision.",
+        "No equity, range, runtime plan, or click-chain is attached to this fixture."
+      ]
+    },
+    {
+      "case_id": "flop_draw_backdoor_flush",
+      "case_name": "Synthetic draw: backdoor flush",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_draw_backdoor_flush.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_draw_backdoor_flush.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_draw_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier",
+        "hero_draw_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic flop Clear_JSON case added in V0.8.4 for Hero Draw fixture-backed coverage.",
+        "Expected JSON covers DrawFeatures only as feature metadata, not a poker decision.",
+        "No equity, range, runtime plan, or click-chain is attached to this fixture."
+      ]
+    },
+    {
+      "case_id": "flop_draw_standard_flush_draw",
+      "case_name": "Synthetic draw: standard flush draw",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_draw_standard_flush_draw.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_draw_standard_flush_draw.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_draw_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier",
+        "hero_draw_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic flop Clear_JSON case added in V0.8.4 for Hero Draw fixture-backed coverage.",
+        "Expected JSON covers DrawFeatures only as feature metadata, not a poker decision.",
+        "No equity, range, runtime plan, or click-chain is attached to this fixture."
+      ]
+    },
+    {
+      "case_id": "flop_draw_nut_flush_draw",
+      "case_name": "Synthetic draw: nut flush draw candidate",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_draw_nut_flush_draw.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_draw_nut_flush_draw.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_draw_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier",
+        "hero_draw_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic flop Clear_JSON case added in V0.8.4 for Hero Draw fixture-backed coverage.",
+        "Expected JSON covers DrawFeatures only as feature metadata, not a poker decision.",
+        "No equity, range, runtime plan, or click-chain is attached to this fixture."
+      ]
+    },
+    {
+      "case_id": "flop_draw_gutshot",
+      "case_name": "Synthetic draw: gutshot",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_draw_gutshot.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_draw_gutshot.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_draw_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier",
+        "hero_draw_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic flop Clear_JSON case added in V0.8.4 for Hero Draw fixture-backed coverage.",
+        "Expected JSON covers DrawFeatures only as feature metadata, not a poker decision.",
+        "No equity, range, runtime plan, or click-chain is attached to this fixture."
+      ]
+    },
+    {
+      "case_id": "flop_draw_oesd",
+      "case_name": "Synthetic draw: open-ended straight draw",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_draw_oesd.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_draw_oesd.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_draw_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier",
+        "hero_draw_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic flop Clear_JSON case added in V0.8.4 for Hero Draw fixture-backed coverage.",
+        "Expected JSON covers DrawFeatures only as feature metadata, not a poker decision.",
+        "No equity, range, runtime plan, or click-chain is attached to this fixture."
+      ]
+    },
+    {
+      "case_id": "flop_draw_double_gutshot",
+      "case_name": "Synthetic draw: double gutshot",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_draw_double_gutshot.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_draw_double_gutshot.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_draw_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier",
+        "hero_draw_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic flop Clear_JSON case added in V0.8.4 for Hero Draw fixture-backed coverage.",
+        "Expected JSON covers DrawFeatures only as feature metadata, not a poker decision.",
+        "No equity, range, runtime plan, or click-chain is attached to this fixture."
+      ]
+    },
+    {
+      "case_id": "flop_draw_two_overcards",
+      "case_name": "Synthetic draw: two overcards",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_draw_two_overcards.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_draw_two_overcards.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_draw_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier",
+        "hero_draw_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic flop Clear_JSON case added in V0.8.4 for Hero Draw fixture-backed coverage.",
+        "Expected JSON covers DrawFeatures only as feature metadata, not a poker decision.",
+        "No equity, range, runtime plan, or click-chain is attached to this fixture."
+      ]
+    },
+    {
+      "case_id": "flop_draw_fd_plus_gutshot",
+      "case_name": "Synthetic draw: flush draw plus gutshot",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_draw_fd_plus_gutshot.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_draw_fd_plus_gutshot.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_draw_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier",
+        "hero_draw_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic flop Clear_JSON case added in V0.8.4 for Hero Draw fixture-backed coverage.",
+        "Expected JSON covers DrawFeatures only as feature metadata, not a poker decision.",
+        "No equity, range, runtime plan, or click-chain is attached to this fixture."
+      ]
+    },
+    {
+      "case_id": "flop_draw_fd_plus_oesd",
+      "case_name": "Synthetic draw: flush draw plus OESD",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_draw_fd_plus_oesd.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_draw_fd_plus_oesd.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_draw_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier",
+        "hero_draw_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic flop Clear_JSON case added in V0.8.4 for Hero Draw fixture-backed coverage.",
+        "Expected JSON covers DrawFeatures only as feature metadata, not a poker decision.",
+        "No equity, range, runtime plan, or click-chain is attached to this fixture."
+      ]
+    },
+    {
+      "case_id": "flop_draw_pair_plus_fd",
+      "case_name": "Synthetic draw: pair plus flush draw",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_draw_pair_plus_fd.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_draw_pair_plus_fd.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_draw_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier",
+        "hero_draw_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic flop Clear_JSON case added in V0.8.4 for Hero Draw fixture-backed coverage.",
+        "Expected JSON covers DrawFeatures only as feature metadata, not a poker decision.",
+        "No equity, range, runtime plan, or click-chain is attached to this fixture."
+      ]
+    },
+    {
+      "case_id": "flop_draw_pair_plus_straight_draw",
+      "case_name": "Synthetic draw: pair plus straight draw",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_draw_pair_plus_straight_draw.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_draw_pair_plus_straight_draw.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_draw_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier",
+        "hero_draw_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic flop Clear_JSON case added in V0.8.4 for Hero Draw fixture-backed coverage.",
+        "Expected JSON covers DrawFeatures only as feature metadata, not a poker decision.",
+        "No equity, range, runtime plan, or click-chain is attached to this fixture."
+      ]
+    },
+    {
+      "case_id": "flop_draw_premium_combo_draw",
+      "case_name": "Synthetic draw: premium combo draw",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_draw_premium_combo_draw.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_draw_premium_combo_draw.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_draw_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier",
+        "hero_draw_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic flop Clear_JSON case added in V0.8.4 for Hero Draw fixture-backed coverage.",
+        "Expected JSON covers DrawFeatures only as feature metadata, not a poker decision.",
+        "No equity, range, runtime plan, or click-chain is attached to this fixture."
+      ]
     }
   ]
 }
