@@ -78,6 +78,7 @@ from .hero_made_hand_contracts import (
     ShowdownValueClass,
 )
 
+from .hero_draw import build_draw_features
 from .hero_draw_contracts import (
     COMBO_DRAW_CLASSES,
     DRAW_CLASSES,
@@ -178,4 +179,5 @@ __all__ = (
     "FlushDrawClass",
     "OvercardClass",
     "StraightDrawClass",
+    "build_draw_features",
 )
