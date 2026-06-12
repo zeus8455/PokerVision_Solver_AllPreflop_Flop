@@ -97,6 +97,24 @@ from .hero_draw_contracts import (
     StraightDrawClass,
 )
 
+from .live_module_audit_report import (
+    CLEAR_JSON_CAPTURE_STATUSES,
+    LIVE_AUDIT_MODULE_STATUSES,
+    LIVE_AUDIT_REPORT_CONTRACT_VERSION,
+    LIVE_AUDIT_REPORT_FUTURE_MODULES,
+    LIVE_AUDIT_REQUIRED_REPORT_FIELDS,
+    MODULE_CHAIN_STATUSES,
+    RUNTIME_CLICK_CHAIN_STATUSES,
+    ClearJsonCaptureStatus,
+    LiveAuditModuleStatus,
+    LiveClearJsonAuditReport,
+    LiveModuleAuditReport,
+    LiveModuleResult,
+    ModuleChainStatus,
+    RuntimeClickChainStatus,
+    build_not_run_module_result,
+)
+
 __all__ = (
     "ClearJsonInput",
     "SolverInput",
@@ -180,4 +198,19 @@ __all__ = (
     "OvercardClass",
     "StraightDrawClass",
     "build_draw_features",
+    "CLEAR_JSON_CAPTURE_STATUSES",
+    "LIVE_AUDIT_MODULE_STATUSES",
+    "LIVE_AUDIT_REPORT_CONTRACT_VERSION",
+    "LIVE_AUDIT_REPORT_FUTURE_MODULES",
+    "LIVE_AUDIT_REQUIRED_REPORT_FIELDS",
+    "MODULE_CHAIN_STATUSES",
+    "RUNTIME_CLICK_CHAIN_STATUSES",
+    "ClearJsonCaptureStatus",
+    "LiveAuditModuleStatus",
+    "LiveClearJsonAuditReport",
+    "LiveModuleAuditReport",
+    "LiveModuleResult",
+    "ModuleChainStatus",
+    "RuntimeClickChainStatus",
+    "build_not_run_module_result",
 )
