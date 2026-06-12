@@ -93,10 +93,13 @@ def test_nut_flush_draw_candidate_is_classified() -> None:
 def test_gutshot_is_classified() -> None:
     features, _context, _texture, _made_hand = _draw_features(("Ah", "Qd"), ("Js", "Tc", "2d"))
 
-    assert features.draw_class is DrawClass.STRAIGHT_DRAW
+    assert features.draw_class is DrawClass.COMBO_DRAW
     assert features.straight_draw_class is StraightDrawClass.GUTSHOT
-    assert features.draw_strength_tier is DrawStrengthTier.WEAK_DRAW
+    assert features.overcard_class is OvercardClass.TWO_OVERCARDS
+    assert features.combo_draw_class is ComboDrawClass.OVERCARDS_PLUS_DRAW
+    assert features.draw_strength_tier is DrawStrengthTier.MEDIUM_DRAW
     assert "gutshot" in features.draw_tags
+    assert "two_overcards_plus_draw" in features.draw_tags
 
 
 def test_open_ended_straight_draw_is_classified() -> None:
