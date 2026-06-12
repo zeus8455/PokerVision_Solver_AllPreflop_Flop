@@ -137,6 +137,26 @@ from .live_clear_json_integration import (
     discover_live_clear_json_files,
 )
 
+from .live_clear_json_capture_hook import (
+    CAPTURE_HOOK_FORBIDDEN_INPUT_LABELS,
+    CAPTURE_HOOK_FUTURE_MODULES,
+    CAPTURE_HOOK_REQUIRED_FIELDS,
+    DEFAULT_LIVE_CLEAR_JSON_FILE_SUFFIX,
+    DEFAULT_LIVE_CLEAR_JSON_FOLDER,
+    LIVE_CLEAR_JSON_CAPTURE_HOOK_VERSION,
+    ClearJsonCaptureHookAudit,
+    ClearJsonCaptureHookMode,
+    ClearJsonCaptureSaveTarget,
+    ClearJsonCaptureTargetStatus,
+    audit_clear_json_capture_target,
+    audit_default_clear_json_capture_hook,
+    build_clear_json_capture_file_path,
+    build_default_clear_json_capture_target,
+    capture_hook_policy_summary,
+    capture_hook_rejects_solver_input_path,
+    is_solver_readable_clear_json_capture_path,
+)
+
 __all__ = (
     "ClearJsonInput",
     "SolverInput",
@@ -254,4 +274,21 @@ __all__ = (
     "classify_live_clear_json_source",
     "clear_json_candidate_paths",
     "discover_live_clear_json_files",
+    "CAPTURE_HOOK_FORBIDDEN_INPUT_LABELS",
+    "CAPTURE_HOOK_FUTURE_MODULES",
+    "CAPTURE_HOOK_REQUIRED_FIELDS",
+    "DEFAULT_LIVE_CLEAR_JSON_FILE_SUFFIX",
+    "DEFAULT_LIVE_CLEAR_JSON_FOLDER",
+    "LIVE_CLEAR_JSON_CAPTURE_HOOK_VERSION",
+    "ClearJsonCaptureHookAudit",
+    "ClearJsonCaptureHookMode",
+    "ClearJsonCaptureSaveTarget",
+    "ClearJsonCaptureTargetStatus",
+    "audit_clear_json_capture_target",
+    "audit_default_clear_json_capture_hook",
+    "build_clear_json_capture_file_path",
+    "build_default_clear_json_capture_target",
+    "capture_hook_policy_summary",
+    "capture_hook_rejects_solver_input_path",
+    "is_solver_readable_clear_json_capture_path",
 )
