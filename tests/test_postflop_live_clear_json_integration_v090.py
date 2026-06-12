@@ -7,6 +7,8 @@ from solver_postflop import (
     LIVE_CLEAR_JSON_ALLOWED_SOURCE_TYPES,
     LIVE_CLEAR_JSON_SCAN_FUTURE_MODULES,
     LIVE_CLEAR_JSON_SCAN_VERSION,
+    LIVE_CLEAR_JSON_PIPELINE_MODULE_CHAIN,
+    LIVE_CLEAR_JSON_PIPELINE_VERSION,
     LIVE_CLEAR_JSON_FORBIDDEN_SOURCE_TYPES,
     LiveClearJsonCandidate,
     LiveClearJsonScanResult,
@@ -14,6 +16,12 @@ from solver_postflop import (
     LiveClearJsonSkipReason,
     LiveClearJsonSkippedFile,
     LiveClearJsonSourceType,
+    ModuleChainStatus,
+    LiveAuditModuleStatus,
+    RuntimeClickChainStatus,
+    audit_live_clear_json_file,
+    audit_live_clear_json_root,
+    audit_live_clear_json_scan_result,
     classify_live_clear_json_source,
     clear_json_candidate_paths,
     discover_live_clear_json_files,
@@ -228,7 +236,7 @@ def test_discovery_is_deterministic_and_supports_non_recursive_scan(tmp_path: Pa
     ]
 
 
-def test_v092_discovery_module_does_not_run_pipeline_or_live_click_layers() -> None:
+def test_v093_pipeline_module_does_not_run_main_live_or_click_layers() -> None:
     module_text = Path("solver_postflop/live_clear_json_integration.py").read_text(encoding="utf-8")
 
     forbidden_runtime_tokens = (
@@ -240,19 +248,23 @@ def test_v092_discovery_module_does_not_run_pipeline_or_live_click_layers() -> N
         "ActionButtonDetector",
         "send_click",
         "physical_click",
+        "main.py",
     )
-    forbidden_pipeline_imports = (
+
+    for token in forbidden_runtime_tokens:
+        assert token not in module_text
+
+    required_pipeline_tokens = (
         "build_solver_input",
         "resolve_solver_branch",
         "build_flop_context",
         "build_board_texture_features",
         "build_made_hand_features",
         "build_draw_features",
-        "load_clear_json_input(",
+        "load_clear_json_input",
     )
-
-    for token in forbidden_runtime_tokens + forbidden_pipeline_imports:
-        assert token not in module_text
+    for token in required_pipeline_tokens:
+        assert token in module_text
 
 
 def test_live_clear_json_scan_future_modules_are_fixed_metadata_targets() -> None:
@@ -281,6 +293,209 @@ def test_live_clear_json_scan_exports_are_public() -> None:
         "classify_live_clear_json_source",
         "clear_json_candidate_paths",
         "discover_live_clear_json_files",
+    ):
+        assert public_name in solver_postflop.__all__
+        assert hasattr(solver_postflop, public_name)
+
+
+
+def _flop_clear_json_payload(
+    *,
+    case_id: str = "flop_live_like_case",
+    board_cards: list[str] | None = None,
+    action_context_label: str = "srp heads_up",
+) -> dict[str, object]:
+    return {
+        "case_id": case_id,
+        "table_id": "table_01",
+        "hand_id": "hand_200",
+        "hero_id": "hero",
+        "hero_position": "BTN",
+        "hero_cards": ["As", "Ks"],
+        "board_cards": board_cards if board_cards is not None else ["Qs", "Js", "2d"],
+        "players": [
+            {"id": "hero", "position": "BTN", "hero": True},
+            {"id": "villain_1", "position": "BB", "hero": False},
+        ],
+        "positions": {"hero": "BTN", "villain_1": "BB"},
+        "total_pot": 7.5,
+        "to_call": 0,
+        "stacks": {"hero": 95.0, "villain_1": 92.0},
+        "allowed_actions": ["check", "bet"],
+        "action_context": {
+            "spot_family": action_context_label,
+            "current_actor": "hero",
+            "can_check": True,
+            "can_bet": True,
+        },
+    }
+
+
+def test_v093_pipeline_version_and_chain_are_fixed() -> None:
+    assert LIVE_CLEAR_JSON_PIPELINE_VERSION == "v0.9.3"
+    assert LIVE_CLEAR_JSON_PIPELINE_MODULE_CHAIN == (
+        "clear_json_input",
+        "solver_input_mapping",
+        "field_usage_trace",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_features",
+        "made_hand_features",
+        "draw_features",
+        "live_module_audit_report",
+    )
+
+
+def test_v093_audit_live_clear_json_file_runs_full_flop_pipeline(tmp_path: Path) -> None:
+    source = _write_json(tmp_path / "clear_json" / "table_01_hand_200.clear.json", _flop_clear_json_payload())
+
+    report = audit_live_clear_json_file(source)
+    payload = report.to_json_dict()
+
+    assert report.module_chain_status is ModuleChainStatus.FLOP_FEATURES_COMPLETED
+    assert report.runtime_click_chain_status is RuntimeClickChainStatus.EXISTING_PROJECT_CHAIN_NOT_INVOKED_BY_AUDIT
+    assert payload["source_file"] == str(source)
+    assert payload["table_id"] == "table_01"
+    assert payload["hand_id"] == "hand_200"
+    assert payload["branch"] == "flop"
+    assert payload["spot_family"] == "srp_heads_up"
+    assert payload["board_texture_result"]["status"] == "passed"
+    assert payload["made_hand_result"]["status"] == "passed"
+    assert payload["draw_result"]["status"] == "passed"
+    assert payload["draw_result"]["payload"]["draw_strength_tier"] in {
+        "medium_draw",
+        "strong_draw",
+        "premium_combo_draw",
+    }
+    assert "raw_data->raw_clear_json_ref" in payload["fields_used"]
+    json.dumps(payload, sort_keys=True)
+
+
+def test_v093_audit_live_clear_json_root_processes_discovered_clear_json_only(tmp_path: Path) -> None:
+    accepted = _write_json(tmp_path / "clear_json" / "table_01_hand_200.clear.json", _flop_clear_json_payload())
+    _write_json(tmp_path / "dark_json" / "table_01.dark.json", {"board_cards": ["Qs", "Js", "2d"]})
+    _write_json(tmp_path / "runtime_json" / "table_01.runtime.json", {"board_cards": ["Qs", "Js", "2d"]})
+    _write_json(tmp_path / "unknown" / "table_01.json", {"board_cards": ["Qs", "Js", "2d"]})
+
+    envelope = audit_live_clear_json_root(tmp_path)
+    payload = envelope.to_json_dict()
+
+    assert envelope.report_version == "v0.9.3"
+    assert envelope.total_files_seen == 4
+    assert envelope.total_clear_json_processed == 1
+    assert payload["reports"][0]["source_file"] == str(accepted)
+    assert payload["reports"][0]["branch"] == "flop"
+    assert payload["runtime_click_chain_status"] == "existing_project_chain_not_invoked_by_audit"
+    json.dumps(payload, sort_keys=True)
+
+
+def test_v093_audit_scan_result_does_not_process_skipped_files(tmp_path: Path) -> None:
+    _write_json(tmp_path / "clear_json" / "table_01_hand_200.clear.json", _flop_clear_json_payload())
+    _write_json(tmp_path / "action_decision_json" / "table_01.json", {"action": "bet"})
+    _write_json(tmp_path / "button_detector" / "table_01.json", {"button": "Raise"})
+
+    scan_result = discover_live_clear_json_files(tmp_path)
+    envelope = audit_live_clear_json_scan_result(scan_result)
+
+    assert scan_result.total_clear_json_candidates == 1
+    assert len(scan_result.skipped_files) == 2
+    assert envelope.total_clear_json_processed == 1
+    assert len(envelope.reports) == 1
+    assert envelope.reports[0].module_chain_status is ModuleChainStatus.FLOP_FEATURES_COMPLETED
+
+
+def test_v093_non_flop_clear_json_returns_structured_skipped_report(tmp_path: Path) -> None:
+    source = _write_json(
+        tmp_path / "clear_json" / "table_02_hand_201.clear.json",
+        _flop_clear_json_payload(case_id="preflop_case", board_cards=[]),
+    )
+
+    report = audit_live_clear_json_file(source)
+    payload = report.to_json_dict()
+
+    assert report.module_chain_status is ModuleChainStatus.NON_FLOP_SKIPPED
+    assert payload["branch"] == "preflop_not_handled"
+    assert payload["spot_family"] is None
+    assert payload["board_texture_result"]["status"] == "skipped"
+    assert payload["made_hand_result"]["status"] == "skipped"
+    assert payload["draw_result"]["status"] == "skipped"
+
+
+def test_v093_unsupported_board_count_returns_structured_skipped_report(tmp_path: Path) -> None:
+    source = _write_json(
+        tmp_path / "clear_json" / "table_03_hand_202.clear.json",
+        _flop_clear_json_payload(case_id="unsupported_case", board_cards=["Qs"]),
+    )
+
+    report = audit_live_clear_json_file(source)
+    payload = report.to_json_dict()
+
+    assert report.module_chain_status is ModuleChainStatus.NON_FLOP_SKIPPED
+    assert payload["branch"] == "unsupported"
+    assert payload["draw_result"]["status"] == "skipped"
+
+
+def test_v093_bad_clear_json_file_returns_module_error_report_without_exception(tmp_path: Path) -> None:
+    source = tmp_path / "clear_json" / "table_04_hand_203.clear.json"
+    source.parent.mkdir(parents=True, exist_ok=True)
+    source.write_text("{bad json", encoding="utf-8")
+
+    report = audit_live_clear_json_file(source)
+    payload = report.to_json_dict()
+
+    assert report.module_chain_status is ModuleChainStatus.MODULE_ERROR
+    assert payload["branch"] == "unknown"
+    assert payload["board_texture_result"]["status"] == "failed"
+    assert payload["errors"]
+    json.dumps(payload, sort_keys=True)
+
+
+def test_v093_pipeline_reports_multiway_flop_context_without_rebuilding_players(tmp_path: Path) -> None:
+    payload = _flop_clear_json_payload(case_id="multiway_case", action_context_label="multiway")
+    payload["players"] = [
+        {"id": "hero", "position": "CO", "hero": True},
+        {"id": "villain_1", "position": "BTN", "hero": False},
+        {"id": "villain_2", "position": "BB", "hero": False},
+    ]
+    source = _write_json(tmp_path / "clear_json" / "table_05_hand_204.clear.json", payload)
+
+    report = audit_live_clear_json_file(source)
+    report_payload = report.to_json_dict()
+
+    assert report_payload["branch"] == "flop"
+    assert report_payload["spot_family"] == "multiway_pot"
+    assert report_payload["module_chain_status"] == "flop_features_completed"
+
+
+def test_v093_pipeline_envelope_status_prefers_module_error_when_any_candidate_fails(tmp_path: Path) -> None:
+    _write_json(tmp_path / "clear_json" / "table_01_hand_200.clear.json", _flop_clear_json_payload())
+    bad = tmp_path / "clear_json" / "table_02_hand_201.clear.json"
+    bad.parent.mkdir(parents=True, exist_ok=True)
+    bad.write_text("not-json", encoding="utf-8")
+
+    envelope = audit_live_clear_json_root(tmp_path)
+
+    assert envelope.total_clear_json_processed == 2
+    assert envelope.module_chain_status is ModuleChainStatus.MODULE_ERROR
+    assert {report.module_chain_status for report in envelope.reports} == {
+        ModuleChainStatus.FLOP_FEATURES_COMPLETED,
+        ModuleChainStatus.MODULE_ERROR,
+    }
+
+
+def test_v093_pipeline_exports_are_public() -> None:
+    import solver_postflop
+
+    for public_name in (
+        "LIVE_CLEAR_JSON_PIPELINE_MODULE_CHAIN",
+        "LIVE_CLEAR_JSON_PIPELINE_VERSION",
+        "ModuleChainStatus",
+        "LiveAuditModuleStatus",
+        "RuntimeClickChainStatus",
+        "audit_live_clear_json_candidate",
+        "audit_live_clear_json_file",
+        "audit_live_clear_json_root",
+        "audit_live_clear_json_scan_result",
     ):
         assert public_name in solver_postflop.__all__
         assert hasattr(solver_postflop, public_name)
