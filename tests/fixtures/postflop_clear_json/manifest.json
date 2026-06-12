@@ -3,7 +3,7 @@
   "library_kind": "clear_json_fixture_library",
   "architecture": "clear_json_only",
   "fixture_root": "tests/fixtures/postflop_clear_json",
-  "description": "Trusted Clear_JSON postflop fixture library with minimum cases, expected interpretation files, and V0.6.4 board texture fixture cases.",
+  "description": "Trusted Clear_JSON postflop fixture library with minimum cases, expected interpretation files, V0.6.4 board texture cases, and V0.7.4 HERO made-hand cases.",
   "source_policy": {
     "accepted_input_kind": "clear_json",
     "real_clear_json_policy": "real files must remain close to PokerVision output and must not be hand-improved",
@@ -14,7 +14,8 @@
     "contains_final_poker_decision": false,
     "purpose": "expected files describe solver interpretation only, not fold/call/bet/raise decisions",
     "v0_2_4_expected_files": "added_for_all_active_minimum_cases",
-    "v0_6_4_expected_texture_files": "added_for_synthetic_flop_board_texture_cases"
+    "v0_6_4_expected_texture_files": "added_for_synthetic_flop_board_texture_cases",
+    "v0_7_4_expected_made_hand_files": "added_for_synthetic_flop_hero_made_hand_cases"
   },
   "cases": [
     {
@@ -295,6 +296,331 @@
         "Synthetic flop Clear_JSON case added in V0.6.4 for Board Texture fixture-backed coverage.",
         "Expected interpretation includes board texture features only; no final poker decision is attached.",
         "Board cards are trusted Clear_JSON input for feature grouping, not validation input."
+      ]
+    },
+    {
+      "case_id": "flop_made_hand_high_card",
+      "case_name": "Synthetic made hand: high card",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_made_hand_high_card.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_made_hand_high_card.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_made_hand_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic HERO made-hand case added in V0.7.4.",
+        "Expected file contains feature metadata only.",
+        "No poker decision or runtime plan is attached."
+      ]
+    },
+    {
+      "case_id": "flop_made_hand_top_pair_good_kicker",
+      "case_name": "Synthetic made hand: top pair good kicker",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_made_hand_top_pair_good_kicker.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_made_hand_top_pair_good_kicker.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_made_hand_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic HERO made-hand case added in V0.7.4.",
+        "Expected file contains feature metadata only.",
+        "No poker decision or runtime plan is attached."
+      ]
+    },
+    {
+      "case_id": "flop_made_hand_middle_pair",
+      "case_name": "Synthetic made hand: middle pair",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_made_hand_middle_pair.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_made_hand_middle_pair.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_made_hand_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic HERO made-hand case added in V0.7.4.",
+        "Expected file contains feature metadata only.",
+        "No poker decision or runtime plan is attached."
+      ]
+    },
+    {
+      "case_id": "flop_made_hand_bottom_pair",
+      "case_name": "Synthetic made hand: bottom pair",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_made_hand_bottom_pair.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_made_hand_bottom_pair.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_made_hand_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic HERO made-hand case added in V0.7.4.",
+        "Expected file contains feature metadata only.",
+        "No poker decision or runtime plan is attached."
+      ]
+    },
+    {
+      "case_id": "flop_made_hand_overpair",
+      "case_name": "Synthetic made hand: overpair",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_made_hand_overpair.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_made_hand_overpair.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_made_hand_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic HERO made-hand case added in V0.7.4.",
+        "Expected file contains feature metadata only.",
+        "No poker decision or runtime plan is attached."
+      ]
+    },
+    {
+      "case_id": "flop_made_hand_underpair",
+      "case_name": "Synthetic made hand: underpair",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_made_hand_underpair.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_made_hand_underpair.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_made_hand_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic HERO made-hand case added in V0.7.4.",
+        "Expected file contains feature metadata only.",
+        "No poker decision or runtime plan is attached."
+      ]
+    },
+    {
+      "case_id": "flop_made_hand_two_pair",
+      "case_name": "Synthetic made hand: two pair",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_made_hand_two_pair.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_made_hand_two_pair.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_made_hand_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic HERO made-hand case added in V0.7.4.",
+        "Expected file contains feature metadata only.",
+        "No poker decision or runtime plan is attached."
+      ]
+    },
+    {
+      "case_id": "flop_made_hand_set",
+      "case_name": "Synthetic made hand: set",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_made_hand_set.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_made_hand_set.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_made_hand_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic HERO made-hand case added in V0.7.4.",
+        "Expected file contains feature metadata only.",
+        "No poker decision or runtime plan is attached."
+      ]
+    },
+    {
+      "case_id": "flop_made_hand_trips",
+      "case_name": "Synthetic made hand: trips",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_made_hand_trips.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_made_hand_trips.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_made_hand_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic HERO made-hand case added in V0.7.4.",
+        "Expected file contains feature metadata only.",
+        "No poker decision or runtime plan is attached."
+      ]
+    },
+    {
+      "case_id": "flop_made_hand_straight",
+      "case_name": "Synthetic made hand: straight",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_made_hand_straight.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_made_hand_straight.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_made_hand_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic HERO made-hand case added in V0.7.4.",
+        "Expected file contains feature metadata only.",
+        "No poker decision or runtime plan is attached."
+      ]
+    },
+    {
+      "case_id": "flop_made_hand_flush",
+      "case_name": "Synthetic made hand: flush",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_made_hand_flush.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_made_hand_flush.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_made_hand_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic HERO made-hand case added in V0.7.4.",
+        "Expected file contains feature metadata only.",
+        "No poker decision or runtime plan is attached."
+      ]
+    },
+    {
+      "case_id": "flop_made_hand_full_house",
+      "case_name": "Synthetic made hand: full house",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_made_hand_full_house.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_made_hand_full_house.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_made_hand_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic HERO made-hand case added in V0.7.4.",
+        "Expected file contains feature metadata only.",
+        "No poker decision or runtime plan is attached."
+      ]
+    },
+    {
+      "case_id": "flop_made_hand_quads",
+      "case_name": "Synthetic made hand: quads",
+      "street_group": "flop",
+      "spot_family": "srp_heads_up",
+      "source_kind": "synthetic",
+      "clear_json_file": "tests/fixtures/postflop_clear_json/synthetic/flop/flop_made_hand_quads.clear.json",
+      "expected_file": "tests/fixtures/postflop_clear_json/expected/flop_made_hand_quads.expected.json",
+      "base_real_case_id": "real_flop_srp_btn_vs_bb_check_option",
+      "purpose": "test_hero_made_hand_features",
+      "solver_modules_targeted": [
+        "clear_json_input_loader",
+        "solver_input_mapping",
+        "branch_resolver",
+        "flop_context_builder",
+        "board_texture_builder",
+        "hero_made_hand_classifier"
+      ],
+      "status": "active",
+      "notes": [
+        "Synthetic HERO made-hand case added in V0.7.4.",
+        "Expected file contains feature metadata only.",
+        "No poker decision or runtime plan is attached."
       ]
     }
   ]
