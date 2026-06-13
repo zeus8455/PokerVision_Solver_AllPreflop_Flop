@@ -2,8 +2,11 @@ from __future__ import annotations
 
 import inspect
 import json
+import subprocess
 import sys
+import textwrap
 from dataclasses import asdict, is_dataclass
+from pathlib import Path
 
 from solver_postflop.equity_contracts import (
     DEFAULT_EQUITY_BACKEND_NAME,
@@ -18,7 +21,11 @@ from solver_postflop.equity_contracts import (
     EquityPlayerResult,
     EquityResult,
 )
+
 import solver_postflop.equity_contracts as equity_contracts
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_equity_contract_version_is_fixed_for_v0111() -> None:
@@ -235,7 +242,6 @@ def test_equity_contracts_define_module_exports() -> None:
 
 def test_equity_contracts_do_not_import_backend_or_action_modules() -> None:
     source = inspect.getsource(equity_contracts).lower()
-
     forbidden_fragments = (
         "from pokerkit",
         "import pokerkit",
@@ -256,5 +262,37 @@ def test_equity_contracts_do_not_import_backend_or_action_modules() -> None:
 
 
 def test_importing_equity_contracts_does_not_require_backend_package() -> None:
-    assert "pokerkit" not in sys.modules
-    assert EquityResult(case_id="no_backend_import", source_file="x.clear.json").backend_name == "pokerkit"
+    script = textwrap.dedent(
+        """
+        from __future__ import annotations
+
+        import json
+        import sys
+
+        payload = {"pokerkit_before_import": "pokerkit" in sys.modules}
+
+        from solver_postflop.equity_contracts import EquityResult
+
+        payload["pokerkit_after_import"] = "pokerkit" in sys.modules
+        payload["backend_name"] = EquityResult(
+            case_id="no_backend_import",
+            source_file="x.clear.json",
+        ).backend_name
+
+        print(json.dumps(payload, sort_keys=True))
+        """
+    )
+    completed = subprocess.run(
+        [sys.executable, "-c", script],
+        cwd=PROJECT_ROOT,
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+    payload = json.loads(completed.stdout)
+
+    assert payload == {
+        "backend_name": "pokerkit",
+        "pokerkit_after_import": False,
+        "pokerkit_before_import": False,
+    }
