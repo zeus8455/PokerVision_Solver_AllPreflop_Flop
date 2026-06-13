@@ -1,0 +1,12 @@
+{
+  "case_id": "flop_equity_input_multiway",
+  "expected_backend_name": "pokerkit",
+  "expected_backend_status": "not_run",
+  "expected_computation_mode": "multiway_raw_equity",
+  "expected_equity_band": "deferred",
+  "expected_next_module": "equity_result",
+  "expected_opponents_count": 2,
+  "expected_result_kind": "multiway_deferred",
+  "expected_sample_count": null,
+  "source_case_id": "flop_equity_input_multiway"
+}

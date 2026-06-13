@@ -1,0 +1,12 @@
+{
+  "case_id": "flop_equity_input_unknown_context",
+  "expected_backend_name": "pokerkit",
+  "expected_backend_status": "not_run",
+  "expected_computation_mode": "unknown_context_equity",
+  "expected_equity_band": "unknown",
+  "expected_next_module": "equity_result",
+  "expected_opponents_count": null,
+  "expected_result_kind": "unknown_context",
+  "expected_sample_count": null,
+  "source_case_id": "flop_equity_input_unknown_context"
+}

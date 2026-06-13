@@ -1,0 +1,12 @@
+{
+  "case_id": "flop_equity_input_limp_passive",
+  "expected_backend_name": "pokerkit",
+  "expected_backend_status": "ok",
+  "expected_computation_mode": "heads_up_raw_equity",
+  "expected_equity_band": "high_equity",
+  "expected_next_module": "equity_result",
+  "expected_opponents_count": 1,
+  "expected_result_kind": "numeric_heads_up_raw_equity",
+  "expected_sample_count": 256,
+  "source_case_id": "flop_equity_input_limp_passive"
+}
