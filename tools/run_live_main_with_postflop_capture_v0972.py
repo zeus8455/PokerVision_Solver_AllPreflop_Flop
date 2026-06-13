@@ -1,4 +1,4 @@
-"""Run PokerVision main.py with V0.9.7.2 postflop Clear_JSON capture installed.
+"""Run PokerVision main.py with postflop Clear_JSON capture installed.
 
 This wrapper is for local real-live audit only. It does not create postflop
 decisions, runtime plans, Action_Button payloads, or clicks. It only installs a
@@ -16,7 +16,7 @@ DEFAULT_LIVE_ROOT = Path("external") / "PokerVisionFinalVersionNoSolver_snapshot
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Run live main.py with V0.9.7.2 postflop Clear_JSON capture.")
+    parser = argparse.ArgumentParser(description="Run live main.py with postflop Clear_JSON capture installed.")
     parser.add_argument("--live-root", default=str(DEFAULT_LIVE_ROOT), help="Path to the PokerVision V1_2 snapshot root.")
     args = parser.parse_args()
 
@@ -34,7 +34,7 @@ def main() -> int:
     from postflop_clear_json_runtime_capture import install_postflop_clear_json_runtime_capture
 
     installed = install_postflop_clear_json_runtime_capture(display_analysis_cycle)
-    print(f"[POSTFLOP_CLEAR_JSON_CAPTURE] V0.9.7.2 install status: {installed}")
+    print(f"[POSTFLOP_CLEAR_JSON_CAPTURE] capture runner install status: {installed}")
     print(f"[POSTFLOP_CLEAR_JSON_CAPTURE] running existing main.py: {live_main}")
 
     runpy.run_path(str(live_main), run_name="__main__")

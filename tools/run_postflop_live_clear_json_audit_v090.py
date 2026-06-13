@@ -12,10 +12,24 @@ from __future__ import annotations
 import argparse
 import json
 import shutil
-from dataclasses import asdict, dataclass, field, is_dataclass
+import sys
+from dataclasses import asdict, dataclass, field, is_dataclass, replace
 from enum import Enum
 from pathlib import Path
 from typing import Any, Optional, Union
+
+
+def _bootstrap_project_root_import_path() -> Path:
+    """Ensure direct tool execution can import the repository package."""
+
+    project_root = Path(__file__).resolve().parents[1]
+    project_root_text = str(project_root)
+    if project_root_text not in sys.path:
+        sys.path.insert(0, project_root_text)
+    return project_root
+
+
+_BOOTSTRAPPED_PROJECT_ROOT = _bootstrap_project_root_import_path()
 
 from solver_postflop.board_texture import build_board_texture_features
 from solver_postflop.branch_contracts import SolverBranch
@@ -44,6 +58,10 @@ LIVE_CLEAR_JSON_AUDIT_OUTPUT_SUBFOLDERS: tuple[str, ...] = (
     "draw_features",
     "module_chain_reports",
 )
+LIVE_CLEAR_JSON_AUDIT_EVIDENCE_STATUS_PASSED = "passed"
+LIVE_CLEAR_JSON_AUDIT_EVIDENCE_STATUS_FAILED = "failed"
+LIVE_CLEAR_JSON_AUDIT_EXPECTED_RUNTIME_CLICK_CHAIN_STATUS = "existing_project_chain_not_invoked_by_audit"
+LIVE_CLEAR_JSON_AUDIT_EXPECTED_MODULE_CHAIN_STATUS = "flop_features_completed"
 
 
 @dataclass(frozen=True, slots=True)
@@ -76,6 +94,8 @@ class LiveClearJsonAuditToolResult:
     module_chain_status: str = "not_started"
     runtime_click_chain_status: str = "existing_project_chain_not_invoked_by_audit"
     clear_json_capture_status: str = "not_checked"
+    evidence_status: str = LIVE_CLEAR_JSON_AUDIT_EVIDENCE_STATUS_FAILED
+    evidence_checks: dict[str, bool] = field(default_factory=dict)
     artifacts_written: dict[str, int] = field(default_factory=dict)
     errors: tuple[str, ...] = field(default_factory=tuple)
     notes: tuple[str, ...] = field(default_factory=tuple)
@@ -122,6 +142,35 @@ def build_live_clear_json_audit_output_structure(output_root: PathLike) -> dict[
         subfolders[subfolder] = str(path)
     return subfolders
 
+
+
+
+def build_live_clear_json_audit_evidence_checks(result: LiveClearJsonAuditToolResult) -> dict[str, bool]:
+    """Return the V0.9.7.4 evidence checklist for a local live audit."""
+
+    return {
+        "total_files_seen_gt_0": result.total_files_seen > 0,
+        "total_clear_json_processed_gt_0": result.total_clear_json_processed > 0,
+        "module_chain_status_flop_features_completed": (
+            result.module_chain_status == LIVE_CLEAR_JSON_AUDIT_EXPECTED_MODULE_CHAIN_STATUS
+        ),
+        "board_texture_gt_0": result.artifacts_written.get("board_texture", 0) > 0,
+        "made_hand_gt_0": result.artifacts_written.get("made_hand", 0) > 0,
+        "draw_features_gt_0": result.artifacts_written.get("draw_features", 0) > 0,
+        "runtime_click_chain_status_audit_only": (
+            result.runtime_click_chain_status == LIVE_CLEAR_JSON_AUDIT_EXPECTED_RUNTIME_CLICK_CHAIN_STATUS
+        ),
+        "errors_empty": not result.errors,
+    }
+
+
+def evaluate_live_clear_json_audit_evidence(result: LiveClearJsonAuditToolResult) -> str:
+    """Return passed/failed for the V0.9.7.4 evidence checklist."""
+
+    checks = build_live_clear_json_audit_evidence_checks(result)
+    if all(checks.values()):
+        return LIVE_CLEAR_JSON_AUDIT_EVIDENCE_STATUS_PASSED
+    return LIVE_CLEAR_JSON_AUDIT_EVIDENCE_STATUS_FAILED
 
 def run_postflop_live_clear_json_audit(
     *,
@@ -198,6 +247,16 @@ def run_postflop_live_clear_json_audit(
             "offline_clear_json_audit_tool_runner_v095",
             "main_live_not_started_by_tool_runner",
             "postflop_solver_does_not_create_decision_or_runtime_plan",
+        ),
+    )
+    evidence_checks = build_live_clear_json_audit_evidence_checks(result)
+    result = replace(
+        result,
+        evidence_checks=evidence_checks,
+        evidence_status=(
+            LIVE_CLEAR_JSON_AUDIT_EVIDENCE_STATUS_PASSED
+            if all(evidence_checks.values())
+            else LIVE_CLEAR_JSON_AUDIT_EVIDENCE_STATUS_FAILED
         ),
     )
     _write_json(output_path / "tool_result.json", result.to_json_dict())
