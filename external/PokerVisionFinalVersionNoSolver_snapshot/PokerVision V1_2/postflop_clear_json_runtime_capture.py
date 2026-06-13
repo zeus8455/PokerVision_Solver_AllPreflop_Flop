@@ -1,9 +1,11 @@
 """Runtime mirror for postflop Clear_JSON files used by V0.9 live audit.
 
-V0.9.7.2 fixes the live evidence gap found after V0.9.7.1:
+V0.9.7.3 extends the V0.9.7.2 live evidence fix:
 real postflop frames are currently published as Clear_JSON_Pending, not as
 Final Clear_JSON. This module therefore mirrors postflop Pending Clear_JSON and
 Final Clear_JSON into solver-readable ``*.clear.json`` files for audit only.
+It also adapts live-runtime Clear_JSON shape into top-level solver-compatible
+aliases such as board_cards, hero_cards, hero_id, table_id, hand_id, and total_pot.
 
 Safety rules:
 - mirrors only Clear_JSON-derived payloads whose board.street is flop/turn/river;
@@ -22,7 +24,7 @@ from types import ModuleType
 from typing import Any, Callable, Dict, Optional
 
 POSTFLOP_CLEAR_JSON_CAPTURE_DIR_NAME = "postflop_live_clear_json"
-POSTFLOP_CLEAR_JSON_CAPTURE_SCHEMA_VERSION = "postflop_clear_json_runtime_capture_v0_9_7_2"
+POSTFLOP_CLEAR_JSON_CAPTURE_SCHEMA_VERSION = "postflop_clear_json_runtime_capture_v0_9_7_3"
 POSTFLOP_STREETS = {"flop", "turn", "river"}
 
 
@@ -51,6 +53,168 @@ def _clear_state_street(clear_state: Optional[Dict[str, Any]]) -> Optional[str]:
 def is_postflop_clear_state(clear_state: Optional[Dict[str, Any]]) -> bool:
     """Return True only for flop/turn/river Clear_JSON-like payloads."""
     return _clear_state_street(clear_state) in POSTFLOP_STREETS
+
+
+RANK_ALIASES: dict[str, str] = {
+    "2": "2",
+    "3": "3",
+    "4": "4",
+    "5": "5",
+    "6": "6",
+    "7": "7",
+    "8": "8",
+    "9": "9",
+    "10": "T",
+    "T": "T",
+    "J": "J",
+    "Q": "Q",
+    "K": "K",
+    "A": "A",
+}
+
+SUIT_ALIASES: dict[str, str] = {
+    "s": "s",
+    "spade": "s",
+    "spades": "s",
+    "♠": "s",
+    "c": "c",
+    "club": "c",
+    "clubs": "c",
+    "♣": "c",
+    "h": "h",
+    "heart": "h",
+    "hearts": "h",
+    "♥": "h",
+    "d": "d",
+    "diamond": "d",
+    "diamonds": "d",
+    "♦": "d",
+}
+
+
+def _normalize_card_token(card: Any) -> str:
+    """Normalize live card labels into compact solver-friendly notation.
+
+    Examples:
+        ``10_clubs`` -> ``Tc``
+        ``A_spades`` -> ``As``
+        ``9_diamonds`` -> ``9d``
+
+    Unknown formats are carried forward as text. This is not card validation; it is
+    a schema adapter for known live-runtime labels.
+    """
+    text = str(card or "").strip()
+    if not text:
+        return text
+    normalized = (
+        text.replace("♠", "_spades")
+        .replace("♣", "_clubs")
+        .replace("♥", "_hearts")
+        .replace("♦", "_diamonds")
+        .replace("-", "_")
+        .replace(" ", "_")
+    )
+    parts = [part for part in normalized.split("_") if part]
+    if len(parts) >= 2:
+        rank_raw = parts[0].upper()
+        suit_raw = parts[-1].lower()
+        rank = RANK_ALIASES.get(rank_raw)
+        suit = SUIT_ALIASES.get(suit_raw)
+        if rank and suit:
+            return f"{rank}{suit}"
+    # Compact forms such as As, 10c, Td.
+    compact = normalized.strip()
+    if len(compact) >= 2:
+        suit_raw = compact[-1].lower()
+        rank_raw = compact[:-1].upper()
+        rank = RANK_ALIASES.get(rank_raw)
+        suit = SUIT_ALIASES.get(suit_raw)
+        if rank and suit:
+            return f"{rank}{suit}"
+    return text
+
+
+def _normalize_cards(cards: Any) -> list[str]:
+    if not isinstance(cards, (list, tuple)):
+        return []
+    return [_normalize_card_token(card) for card in cards if str(card or "").strip()]
+
+
+def _parse_table_hand_from_frame_id(frame_id: Any) -> tuple[Optional[str], Optional[str]]:
+    text = str(frame_id or "").strip()
+    if not text:
+        return None, None
+    parts = text.split("_")
+    table_id: Optional[str] = None
+    hand_id: Optional[str] = None
+    for idx in range(len(parts) - 1):
+        if parts[idx].lower() == "table" and parts[idx + 1].isdigit():
+            table_id = f"table_{parts[idx + 1]}"
+        if parts[idx].lower() == "hand" and parts[idx + 1].isdigit():
+            hand_id = f"hand_{parts[idx + 1]}"
+    return table_id, hand_id
+
+
+def _find_hero_from_players(players: Any) -> tuple[Optional[str], list[str]]:
+    if not isinstance(players, dict):
+        return None, []
+    for seat, player in players.items():
+        if isinstance(player, dict) and player.get("hero") is True:
+            return str(seat), _normalize_cards(player.get("cards"))
+    return None, []
+
+
+def build_solver_compatible_live_clear_json(clear_state: Dict[str, Any]) -> Dict[str, Any]:
+    """Return a solver-compatible audit payload built from live Clear_JSON shape.
+
+    Live runtime currently stores useful postflop metadata under nested keys such
+    as ``board.cards`` and ``players.<seat>.cards``. V0.1-V0.9 audit modules read
+    contract-backed top-level aliases such as ``board_cards`` and ``hero_cards``.
+    This adapter adds those aliases while preserving the original live payload
+    under ``raw_live_clear_json``.
+    """
+    if not isinstance(clear_state, dict):
+        raise TypeError("clear_state must be a dict")
+
+    raw_live_clear_json = copy.deepcopy(clear_state)
+    adapted: Dict[str, Any] = copy.deepcopy(clear_state)
+
+    frame_id = adapted.get("frame_id") or adapted.get("case_id")
+    parsed_table_id, parsed_hand_id = _parse_table_hand_from_frame_id(frame_id)
+    table_id = adapted.get("table_id") or parsed_table_id
+    hand_id = adapted.get("hand_id") or parsed_hand_id
+    if frame_id is not None:
+        adapted.setdefault("case_id", str(frame_id))
+    if table_id is not None:
+        adapted.setdefault("table_id", str(table_id))
+    if hand_id is not None:
+        adapted.setdefault("hand_id", str(hand_id))
+
+    board = adapted.get("board")
+    if isinstance(board, dict):
+        board_cards = _normalize_cards(board.get("cards"))
+        if board_cards:
+            adapted.setdefault("board_cards", board_cards)
+        street = board.get("street")
+        if street not in (None, ""):
+            adapted.setdefault("street", str(street).strip().lower())
+
+    players = adapted.get("players")
+    hero_id, hero_cards = _find_hero_from_players(players)
+    if hero_id is not None:
+        adapted.setdefault("hero_id", hero_id)
+        adapted.setdefault("hero", hero_id)
+        adapted.setdefault("hero_position", hero_id)
+    if hero_cards:
+        adapted.setdefault("hero_cards", hero_cards)
+
+    if "Total_pot" in adapted and "total_pot" not in adapted:
+        adapted["total_pot"] = adapted["Total_pot"]
+    if "total_pot" in adapted and "pot" not in adapted:
+        adapted["pot"] = adapted["total_pot"]
+
+    adapted["raw_live_clear_json"] = raw_live_clear_json
+    return adapted
 
 
 def resolve_postflop_clear_json_capture_root(cycle_dir: Path) -> Path:
@@ -142,7 +306,7 @@ def mirror_postflop_clear_json_for_v090_audit(
     if not is_postflop_clear_state(clear_state):
         return None
 
-    mirror_payload: Dict[str, Any] = copy.deepcopy(clear_state)
+    mirror_payload: Dict[str, Any] = build_solver_compatible_live_clear_json(clear_state)
     mirror_payload["postflop_live_capture"] = _build_capture_metadata(
         capture_stage=capture_stage,
         final_clear_confirmed=final_clear_confirmed,

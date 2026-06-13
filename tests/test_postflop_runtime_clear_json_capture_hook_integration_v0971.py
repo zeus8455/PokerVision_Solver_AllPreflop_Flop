@@ -74,7 +74,12 @@ def test_v0971_mirror_final_clear_json_writes_only_solver_readable_clear_json(tm
     assert mirror_path.exists()
     mirrored_payload = json.loads(mirror_path.read_text(encoding="utf-8"))
     metadata = mirrored_payload.pop("postflop_live_capture", None)
-    assert mirrored_payload == clear_state
+    raw_live_clear_json = mirrored_payload.pop("raw_live_clear_json", None)
+    assert raw_live_clear_json == clear_state
+    assert mirrored_payload["board_cards"] == ["As", "7d", "2c"]
+    assert mirrored_payload["hero_cards"] == ["Ah", "Kd"]
+    assert mirrored_payload["hero_id"] == "BTN"
+    assert mirrored_payload["total_pot"] == 6.5
     assert isinstance(metadata, dict)
     assert metadata["solver_input_allowed_for_v090_audit"] is True
     assert metadata["solver_input_allowed_for_decision"] is False
@@ -115,7 +120,12 @@ def test_v0971_install_wrapper_preserves_original_final_clear_save_and_adds_mirr
     assert json.loads(final_path.read_text(encoding="utf-8")) == clear_state
     mirrored_payload = json.loads(mirror_path.read_text(encoding="utf-8"))
     metadata = mirrored_payload.pop("postflop_live_capture", None)
-    assert mirrored_payload == clear_state
+    raw_live_clear_json = mirrored_payload.pop("raw_live_clear_json", None)
+    assert raw_live_clear_json == clear_state
+    assert mirrored_payload["board_cards"] == ["As", "7d", "2c"]
+    assert mirrored_payload["hero_cards"] == ["Ah", "Kd"]
+    assert mirrored_payload["hero_id"] == "BTN"
+    assert mirrored_payload["total_pot"] == 6.5
     assert isinstance(metadata, dict)
     assert metadata["solver_input_allowed_for_v090_audit"] is True
     assert metadata["solver_input_allowed_for_decision"] is False

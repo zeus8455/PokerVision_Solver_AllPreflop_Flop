@@ -59,7 +59,7 @@ def test_v0972_pending_postflop_clear_json_is_mirrored_with_pending_metadata(tmp
     assert expected.exists()
     payload = json.loads(expected.read_text(encoding="utf-8"))
     metadata = payload["postflop_live_capture"]
-    assert metadata["schema_version"] == "postflop_clear_json_runtime_capture_v0_9_7_2"
+    assert metadata["schema_version"] == "postflop_clear_json_runtime_capture_v0_9_7_3"
     assert metadata["capture_stage"] == "pending_clear_json"
     assert metadata["final_clear_confirmed"] is False
     assert metadata["solver_input_allowed_for_v090_audit"] is True
