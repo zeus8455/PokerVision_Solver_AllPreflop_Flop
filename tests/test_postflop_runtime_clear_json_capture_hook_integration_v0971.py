@@ -72,7 +72,12 @@ def test_v0971_mirror_final_clear_json_writes_only_solver_readable_clear_json(tm
 
     assert mirror_path == tmp_path / "outputs" / "postflop_live_clear_json" / "table_01" / "table_01_hand_12_flop.clear.json"
     assert mirror_path.exists()
-    assert json.loads(mirror_path.read_text(encoding="utf-8")) == clear_state
+    mirrored_payload = json.loads(mirror_path.read_text(encoding="utf-8"))
+    metadata = mirrored_payload.pop("postflop_live_capture", None)
+    assert mirrored_payload == clear_state
+    assert isinstance(metadata, dict)
+    assert metadata["solver_input_allowed_for_v090_audit"] is True
+    assert metadata["solver_input_allowed_for_decision"] is False
     assert mirror_path.name.endswith(".clear.json")
 
     created_dirs = {path.name for path in (tmp_path / "outputs").rglob("*") if path.is_dir()}
@@ -108,8 +113,13 @@ def test_v0971_install_wrapper_preserves_original_final_clear_save_and_adds_mirr
     assert final_path.exists()
     assert mirror_path.exists()
     assert json.loads(final_path.read_text(encoding="utf-8")) == clear_state
-    assert json.loads(mirror_path.read_text(encoding="utf-8")) == clear_state
-    assert any("mirrored Final Clear_JSON" in message for message in logs)
+    mirrored_payload = json.loads(mirror_path.read_text(encoding="utf-8"))
+    metadata = mirrored_payload.pop("postflop_live_capture", None)
+    assert mirrored_payload == clear_state
+    assert isinstance(metadata, dict)
+    assert metadata["solver_input_allowed_for_v090_audit"] is True
+    assert metadata["solver_input_allowed_for_decision"] is False
+    assert any("mirrored Final" in message for message in logs)
 
 
 def test_v0971_sitecustomize_installs_capture_but_does_not_contain_click_or_decision_logic() -> None:

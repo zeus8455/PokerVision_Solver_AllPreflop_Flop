@@ -1,8 +1,8 @@
-"""Auto-install V0.9.7.1 postflop Clear_JSON mirror for live main.py runs.
+"""Best-effort startup installer for V0.9.7.2 postflop Clear_JSON capture.
 
-Python imports sitecustomize at interpreter startup when this snapshot directory is
-on sys.path. The hook wraps only Final Clear_JSON publication and is deliberately
-limited to file mirroring.
+This file is intentionally not the only supported install path. The reliable
+V0.9.7.2 live-audit path is tools/run_live_main_with_postflop_capture_v0972.py,
+which imports display_analysis_cycle, installs the wrapper, then runs main.py.
 """
 from __future__ import annotations
 
