@@ -8,15 +8,32 @@ Development line: **Clear_JSON-only postflop solver engine**
 
 ## Current status
 
-**Current closed version:** `V0.9.0 — Main Live Clear_JSON Audit / Postflop Capture Evidence`
+**Current closed version:** `V0.10.0 — Equity Input Builder / PokerKit Scenario Preparation`
 
-**Closing subversion:** `V0.9.8 — Close V0.9.0 / Live Audit Checkpoint`
+**Closing subversion:** `V0.10.5 — Close V0.10.0 / README + VERSION Checkpoint`
 
-**Latest code gate:** `405 passed` at `V0.9.7.4`
+**Latest implementation checkpoint before close:** `ee62827 — V0.10.4 add equity input architecture gate`
 
-**Latest formal live evidence:** `passed`
+**Latest official postflop cumulative gate:**
 
-**Next planned version:** `V0.10.0 — to be discussed before implementation`
+```text
+457 passed in 5.11s
+```
+
+**Next planned version:** `V0.11.0 — PokerKit-backed Equity Engine / Raw Equity Snapshot`
+
+---
+
+## Official gate policy
+
+Official regression for the active Clear_JSON-only postflop line:
+
+```powershell
+$postflopTests = Get-ChildItem tests -File -Filter "test_postflop_*.py" | Sort-Object Name | ForEach-Object { $_.FullName }
+C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe -m pytest $postflopTests -q
+```
+
+The raw global `pytest -q` suite is not the official V0.1+ postflop gate because legacy preflop/V2/live/snapshot tests depend on old runtime artifacts and live configuration.
 
 ---
 
@@ -92,7 +109,7 @@ Clear_JSON -> ClearJsonInput -> SolverInput -> SolverTrace
 - `66bd6a1` — `V0.3.1 add postflop field mapping contract`
 - `00de073` — `V0.3.2 add postflop field usage trace`
 - `99674e1` — `V0.3.3 bind SolverInput mapping to field contract`
-- `cba0daa` — `V0.3.4 add postflop no-validation mapping gate`
+- `cba0daa` — `V0.3.4 add no-validation mapping gate`
 - `7a3dfce` — `V0.3.5 document Clear_JSON field mapping`
 - `4603c68` — `V0.3.6 close SolverInput mapping contract`
 
@@ -227,7 +244,7 @@ Clear_JSON -> ClearJsonInput -> SolverInput -> SolverTrace
 
 **Status:** closed by V0.9.8
 
-**Closing checkpoint:** `V0.9.8 — Close V0.9.0 / Live Audit Checkpoint`
+**Closing checkpoint:** `6ea2c62 — V0.9.8 close live audit checkpoint`
 
 ### Subversions
 
@@ -242,7 +259,7 @@ Clear_JSON -> ClearJsonInput -> SolverInput -> SolverTrace
 - `52738bc` — `V0.9.7.2 add pending postflop Clear_JSON capture`
 - `14289f5` — `V0.9.7.3 adapt live Clear_JSON schema for postflop audit`
 - `5e315c8` — `V0.9.7.4 add live audit hygiene gate`
-- `V0.9.8` — `close live audit checkpoint`
+- `6ea2c62` — `V0.9.8 close live audit checkpoint`
 
 ### Final live evidence
 
@@ -277,8 +294,71 @@ V0.9.0 did **not** create postflop decisions, runtime plans, Action_Button calls
 
 ---
 
+## V0.10.0 — Equity Input Builder / PokerKit Scenario Preparation
+
+**Status:** closed by V0.10.5
+
+**Closing checkpoint:** `V0.10.5 — Close V0.10.0 / README + VERSION Checkpoint`
+
+### Subversions
+
+- `fce43d9` — `V0.10.1 add equity input contracts`
+- `3a34f71` — `V0.10.2 add equity input builder`
+- `6f47c05` — `V0.10.3 add equity input fixture coverage`
+- `ee62827` — `V0.10.4 add equity input architecture gate`
+- `V0.10.5` — `close equity input builder`
+
+### Files added
+
+- `solver_postflop/equity_input_contracts.py`
+- `solver_postflop/equity_input.py`
+- `tests/test_postflop_equity_input_contracts_v100.py`
+- `tests/test_postflop_equity_input_builder_v100.py`
+- `tests/test_postflop_equity_input_from_fixtures_v100.py`
+- `tests/test_postflop_equity_input_no_extra_logic_v100.py`
+- `tests/fixtures/postflop_equity_input_v0103/`
+- `docs/POSTFLOP_EQUITY_INPUT.md`
+
+### Targeted V0.10 gate at V0.10.4
+
+```text
+46 passed in 0.45s
+```
+
+### Final postflop cumulative gate before close
+
+```text
+457 passed in 5.11s
+```
+
+### Final result
+
+V0.10.0 created the official equity-input preparation layer:
+
+```text
+FlopContext + BoardTextureFeatures + MadeHandFeatures + DrawFeatures
+-> EquityScenarioInput
+```
+
+The full postflop chain is now:
+
+```text
+Clear_JSON
+-> SolverInput
+-> Branch Resolver
+-> FlopContext
+-> BoardTextureFeatures
+-> MadeHandFeatures
+-> DrawFeatures
+-> EquityScenarioInput
+```
+
+V0.10.0 did **not** create PokerKit simulation, equity calculation, ranges, blocker filtering, decision logic, runtime plans, Action_Button calls, clicks, or bet sizing.
+
+---
+
 ## Next planned version
 
-### V0.10.0 — to be discussed before implementation
+### V0.11.0 — PokerKit-backed Equity Engine / Raw Equity Snapshot
 
-Scope must be discussed and approved before any V0.10.0 code is written.
+Scope must be discussed and approved before implementation.

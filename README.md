@@ -14,70 +14,92 @@ The active postflop solver line is intentionally isolated from real postflop dec
 
 ## Current status
 
-**Current closed version:** `V0.9.0 — Main Live Clear_JSON Audit / Postflop Capture Evidence`
+**Current closed version:** `V0.10.0 — Equity Input Builder / PokerKit Scenario Preparation`
 
-**Closing subversion:** `V0.9.8 — Close V0.9.0 / Live Audit Checkpoint`
+**Closing subversion:** `V0.10.5 — Close V0.10.0 / README + VERSION Checkpoint`
 
-**Closing checkpoint commit:** created by `V0.9.8 close live audit checkpoint`
+**Closing checkpoint commit:** created by `V0.10.5 close equity input builder`
 
-**Latest code gate before close:** `405 passed` at `V0.9.7.4`
+**Latest implementation checkpoint before close:** `ee62827 — V0.10.4 add equity input architecture gate`
 
-**Latest live evidence:** passed after V0.9.7.4
+**Latest official postflop cumulative gate:**
 
 ```text
-evidence_status = passed
-total_files_seen = 5
-total_clear_json_processed = 5
-module_chain_status = flop_features_completed
-artifacts_written.board_texture = 1
-artifacts_written.flop_contexts = 1
-artifacts_written.made_hand = 1
-artifacts_written.draw_features = 1
-runtime_click_chain_status = existing_project_chain_not_invoked_by_audit
-errors = []
+457 passed in 5.11s
 ```
 
-**Next planned version:** `V0.10.0 — to be discussed before implementation`
+**Next planned version:** `V0.11.0 — PokerKit-backed Equity Engine / Raw Equity Snapshot`
 
 ---
 
-## Active architecture after V0.9.0
+## Official test policy for this development line
+
+The official regression gate for the active Clear_JSON-only postflop line is the cumulative postflop gate:
+
+```powershell
+$postflopTests = Get-ChildItem tests -File -Filter "test_postflop_*.py" | Sort-Object Name | ForEach-Object { $_.FullName }
+C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe -m pytest $postflopTests -q
+```
+
+The raw global `pytest -q` suite is **not** the official gate for this line because it still includes legacy preflop/V2/live/snapshot tests with external runtime/config dependencies. Those tests are not allowed to block the V0.1+ Clear_JSON-only postflop solver line unless a future version explicitly re-integrates them.
+
+---
+
+## Active architecture after V0.10.0
 
 ```text
 Existing PokerVision main live runtime
-  -> Pending postflop Clear_JSON capture hook
-  -> Live Clear_JSON schema adapter
-  -> Solver-readable .clear.json artifact
-  -> Offline postflop audit runner
-  -> ClearJsonInput
-  -> SolverInput
-  -> Branch Resolver
-  -> FlopContext
-  -> BoardTextureFeatures
-  -> MadeHandFeatures
-  -> DrawFeatures
+-> Pending postflop Clear_JSON capture hook
+-> Live Clear_JSON schema adapter
+-> Solver-readable .clear.json artifact
+-> Offline postflop audit runner
+-> ClearJsonInput
+-> SolverInput
+-> Branch Resolver
+-> FlopContext
+-> BoardTextureFeatures
+-> MadeHandFeatures
+-> DrawFeatures
+-> EquityScenarioInput
 ```
 
-The V0.9 audit layer proves that the existing project can generate live postflop Clear_JSON artifacts that are readable by the current V0.1–V0.8 solver modules.
+V0.10.0 adds the first official input layer for the future equity module:
+
+```text
+FlopContext + BoardTextureFeatures + MadeHandFeatures + DrawFeatures
+-> EquityScenarioInput
+```
+
+This version only prepares data for a future equity engine. It does **not** calculate equity.
 
 ---
 
-## Non-negotiable V0.9 policy
+## Non-negotiable V0.10 policy
 
-V0.9.0 is **audit-only** for the postflop solver line.
+V0.10.0 is **equity-input preparation only**.
 
-The postflop solver/audit layer must not create or perform:
+The postflop solver line must not create or perform:
 
+- PokerKit simulation;
+- equity calculation;
+- Monte Carlo / sampling;
+- range construction;
+- range narrowing;
+- blocker filtering;
+- card validation;
+- duplicate-card validation;
+- player filtering;
+- HERO/opponent invention;
 - postflop poker decisions;
 - postflop Action_Decision_JSON;
 - postflop Action_Runtime_Plan_JSON;
 - Action_Button detector calls;
 - physical mouse clicks;
-- equity calculations;
-- range calculations;
 - bet sizing policy.
 
-The existing PokerVision live click-chain may still exist in the wrapped project, but the postflop solver line does not invoke it in V0.9.0.
+`unknown_context_mode` is a valid structured result, not a pipeline failure. If opponent context is insufficient, the builder must not invent opponents or repair the source state.
+
+PokerKit belongs to `V0.11.0+`, not V0.10.0.
 
 ---
 
@@ -291,7 +313,7 @@ Subversions:
 - `52738bc` — `V0.9.7.2 add pending postflop Clear_JSON capture`
 - `14289f5` — `V0.9.7.3 adapt live Clear_JSON schema for postflop audit`
 - `5e315c8` — `V0.9.7.4 add live audit hygiene gate`
-- `V0.9.8` — `close live audit checkpoint`
+- `6ea2c62` — `V0.9.8 close live audit checkpoint`
 
 Final V0.9 live evidence:
 
@@ -316,31 +338,95 @@ Final V0.9 test gate:
 
 ---
 
-## Current test gate
+### V0.10.0 — Equity Input Builder / PokerKit Scenario Preparation
 
-Run the full current test suite:
+**Status:** closed by V0.10.5
 
-```powershell
-C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe -m pytest tests -q
-```
+**Closing checkpoint:** `V0.10.5 — Close V0.10.0 / README + VERSION Checkpoint`
 
-Expected after V0.9.8 overlay:
+V0.10.0 created the equity-input preparation layer:
 
 ```text
-411 passed
+FlopContext + BoardTextureFeatures + MadeHandFeatures + DrawFeatures
+-> EquityScenarioInput
+```
+
+Subversions:
+
+- `fce43d9` — `V0.10.1 add equity input contracts`
+- `3a34f71` — `V0.10.2 add equity input builder`
+- `6f47c05` — `V0.10.3 add equity input fixture coverage`
+- `ee62827` — `V0.10.4 add equity input architecture gate`
+- `V0.10.5` — `close equity input builder`
+
+Key files:
+
+- `solver_postflop/equity_input_contracts.py`
+- `solver_postflop/equity_input.py`
+- `tests/test_postflop_equity_input_contracts_v100.py`
+- `tests/test_postflop_equity_input_builder_v100.py`
+- `tests/test_postflop_equity_input_from_fixtures_v100.py`
+- `tests/test_postflop_equity_input_no_extra_logic_v100.py`
+- `tests/fixtures/postflop_equity_input_v0103/`
+- `docs/POSTFLOP_EQUITY_INPUT.md`
+
+Final V0.10 targeted gate at V0.10.4:
+
+```text
+46 passed in 0.45s
+```
+
+Final V0.10 postflop cumulative gate:
+
+```text
+457 passed in 5.11s
+```
+
+Final result:
+
+```text
+Clear_JSON
+-> SolverInput
+-> Branch Resolver
+-> FlopContext
+-> BoardTextureFeatures
+-> MadeHandFeatures
+-> DrawFeatures
+-> EquityScenarioInput
+```
+
+V0.10.0 did **not** create PokerKit simulation, equity calculation, ranges, blocker filtering, decision logic, runtime plans, Action_Button calls, clicks, or bet sizing.
+
+---
+
+## Current test gate
+
+Run the official postflop cumulative test suite:
+
+```powershell
+cd "C:\PokerVision_Solver_AllPreflop_Flop"
+$postflopTests = Get-ChildItem tests -File -Filter "test_postflop_*.py" | Sort-Object Name | ForEach-Object { $_.FullName }
+C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe -m pytest $postflopTests -q
+```
+
+Expected after V0.10.5 overlay:
+
+```text
+457 passed
 ```
 
 ---
 
 ## Next planned block
 
-### V0.10.0 — to be discussed before implementation
+### V0.11.0 — PokerKit-backed Equity Engine / Raw Equity Snapshot
 
-No V0.10.0 code should be written until its scope is explicitly discussed and approved.
+Scope must be discussed and approved before any V0.11.0 code is written.
 
-Candidate discussion areas:
+Candidate direction:
 
-- whether to begin a postflop decision-input contract;
-- whether to add turn/river feature placeholders or real modules;
-- whether to formalize range/equity inputs;
-- whether to keep V0.10 audit-only or start decision blueprint work.
+- introduce equity result contracts;
+- add a PokerKit backend adapter behind an abstraction;
+- return structured `backend_unavailable` instead of breaking the pipeline;
+- calculate raw/random-opponent equity only;
+- keep range-aware equity for later versions.
