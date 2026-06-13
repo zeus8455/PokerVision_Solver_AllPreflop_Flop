@@ -1,9 +1,9 @@
 """Raw postflop equity engine wrapper.
 
-V0.11.4 scope: convert EquityScenarioInput into a structured EquityResult
-by selecting the raw computation mode and delegating backend metadata to the
-PokerKit adapter. This module does not implement card enumeration, sampling,
-range logic, poker decisions, runtime planning, or clicks.
+V0.11.7 scope: preserve numeric raw backend output in the public
+EquityResult. This wrapper still delegates all card enumeration to the
+PokerKit backend adapter and does not implement ranges, poker decisions,
+runtime planning, or clicks.
 """
 
 from __future__ import annotations
@@ -23,8 +23,10 @@ from solver_postflop.equity_contracts import (
 from solver_postflop.equity_input_contracts import EquityRunMode, EquityScenarioInput
 
 EQUITY_ENGINE_VERSION = "v0.11.4"
+EQUITY_ENGINE_NUMERIC_INTEGRATION_VERSION = "v0.11.7"
 EQUITY_ENGINE_DEFAULT_BACKEND = DEFAULT_EQUITY_BACKEND_NAME
 EQUITY_ENGINE_WRAPPER_NOTE = "equity_engine_wrapper_v0114"
+NUMERIC_BACKEND_INTEGRATION_NOTE = "equity_engine_numeric_backend_integration_v0117"
 RAW_NUMERIC_BACKEND_DEFERRED_NOTE = "raw_numeric_backend_result_deferred"
 
 BackendRunner = Callable[[EquityScenarioInput], EquityBackendResult]
@@ -100,6 +102,7 @@ def build_equity_result_from_backend(
         (EQUITY_ENGINE_WRAPPER_NOTE,),
         backend_result.notes,
         _mode_notes(scenario_input=scenario_input, backend_result=backend_result),
+        _numeric_integration_notes(backend_result),
     )
 
     runtime_ms = backend_result.runtime_ms
@@ -110,8 +113,11 @@ def build_equity_result_from_backend(
     backend_metadata.update(
         {
             "engine_version": EQUITY_ENGINE_VERSION,
+            "numeric_integration_version": EQUITY_ENGINE_NUMERIC_INTEGRATION_VERSION,
             "selected_computation_mode": selected_mode.value,
             "scenario_equity_run_mode": _enum_value(scenario_input.equity_run_mode),
+            "numeric_result_integrated": _has_numeric_backend_payload(backend_result),
+            "backend_sample_count_used": backend_result.sample_count_used,
         }
     )
 
@@ -157,9 +163,26 @@ def _derive_confidence(backend_result: EquityBackendResult) -> EquityConfidenceC
         return EquityConfidenceClass.UNKNOWN
     if backend_result.hero_equity is None:
         return EquityConfidenceClass.UNKNOWN
+    if backend_result.computation_mode == EquityComputationMode.HEADS_UP_RAW_EQUITY:
+        return EquityConfidenceClass.MEDIUM
     if backend_result.sample_count_used is not None and backend_result.sample_count_used < 1000:
         return EquityConfidenceClass.LOW
     return EquityConfidenceClass.MEDIUM
+
+
+def _has_numeric_backend_payload(backend_result: EquityBackendResult) -> bool:
+    return (
+        backend_result.backend_status == EquityBackendStatus.OK
+        and backend_result.hero_equity is not None
+        and backend_result.hero_win_rate is not None
+        and backend_result.hero_tie_rate is not None
+    )
+
+
+def _numeric_integration_notes(backend_result: EquityBackendResult) -> tuple[str, ...]:
+    if _has_numeric_backend_payload(backend_result):
+        return (NUMERIC_BACKEND_INTEGRATION_NOTE,)
+    return ()
 
 
 def _mode_notes(
@@ -200,6 +223,8 @@ __all__ = (
     "EQUITY_ENGINE_DEFAULT_BACKEND",
     "EQUITY_ENGINE_VERSION",
     "EQUITY_ENGINE_WRAPPER_NOTE",
+    "EQUITY_ENGINE_NUMERIC_INTEGRATION_VERSION",
+    "NUMERIC_BACKEND_INTEGRATION_NOTE",
     "RAW_NUMERIC_BACKEND_DEFERRED_NOTE",
     "build_equity_result_from_backend",
     "run_equity_engine",
