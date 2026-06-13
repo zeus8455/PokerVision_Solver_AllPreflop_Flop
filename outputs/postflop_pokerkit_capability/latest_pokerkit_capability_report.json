@@ -1,0 +1,33 @@
+{
+  "available_symbols": [
+    "NoLimitTexasHoldem",
+    "Automation",
+    "Mode",
+    "State",
+    "StandardHighHand",
+    "Card",
+    "Rank",
+    "Suit",
+    "Deck"
+  ],
+  "backend_name": "pokerkit",
+  "decision_logic_executed": false,
+  "equity_calculation_executed": false,
+  "importable": true,
+  "missing_symbols": [],
+  "module_file": "C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pokerkit\\__init__.py",
+  "monte_carlo_executed": false,
+  "notes": [
+    "pokerkit_importable",
+    "core_symbol_candidates_available"
+  ],
+  "package_version": "0.7.4",
+  "physical_click_executed": false,
+  "range_logic_executed": false,
+  "real_project_touched": false,
+  "runtime_plan_created": false,
+  "schema": "pokervision_solver_postflop_pokerkit_capability_probe_v1",
+  "simulation_executed": false,
+  "status": "available",
+  "version_block": "V0.11.3"
+}
