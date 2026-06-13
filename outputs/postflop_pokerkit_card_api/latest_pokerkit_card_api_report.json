@@ -1,0 +1,100 @@
+{
+  "available_symbols": [
+    "Card",
+    "Rank",
+    "Suit",
+    "StandardHighHand"
+  ],
+  "backend_name": "pokerkit",
+  "board_compact": "QdJcTs2c3d",
+  "card_parse_error": null,
+  "decision_logic_executed": false,
+  "equity_calculation_executed": false,
+  "hand_evaluation_error": null,
+  "hero_compact": "AsKh",
+  "importable": true,
+  "missing_symbols": [],
+  "module_file": "C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pokerkit\\__init__.py",
+  "monte_carlo_executed": false,
+  "notes": [
+    "pokerkit_importable",
+    "card_api_symbols_available",
+    "card_parse_ok",
+    "standard_high_hand_evaluation_ok"
+  ],
+  "package_version": "0.7.4",
+  "parsed_card_compacts": [
+    "As",
+    "Kh",
+    "Qd",
+    "Jc",
+    "Ts",
+    "2c",
+    "3d"
+  ],
+  "parsed_card_strings": [
+    "ACE OF SPADES (As)",
+    "KING OF HEARTS (Kh)",
+    "QUEEN OF DIAMONDS (Qd)",
+    "JACK OF CLUBS (Jc)",
+    "TEN OF SPADES (Ts)",
+    "DEUCE OF CLUBS (2c)",
+    "TREY OF DIAMONDS (3d)"
+  ],
+  "physical_click_executed": false,
+  "range_logic_executed": false,
+  "real_project_touched": false,
+  "runtime_plan_created": false,
+  "sample_mapping_results": [
+    {
+      "compact": "As",
+      "error": null,
+      "ok": true,
+      "source": "A_spades"
+    },
+    {
+      "compact": "Kh",
+      "error": null,
+      "ok": true,
+      "source": "K_hearts"
+    },
+    {
+      "compact": "Qd",
+      "error": null,
+      "ok": true,
+      "source": "Q_diamonds"
+    },
+    {
+      "compact": "Jc",
+      "error": null,
+      "ok": true,
+      "source": "J_clubs"
+    },
+    {
+      "compact": "Ts",
+      "error": null,
+      "ok": true,
+      "source": "10_spades"
+    },
+    {
+      "compact": "2c",
+      "error": null,
+      "ok": true,
+      "source": "2_clubs"
+    }
+  ],
+  "schema": "pokervision_solver_postflop_pokerkit_card_api_probe_v1",
+  "simulation_executed": false,
+  "standard_high_comparison_ok": true,
+  "standard_high_hand_cards": [
+    "ACE OF SPADES (As)",
+    "KING OF HEARTS (Kh)",
+    "QUEEN OF DIAMONDS (Qd)",
+    "JACK OF CLUBS (Jc)",
+    "TEN OF SPADES (Ts)"
+  ],
+  "standard_high_hand_created": true,
+  "standard_high_hand_repr": "Straight (AsKhQdJcTs)",
+  "status": "available",
+  "version_block": "V0.11.5"
+}
