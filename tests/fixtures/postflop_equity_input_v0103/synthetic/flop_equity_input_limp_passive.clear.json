@@ -1,0 +1,94 @@
+{
+  "action_context": {
+    "action_context_label": "limped_pot_checked_to_hero",
+    "allowed_actions": [
+      "check",
+      "bet"
+    ],
+    "can_bet": true,
+    "can_check": true,
+    "current_actor": "HERO",
+    "facing_bet": false
+  },
+  "board_cards": [
+    "8s",
+    "7d",
+    "2s"
+  ],
+  "board_texture": {
+    "connection_texture": "connected",
+    "paired_texture": "unpaired",
+    "rank_texture": "middle_connected",
+    "suit_texture": "two_tone",
+    "texture_tags": [
+      "two_tone",
+      "connected",
+      "draw_heavy"
+    ],
+    "volatility_class": "dynamic_board"
+  },
+  "case_id": "flop_equity_input_limp_passive",
+  "draw": {
+    "combo_draw_class": "flush_plus_oesd",
+    "draw_class": "combo_draw",
+    "draw_strength_tier": "strong_draw",
+    "draw_tags": [
+      "flush_draw",
+      "oesd"
+    ],
+    "flush_draw_class": "standard_flush_draw",
+    "overcard_class": "no_overcards",
+    "straight_draw_class": "open_ended_straight_draw"
+  },
+  "hand_id": "hand_limp_passive_001",
+  "hero_cards": [
+    "Ts",
+    "9s"
+  ],
+  "made_hand": {
+    "board_interaction_tags": [],
+    "kicker_relevance": "not_relevant",
+    "made_hand_class": "high_card",
+    "pair_class": "no_pair_class",
+    "showdown_value_class": "air",
+    "strength_tier": "air"
+  },
+  "player_context": {
+    "hero_id": "HERO",
+    "hero_position": "BB",
+    "is_heads_up": true,
+    "is_multiway": false,
+    "opponents": [
+      {
+        "player_id": "SB",
+        "position": "SB"
+      }
+    ],
+    "players": [
+      {
+        "player_id": "HERO",
+        "position": "BB"
+      },
+      {
+        "player_id": "SB",
+        "position": "SB"
+      }
+    ]
+  },
+  "position_context": {
+    "hero_id": "HERO",
+    "hero_position": "BB",
+    "is_in_position": false,
+    "position_label": "oop"
+  },
+  "pot_context": {
+    "effective_stack": 95.0,
+    "pot": 5.0,
+    "pot_type": "limped_pot",
+    "spr": 19.0,
+    "to_call": 0.0
+  },
+  "source_file": "tests/fixtures/postflop_equity_input_v0103/synthetic/flop_equity_input_limp_passive.clear.json",
+  "spot_family": "limp_or_passive_pot",
+  "table_id": "table_04"
+}

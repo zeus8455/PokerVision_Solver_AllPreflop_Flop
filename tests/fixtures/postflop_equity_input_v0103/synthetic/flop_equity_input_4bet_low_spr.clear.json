@@ -1,0 +1,95 @@
+{
+  "action_context": {
+    "action_context_label": "low_spr_facing_bet",
+    "allowed_actions": [
+      "fold",
+      "call",
+      "raise"
+    ],
+    "can_call": true,
+    "can_raise": true,
+    "current_actor": "HERO",
+    "facing_bet": true
+  },
+  "board_cards": [
+    "Jh",
+    "8h",
+    "3c"
+  ],
+  "board_texture": {
+    "connection_texture": "semi_connected",
+    "paired_texture": "unpaired",
+    "rank_texture": "middle_connected",
+    "suit_texture": "two_tone",
+    "texture_tags": [
+      "two_tone",
+      "middle_connected",
+      "low_spr"
+    ],
+    "volatility_class": "semi_dynamic_board"
+  },
+  "case_id": "flop_equity_input_4bet_low_spr",
+  "draw": {
+    "combo_draw_class": "no_combo_draw",
+    "draw_class": "no_draw",
+    "draw_strength_tier": "no_draw",
+    "draw_tags": [],
+    "flush_draw_class": "no_flush_draw",
+    "overcard_class": "no_overcards",
+    "straight_draw_class": "no_straight_draw"
+  },
+  "hand_id": "hand_4bp_low_spr_001",
+  "hero_cards": [
+    "Qc",
+    "Qd"
+  ],
+  "made_hand": {
+    "board_interaction_tags": [
+      "overpair",
+      "low_spr_value"
+    ],
+    "kicker_relevance": "not_relevant",
+    "made_hand_class": "one_pair",
+    "pair_class": "overpair",
+    "showdown_value_class": "value_hand",
+    "strength_tier": "strong_showdown"
+  },
+  "player_context": {
+    "hero_id": "HERO",
+    "hero_position": "CO",
+    "is_heads_up": true,
+    "is_multiway": false,
+    "opponents": [
+      {
+        "player_id": "BTN",
+        "position": "BTN"
+      }
+    ],
+    "players": [
+      {
+        "player_id": "HERO",
+        "position": "CO"
+      },
+      {
+        "player_id": "BTN",
+        "position": "BTN"
+      }
+    ]
+  },
+  "position_context": {
+    "hero_id": "HERO",
+    "hero_position": "CO",
+    "is_in_position": false,
+    "position_label": "oop"
+  },
+  "pot_context": {
+    "effective_stack": 38.0,
+    "pot": 45.0,
+    "pot_type": "fourbet_pot",
+    "spr": 0.84,
+    "to_call": 18.0
+  },
+  "source_file": "tests/fixtures/postflop_equity_input_v0103/synthetic/flop_equity_input_4bet_low_spr.clear.json",
+  "spot_family": "fourbet_low_spr",
+  "table_id": "table_03"
+}

@@ -1,0 +1,80 @@
+{
+  "action_context": {
+    "action_context_label": "unknown",
+    "allowed_actions": [],
+    "can_call": null,
+    "can_raise": null,
+    "current_actor": "HERO",
+    "facing_bet": null
+  },
+  "board_cards": [
+    "Ks",
+    "5c",
+    "2d"
+  ],
+  "board_texture": {
+    "connection_texture": "disconnected",
+    "paired_texture": "unpaired",
+    "rank_texture": "king_high",
+    "suit_texture": "rainbow",
+    "texture_tags": [
+      "rainbow",
+      "king_high"
+    ],
+    "volatility_class": "unknown"
+  },
+  "case_id": "flop_equity_input_unknown_context",
+  "draw": {
+    "combo_draw_class": "no_combo_draw",
+    "draw_class": "no_draw",
+    "draw_strength_tier": "no_draw",
+    "draw_tags": [],
+    "flush_draw_class": "no_flush_draw",
+    "overcard_class": "no_overcards",
+    "straight_draw_class": "no_straight_draw"
+  },
+  "hand_id": "hand_unknown_001",
+  "hero_cards": [
+    "9h",
+    "9d"
+  ],
+  "made_hand": {
+    "board_interaction_tags": [
+      "underpair"
+    ],
+    "kicker_relevance": "not_relevant",
+    "made_hand_class": "one_pair",
+    "pair_class": "underpair",
+    "showdown_value_class": "weak_showdown",
+    "strength_tier": "weak_showdown"
+  },
+  "player_context": {
+    "hero_id": "HERO",
+    "hero_position": null,
+    "is_heads_up": null,
+    "is_multiway": null,
+    "opponents": [],
+    "players": [
+      {
+        "player_id": "HERO",
+        "position": null
+      }
+    ]
+  },
+  "position_context": {
+    "hero_id": "HERO",
+    "hero_position": null,
+    "is_in_position": null,
+    "position_label": null
+  },
+  "pot_context": {
+    "effective_stack": null,
+    "pot": 9.0,
+    "pot_type": null,
+    "spr": null,
+    "to_call": null
+  },
+  "source_file": "tests/fixtures/postflop_equity_input_v0103/synthetic/flop_equity_input_unknown_context.clear.json",
+  "spot_family": "unknown_flop_spot",
+  "table_id": "table_06"
+}

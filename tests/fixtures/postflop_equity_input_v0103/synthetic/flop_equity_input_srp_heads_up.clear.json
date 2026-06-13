@@ -1,0 +1,98 @@
+{
+  "action_context": {
+    "action_context_label": "facing_bet",
+    "allowed_actions": [
+      "fold",
+      "call",
+      "raise"
+    ],
+    "can_call": true,
+    "can_raise": true,
+    "current_actor": "HERO",
+    "facing_bet": true
+  },
+  "board_cards": [
+    "Qh",
+    "Jh",
+    "2c"
+  ],
+  "board_texture": {
+    "connection_texture": "semi_connected",
+    "paired_texture": "unpaired",
+    "rank_texture": "broadway_heavy",
+    "suit_texture": "two_tone",
+    "texture_tags": [
+      "two_tone",
+      "broadway_heavy",
+      "semi_connected"
+    ],
+    "volatility_class": "semi_dynamic_board"
+  },
+  "case_id": "flop_equity_input_srp_heads_up",
+  "draw": {
+    "combo_draw_class": "premium_combo_draw",
+    "draw_class": "combo_draw",
+    "draw_strength_tier": "premium_combo_draw",
+    "draw_tags": [
+      "nut_flush_candidate",
+      "gutshot",
+      "two_overcards"
+    ],
+    "flush_draw_class": "nut_flush_draw_candidate",
+    "overcard_class": "two_overcards",
+    "straight_draw_class": "gutshot"
+  },
+  "hand_id": "hand_srp_hu_001",
+  "hero_cards": [
+    "Ah",
+    "Kh"
+  ],
+  "made_hand": {
+    "board_interaction_tags": [
+      "two_overcards"
+    ],
+    "kicker_relevance": "two_overcards",
+    "made_hand_class": "high_card",
+    "pair_class": "no_pair_class",
+    "showdown_value_class": "air",
+    "strength_tier": "air"
+  },
+  "player_context": {
+    "hero_id": "HERO",
+    "hero_position": "BTN",
+    "is_heads_up": true,
+    "is_multiway": false,
+    "opponents": [
+      {
+        "player_id": "BB",
+        "position": "BB"
+      }
+    ],
+    "players": [
+      {
+        "player_id": "HERO",
+        "position": "BTN"
+      },
+      {
+        "player_id": "BB",
+        "position": "BB"
+      }
+    ]
+  },
+  "position_context": {
+    "hero_id": "HERO",
+    "hero_position": "BTN",
+    "is_in_position": true,
+    "position_label": "ip"
+  },
+  "pot_context": {
+    "effective_stack": 82.5,
+    "pot": 7.5,
+    "pot_type": "single_raised_pot",
+    "spr": 11.0,
+    "to_call": 2.5
+  },
+  "source_file": "tests/fixtures/postflop_equity_input_v0103/synthetic/flop_equity_input_srp_heads_up.clear.json",
+  "spot_family": "srp_heads_up",
+  "table_id": "table_01"
+}

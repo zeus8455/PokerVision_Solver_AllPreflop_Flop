@@ -1,0 +1,13 @@
+{
+  "case_id": "flop_equity_input_limp_passive",
+  "expected_equity_run_mode": "heads_up_exact_or_sampled",
+  "expected_features_used": [
+    "flop_context.hero_cards",
+    "flop_context.board_cards",
+    "board_texture_features.texture_tags",
+    "flop_context.pot_context.pot"
+  ],
+  "expected_next_module": "equity_engine",
+  "expected_opponents_count": 1,
+  "expected_spot_family": "limp_or_passive_pot"
+}

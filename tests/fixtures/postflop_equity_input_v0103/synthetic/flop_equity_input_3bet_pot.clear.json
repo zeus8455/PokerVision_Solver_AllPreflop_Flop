@@ -1,0 +1,93 @@
+{
+  "action_context": {
+    "action_context_label": "checked_to_hero",
+    "allowed_actions": [
+      "check",
+      "bet"
+    ],
+    "can_bet": true,
+    "can_check": true,
+    "current_actor": "HERO",
+    "facing_bet": false
+  },
+  "board_cards": [
+    "Kd",
+    "7h",
+    "2s"
+  ],
+  "board_texture": {
+    "connection_texture": "disconnected",
+    "paired_texture": "unpaired",
+    "rank_texture": "king_high",
+    "suit_texture": "rainbow",
+    "texture_tags": [
+      "rainbow",
+      "king_high",
+      "dry"
+    ],
+    "volatility_class": "static_board"
+  },
+  "case_id": "flop_equity_input_3bet_pot",
+  "draw": {
+    "combo_draw_class": "no_combo_draw",
+    "draw_class": "no_draw",
+    "draw_strength_tier": "no_draw",
+    "draw_tags": [],
+    "flush_draw_class": "no_flush_draw",
+    "overcard_class": "no_overcards",
+    "straight_draw_class": "no_straight_draw"
+  },
+  "hand_id": "hand_3bp_001",
+  "hero_cards": [
+    "As",
+    "Ad"
+  ],
+  "made_hand": {
+    "board_interaction_tags": [
+      "overpair"
+    ],
+    "kicker_relevance": "not_relevant",
+    "made_hand_class": "one_pair",
+    "pair_class": "overpair",
+    "showdown_value_class": "value_hand",
+    "strength_tier": "very_strong_value"
+  },
+  "player_context": {
+    "hero_id": "HERO",
+    "hero_position": "BTN",
+    "is_heads_up": true,
+    "is_multiway": false,
+    "opponents": [
+      {
+        "player_id": "SB",
+        "position": "SB"
+      }
+    ],
+    "players": [
+      {
+        "player_id": "HERO",
+        "position": "BTN"
+      },
+      {
+        "player_id": "SB",
+        "position": "SB"
+      }
+    ]
+  },
+  "position_context": {
+    "hero_id": "HERO",
+    "hero_position": "BTN",
+    "is_in_position": true,
+    "position_label": "ip"
+  },
+  "pot_context": {
+    "effective_stack": 74.0,
+    "pot": 22.0,
+    "pot_type": "threebet_pot",
+    "spr": 3.36,
+    "to_call": 0.0
+  },
+  "source_file": "tests/fixtures/postflop_equity_input_v0103/synthetic/flop_equity_input_3bet_pot.clear.json",
+  "spot_family": "threebet_pot_heads_up",
+  "table_id": "table_02"
+}

@@ -1,0 +1,104 @@
+{
+  "action_context": {
+    "action_context_label": "multiway_facing_bet",
+    "allowed_actions": [
+      "fold",
+      "call",
+      "raise"
+    ],
+    "can_call": true,
+    "can_raise": true,
+    "current_actor": "HERO",
+    "facing_bet": true
+  },
+  "board_cards": [
+    "Jd",
+    "6c",
+    "3h"
+  ],
+  "board_texture": {
+    "connection_texture": "disconnected",
+    "paired_texture": "unpaired",
+    "rank_texture": "middle_connected",
+    "suit_texture": "rainbow",
+    "texture_tags": [
+      "rainbow",
+      "static",
+      "multiway"
+    ],
+    "volatility_class": "static_board"
+  },
+  "case_id": "flop_equity_input_multiway",
+  "draw": {
+    "combo_draw_class": "no_combo_draw",
+    "draw_class": "backdoor_only",
+    "draw_strength_tier": "backdoor_only",
+    "draw_tags": [
+      "backdoor_club"
+    ],
+    "flush_draw_class": "backdoor_flush_draw",
+    "overcard_class": "no_overcards",
+    "straight_draw_class": "no_straight_draw"
+  },
+  "hand_id": "hand_multiway_001",
+  "hero_cards": [
+    "Ac",
+    "Jc"
+  ],
+  "made_hand": {
+    "board_interaction_tags": [
+      "top_pair_top_kicker"
+    ],
+    "kicker_relevance": "top_kicker",
+    "made_hand_class": "one_pair",
+    "pair_class": "top_pair",
+    "showdown_value_class": "strong_showdown",
+    "strength_tier": "strong_showdown"
+  },
+  "player_context": {
+    "hero_id": "HERO",
+    "hero_position": "CO",
+    "is_heads_up": false,
+    "is_multiway": true,
+    "opponents": [
+      {
+        "player_id": "BTN",
+        "position": "BTN"
+      },
+      {
+        "player_id": "BB",
+        "position": "BB"
+      }
+    ],
+    "players": [
+      {
+        "player_id": "HERO",
+        "position": "CO"
+      },
+      {
+        "player_id": "BTN",
+        "position": "BTN"
+      },
+      {
+        "player_id": "BB",
+        "position": "BB"
+      }
+    ]
+  },
+  "position_context": {
+    "hero_id": "HERO",
+    "hero_position": "CO",
+    "is_in_position": false,
+    "position_label": "mixed_multiway"
+  },
+  "pot_context": {
+    "effective_stack": 70.0,
+    "pot": 12.0,
+    "pot_type": "multiway_single_raised_pot",
+    "spr": 5.83,
+    "to_call": 4.0
+  },
+  "source_file": "tests/fixtures/postflop_equity_input_v0103/synthetic/flop_equity_input_multiway.clear.json",
+  "spot_family": "multiway_pot",
+  "table_id": "table_05"
+}
