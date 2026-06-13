@@ -1,10 +1,13 @@
-﻿__pycache__/
+__pycache__/
 *.pyc
 .pytest_cache/
 .venv/
 venv/
 .env
-
 tmp_solver_outputs/
-
 tmp_preintegration_outputs/
+
+# Generated audit/runtime outputs
+outputs/postflop_live_clear_json_audit_v090/
+external/PokerVisionFinalVersionNoSolver_snapshot/PokerVision V1_2/outputs/postflop_live_clear_json/
+TABLE_03_HAND_49_DEEP_DUMP.txt

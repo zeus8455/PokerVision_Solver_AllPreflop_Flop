@@ -1,29 +1,22 @@
 # VERSION
 
-Project: **PokerVision_Solver_AllPreflop_Flop**  
+Project: **PokerVision_Solver_AllPreflop_Flop**
+
 Development line: **Clear_JSON-only postflop solver engine**
 
 ---
 
 ## Current status
 
-**Current closed version:** `V0.8.0 — Hero Draw Classifier / Draw Features`  
-**Closing subversion:** `V0.8.7 — Version Close / README / VERSION / Miro`  
-**Final gate:** `297 passed`  
-**Next planned version:** `V0.9.0 — Main Live Integration / Clear_JSON Capture / Full Module Audit`
+**Current closed version:** `V0.9.0 — Main Live Clear_JSON Audit / Postflop Capture Evidence`
 
-Current closed chain:
+**Closing subversion:** `V0.9.8 — Close V0.9.0 / Live Audit Checkpoint`
 
-```text
-Clear_JSON
-  -> ClearJsonInput
-  -> SolverInput
-  -> Branch Resolver
-  -> FlopContext
-  -> BoardTextureFeatures
-  -> MadeHandFeatures
-  -> DrawFeatures
-```
+**Latest code gate:** `405 passed` at `V0.9.7.4`
+
+**Latest formal live evidence:** `passed`
+
+**Next planned version:** `V0.10.0 — to be discussed before implementation`
 
 ---
 
@@ -37,7 +30,8 @@ Clear_JSON
 
 ## V0.1.0 — Solver Engine Blueprint / Clear_JSON Input Contract
 
-**Status:** closed  
+**Status:** closed
+
 **Closing checkpoint:** `00b6b7d — V0.1.5 close solver engine blueprint`
 
 ### Subversions
@@ -56,7 +50,7 @@ Clear_JSON
 
 ### Final result
 
-Created the baseline chain:
+Created the trusted-input baseline:
 
 ```text
 Clear_JSON -> ClearJsonInput -> SolverInput -> SolverTrace
@@ -66,7 +60,8 @@ Clear_JSON -> ClearJsonInput -> SolverInput -> SolverTrace
 
 ## V0.2.0 — Clear_JSON Fixture Library / Real + Synthetic Solver Cases
 
-**Status:** closed  
+**Status:** closed
+
 **Closing checkpoint:** `ee56990 — V0.2.6 close Clear_JSON fixture library`
 
 ### Subversions
@@ -88,7 +83,8 @@ Clear_JSON -> ClearJsonInput -> SolverInput -> SolverTrace
 
 ## V0.3.0 — SolverInput Mapping / Field Usage Contract
 
-**Status:** closed  
+**Status:** closed
+
 **Closing checkpoint:** `4603c68 — V0.3.6 close SolverInput mapping contract`
 
 ### Subversions
@@ -110,7 +106,8 @@ Clear_JSON -> ClearJsonInput -> SolverInput -> SolverTrace
 
 ## V0.4.0 — Solver Branch Resolver / Street Module Routing
 
-**Status:** closed  
+**Status:** closed
+
 **Closing checkpoint:** `6da8320 — V0.4.6 close branch resolver routing`
 
 ### Subversions
@@ -128,31 +125,12 @@ Clear_JSON -> ClearJsonInput -> SolverInput -> SolverTrace
 125 passed
 ```
 
-### Final result
-
-Created the routing chain:
-
-```text
-SolverInput -> Branch Resolver -> SolverBranchResult
-```
-
-V0.4.0 maps board-card count to branch result:
-
-```text
-0 board cards        -> preflop_not_handled
-3 board cards        -> flop
-4 board cards        -> turn_not_implemented_yet
-5 board cards        -> river_not_implemented_yet
-missing / 1 / 2 / 6+ -> unsupported
-```
-
-This is a routing layer, not a validator or decision engine.
-
 ---
 
 ## V0.5.0 — Flop Context Builder / Spot Family Layer
 
-**Status:** closed  
+**Status:** closed
+
 **Closing checkpoint:** `1d7154e — V0.5.7 close flop context builder`
 
 ### Subversions
@@ -171,28 +149,12 @@ This is a routing layer, not a validator or decision engine.
 163 passed
 ```
 
-### Final result
-
-Created the flop-context chain:
-
-```text
-SolverInput + SolverBranchResult -> FlopContext
-```
-
-V0.5.0 added:
-
-- Flop context contracts
-- Flop context builder baseline
-- Spot family classifier
-- Fixture-backed FlopContext test coverage
-- No-extra-logic architecture gate
-- FlopContext documentation
-
 ---
 
-## V0.6.0 — Board Texture Feature Builder
+## V0.6.0 — Board Texture Builder
 
-**Status:** closed  
+**Status:** closed
+
 **Closing checkpoint:** `341657d — V0.6.7 close board texture builder`
 
 ### Subversions
@@ -211,29 +173,12 @@ V0.5.0 added:
 205 passed
 ```
 
-### Final result
-
-Created the board-texture feature chain:
-
-```text
-FlopContext -> BoardTextureFeatures
-```
-
-V0.6.0 added:
-
-- Board texture contracts
-- Board texture builder baseline
-- Board texture classification matrix
-- Fixture-backed board texture cases
-- No-extra-logic architecture gate
-- Board texture documentation
-- V0.6 close checkpoint
-
 ---
 
-## V0.7.0 — Hero Hand Classifier / Made Hand Features
+## V0.7.0 — Hero Made Hand Classifier
 
-**Status:** closed by V0.7.7  
+**Status:** closed
+
 **Closing checkpoint:** `67e0183 — V0.7.7 close hero made hand classifier`
 
 ### Subversions
@@ -244,7 +189,7 @@ V0.6.0 added:
 - `a650eb8` — `V0.7.4 add fixture-backed hero made hand cases`
 - `daa1923` — `V0.7.5 add hero made hand no-extra-logic gate`
 - `adb6b14` — `V0.7.6 document hero made hand classifier`
-- `V0.7.7` — `close hero made hand classifier`
+- `67e0183` — `V0.7.7 close hero made hand classifier`
 
 ### Final gate
 
@@ -252,89 +197,13 @@ V0.6.0 added:
 254 passed
 ```
 
-### Final result
-
-Created the HERO made-hand feature chain:
-
-```text
-FlopContext + BoardTextureFeatures -> MadeHandFeatures
-```
-
-V0.7.0 added:
-
-- Hero made-hand contracts
-- Hero made-hand classifier baseline
-- Pair class / strength tier matrix
-- Fixture-backed made-hand coverage
-- No-extra-logic architecture gate
-- Hero made-hand documentation
-- V0.7 close checkpoint
-
-### Main output contract
-
-`MadeHandFeatures` contains:
-
-- `case_id`
-- `source_file`
-- `hero_cards`
-- `board_cards`
-- `made_hand_class`
-- `pair_class`
-- `showdown_value_class`
-- `strength_tier`
-- `kicker_relevance`
-- `board_interaction_tags`
-- `features_used_by_future_modules`
-- `notes`
-
-### Made hand classes
-
-```text
-high_card
-one_pair
-two_pair
-three_of_a_kind
-straight
-flush
-full_house
-quads
-```
-
-### Pair classes
-
-```text
-top_pair
-middle_pair
-bottom_pair
-overpair
-underpair
-pocket_pair_below_board
-no_pair_class
-```
-
-### Strength tiers
-
-```text
-air
-weak_showdown
-medium_showdown
-strong_showdown
-value_hand
-very_strong_value
-nut_or_near_nut
-```
-
-### Architecture boundaries
-
-V0.7.0 does not validate cards, find duplicate cards, check hero-board collisions, filter players, create HERO, calculate draws, calculate equity, build ranges, make decisions, create runtime plans, or click.
-
 ---
 
+## V0.8.0 — Hero Draw Classifier
 
-## V0.8.0 — Hero Draw Classifier / Draw Features
+**Status:** closed
 
-**Status:** closed by V0.8.7  
-**Closing checkpoint:** created by commit `V0.8.7 close hero draw classifier`
+**Closing checkpoint:** `0b787bd — V0.8.7 close hero draw classifier`
 
 ### Subversions
 
@@ -344,7 +213,7 @@ V0.7.0 does not validate cards, find duplicate cards, check hero-board collision
 - `8dac329` — `V0.8.4 add fixture-backed hero draw cases`
 - `762e729` — `V0.8.5 add hero draw no-extra-logic gate`
 - `41c3261` — `V0.8.6 document hero draw classifier`
-- `V0.8.7` — `close hero draw classifier`
+- `0b787bd` — `V0.8.7 close hero draw classifier`
 
 ### Final gate
 
@@ -352,139 +221,64 @@ V0.7.0 does not validate cards, find duplicate cards, check hero-board collision
 297 passed
 ```
 
+---
+
+## V0.9.0 — Main Live Clear_JSON Audit / Postflop Capture Evidence
+
+**Status:** closed by V0.9.8
+
+**Closing checkpoint:** `V0.9.8 — Close V0.9.0 / Live Audit Checkpoint`
+
+### Subversions
+
+- `bf062c5` — `V0.9.1 add live audit report contracts`
+- `6928575` — `V0.9.2 add Clear_JSON discovery gate`
+- `0fabc40` — `V0.9.3 add Clear_JSON module pipeline runner`
+- `54e4f55` — `V0.9.4 add Clear_JSON capture hook audit`
+- `813dd5f` — `V0.9.5 add Clear_JSON audit tool runner`
+- `3b17f9f` — `V0.9.6 add no postflop click architecture gate`
+- `eb7fed5` — `V0.9.7 document main live Clear_JSON audit command`
+- `cca11f0` — `V0.9.7.1 integrate runtime Clear_JSON capture hook`
+- `52738bc` — `V0.9.7.2 add pending postflop Clear_JSON capture`
+- `14289f5` — `V0.9.7.3 adapt live Clear_JSON schema for postflop audit`
+- `5e315c8` — `V0.9.7.4 add live audit hygiene gate`
+- `V0.9.8` — `close live audit checkpoint`
+
+### Final live evidence
+
+```text
+evidence_status = passed
+total_files_seen = 5
+total_clear_json_processed = 5
+module_chain_status = flop_features_completed
+artifacts_written.board_texture = 1
+artifacts_written.flop_contexts = 1
+artifacts_written.made_hand = 1
+artifacts_written.draw_features = 1
+runtime_click_chain_status = existing_project_chain_not_invoked_by_audit
+errors = []
+```
+
+### Final code gate before close
+
+```text
+405 passed at V0.9.7.4
+```
+
 ### Final result
 
-Created the HERO draw feature chain:
+V0.9.0 proved that live postflop Clear_JSON from the existing PokerVision main runtime can be captured, adapted into solver-readable Clear_JSON, and processed by the current flop feature chain:
 
 ```text
-FlopContext + BoardTextureFeatures + MadeHandFeatures -> DrawFeatures
+Clear_JSON -> SolverInput -> Branch Resolver -> FlopContext -> BoardTexture -> MadeHand -> DrawFeatures
 ```
 
-V0.8.0 added:
-
-- Hero draw contracts
-- Hero draw classifier baseline
-- Combo draw / draw strength matrix
-- Fixture-backed draw coverage
-- No-extra-logic architecture gate
-- Hero draw documentation
-- V0.8 close checkpoint
-
-### Main output contract
-
-`DrawFeatures` contains:
-
-- `case_id`
-- `source_file`
-- `hero_cards`
-- `board_cards`
-- `flush_draw_class`
-- `straight_draw_class`
-- `overcard_class`
-- `combo_draw_class`
-- `draw_strength_tier`
-- `draw_tags`
-- `features_used_by_future_modules`
-- `notes`
-
-### Flush draw classes
-
-```text
-no_flush_draw
-backdoor_flush_draw
-weak_flush_draw
-standard_flush_draw
-nut_flush_draw_candidate
-```
-
-### Straight draw classes
-
-```text
-no_straight_draw
-gutshot
-open_ended_straight_draw
-double_gutshot
-combo_straight_draw
-```
-
-### Overcard classes
-
-```text
-no_overcards
-one_overcard
-two_overcards
-```
-
-### Combo draw classes
-
-```text
-no_combo_draw
-flush_plus_gutshot
-flush_plus_oesd
-pair_plus_flush_draw
-pair_plus_straight_draw
-pair_plus_combo_draw
-overcards_plus_draw
-```
-
-### Draw strength tiers
-
-```text
-no_draw
-backdoor_only
-weak_draw
-medium_draw
-strong_draw
-premium_combo_draw
-```
-
-### Fixture coverage
-
-V0.8.4 added thirteen synthetic draw Clear_JSON fixtures:
-
-```text
-flop_draw_no_draw
-flop_draw_backdoor_flush
-flop_draw_standard_flush_draw
-flop_draw_nut_flush_draw
-flop_draw_gutshot
-flop_draw_oesd
-flop_draw_double_gutshot
-flop_draw_two_overcards
-flop_draw_fd_plus_gutshot
-flop_draw_fd_plus_oesd
-flop_draw_pair_plus_fd
-flop_draw_pair_plus_straight_draw
-flop_draw_premium_combo_draw
-```
-
-### Architecture boundaries
-
-V0.8.0 does not validate cards, find duplicate cards, check hero-board collisions, filter players, create HERO, calculate equity, build ranges, make decisions, create runtime plans, call Action_Button, or click.
+V0.9.0 did **not** create postflop decisions, runtime plans, Action_Button calls, clicks, equity, ranges, or bet sizing.
 
 ---
 
-## Next version
+## Next planned version
 
-## V0.9.0 — Main Live Integration / Clear_JSON Capture / Full Module Audit
+### V0.10.0 — to be discussed before implementation
 
-**Status:** planned
-
-Planned chain:
-
-```text
-live/main cycle
-  -> Clear_JSON capture
-  -> ClearJsonInput
-  -> SolverInput
-  -> Branch Resolver
-  -> FlopContext
-  -> BoardTextureFeatures
-  -> MadeHandFeatures
-  -> DrawFeatures
-  -> module audit report
-```
-
-V0.9.0 will verify that live Clear_JSON exists, is readable, and can pass through the complete V0.1–V0.8 module chain.
-
-V0.9.0 will not calculate equity, build ranges, make decisions, create postflop runtime plans, call Action_Button from the postflop solver, or click from the postflop solver.
+Scope must be discussed and approved before any V0.10.0 code is written.
