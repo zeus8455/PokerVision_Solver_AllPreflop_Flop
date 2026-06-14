@@ -8,17 +8,17 @@ Development line: **Clear_JSON-only postflop solver engine**
 
 ## Current status
 
-**Current closed version:** `V0.11.0 — PokerKit-backed Equity Engine / Raw Equity Snapshot`
+**Current closed version:** `V0.12.0 — Preflop Range Import / Range State Foundation`
 
-**Closing subversion:** `V0.11.10 — Close V0.11.0 / README + VERSION Checkpoint`
+**Closing subversion:** `V0.12.7 — Close V0.12.0 / README + VERSION Checkpoint`
 
-**Latest implementation checkpoint before close:** `e85656b — V0.11.9 add equity architecture gate`
+**Latest implementation checkpoint before close:** `7ff80ef — V0.12.6 add range architecture gate`
 
-**Latest official postflop cumulative gate:** `526 passed in 17.88s`
+**Latest official postflop cumulative gate:** `594 passed in 18.73s`
 
 **PokerKit local version:** `0.7.4`
 
-**Next planned version:** `V0.12.0 — Preflop Range Import / Range State Foundation`
+**Next planned version:** `V0.13.0 — Blocker Filtering / Available Combo State`
 
 ---
 
@@ -315,7 +315,7 @@ V0.10.0 did **not** calculate equity, import PokerKit in the equity input layer,
 
 **Status:** closed by V0.11.10
 
-**Closing checkpoint:** `V0.11.10 — Close V0.11.0 / README + VERSION Checkpoint`
+**Closing checkpoint:** `293f3a2 — V0.11.10 close PokerKit raw equity engine`
 
 ### Subversions
 
@@ -328,6 +328,7 @@ V0.10.0 did **not** calculate equity, import PokerKit in the equity input layer,
 - `09b8056` — `V0.11.7 integrate numeric equity engine result`
 - `2245820` — `V0.11.8 add equity scenario fixture coverage`
 - `e85656b` — `V0.11.9 add equity architecture gate`
+- `293f3a2` — `V0.11.10 close PokerKit raw equity engine`
 
 ### PokerKit local environment
 
@@ -335,33 +336,16 @@ V0.10.0 did **not** calculate equity, import PokerKit in the equity input layer,
 pokerkit = 0.7.4
 ```
 
-### Capability probe
-
-```text
-status = available
-available_symbols = NoLimitTexasHoldem, Automation, Mode, State, StandardHighHand, Card, Rank, Suit, Deck
-```
-
-### Card API probe
-
-```text
-A_spades -> As
-K_hearts -> Kh
-10_spades -> Ts
-StandardHighHand.from_game(...) = ok
-example = Straight (AsKhQdJcTs)
-```
-
 ### Final targeted gate
 
 ```text
-69 passed in 10.90s
+69 passed in 11.07s
 ```
 
 ### Final postflop cumulative gate
 
 ```text
-526 passed in 17.88s
+526 passed in 16.37s
 ```
 
 ### Final result
@@ -370,12 +354,97 @@ example = Straight (AsKhQdJcTs)
 Clear_JSON -> SolverInput -> Branch Resolver -> FlopContext -> BoardTextureFeatures -> MadeHandFeatures -> DrawFeatures -> EquityScenarioInput -> EquityResult
 ```
 
-V0.11.0 supports numeric heads-up raw equity through local PokerKit. Multiway is intentionally structured/deferred. V0.11.0 did **not** create ranges, blocker filtering, range narrowing, decisions, runtime plans, Action_Button calls, clicks, or bet sizing.
+V0.11.0 supports numeric heads-up raw equity through local PokerKit.
+
+Multiway is intentionally structured/deferred. V0.11.0 did **not** create ranges, blocker filtering, range narrowing, decisions, runtime plans, Action_Button calls, clicks, or bet sizing.
+
+---
+
+## V0.12.0 — Preflop Range Import / Range State Foundation
+
+**Status:** closed by V0.12.7
+
+**Closing checkpoint:** `V0.12.7 — Close V0.12.0 / README + VERSION Checkpoint`
+
+### Subversions
+
+- `e2ae8b0` — `V0.12.1 add range contracts`
+- `51b8b8c` — `V0.12.2 add range source inventory`
+- `2dc9fb0` — `V0.12.3 add synthetic baseline range pack`
+- `f5e1cae` — `V0.12.4 add range importer`
+- `4857867` — `V0.12.5 add range state fixture coverage`
+- `7ff80ef` — `V0.12.6 add range architecture gate`
+
+### Key files
+
+- `solver_postflop/range_contracts.py`
+- `solver_postflop/range_importer.py`
+- `ranges/hero_preflop_ranges.json`
+- `ranges/postflop_default_ranges.json`
+- `tools/run_postflop_range_source_inventory.py`
+- `tests/test_postflop_range_contracts_v120.py`
+- `tests/test_postflop_range_source_inventory_v120.py`
+- `tests/test_postflop_synthetic_baseline_ranges_v120.py`
+- `tests/test_postflop_range_importer_v120.py`
+- `tests/test_postflop_range_state_from_flop_context_v120.py`
+- `tests/test_postflop_range_no_extra_logic_v120.py`
+- `docs/POSTFLOP_RANGE_STATE.md`
+- `outputs/postflop_range_inventory/latest_range_source_inventory_report.json`
+
+### Range source inventory
+
+```text
+ranges/hero_preflop_ranges.json:
+  schema = preflop_ranges_v1
+  source_type_candidate = existing_project_ranges
+  contains_range_shorthand_strings = true
+  contains_combo_level_compact_strings = false
+  requires_expansion_before_v013 = true
+
+ranges/postflop_default_ranges.json:
+  schema = pokervision_solver_postflop_default_ranges_v1
+  source_type = postflop_default_ranges
+  combo_level_compact_string_count = 551
+  requires_expansion_before_v013 = false
+```
+
+### Targeted gates
+
+```text
+V0.12.1: 10 passed in 0.44s
+V0.12.2: 15 passed in 1.16s
+V0.12.3: 23 passed in 1.14s
+V0.12.4: 34 passed in 1.27s
+V0.12.5: 61 passed in 1.58s
+V0.12.6: 68 passed in 1.68s
+```
+
+### Final postflop cumulative gate
+
+```text
+594 passed in 18.73s
+```
+
+### Final result
+
+```text
+Clear_JSON -> SolverInput -> Branch Resolver -> FlopContext -> BoardTextureFeatures -> MadeHandFeatures -> DrawFeatures -> EquityScenarioInput -> EquityResult -> RangeState
+```
+
+V0.12.0 creates baseline `RangeState` only. It does **not** perform blocker filtering, combo removal, range narrowing, equity recalculation, decision logic, runtime plans, Action_Button calls, physical clicks, Clear_JSON validation, player filtering, or fallback to temporary JSON sources.
 
 ---
 
 ## Next planned version
 
-### V0.12.0 — Preflop Range Import / Range State Foundation
+### V0.13.0 — Blocker Filtering / Available Combo State
 
-Scope must be discussed and approved before any V0.12.0 code is written.
+Scope must be discussed and approved before any V0.13.0 code is written.
+
+Candidate direction:
+
+```text
+RangeState + hero_cards + board_cards -> AvailableComboState
+```
+
+V0.13.0 should use hero cards and board cards as poker blockers, not as source validation. It must keep `RangeState` read-only and must not create decision/runtime/click logic.

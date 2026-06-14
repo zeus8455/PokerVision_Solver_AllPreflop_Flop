@@ -14,21 +14,21 @@ The active postflop solver line is intentionally isolated from real postflop dec
 
 ## Current status
 
-**Current closed version:** `V0.11.0 — PokerKit-backed Equity Engine / Raw Equity Snapshot`
+**Current closed version:** `V0.12.0 — Preflop Range Import / Range State Foundation`
 
-**Closing subversion:** `V0.11.10 — Close V0.11.0 / README + VERSION Checkpoint`
+**Closing subversion:** `V0.12.7 — Close V0.12.0 / README + VERSION Checkpoint`
 
-**Closing checkpoint commit:** created by `V0.11.10 close PokerKit raw equity engine`
+**Closing checkpoint commit:** created by `V0.12.7 close range state foundation`
 
-**Latest implementation checkpoint before close:** `e85656b — V0.11.9 add equity architecture gate`
+**Latest implementation checkpoint before close:** `7ff80ef — V0.12.6 add range architecture gate`
 
 **Latest official postflop cumulative gate:**
 
 ```text
-526 passed in 17.88s
+594 passed in 18.73s
 ```
 
-**Next planned version:** `V0.12.0 — Preflop Range Import / Range State Foundation`
+**Next planned version:** `V0.13.0 — Blocker Filtering / Available Combo State`
 
 ---
 
@@ -47,7 +47,7 @@ Those tests are not allowed to block the V0.1+ Clear_JSON-only postflop solver l
 
 ---
 
-## Active architecture after V0.11.0
+## Active architecture after V0.12.0
 
 ```text
 Existing PokerVision main live runtime
@@ -66,37 +66,74 @@ Existing PokerVision main live runtime
 -> EquityEngine
 -> PokerKit backend
 -> EquityResult
+-> RangeImporter
+-> RangeState
 ```
 
-V0.11.0 adds the first raw-equity calculation layer:
+V0.12.0 adds the baseline range foundation:
 
 ```text
-EquityScenarioInput -> Equity Engine -> PokerKit backend -> EquityResult
+FlopContext -> RangeImporter -> RangeState
 ```
 
-V0.11.0 supports **numeric heads-up raw equity** through local PokerKit `0.7.4`.
-
-Multiway equity is intentionally left as a **structured deferred result**. Unknown or unsupported contexts are also structured results, not pipeline crashes.
+The range layer is **baseline import only**. It selects or imports a starting preflop/postflop baseline range for the current postflop spot family and stores the result as `RangeState`.
 
 ---
 
-## Non-negotiable V0.11 policy
+## Range source status after V0.12.0
 
-V0.11.0 is **raw equity snapshot only**.
+### `ranges/hero_preflop_ranges.json`
 
-The equity layer may:
+Detected as an existing project range source:
 
-- consume `EquityScenarioInput`;
-- call the isolated PokerKit backend adapter;
-- calculate numeric heads-up raw equity;
-- return `EquityResult`;
-- preserve backend metadata, sample counts, confidence, notes, and structured unavailable/error states.
+```text
+schema = preflop_ranges_v1
+source_type_candidate = existing_project_ranges
+contains_range_shorthand_strings = true
+contains_combo_level_compact_strings = false
+requires_expansion_before_v013 = true
+```
 
-The equity layer must not create or perform:
+This file can remain available as an existing shorthand range source, but it is not enough by itself for V0.13 blocker filtering until shorthand expansion exists.
 
-- opponent range construction;
-- range narrowing from action history;
-- blocker filtering as a range module;
+### `ranges/postflop_default_ranges.json`
+
+Created as a synthetic baseline postflop range pack for V0.12 importer tests:
+
+```text
+schema = pokervision_solver_postflop_default_ranges_v1
+source_type = postflop_default_ranges
+combo_level_compact_string_count = 551
+requires_expansion_before_v013 = false
+next_module = range_importer_v0124
+```
+
+This file provides combo-level compact strings suitable for the next blocker-filtering layer.
+
+---
+
+## Non-negotiable V0.12 policy
+
+V0.12.0 is **RangeState foundation only**.
+
+The range layer may:
+
+- consume `FlopContext`;
+- read `spot_family`, `pot_type`, and position context;
+- select a baseline source from `ranges/postflop_default_ranges.json`;
+- create `RangeState`;
+- create HERO/opponent `PlayerRangeState` entries;
+- preserve `RangeSourceInfo`;
+- preserve combo-level `combo_groups`;
+- return structured `unknown_range` without crashing.
+
+The range layer must not create or perform:
+
+- blocker filtering;
+- combo removal by HERO cards or board cards;
+- range narrowing from flop action;
+- texture-based range weighting;
+- equity recalculation;
 - postflop decision logic;
 - bet sizing policy;
 - postflop Action_Decision_JSON;
@@ -104,13 +141,12 @@ The equity layer must not create or perform:
 - Action_Button detector calls;
 - physical mouse clicks;
 - Clear_JSON validation;
-- duplicate-card validation as source validation;
 - player filtering;
 - HERO/opponent invention;
 - live source discovery;
-- Dark/Pending/current_cycle fallback.
+- Dark/Pending/Service/Runtime JSON fallback.
 
-`hero_equity` is a numeric input for future solver modules. It is **not** a poker decision.
+`RangeState` is an input for future solver modules. It is **not** a poker decision and does not authorize runtime actions.
 
 ---
 
@@ -301,30 +337,17 @@ Final gate:
 
 ### V0.9.0 — Main Live Clear_JSON Audit / Postflop Capture Evidence
 
+### V0.9.8 — Close V0.9.0 / Live Audit Checkpoint
+
 **Closed by:** `V0.9.8`
 
-**Closing checkpoint:** `V0.9.8 — Close V0.9.0 / Live Audit Checkpoint`
+**Closing checkpoint:** `6ea2c62 — V0.9.8 close live audit checkpoint`
 
 V0.9.0 integrated the current solver modules with the existing PokerVision live runtime for audit-only evidence:
 
 ```text
 main live -> postflop Clear_JSON capture -> schema adapter -> audit runner -> V0.1–V0.8 feature chain
 ```
-
-Subversions:
-
-- `bf062c5` — `V0.9.1 add live audit report contracts`
-- `6928575` — `V0.9.2 add Clear_JSON discovery gate`
-- `0fabc40` — `V0.9.3 add Clear_JSON module pipeline runner`
-- `54e4f55` — `V0.9.4 add Clear_JSON capture hook audit`
-- `813dd5f` — `V0.9.5 add Clear_JSON audit tool runner`
-- `3b17f9f` — `V0.9.6 add no postflop click architecture gate`
-- `eb7fed5` — `V0.9.7 document main live Clear_JSON audit command`
-- `cca11f0` — `V0.9.7.1 integrate runtime Clear_JSON capture hook`
-- `52738bc` — `V0.9.7.2 add pending postflop Clear_JSON capture`
-- `14289f5` — `V0.9.7.3 adapt live Clear_JSON schema for postflop audit`
-- `5e315c8` — `V0.9.7.4 add live audit hygiene gate`
-- `6ea2c62` — `V0.9.8 close live audit checkpoint`
 
 Final V0.9 live evidence:
 
@@ -369,17 +392,6 @@ Subversions:
 - `ee62827` — `V0.10.4 add equity input architecture gate`
 - `bc2408e` — `V0.10.5 close equity input builder`
 
-Key files:
-
-- `solver_postflop/equity_input_contracts.py`
-- `solver_postflop/equity_input.py`
-- `tests/test_postflop_equity_input_contracts_v100.py`
-- `tests/test_postflop_equity_input_builder_v100.py`
-- `tests/test_postflop_equity_input_from_fixtures_v100.py`
-- `tests/test_postflop_equity_input_no_extra_logic_v100.py`
-- `tests/fixtures/postflop_equity_input_v0103/`
-- `docs/POSTFLOP_EQUITY_INPUT.md`
-
 Final V0.10 targeted gate:
 
 ```text
@@ -406,7 +418,7 @@ V0.10.0 did **not** create PokerKit simulation, equity calculation, ranges, bloc
 
 **Status:** closed by V0.11.10
 
-**Closing checkpoint:** `V0.11.10 — Close V0.11.0 / README + VERSION Checkpoint`
+**Closing checkpoint:** `293f3a2 — V0.11.10 close PokerKit raw equity engine`
 
 V0.11.0 created the first raw-equity calculation layer:
 
@@ -425,26 +437,7 @@ Subversions:
 - `09b8056` — `V0.11.7 integrate numeric equity engine result`
 - `2245820` — `V0.11.8 add equity scenario fixture coverage`
 - `e85656b` — `V0.11.9 add equity architecture gate`
-
-Key files:
-
-- `solver_postflop/equity_contracts.py`
-- `solver_postflop/equity_backend_pokerkit.py`
-- `solver_postflop/equity_engine.py`
-- `tools/run_pokerkit_capability_probe.py`
-- `tools/run_pokerkit_card_api_probe.py`
-- `tests/test_postflop_equity_contracts_v110.py`
-- `tests/test_postflop_equity_backend_pokerkit_v110.py`
-- `tests/test_postflop_pokerkit_capability_probe_v110.py`
-- `tests/test_postflop_pokerkit_card_api_probe_v110.py`
-- `tests/test_postflop_equity_backend_numeric_v110.py`
-- `tests/test_postflop_equity_engine_v110.py`
-- `tests/test_postflop_equity_engine_numeric_integration_v110.py`
-- `tests/test_postflop_equity_from_scenarios_v110.py`
-- `tests/test_postflop_equity_no_extra_logic_v110.py`
-- `docs/POSTFLOP_EQUITY_ENGINE.md`
-- `outputs/postflop_pokerkit_capability/latest_pokerkit_capability_report.json`
-- `outputs/postflop_pokerkit_card_api/latest_pokerkit_card_api_report.json`
+- `293f3a2` — `V0.11.10 close PokerKit raw equity engine`
 
 PokerKit local environment:
 
@@ -452,33 +445,16 @@ PokerKit local environment:
 pokerkit = 0.7.4
 ```
 
-Capability probe confirmed:
-
-```text
-status = available
-available_symbols = NoLimitTexasHoldem, Automation, Mode, State, StandardHighHand, Card, Rank, Suit, Deck
-```
-
-Card API probe confirmed:
-
-```text
-A_spades -> As
-K_hearts -> Kh
-10_spades -> Ts
-StandardHighHand.from_game(...) = ok
-example = Straight (AsKhQdJcTs)
-```
-
 Final V0.11 targeted gate:
 
 ```text
-69 passed in 10.90s
+69 passed in 11.07s
 ```
 
 Final V0.11 postflop cumulative gate:
 
 ```text
-526 passed in 17.88s
+526 passed in 16.37s
 ```
 
 Final result:
@@ -487,7 +463,86 @@ Final result:
 Clear_JSON -> SolverInput -> Branch Resolver -> FlopContext -> BoardTextureFeatures -> MadeHandFeatures -> DrawFeatures -> EquityScenarioInput -> EquityResult
 ```
 
-V0.11.0 supports numeric heads-up raw equity. Multiway is intentionally structured/deferred. V0.11.0 did **not** create ranges, blocker filtering, range narrowing, decisions, runtime plans, Action_Button calls, clicks, or bet sizing.
+V0.11.0 supports numeric heads-up raw equity.
+
+Multiway is intentionally structured/deferred. V0.11.0 did **not** create ranges, blocker filtering, range narrowing, decisions, runtime plans, Action_Button calls, clicks, or bet sizing.
+
+---
+
+### V0.12.0 — Preflop Range Import / Range State Foundation
+
+**Status:** closed by V0.12.7
+
+**Closing checkpoint:** `V0.12.7 — Close V0.12.0 / README + VERSION Checkpoint`
+
+V0.12.0 created the baseline range-state layer:
+
+```text
+FlopContext -> RangeImporter -> RangeState
+```
+
+Subversions:
+
+- `e2ae8b0` — `V0.12.1 add range contracts`
+- `51b8b8c` — `V0.12.2 add range source inventory`
+- `2dc9fb0` — `V0.12.3 add synthetic baseline range pack`
+- `f5e1cae` — `V0.12.4 add range importer`
+- `4857867` — `V0.12.5 add range state fixture coverage`
+- `7ff80ef` — `V0.12.6 add range architecture gate`
+
+Key files:
+
+- `solver_postflop/range_contracts.py`
+- `solver_postflop/range_importer.py`
+- `ranges/hero_preflop_ranges.json`
+- `ranges/postflop_default_ranges.json`
+- `tools/run_postflop_range_source_inventory.py`
+- `tests/test_postflop_range_contracts_v120.py`
+- `tests/test_postflop_range_source_inventory_v120.py`
+- `tests/test_postflop_synthetic_baseline_ranges_v120.py`
+- `tests/test_postflop_range_importer_v120.py`
+- `tests/test_postflop_range_state_from_flop_context_v120.py`
+- `tests/test_postflop_range_no_extra_logic_v120.py`
+- `tests/fixtures/postflop_range_state_v0125/expected/`
+- `docs/POSTFLOP_RANGE_STATE.md`
+- `outputs/postflop_range_inventory/latest_range_source_inventory_report.json`
+
+Range source inventory confirmed:
+
+```text
+ranges/hero_preflop_ranges.json:
+  schema = preflop_ranges_v1
+  source_type_candidate = existing_project_ranges
+  contains_range_shorthand_strings = true
+  contains_combo_level_compact_strings = false
+  requires_expansion_before_v013 = true
+
+ranges/postflop_default_ranges.json:
+  schema = pokervision_solver_postflop_default_ranges_v1
+  source_type = postflop_default_ranges
+  combo_level_compact_string_count = 551
+  requires_expansion_before_v013 = false
+```
+
+Final V0.12 targeted gate:
+
+```text
+68 passed in 1.68s
+```
+
+Final V0.12 postflop cumulative gate:
+
+```text
+594 passed in 18.73s
+```
+
+Final result:
+
+```text
+Clear_JSON -> SolverInput -> Branch Resolver -> FlopContext -> BoardTextureFeatures -> MadeHandFeatures -> DrawFeatures -> EquityScenarioInput -> EquityResult -> RangeState
+```
+
+V0.12.0 did **not** create blocker filtering, combo removal by hero/board cards, range narrowing, equity recalculation, decisions, runtime plans, Action_Button calls, clicks, Clear_JSON validation, player filtering, or fallback to temporary JSON sources.
 
 ---
 
@@ -501,24 +556,31 @@ $postflopTests = Get-ChildItem tests -File -Filter "test_postflop_*.py" | Sort-O
 C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe -m pytest $postflopTests -q
 ```
 
-Expected after V0.11.10 overlay:
+Expected after V0.12.7 overlay:
 
 ```text
-526 passed
+594 passed
 ```
 
 ---
 
 ## Next planned block
 
-### V0.12.0 — Preflop Range Import / Range State Foundation
+### V0.13.0 — Blocker Filtering / Available Combo State
 
-Scope must be discussed and approved before any V0.12.0 code is written.
+Planned chain:
+
+```text
+RangeState + hero_cards + board_cards -> AvailableComboState
+```
+
+Scope must be discussed and approved before any V0.13.0 code is written.
 
 Candidate direction:
 
-- introduce range result contracts;
-- import/select baseline range source by spot family;
-- create `RangeState` without blocker filtering;
-- keep equity-range integration for later versions;
-- keep decision/runtime/click out of V0.12.0.
+- introduce combo-state contracts;
+- treat HERO cards and board cards as blockers for poker calculation;
+- remove blocked combos from `RangeState` into `AvailableComboState`;
+- preserve `RangeState` as read-only;
+- do not validate or repair Clear_JSON;
+- keep range narrowing, equity recalculation, decision/runtime/click out of V0.13.0.
