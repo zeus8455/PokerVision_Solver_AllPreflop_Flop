@@ -1,0 +1,58 @@
+{
+  "case_id": "flop_blockers_multiway_combo_state",
+  "expected_availability_status": "partially_blocked",
+  "expected_blocked_combo_reasons": [
+    "blocked_by_board_card",
+    "blocked_by_hero_and_board",
+    "blocked_by_hero_card",
+    "not_blocked"
+  ],
+  "expected_board_cards_used_as_blockers": [
+    "Kh",
+    "Th",
+    "2c"
+  ],
+  "expected_combo_count_available": 7,
+  "expected_combo_count_before": 17,
+  "expected_combo_count_blocked_by_board": 5,
+  "expected_combo_count_blocked_by_hero": 6,
+  "expected_combo_count_blocked_by_hero_and_board": 1,
+  "expected_hero_cards_used_as_blockers": [
+    "Ah",
+    "8h"
+  ],
+  "expected_next_module": "flop_action_model_later",
+  "expected_player_count": 3,
+  "expected_player_summaries": {
+    "hero": {
+      "blocked_by_board_count": 1,
+      "blocked_by_hero_and_board_count": 1,
+      "blocked_by_hero_count": 2,
+      "combo_count_available": 3,
+      "combo_count_before": 5,
+      "combo_count_blocked": 2
+    },
+    "villain_1": {
+      "blocked_by_board_count": 1,
+      "blocked_by_hero_and_board_count": 0,
+      "blocked_by_hero_count": 2,
+      "combo_count_available": 3,
+      "combo_count_before": 6,
+      "combo_count_blocked": 3
+    },
+    "villain_2": {
+      "blocked_by_board_count": 3,
+      "blocked_by_hero_and_board_count": 0,
+      "blocked_by_hero_count": 2,
+      "combo_count_available": 1,
+      "combo_count_before": 6,
+      "combo_count_blocked": 5
+    }
+  },
+  "expected_spot_family": "multiway_pot",
+  "notes": [
+    "v0134_expected_fixture",
+    "not_decision_runtime_click"
+  ],
+  "schema": "pokervision_solver_available_combo_state_expected_v0134"
+}
