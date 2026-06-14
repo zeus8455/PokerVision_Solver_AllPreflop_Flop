@@ -1,0 +1,1411 @@
+{
+  "architecture_flags": {
+    "blocker_filtering_executed": false,
+    "clear_json_validation_executed": false,
+    "decision_logic_executed": false,
+    "equity_recalculation_executed": false,
+    "physical_click_executed": false,
+    "player_filtering_executed": false,
+    "range_importer_executed": false,
+    "range_narrowing_executed": false,
+    "range_state_created": false,
+    "runtime_plan_created": false
+  },
+  "cases": {
+    "flop_range_3bet_pot_ip": {
+      "case_id": "flop_range_3bet_pot_ip",
+      "hero_position": "BTN",
+      "hero_range_state": {
+        "combo_groups": {
+          "ace_x_suited": [
+            "As5s",
+            "Ah5h",
+            "Ac5c",
+            "Ad5d",
+            "As4s",
+            "Ah4h",
+            "As3s",
+            "Ah3h"
+          ],
+          "pocket_pairs": [
+            "JsJh",
+            "JcJd",
+            "TsTh",
+            "TcTd",
+            "9s9h",
+            "9c9d",
+            "8s8h",
+            "7s7h"
+          ],
+          "premium_pairs": [
+            "AsAh",
+            "AcAd",
+            "KsKh",
+            "KcKd",
+            "QsQh",
+            "QcQd"
+          ],
+          "strong_broadways": [
+            "AsKs",
+            "AhKh",
+            "AcKc",
+            "AdKd",
+            "AsQs",
+            "AhQh",
+            "KsQs",
+            "KhQh"
+          ],
+          "suited_broadways": [
+            "AsJs",
+            "AhJh",
+            "KsJs",
+            "KhJh",
+            "QsJs",
+            "QhJh",
+            "JsTs",
+            "JhTh"
+          ]
+        },
+        "confidence": "medium",
+        "hand_class_groups": {},
+        "notes": [
+          "synthetic_baseline_only",
+          "no_blocker_filtering",
+          "no_action_narrowing"
+        ],
+        "player_id": "hero",
+        "position": "BTN",
+        "range_buckets": [
+          "premium_pairs",
+          "strong_broadways",
+          "suited_broadways",
+          "pocket_pairs",
+          "ace_x_suited"
+        ],
+        "range_name": "three_bet_pot_ip_caller_baseline",
+        "range_source": "postflop_default_ranges",
+        "role": "three_bet_caller_ip",
+        "shorthand_source": {
+          "call_3bet": [
+            "55-JJ A2s-AJs KTs-KQs QTs-QJs JTs T9s 98s AJo-AQo KQo"
+          ]
+        },
+        "weighting_mode": "flat_baseline"
+      },
+      "next_module": "range_importer_v0124",
+      "notes": [
+        "synthetic_baseline_range_pack",
+        "for_v012_importer_tests"
+      ],
+      "opponent_positions": [
+        "SB"
+      ],
+      "opponent_range_states": [
+        {
+          "combo_groups": {
+            "ace_x_suited": [
+              "As5s",
+              "Ah5h",
+              "Ac5c",
+              "Ad5d",
+              "As4s",
+              "Ah4h",
+              "As3s",
+              "Ah3h"
+            ],
+            "premium_pairs": [
+              "AsAh",
+              "AcAd",
+              "KsKh",
+              "KcKd",
+              "QsQh",
+              "QcQd"
+            ],
+            "strong_broadways": [
+              "AsKs",
+              "AhKh",
+              "AcKc",
+              "AdKd",
+              "AsQs",
+              "AhQh",
+              "KsQs",
+              "KhQh"
+            ],
+            "suited_broadways": [
+              "AsJs",
+              "AhJh",
+              "KsJs",
+              "KhJh",
+              "QsJs",
+              "QhJh",
+              "JsTs",
+              "JhTh"
+            ]
+          },
+          "confidence": "medium",
+          "hand_class_groups": {},
+          "notes": [
+            "synthetic_baseline_only",
+            "no_blocker_filtering",
+            "no_action_narrowing"
+          ],
+          "player_id": "villain_1",
+          "position": "SB",
+          "range_buckets": [
+            "premium_pairs",
+            "strong_broadways",
+            "suited_broadways",
+            "ace_x_suited"
+          ],
+          "range_name": "three_bet_pot_oop_aggressor_baseline",
+          "range_source": "postflop_default_ranges",
+          "role": "three_bettor_oop",
+          "shorthand_source": {
+            "3bet": [
+              "TT+ AQs+ AKo A2s-A5s KQs"
+            ]
+          },
+          "weighting_mode": "flat_baseline"
+        }
+      ],
+      "pot_type": "3bet_pot",
+      "range_buckets": [
+        "ace_x_suited",
+        "pocket_pairs",
+        "premium_pairs",
+        "strong_broadways",
+        "suited_broadways"
+      ],
+      "range_confidence": "medium",
+      "range_import_status": "imported",
+      "source_name": "postflop_default_flop_range_3bet_pot_ip",
+      "source_type": "postflop_default_ranges",
+      "spot_family": "three_bet_pot_ip"
+    },
+    "flop_range_3bet_pot_oop": {
+      "case_id": "flop_range_3bet_pot_oop",
+      "hero_position": "SB",
+      "hero_range_state": {
+        "combo_groups": {
+          "ace_x_suited": [
+            "As5s",
+            "Ah5h",
+            "Ac5c",
+            "Ad5d",
+            "As4s",
+            "Ah4h",
+            "As3s",
+            "Ah3h"
+          ],
+          "premium_pairs": [
+            "AsAh",
+            "AcAd",
+            "KsKh",
+            "KcKd",
+            "QsQh",
+            "QcQd"
+          ],
+          "strong_broadways": [
+            "AsKs",
+            "AhKh",
+            "AcKc",
+            "AdKd",
+            "AsQs",
+            "AhQh",
+            "KsQs",
+            "KhQh"
+          ],
+          "suited_broadways": [
+            "AsJs",
+            "AhJh",
+            "KsJs",
+            "KhJh",
+            "QsJs",
+            "QhJh",
+            "JsTs",
+            "JhTh"
+          ]
+        },
+        "confidence": "medium",
+        "hand_class_groups": {},
+        "notes": [
+          "synthetic_baseline_only",
+          "no_blocker_filtering",
+          "no_action_narrowing"
+        ],
+        "player_id": "hero",
+        "position": "SB",
+        "range_buckets": [
+          "premium_pairs",
+          "strong_broadways",
+          "suited_broadways",
+          "ace_x_suited"
+        ],
+        "range_name": "three_bet_pot_oop_aggressor_baseline",
+        "range_source": "postflop_default_ranges",
+        "role": "three_bettor_oop",
+        "shorthand_source": {
+          "3bet": [
+            "TT+ AQs+ AKo A2s-A5s KQs"
+          ]
+        },
+        "weighting_mode": "flat_baseline"
+      },
+      "next_module": "range_importer_v0124",
+      "notes": [
+        "synthetic_baseline_range_pack",
+        "for_v012_importer_tests"
+      ],
+      "opponent_positions": [
+        "BTN"
+      ],
+      "opponent_range_states": [
+        {
+          "combo_groups": {
+            "ace_x_suited": [
+              "As5s",
+              "Ah5h",
+              "Ac5c",
+              "Ad5d",
+              "As4s",
+              "Ah4h",
+              "As3s",
+              "Ah3h"
+            ],
+            "pocket_pairs": [
+              "JsJh",
+              "JcJd",
+              "TsTh",
+              "TcTd",
+              "9s9h",
+              "9c9d",
+              "8s8h",
+              "7s7h"
+            ],
+            "premium_pairs": [
+              "AsAh",
+              "AcAd",
+              "KsKh",
+              "KcKd",
+              "QsQh",
+              "QcQd"
+            ],
+            "strong_broadways": [
+              "AsKs",
+              "AhKh",
+              "AcKc",
+              "AdKd",
+              "AsQs",
+              "AhQh",
+              "KsQs",
+              "KhQh"
+            ],
+            "suited_broadways": [
+              "AsJs",
+              "AhJh",
+              "KsJs",
+              "KhJh",
+              "QsJs",
+              "QhJh",
+              "JsTs",
+              "JhTh"
+            ]
+          },
+          "confidence": "medium",
+          "hand_class_groups": {},
+          "notes": [
+            "synthetic_baseline_only",
+            "no_blocker_filtering",
+            "no_action_narrowing"
+          ],
+          "player_id": "villain_1",
+          "position": "BTN",
+          "range_buckets": [
+            "premium_pairs",
+            "strong_broadways",
+            "suited_broadways",
+            "pocket_pairs",
+            "ace_x_suited"
+          ],
+          "range_name": "three_bet_pot_ip_caller_baseline",
+          "range_source": "postflop_default_ranges",
+          "role": "three_bet_caller_ip",
+          "shorthand_source": {
+            "call_3bet": [
+              "55-JJ A2s-AJs KTs-KQs QTs-QJs JTs T9s 98s AJo-AQo KQo"
+            ]
+          },
+          "weighting_mode": "flat_baseline"
+        }
+      ],
+      "pot_type": "3bet_pot",
+      "range_buckets": [
+        "ace_x_suited",
+        "pocket_pairs",
+        "premium_pairs",
+        "strong_broadways",
+        "suited_broadways"
+      ],
+      "range_confidence": "medium",
+      "range_import_status": "imported",
+      "source_name": "postflop_default_flop_range_3bet_pot_oop",
+      "source_type": "postflop_default_ranges",
+      "spot_family": "three_bet_pot_oop"
+    },
+    "flop_range_4bet_low_spr": {
+      "case_id": "flop_range_4bet_low_spr",
+      "hero_position": "CO",
+      "hero_range_state": {
+        "combo_groups": {
+          "ace_x_suited": [
+            "As5s",
+            "Ah5h",
+            "Ac5c",
+            "Ad5d",
+            "As4s",
+            "Ah4h",
+            "As3s",
+            "Ah3h"
+          ],
+          "premium_pairs": [
+            "AsAh",
+            "AcAd",
+            "KsKh",
+            "KcKd",
+            "QsQh",
+            "QcQd"
+          ],
+          "strong_broadways": [
+            "AsKs",
+            "AhKh",
+            "AcKc",
+            "AdKd",
+            "AsQs",
+            "AhQh",
+            "KsQs",
+            "KhQh"
+          ]
+        },
+        "confidence": "high",
+        "hand_class_groups": {},
+        "notes": [
+          "synthetic_baseline_only",
+          "no_blocker_filtering",
+          "no_action_narrowing"
+        ],
+        "player_id": "hero",
+        "position": "CO",
+        "range_buckets": [
+          "premium_pairs",
+          "strong_broadways",
+          "ace_x_suited"
+        ],
+        "range_name": "four_bet_low_spr_aggressor_baseline",
+        "range_source": "postflop_default_ranges",
+        "role": "four_bettor",
+        "shorthand_source": {
+          "4bet": [
+            "QQ+ AKs AKo A5s-A4s"
+          ]
+        },
+        "weighting_mode": "flat_baseline"
+      },
+      "next_module": "range_importer_v0124",
+      "notes": [
+        "synthetic_baseline_range_pack",
+        "for_v012_importer_tests"
+      ],
+      "opponent_positions": [
+        "BTN"
+      ],
+      "opponent_range_states": [
+        {
+          "combo_groups": {
+            "pocket_pairs": [
+              "JsJh",
+              "JcJd",
+              "TsTh",
+              "TcTd",
+              "9s9h",
+              "9c9d",
+              "8s8h",
+              "7s7h"
+            ],
+            "premium_pairs": [
+              "AsAh",
+              "AcAd",
+              "KsKh",
+              "KcKd",
+              "QsQh",
+              "QcQd"
+            ],
+            "strong_broadways": [
+              "AsKs",
+              "AhKh",
+              "AcKc",
+              "AdKd",
+              "AsQs",
+              "AhQh",
+              "KsQs",
+              "KhQh"
+            ],
+            "suited_broadways": [
+              "AsJs",
+              "AhJh",
+              "KsJs",
+              "KhJh",
+              "QsJs",
+              "QhJh",
+              "JsTs",
+              "JhTh"
+            ]
+          },
+          "confidence": "high",
+          "hand_class_groups": {},
+          "notes": [
+            "synthetic_baseline_only",
+            "no_blocker_filtering",
+            "no_action_narrowing"
+          ],
+          "player_id": "villain_1",
+          "position": "BTN",
+          "range_buckets": [
+            "premium_pairs",
+            "strong_broadways",
+            "suited_broadways",
+            "pocket_pairs"
+          ],
+          "range_name": "four_bet_low_spr_caller_baseline",
+          "range_source": "postflop_default_ranges",
+          "role": "four_bet_caller",
+          "shorthand_source": {
+            "call_4bet": [
+              "JJ-QQ AQs+ AKo"
+            ]
+          },
+          "weighting_mode": "flat_baseline"
+        }
+      ],
+      "pot_type": "4bet_pot",
+      "range_buckets": [
+        "ace_x_suited",
+        "pocket_pairs",
+        "premium_pairs",
+        "strong_broadways",
+        "suited_broadways"
+      ],
+      "range_confidence": "high",
+      "range_import_status": "imported",
+      "source_name": "postflop_default_flop_range_4bet_low_spr",
+      "source_type": "postflop_default_ranges",
+      "spot_family": "four_bet_low_spr"
+    },
+    "flop_range_limp_passive": {
+      "case_id": "flop_range_limp_passive",
+      "hero_position": "BB",
+      "hero_range_state": {
+        "combo_groups": {
+          "ace_x_suited": [
+            "As5s",
+            "Ah5h",
+            "Ac5c",
+            "Ad5d",
+            "As4s",
+            "Ah4h",
+            "As3s",
+            "Ah3h"
+          ],
+          "defense_range": [
+            "As9s",
+            "Ah9h",
+            "KcQc",
+            "KdQd",
+            "QsTs",
+            "QhTh",
+            "JcTc",
+            "9c8c"
+          ],
+          "premium_pairs": [
+            "AsAh",
+            "AcAd",
+            "KsKh",
+            "KcKd",
+            "QsQh",
+            "QcQd"
+          ],
+          "strong_broadways": [
+            "AsKs",
+            "AhKh",
+            "AcKc",
+            "AdKd",
+            "AsQs",
+            "AhQh",
+            "KsQs",
+            "KhQh"
+          ],
+          "suited_connectors": [
+            "Ts9s",
+            "Th9h",
+            "9s8s",
+            "9h8h",
+            "8s7s",
+            "8h7h",
+            "7s6s",
+            "7h6h"
+          ]
+        },
+        "confidence": "medium",
+        "hand_class_groups": {},
+        "notes": [
+          "synthetic_baseline_only",
+          "no_blocker_filtering",
+          "no_action_narrowing"
+        ],
+        "player_id": "hero",
+        "position": "BB",
+        "range_buckets": [
+          "premium_pairs",
+          "strong_broadways",
+          "suited_connectors",
+          "defense_range",
+          "ace_x_suited"
+        ],
+        "range_name": "limp_passive_bb_check_or_iso_baseline",
+        "range_source": "postflop_default_ranges",
+        "role": "bb_option_vs_limp",
+        "shorthand_source": {
+          "check": [
+            "A2o-A7o K2o-K9o Q5o-Q9o J7o-J9o T7o-T9o 98o 87o 76o"
+          ],
+          "iso_raise": [
+            "55+ A2s+ K8s+ Q8s+ J8s+ T8s+ 97s+ 87s A8o+ KTo+ QTo+ JTo"
+          ]
+        },
+        "weighting_mode": "flat_baseline"
+      },
+      "next_module": "range_importer_v0124",
+      "notes": [
+        "synthetic_baseline_range_pack",
+        "for_v012_importer_tests"
+      ],
+      "opponent_positions": [
+        "SB"
+      ],
+      "opponent_range_states": [
+        {
+          "combo_groups": {
+            "ace_x_suited": [
+              "As5s",
+              "Ah5h",
+              "Ac5c",
+              "Ad5d",
+              "As4s",
+              "Ah4h",
+              "As3s",
+              "Ah3h"
+            ],
+            "defense_range": [
+              "As9s",
+              "Ah9h",
+              "KcQc",
+              "KdQd",
+              "QsTs",
+              "QhTh",
+              "JcTc",
+              "9c8c"
+            ],
+            "pocket_pairs": [
+              "JsJh",
+              "JcJd",
+              "TsTh",
+              "TcTd",
+              "9s9h",
+              "9c9d",
+              "8s8h",
+              "7s7h"
+            ],
+            "suited_connectors": [
+              "Ts9s",
+              "Th9h",
+              "9s8s",
+              "9h8h",
+              "8s7s",
+              "8h7h",
+              "7s6s",
+              "7h6h"
+            ]
+          },
+          "confidence": "medium",
+          "hand_class_groups": {},
+          "notes": [
+            "synthetic_baseline_only",
+            "no_blocker_filtering",
+            "no_action_narrowing"
+          ],
+          "player_id": "villain_1",
+          "position": "SB",
+          "range_buckets": [
+            "pocket_pairs",
+            "ace_x_suited",
+            "suited_connectors",
+            "defense_range"
+          ],
+          "range_name": "limp_passive_limper_baseline",
+          "range_source": "postflop_default_ranges",
+          "role": "limper",
+          "shorthand_source": {
+            "limp": [
+              "22-88 A2s-A7s K2s-KTs Q2s-QJs J2s-JTs T2s-T9s 92s-98s"
+            ]
+          },
+          "weighting_mode": "flat_baseline"
+        }
+      ],
+      "pot_type": "limped_pot",
+      "range_buckets": [
+        "ace_x_suited",
+        "defense_range",
+        "pocket_pairs",
+        "premium_pairs",
+        "strong_broadways",
+        "suited_connectors"
+      ],
+      "range_confidence": "medium",
+      "range_import_status": "imported",
+      "source_name": "postflop_default_flop_range_limp_passive",
+      "source_type": "postflop_default_ranges",
+      "spot_family": "limp_passive"
+    },
+    "flop_range_multiway": {
+      "case_id": "flop_range_multiway",
+      "hero_position": "BTN",
+      "hero_range_state": {
+        "combo_groups": {
+          "pocket_pairs": [
+            "JsJh",
+            "JcJd",
+            "TsTh",
+            "TcTd",
+            "9s9h",
+            "9c9d",
+            "8s8h",
+            "7s7h"
+          ],
+          "premium_pairs": [
+            "AsAh",
+            "AcAd",
+            "KsKh",
+            "KcKd",
+            "QsQh",
+            "QcQd"
+          ],
+          "strong_broadways": [
+            "AsKs",
+            "AhKh",
+            "AcKc",
+            "AdKd",
+            "AsQs",
+            "AhQh",
+            "KsQs",
+            "KhQh"
+          ],
+          "suited_broadways": [
+            "AsJs",
+            "AhJh",
+            "KsJs",
+            "KhJh",
+            "QsJs",
+            "QhJh",
+            "JsTs",
+            "JhTh"
+          ],
+          "suited_connectors": [
+            "Ts9s",
+            "Th9h",
+            "9s8s",
+            "9h8h",
+            "8s7s",
+            "8h7h",
+            "7s6s",
+            "7h6h"
+          ]
+        },
+        "confidence": "medium",
+        "hand_class_groups": {},
+        "notes": [
+          "synthetic_baseline_only",
+          "no_blocker_filtering",
+          "no_action_narrowing"
+        ],
+        "player_id": "hero",
+        "position": "BTN",
+        "range_buckets": [
+          "premium_pairs",
+          "strong_broadways",
+          "suited_broadways",
+          "pocket_pairs",
+          "suited_connectors"
+        ],
+        "range_name": "multiway_ip_baseline",
+        "range_source": "postflop_default_ranges",
+        "role": "multiway_participant",
+        "shorthand_source": {
+          "call_multiway": [
+            "55-JJ AJs-AQs KQs QJs JTs T9s 98s"
+          ]
+        },
+        "weighting_mode": "flat_baseline"
+      },
+      "next_module": "range_importer_v0124",
+      "notes": [
+        "synthetic_baseline_range_pack",
+        "for_v012_importer_tests"
+      ],
+      "opponent_positions": [
+        "BB",
+        "CO"
+      ],
+      "opponent_range_states": [
+        {
+          "combo_groups": {
+            "ace_x_suited": [
+              "As5s",
+              "Ah5h",
+              "Ac5c",
+              "Ad5d",
+              "As4s",
+              "Ah4h",
+              "As3s",
+              "Ah3h"
+            ],
+            "defense_range": [
+              "As9s",
+              "Ah9h",
+              "KcQc",
+              "KdQd",
+              "QsTs",
+              "QhTh",
+              "JcTc",
+              "9c8c"
+            ],
+            "pocket_pairs": [
+              "JsJh",
+              "JcJd",
+              "TsTh",
+              "TcTd",
+              "9s9h",
+              "9c9d",
+              "8s8h",
+              "7s7h"
+            ],
+            "suited_connectors": [
+              "Ts9s",
+              "Th9h",
+              "9s8s",
+              "9h8h",
+              "8s7s",
+              "8h7h",
+              "7s6s",
+              "7h6h"
+            ]
+          },
+          "confidence": "medium",
+          "hand_class_groups": {},
+          "notes": [
+            "synthetic_baseline_only",
+            "no_blocker_filtering",
+            "no_action_narrowing"
+          ],
+          "player_id": "villain_1",
+          "position": "BB",
+          "range_buckets": [
+            "defense_range",
+            "pocket_pairs",
+            "ace_x_suited",
+            "suited_connectors"
+          ],
+          "range_name": "multiway_bb_defense_baseline",
+          "range_source": "postflop_default_ranges",
+          "role": "multiway_defender",
+          "shorthand_source": {
+            "call_multiway": [
+              "22-TT A2s-AJs K7s-KQs Q8s-QJs J7s-JTs T7s-T9s 54s 65s 76s 87s 98s"
+            ]
+          },
+          "weighting_mode": "flat_baseline"
+        },
+        {
+          "combo_groups": {
+            "pocket_pairs": [
+              "JsJh",
+              "JcJd",
+              "TsTh",
+              "TcTd",
+              "9s9h",
+              "9c9d",
+              "8s8h",
+              "7s7h"
+            ],
+            "strong_broadways": [
+              "AsKs",
+              "AhKh",
+              "AcKc",
+              "AdKd",
+              "AsQs",
+              "AhQh",
+              "KsQs",
+              "KhQh"
+            ],
+            "suited_broadways": [
+              "AsJs",
+              "AhJh",
+              "KsJs",
+              "KhJh",
+              "QsJs",
+              "QhJh",
+              "JsTs",
+              "JhTh"
+            ],
+            "suited_connectors": [
+              "Ts9s",
+              "Th9h",
+              "9s8s",
+              "9h8h",
+              "8s7s",
+              "8h7h",
+              "7s6s",
+              "7h6h"
+            ]
+          },
+          "confidence": "medium",
+          "hand_class_groups": {},
+          "notes": [
+            "synthetic_baseline_only",
+            "no_blocker_filtering",
+            "no_action_narrowing"
+          ],
+          "player_id": "villain_2",
+          "position": "CO",
+          "range_buckets": [
+            "pocket_pairs",
+            "suited_broadways",
+            "suited_connectors",
+            "strong_broadways"
+          ],
+          "range_name": "multiway_caller_baseline",
+          "range_source": "postflop_default_ranges",
+          "role": "multiway_caller",
+          "shorthand_source": {
+            "call_multiway": [
+              "66-JJ A9s-AQs KTs-KQs QTs-QJs JTs T9s 98s"
+            ]
+          },
+          "weighting_mode": "flat_baseline"
+        }
+      ],
+      "pot_type": "multiway_pot",
+      "range_buckets": [
+        "ace_x_suited",
+        "defense_range",
+        "pocket_pairs",
+        "premium_pairs",
+        "strong_broadways",
+        "suited_broadways",
+        "suited_connectors"
+      ],
+      "range_confidence": "low",
+      "range_import_status": "imported",
+      "source_name": "postflop_default_flop_range_multiway",
+      "source_type": "postflop_default_ranges",
+      "spot_family": "multiway"
+    },
+    "flop_range_srp_heads_up_btn_vs_bb": {
+      "case_id": "flop_range_srp_heads_up_btn_vs_bb",
+      "hero_position": "BTN",
+      "hero_range_state": {
+        "combo_groups": {
+          "ace_x_suited": [
+            "As5s",
+            "Ah5h",
+            "Ac5c",
+            "Ad5d",
+            "As4s",
+            "Ah4h",
+            "As3s",
+            "Ah3h"
+          ],
+          "offsuit_broadways": [
+            "AsKd",
+            "AhKc",
+            "AcQd",
+            "AdQh",
+            "KsQd",
+            "KhQc",
+            "QsJd",
+            "QhJc"
+          ],
+          "pocket_pairs": [
+            "JsJh",
+            "JcJd",
+            "TsTh",
+            "TcTd",
+            "9s9h",
+            "9c9d",
+            "8s8h",
+            "7s7h"
+          ],
+          "premium_pairs": [
+            "AsAh",
+            "AcAd",
+            "KsKh",
+            "KcKd",
+            "QsQh",
+            "QcQd"
+          ],
+          "strong_broadways": [
+            "AsKs",
+            "AhKh",
+            "AcKc",
+            "AdKd",
+            "AsQs",
+            "AhQh",
+            "KsQs",
+            "KhQh"
+          ],
+          "suited_broadways": [
+            "AsJs",
+            "AhJh",
+            "KsJs",
+            "KhJh",
+            "QsJs",
+            "QhJh",
+            "JsTs",
+            "JhTh"
+          ],
+          "suited_connectors": [
+            "Ts9s",
+            "Th9h",
+            "9s8s",
+            "9h8h",
+            "8s7s",
+            "8h7h",
+            "7s6s",
+            "7h6h"
+          ]
+        },
+        "confidence": "medium",
+        "hand_class_groups": {},
+        "notes": [
+          "synthetic_baseline_only",
+          "no_blocker_filtering",
+          "no_action_narrowing"
+        ],
+        "player_id": "hero",
+        "position": "BTN",
+        "range_buckets": [
+          "premium_pairs",
+          "strong_broadways",
+          "suited_broadways",
+          "suited_connectors",
+          "offsuit_broadways",
+          "pocket_pairs",
+          "ace_x_suited"
+        ],
+        "range_name": "srp_btn_open_baseline",
+        "range_source": "postflop_default_ranges",
+        "role": "preflop_aggressor",
+        "shorthand_source": {
+          "open_raise": [
+            "22+ A2s+ K5s+ Q6s+ J7s+ T6s+ 96s+ 85s+ 76s+ 65s+ A2o+ K8o+ Q8o+ J9o+ T9o+"
+          ]
+        },
+        "weighting_mode": "flat_baseline"
+      },
+      "next_module": "range_importer_v0124",
+      "notes": [
+        "synthetic_baseline_range_pack",
+        "for_v012_importer_tests"
+      ],
+      "opponent_positions": [
+        "BB"
+      ],
+      "opponent_range_states": [
+        {
+          "combo_groups": {
+            "ace_x_suited": [
+              "As5s",
+              "Ah5h",
+              "Ac5c",
+              "Ad5d",
+              "As4s",
+              "Ah4h",
+              "As3s",
+              "Ah3h"
+            ],
+            "defense_range": [
+              "As9s",
+              "Ah9h",
+              "KcQc",
+              "KdQd",
+              "QsTs",
+              "QhTh",
+              "JcTc",
+              "9c8c"
+            ],
+            "offsuit_broadways": [
+              "AsKd",
+              "AhKc",
+              "AcQd",
+              "AdQh",
+              "KsQd",
+              "KhQc",
+              "QsJd",
+              "QhJc"
+            ],
+            "pocket_pairs": [
+              "JsJh",
+              "JcJd",
+              "TsTh",
+              "TcTd",
+              "9s9h",
+              "9c9d",
+              "8s8h",
+              "7s7h"
+            ],
+            "suited_connectors": [
+              "Ts9s",
+              "Th9h",
+              "9s8s",
+              "9h8h",
+              "8s7s",
+              "8h7h",
+              "7s6s",
+              "7h6h"
+            ]
+          },
+          "confidence": "medium",
+          "hand_class_groups": {},
+          "notes": [
+            "synthetic_baseline_only",
+            "no_blocker_filtering",
+            "no_action_narrowing"
+          ],
+          "player_id": "villain_1",
+          "position": "BB",
+          "range_buckets": [
+            "defense_range",
+            "pocket_pairs",
+            "ace_x_suited",
+            "suited_connectors",
+            "offsuit_broadways"
+          ],
+          "range_name": "srp_bb_defense_baseline",
+          "range_source": "postflop_default_ranges",
+          "role": "bb_defender",
+          "shorthand_source": {
+            "call": [
+              "22-99 A2s-A9s K4s-KJs Q7s-QJs J7s-JTs T7s-T9s 53s 64s 75s 86s 97s 98s A2o-ATo K8o-KQo QTo+ JTo"
+            ]
+          },
+          "weighting_mode": "flat_baseline"
+        }
+      ],
+      "pot_type": "srp",
+      "range_buckets": [
+        "ace_x_suited",
+        "defense_range",
+        "offsuit_broadways",
+        "pocket_pairs",
+        "premium_pairs",
+        "strong_broadways",
+        "suited_broadways",
+        "suited_connectors"
+      ],
+      "range_confidence": "medium",
+      "range_import_status": "imported",
+      "source_name": "postflop_default_flop_range_srp_heads_up_btn_vs_bb",
+      "source_type": "postflop_default_ranges",
+      "spot_family": "srp_heads_up"
+    },
+    "flop_range_srp_oop_bb_vs_btn": {
+      "case_id": "flop_range_srp_oop_bb_vs_btn",
+      "hero_position": "BB",
+      "hero_range_state": {
+        "combo_groups": {
+          "ace_x_suited": [
+            "As5s",
+            "Ah5h",
+            "Ac5c",
+            "Ad5d",
+            "As4s",
+            "Ah4h",
+            "As3s",
+            "Ah3h"
+          ],
+          "defense_range": [
+            "As9s",
+            "Ah9h",
+            "KcQc",
+            "KdQd",
+            "QsTs",
+            "QhTh",
+            "JcTc",
+            "9c8c"
+          ],
+          "offsuit_broadways": [
+            "AsKd",
+            "AhKc",
+            "AcQd",
+            "AdQh",
+            "KsQd",
+            "KhQc",
+            "QsJd",
+            "QhJc"
+          ],
+          "pocket_pairs": [
+            "JsJh",
+            "JcJd",
+            "TsTh",
+            "TcTd",
+            "9s9h",
+            "9c9d",
+            "8s8h",
+            "7s7h"
+          ],
+          "suited_connectors": [
+            "Ts9s",
+            "Th9h",
+            "9s8s",
+            "9h8h",
+            "8s7s",
+            "8h7h",
+            "7s6s",
+            "7h6h"
+          ]
+        },
+        "confidence": "medium",
+        "hand_class_groups": {},
+        "notes": [
+          "synthetic_baseline_only",
+          "no_blocker_filtering",
+          "no_action_narrowing"
+        ],
+        "player_id": "hero",
+        "position": "BB",
+        "range_buckets": [
+          "defense_range",
+          "pocket_pairs",
+          "ace_x_suited",
+          "suited_connectors",
+          "offsuit_broadways"
+        ],
+        "range_name": "srp_bb_defense_baseline",
+        "range_source": "postflop_default_ranges",
+        "role": "bb_defender",
+        "shorthand_source": {
+          "call": [
+            "22-99 A2s-A9s K4s-KJs Q7s-QJs J7s-JTs T7s-T9s 53s 64s 75s 86s 97s 98s A2o-ATo K8o-KQo QTo+ JTo"
+          ]
+        },
+        "weighting_mode": "flat_baseline"
+      },
+      "next_module": "range_importer_v0124",
+      "notes": [
+        "synthetic_baseline_range_pack",
+        "for_v012_importer_tests"
+      ],
+      "opponent_positions": [
+        "BTN"
+      ],
+      "opponent_range_states": [
+        {
+          "combo_groups": {
+            "ace_x_suited": [
+              "As5s",
+              "Ah5h",
+              "Ac5c",
+              "Ad5d",
+              "As4s",
+              "Ah4h",
+              "As3s",
+              "Ah3h"
+            ],
+            "offsuit_broadways": [
+              "AsKd",
+              "AhKc",
+              "AcQd",
+              "AdQh",
+              "KsQd",
+              "KhQc",
+              "QsJd",
+              "QhJc"
+            ],
+            "pocket_pairs": [
+              "JsJh",
+              "JcJd",
+              "TsTh",
+              "TcTd",
+              "9s9h",
+              "9c9d",
+              "8s8h",
+              "7s7h"
+            ],
+            "premium_pairs": [
+              "AsAh",
+              "AcAd",
+              "KsKh",
+              "KcKd",
+              "QsQh",
+              "QcQd"
+            ],
+            "strong_broadways": [
+              "AsKs",
+              "AhKh",
+              "AcKc",
+              "AdKd",
+              "AsQs",
+              "AhQh",
+              "KsQs",
+              "KhQh"
+            ],
+            "suited_broadways": [
+              "AsJs",
+              "AhJh",
+              "KsJs",
+              "KhJh",
+              "QsJs",
+              "QhJh",
+              "JsTs",
+              "JhTh"
+            ],
+            "suited_connectors": [
+              "Ts9s",
+              "Th9h",
+              "9s8s",
+              "9h8h",
+              "8s7s",
+              "8h7h",
+              "7s6s",
+              "7h6h"
+            ]
+          },
+          "confidence": "medium",
+          "hand_class_groups": {},
+          "notes": [
+            "synthetic_baseline_only",
+            "no_blocker_filtering",
+            "no_action_narrowing"
+          ],
+          "player_id": "villain_1",
+          "position": "BTN",
+          "range_buckets": [
+            "premium_pairs",
+            "strong_broadways",
+            "suited_broadways",
+            "suited_connectors",
+            "offsuit_broadways",
+            "pocket_pairs",
+            "ace_x_suited"
+          ],
+          "range_name": "srp_btn_open_baseline",
+          "range_source": "postflop_default_ranges",
+          "role": "preflop_aggressor",
+          "shorthand_source": {
+            "open_raise": [
+              "22+ A2s+ K5s+ Q6s+ J7s+ T6s+ 96s+ 85s+ 76s+ 65s+ A2o+ K8o+ Q8o+ J9o+ T9o+"
+            ]
+          },
+          "weighting_mode": "flat_baseline"
+        }
+      ],
+      "pot_type": "srp",
+      "range_buckets": [
+        "ace_x_suited",
+        "defense_range",
+        "offsuit_broadways",
+        "pocket_pairs",
+        "premium_pairs",
+        "strong_broadways",
+        "suited_broadways",
+        "suited_connectors"
+      ],
+      "range_confidence": "medium",
+      "range_import_status": "imported",
+      "source_name": "postflop_default_flop_range_srp_oop_bb_vs_btn",
+      "source_type": "postflop_default_ranges",
+      "spot_family": "srp_oop"
+    },
+    "flop_range_unknown_context": {
+      "case_id": "flop_range_unknown_context",
+      "hero_position": null,
+      "hero_range_state": {
+        "combo_groups": {
+          "unknown_bucket": []
+        },
+        "confidence": "unknown",
+        "hand_class_groups": {
+          "unknown_bucket": []
+        },
+        "notes": [
+          "unknown_context_non_fatal"
+        ],
+        "player_id": "hero",
+        "position": null,
+        "range_buckets": [
+          "unknown_bucket"
+        ],
+        "range_name": "unknown_range",
+        "range_source": "unknown_range",
+        "role": "hero",
+        "shorthand_source": {},
+        "weighting_mode": "unknown"
+      },
+      "next_module": "range_importer_v0124",
+      "notes": [
+        "structured_unknown_range_without_pipeline_failure"
+      ],
+      "opponent_positions": [],
+      "opponent_range_states": [],
+      "pot_type": null,
+      "range_buckets": [
+        "unknown_bucket"
+      ],
+      "range_confidence": "unknown",
+      "range_import_status": "unknown_range",
+      "source_name": "unknown_range",
+      "source_type": "unknown_range",
+      "spot_family": "unknown_context"
+    }
+  },
+  "combo_examples": [
+    "AsKs",
+    "QcQd",
+    "Th9h"
+  ],
+  "combo_format": "compact_combo_rank_suit_rank_suit",
+  "next_module": "range_importer_v0124",
+  "notes": [
+    "synthetic_baseline_range_pack",
+    "combo_level_compact_strings_are_available_for_future_v013",
+    "not_a_decision_engine",
+    "not_a_runtime_or_click_layer"
+  ],
+  "range_buckets_supported": [
+    "premium_pairs",
+    "strong_broadways",
+    "suited_broadways",
+    "suited_connectors",
+    "offsuit_broadways",
+    "pocket_pairs",
+    "ace_x_suited",
+    "defense_range",
+    "unknown_bucket"
+  ],
+  "schema": "pokervision_solver_postflop_default_ranges_v1",
+  "source": "Synthetic postflop baseline range pack for V0.12 importer tests",
+  "source_name": "postflop_default_ranges_v0123",
+  "source_type": "postflop_default_ranges",
+  "source_version": "v0.12.3",
+  "version_block": "V0.12.3",
+  "weighting_mode": "flat_baseline"
+}
