@@ -1,0 +1,49 @@
+{
+  "input_case_id": "flop_range_multiway",
+  "input_spot_family": "multiway_pot",
+  "input_pot_type": "multiway_pot",
+  "input_hero_position": "BTN",
+  "input_players": [
+    {
+      "player_id": "hero",
+      "position": "BTN"
+    },
+    {
+      "player_id": "villain_1",
+      "position": "BB"
+    },
+    {
+      "player_id": "villain_2",
+      "position": "CO"
+    }
+  ],
+  "expected_range_case_id": "flop_range_multiway",
+  "expected_spot_family": "multiway_pot",
+  "expected_pot_type": "multiway_pot",
+  "expected_hero_position": "BTN",
+  "expected_opponent_positions": [
+    "BB",
+    "CO"
+  ],
+  "expected_range_import_status": "imported",
+  "expected_range_source_type": "postflop_default_ranges",
+  "expected_range_confidence": "low",
+  "expected_hero_range_name": "multiway_ip_baseline",
+  "expected_hero_role": "multiway_participant",
+  "expected_opponent_range_names": [
+    "multiway_bb_defense_baseline",
+    "multiway_caller_baseline"
+  ],
+  "expected_opponent_roles": [
+    "multiway_defender",
+    "multiway_caller"
+  ],
+  "expected_required_buckets": [
+    "premium_pairs",
+    "strong_broadways",
+    "suited_broadways",
+    "pocket_pairs",
+    "suited_connectors"
+  ],
+  "expected_next_module": "blocker_filtering_later"
+}

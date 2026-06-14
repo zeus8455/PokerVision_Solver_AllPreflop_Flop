@@ -1,0 +1,42 @@
+{
+  "input_case_id": "flop_range_limp_passive",
+  "input_spot_family": "limp_or_passive_pot",
+  "input_pot_type": "limped_pot",
+  "input_hero_position": "BB",
+  "input_players": [
+    {
+      "player_id": "hero",
+      "position": "BB"
+    },
+    {
+      "player_id": "villain_1",
+      "position": "SB"
+    }
+  ],
+  "expected_range_case_id": "flop_range_limp_passive",
+  "expected_spot_family": "limp_or_passive_pot",
+  "expected_pot_type": "limped_pot",
+  "expected_hero_position": "BB",
+  "expected_opponent_positions": [
+    "SB"
+  ],
+  "expected_range_import_status": "imported",
+  "expected_range_source_type": "postflop_default_ranges",
+  "expected_range_confidence": "medium",
+  "expected_hero_range_name": "limp_passive_bb_check_or_iso_baseline",
+  "expected_hero_role": "bb_option_vs_limp",
+  "expected_opponent_range_names": [
+    "limp_passive_limper_baseline"
+  ],
+  "expected_opponent_roles": [
+    "limper"
+  ],
+  "expected_required_buckets": [
+    "premium_pairs",
+    "strong_broadways",
+    "suited_connectors",
+    "defense_range",
+    "ace_x_suited"
+  ],
+  "expected_next_module": "blocker_filtering_later"
+}

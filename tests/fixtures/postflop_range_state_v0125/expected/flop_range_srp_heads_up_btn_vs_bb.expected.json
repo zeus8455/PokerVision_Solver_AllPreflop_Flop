@@ -1,0 +1,44 @@
+{
+  "input_case_id": "flop_range_srp_heads_up_btn_vs_bb",
+  "input_spot_family": "srp_heads_up",
+  "input_pot_type": "srp",
+  "input_hero_position": "BTN",
+  "input_players": [
+    {
+      "player_id": "hero",
+      "position": "BTN"
+    },
+    {
+      "player_id": "villain_1",
+      "position": "BB"
+    }
+  ],
+  "expected_range_case_id": "flop_range_srp_heads_up_btn_vs_bb",
+  "expected_spot_family": "srp_heads_up",
+  "expected_pot_type": "srp",
+  "expected_hero_position": "BTN",
+  "expected_opponent_positions": [
+    "BB"
+  ],
+  "expected_range_import_status": "imported",
+  "expected_range_source_type": "postflop_default_ranges",
+  "expected_range_confidence": "medium",
+  "expected_hero_range_name": "srp_btn_open_baseline",
+  "expected_hero_role": "preflop_aggressor",
+  "expected_opponent_range_names": [
+    "srp_bb_defense_baseline"
+  ],
+  "expected_opponent_roles": [
+    "bb_defender"
+  ],
+  "expected_required_buckets": [
+    "premium_pairs",
+    "strong_broadways",
+    "suited_broadways",
+    "suited_connectors",
+    "offsuit_broadways",
+    "pocket_pairs",
+    "ace_x_suited"
+  ],
+  "expected_next_module": "blocker_filtering_later"
+}
